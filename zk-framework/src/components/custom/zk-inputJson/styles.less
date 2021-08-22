@@ -1,0 +1,144 @@
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-12 11:32:41
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2021-03-07 21:16:57
+ */
+
+.edit_json {
+
+	/*width: 500px;*/
+	/*height: 100%;*/
+	margin     : auto 0px;
+	padding    : 4px 0px;
+	line-height: normal;
+
+	.input_json {
+		/*width: 360px;*/
+	}
+
+	.attr_before {
+		overflow   : hidden;
+		width      : 60px;
+		line-height: 1.8;
+		text-align : right;
+	}
+
+	.attr_before_select {
+		width      : 100px;
+		line-height: 1.8;
+	}
+
+	.attr_after {
+		width      : 38px;
+		line-height: 1.8;
+	}
+
+	.attr_before_color {}
+
+	.attr_after_color {}
+
+	.attr_after_select {
+		color: @primary-color;
+	}
+
+	.ant-input-group-addon {
+		padding : 0px 3px;
+		/*margin: 0px;*/
+	}
+
+	.ant-input-group-addon:hover,
+	.attr_before_color:hover {
+		color : @primary-color;
+		cursor: pointer;
+	}
+
+	.ant-input-group-addon:hover,
+	.attr_after_color:hover {
+		color : @primary-color;
+		cursor: pointer;
+	}
+
+	.ant-input-group-addon:hover span {
+		color: @primary-color;
+	}
+
+	.ant-input-group .ant-select,
+	.ant-input-group .ant-cascader-picker {
+		width: 100px;
+	}
+
+}
+
+.edit_json>span {
+	margin : 0px 1px;
+	display: block;
+}
+
+.attr_popver_div {
+
+	max-width : 500px;
+	max-height: 380px;
+	overflow  : auto;
+
+	.attr_popover_panel {
+		display: flex;
+	}
+
+	.attr_popover_panel>span:nth-child(1) {
+		/* 与 attr_popover_panel>span:first-child 选择的是同一个结点 */
+		color      : @label-color;
+		max-width  : 100px;
+		/*min-width: 66px;*/
+		width      : 60px;
+		/*padding  : 0px 6px 0px 0px;*/
+		overflow   : hidden;
+		white-space: nowrap;
+		/*强制不换行*/
+		text-align : right;
+	}
+
+	.attr_popover_panel>pre:nth-child(2) {
+		padding      : 0px 0px 0px 6px;
+		max-width    : 440px;
+		/*自动换行
+		word-wrap    : break-word;
+    	word-break: normal;*/
+		/*强制英文单词断行
+    	word-break:break-all; */
+
+		/*word-wrap: break-word;*/
+		/*word-break: normal;*/
+	}
+
+	.attr_popover_panel>span:first-child:hover {
+		color: @primary-color;
+	}
+}
+
+.edit_json_default_class {
+	width: 380px;
+}
+
+// .has-error .ant-select {
+// 	color: red;
+// }
+:global(.has-error .ant-select) {
+	color: red;
+}
+
+:global(.ant-form-item-has-error .ant-select>div>span) {
+	color: red;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "description": "zk-frontEnd project sample",
+  "descriptionName": {
+    "zh-CN": "样例",
+    "en-US": "sample"
+  },
+  "main": "index.js",
+  "module": "es/index.js",
+  "files": [
+    "es"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vinson",
+  "license": "ISC"
+}

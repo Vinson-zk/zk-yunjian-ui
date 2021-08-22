@@ -1,0 +1,53 @@
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-12 11:42:33
+ * @Last Modified by: Vinson
+ * @Last Modified time: 2020-08-12 15:05:22
+ */
+
+@import "~antd/dist/antd.less";
+
+/*
+ :global{
+ }
+ */
+
+.menu {
+
+    border             : 0px;
+    /*display          : none;*/
+    /*border-right     : 0px solid #e8e8e8;*/
+    /*** 不允许选中文字 ***/
+    moz-user-select    : -moz-none;
+    -moz-user-select   : none;
+    -o-user-select     : none;
+    -khtml-user-select : none;
+    -webkit-user-select: none;
+    -ms-user-select    : none;
+    user-select        : none;
+}
+
+.menu_sub>div {
+    margin: 0px;
+}
+
+.menu_sub_selected {
+    color             : @primary-color;
+    /*background-color:@primary-1; */
+    background-color  :color(~`colorPalette("@{primary-color}", 1)`);
+    /*background-color: hsl(@primary-color, 0.09, 0.4);*/
+}
+
+/*.menu_sub_selected > div{
+    border-right: 3px solid @primary-color;
+}*/
+
+.menu_sub_selected>div:after {
+    content     : "";
+    position    : absolute;
+    right       : 0;
+    top         : 0;
+    bottom      : 0;
+    border-right: 3px solid @primary-color;
+}

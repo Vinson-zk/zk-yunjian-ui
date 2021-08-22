@@ -1,0 +1,112 @@
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-12 16:10:49
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2021-03-29 14:22:16
+ */
+
+/*样例明细窗口*/
+.sample_detail_panel {
+  /*position: relative;*/
+  /*overflow: hidden;*/
+  width: 100%;
+  margin : 0px 0px;
+  padding: 6px 2px 0px 2px;
+  background: #fff;
+
+  /* 样例明细锚点 */
+  .sample_detail_top_affix {
+    position: absolute;
+    /*float : right;*/
+    width   : 118px;
+    top     : 6px;
+    right   : 30px;
+    z-index : 999;
+  }
+
+  /* 样例明细断落*/
+  .sample_detail_section {
+    margin-bottom: 9px 0px;
+    padding      : 9px 16px;
+    display      : block;
+    width        : 100%;
+    background   : #fff;
+  }
+
+  /* 样例明细断落 的一级 ul*/
+  .sample_detail_section>ul {
+    margin: 0px;
+  }
+
+  .sample_detail_section>ul>li {
+    margin-bottom: 9px;
+  }
+
+  /* 样例明细断落的 table*/
+  .sample_detail_section_table {
+    border-collapse: collapse;
+    border-spacing : 0;
+    empty-cells    : show;
+    border         : 0px solid #e6e6e6;
+    width          : 100%;
+    margin         : 0px 0px;
+    font-size      : 13px;
+  }
+
+  .sample_detail_section_table th {
+    background    : #f7f7f7;
+    border        : 1px solid #e6e6e6;
+    /*border-right: 1px solid #e6e6e6;*/
+    padding       : 8px 16px;
+    text-align    : left;
+    white-space   : nowrap;
+    /*color       : #5c6b77;*/
+    font-weight   : 600;
+  }
+
+  .sample_detail_section_table td {
+    /*background: #fcfcfc;*/
+    border        : 1px solid #e6e6e6;
+    /*border-right: 1px solid #e6e6e6;*/
+    font-weight   : 500;
+    /*width       : 20%;*/
+    padding       : 8px 16px;
+    text-align    : left;
+  }
+
+  /* 样例明细断落 行*/
+  .sample_detail_section_row {
+    margin-bottom: 9px;
+    padding      : 0px;
+    border       : 1px solid @primary-color;
+    border-radius: 6px !important;
+  }
+
+  .sample_detail_section_right {
+    margin-bottom: 9px;
+    padding      : 0px;
+    border       : 1px solid @primary-color;
+    border-radius: 6px !important;
+  }
+
+}
+
+/* 样例明细 标题1, 标题2*/
+.sample_detail_panel h1,
+.sample_detail_panel h2 {
+  border-bottom: 1px solid @primary-color;
+}
+
+/* 样例明细 标题1*/
+.sample_detail_panel h1 {
+  font-size: 1.75em;
+}
+
+/* 样例明细 标题2*/
+.sample_detail_panel h2 {
+  font-size: 1.5em;
+}
+
+
+

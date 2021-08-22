@@ -1,0 +1,218 @@
+/*
+* @Author: Vinson
+* @Date:   2021-07-01 16:31:37
+* @Last Modified by:   Vinson
+* @Last Modified time: 2021-07-02 20:16:46
+* 
+* 
+* 
+*/
+
+/*.login_panel_zh_CN {
+	width: 360px;
+}
+.login_panel_en_US {
+	width: 410px;
+}*/
+
+.login_panel {
+	min-width: 432px;
+	max-width: 480px;
+	/* width: 360px; */
+    display: table;
+    background: #fff;
+    box-shadow: 0 2px 6px #999;
+    border-radius: 5px;
+
+    padding: 32px;
+    /*margin: 28px auto auto auto;*/
+    margin: -160px 32px 32px -150px;
+    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 68%;
+
+	:global(.ant-checkbox-wrapper.ant-checkbox-wrapper-checked) {
+		color: @primary-color;
+	}
+}
+
+.login_item {
+
+}
+
+.login_item_icon {
+	color: rgba(0, 0, 0, 0.45);
+}
+
+.login_item_checkbox {
+	user-select: none;
+}
+.login_item_checkbox:hover {
+	/*color: #1890ff;*/
+	color: @primary-color;
+}
+
+.login_item_btn {
+	margin-bottom: 5px;
+}
+
+/* login 按钮样式 */
+.login_item_btn>div>div>div {
+	text-align: center; 
+	display: flex;
+}
+
+.login_btn {
+	flex: 1 1 auto;
+	margin-left: 0px;
+    margin-right: 0px;
+}
+
+.login_no_account_register {
+	user-select: none;
+}
+
+/* 语言选择器样式 */
+.login_languageDropdown {
+	flex        : 0 0 100px;
+	float: right;
+	text-align: right;
+	color  : @primary-color;
+}
+
+.login_languageDropdown:hover {
+	color  : @primary-color;
+	cursor:pointer;
+}
+
+/* 模拟按钮 span */
+.login_span_btn {
+	user-select:none;
+}
+.login_span_btn:hover {
+	cursor: pointer;
+}
+.login_span_btn_userType {
+	font-size: 13px;
+	color : @primary-color;
+}
+
+/* tabs 页样式 */
+.login_tabs {
+	/* 选 tab 页时，tab title 的字段颜色*/
+	:global(.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active) {
+		border-top: 1px solid #F0F0F0;
+		border-left: 1px solid #F0F0F0;
+		border-right: 1px solid #F0F0F0;
+	}
+
+	:global(.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn) {
+		/*color: inherit;*/
+		color: #555;
+	}
+
+	/* 没选中的 tab 页的 tab title 的样式 */
+	:global(.ant-tabs-nav-list .ant-tabs-tab) {
+		border-top: 1px solid #FFFFFF;
+		border-left: 1px solid #FFFFFF;
+		border-right: 1px solid #FFFFFF;
+	    background: inherit;
+		color  : @primary-color;
+		user-select: none;
+	}
+
+	:global(.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active:hover){
+		background: #FFFFFF;
+		border-bottom: 1px solid #FFFFFF;
+		cursor: default;
+	}
+	:global(.ant-tabs-nav-list .ant-tabs-tab:hover) {
+		background: #FAFAFA;
+    	border: 1px solid #F0F0F0;
+		cursor: pointer;
+	}
+}
+
+.login_panel_block {
+	animation: login-turnover 0.5s forwards;
+    -webkit-animation: login-turnover 0.5s forwards;
+}
+
+@keyframes login-turnover {
+    0% { transform: rotateY(180deg);  } 
+    100% { transform: rotateY(360deg); } 
+}
+@-webkit-keyframes login-turnover {
+    0% { transform: rotateY(180deg);  } 
+    100% { transform: rotateY(360deg); } 
+}
+
+.user_register {
+	padding-bottom: 6px;
+}
+.login_by_third_Divider_text>span {
+	font-weight: bold;
+    color: #555555;
+    user-select: none;
+}
+.login_by_third_account_row {
+	text-align: center;
+}
+.login_by_third_account_row>span{
+	font-size: 32px;
+    margin: 0px 9px;
+}
+.login_by_third_account_row svg:hover {
+	cursor: pointer;
+}
+.login_by_third_account_Qq {
+	color: #1396db;
+}
+.login_by_third_account_Wechat {
+	color: #04c924;
+}
+.login_by_third_account_AlipayCircle {
+	color: #09abeb;
+}
+.login_by_third_account_Github {
+	color: #191618;
+}
+.login_by_third_account_Zhihu {
+	color: #1387eb;
+}
+.login_by_third_account_Amazon {
+	color: #fc9901;
+}
+.login_by_third_account_Google {
+	color: #4384f8;
+}
+.login_by_third_account_Twitter {
+	color: #56aded;
+}
+.login_by_third_account_Dingding {
+	color: #1ea0f7;
+}
+.login_by_third_account_Weibo {
+	color: #d62929;
+}
+.login_by_third_account_Taobao {
+	color: #fd7b02;
+}
+.login_by_third_account_Yahoo {
+	color: #70329b;
+}
+.login_by_third_account_Sketch {
+	color: #faac02;
+}
+.login_by_third_account_Yuque {
+	color: #39cf66;
+}
+.login_by_third_account_Youtube {
+	color: #fc040e;
+}
+
+
+
+
+

@@ -1,0 +1,88 @@
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-12 12:44:00
+ * @Last Modified by: Vinson
+ * @Last Modified time: 2020-08-13 00:52:05
+ */
+
+.version_info {
+	border    : 1px solid @primary-color;
+	height    : 300px;
+	/*width   : 100%;*/
+	overflow-y: auto;
+	overflow-x: hidden;
+	/*margin  : 0px 0px 0px 0px;*/
+
+}
+
+.dependences_info_card {
+	padding: 9px 6px 16px 19px;
+}
+
+.dependences_info_card div[class='ant-card-body'] {
+	padding: 0px;
+}
+
+///////////////////////////////
+// .version_info_line{
+
+// 	/*border: 1px solid red;*/
+// 	width: 100%;
+// 	/*height: 30px;*/
+// 	/*line-height: 30px;*/
+// 	display:inline-block;
+// 	/*padding: 9px 9px;*/
+// }
+
+// .version_info_line>p{
+// 	margin: 0px 2px;
+// }
+
+// .version_info_line>p>span{
+// 	margin: 0px 3px;
+// 	display:inline-block;
+// }
+
+// .version_info_line_right_span {
+// 	// float: right;
+// 	/*border: 1px solid red;*/
+// 	/*margin-right: 0px;*/
+// 	text-align: right;
+// 	display:inline-block;
+// }
+
+.dependences_info {
+	border-top   : 0px;
+	border-radius: 0px;
+}
+
+.dependences_info_panel {
+	border-radius: 0px;
+}
+
+.dependences_info_panel>div:nth-child(2)>div {
+	padding: 9px 9px;
+}
+
+// 下面两种写法都能匹配 class 为 dependence_info_line 的最后一个兄弟元素；
+// .dependence_info_line:nth-last-of-type(1) {
+// .dependence_info_line:last-child {
+// 	border-bottom: 0px solid;
+// }
+
+.dependence_info_line {
+	margin       : 0px 0px 5px 0px;
+	width        : 100%;
+	display      : inline-block;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.dependence_info_line>p {
+	margin: 5px 16px 3px 29px
+}
+
+.dependence_info_line>p>span {
+	margin : 0px 4px;
+	display: inline-block;
+}

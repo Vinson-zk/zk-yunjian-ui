@@ -1,0 +1,45 @@
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-11 22:43:25
+ * @Last Modified by: Vinson
+ * @Last Modified time: 2020-08-12 15:06:16
+ */
+
+.dropdown {
+	flex                : 0 0 auto;
+	/*width             : 26px;*/
+	height              : 26px;
+	line-height         : 26px;
+	padding             : 0px 28px;
+	/*border-right      : 1px solid #e500e5;*/
+	background          : rgba(255, 255, 255, 0); // 背景透明
+	/*-ms-flex-direction: row;*/
+	/*flex-direction    : row;*/
+	/*display           : inline;*/
+	/*flex              :0 0 100px;*/
+	text-align          : right;
+	min-width           : 160px;
+	flex                : 1 0 auto;
+}
+
+.dropdown>div {
+	display            : inline;
+	margin             : 0px 9px 0px 0px;
+	/*flex             :0 0 auto;*/
+	/*text-align       : right;*/
+	/*display          : flex;*/
+	/*** 不允许选中文字 ***/
+	moz-user-select    : -moz-none;
+	-moz-user-select   : none;
+	-o-user-select     : none;
+	-khtml-user-select : none;
+	-webkit-user-select: none;
+	-ms-user-select    : none;
+	user-select        : none;
+}
+
+.dropdown>div:hover {
+	color : @primary-color;
+	cursor: pointer;
+}

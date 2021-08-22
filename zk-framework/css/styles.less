@@ -1,0 +1,224 @@
+/*
+* @Author: Vinson
+* @Date:   2021-03-29 11:37:28
+* @Last Modified by:   Vinson
+* @Last Modified time: 2021-08-20 09:55:06
+* 
+* 
+* 
+*/
+@import "~antd/dist/antd.less";
+
+html,
+body {
+	height      : 100%;
+	width       : 100%;
+	margin      : 0px;
+	padding     : 0px;
+	overflow    : hidden;
+	/*background:#ececec;*/
+}
+
+:global(#root) {
+	height      : 100%;
+	width       : 100%;
+	margin      : 0px;
+	padding     : 0px;
+	overflow    : hidden;
+	/*background:#ececec;*/
+}
+
+:global(.wrapper) {
+	display : flex;
+	height  : 100%;
+	width   : 100%;
+	overflow: hidden;
+}
+
+:global(.ant-spin-nested-loading) {
+	height: 100%;
+}
+
+:global(.ant-spin-container) {
+	height: 100%;
+}
+
+/* --------------------------------------------------------------- */
+.zk_layout {
+	display   : flex;
+	/* 1个     : 上下左右；2个：上下+左右；3个：上+左右+下；4个：上右下左*/
+	margin    : 0px 0px 0px 0px;
+	/* 1个     : 上下左右；2个：上下+左右；3个：上+左右+下；4个：上右下左*/
+	padding   : 0px 0px;
+	height    : 100%;
+	overflow  : hidden;
+	/*position:relative;*/
+
+	/* -webkit-box-orient: horizontal;*/
+	/* -webkit-box-direction: normal;*/
+	/* -ms-flex-direction: row;*/
+	/* flex-direction: row;*/
+
+	/* css: 布局 ======================================== */
+	/* css: 头 */
+	.zk_header {
+		position: relative;
+
+		/*position: absolute;*/
+		/*top:0px;*/
+		/*left: 0px;*/
+
+		/*position: fixed;*/
+		/*flex: 1 1 100px;*/
+		/*top:0px;*/
+
+		width             : 100%;
+		height            : 45px;
+		line-height       : 45px;
+		background        : #f7f7f7;
+		z-index           : 999;
+		display           : flex;
+		padding           : 0 16px;
+		/* box-shadow     : 0 2px 4px 0 rgba(0, 0, 0, 0.1);*/
+		/* border-bottom  : 1px solid #e5e5e5;*/
+		/* box-shadow     : 0 2px 4px 0 rgba(138, 192, 7, 0.1);*/
+		/*background-color:color(~`colorPalette("@{primary-color}", 1)`);*/
+		box-shadow        : 0 2px 4px 0 color(~`colorPalette("@{primary-color}", 0.1)`);
+		/*border-bottom   : 1px solid color(~`colorPalette("@{primary-color}", 2)`);*/
+		/*box-shadow      : 0 2px 4px 0 hsl(@primary-color, 0.13, 0.9);*/
+		border-bottom     : 1px solid hsl(@primary-color, 0.63, 0.9);
+	}
+
+	.zk_header>div {
+		align-self: center;
+	}
+
+	/* css: 侧边栏 */
+	.zk_left_sider {
+        background       : #fff;
+        /*// position    : fixed;*/
+        /*// top         : 45px;*/
+        /*// bottom      : 0px;*/
+        /*// left        : 0;*/
+        /*// display     : none;*/
+        /*// overflow    : auto;*/
+        /*// background  : #fff;*/
+        /*// border-right: 1px solid #e5e5e5;*/
+        padding          : 0px 0px 30px 0px;
+        /*// overflow    :hidden;*/
+        /*// z-index     : 1;*/
+        flex             : 1 1 auto;
+        max-width        : 300px;
+        min-width        : 300px;
+        width            : 300px;
+        height           : 100%;
+    }
+
+    /* css: 内容 */
+	.zk_content {
+		position: relative;
+		width      : 100%;
+		margin     : 0px 0px 0px 0px;
+		padding    : 0px 0px 0px 0px;
+		height     : 100%;
+		/*min-height: 100%;*/
+		background : #fff;
+		/* overflow: initial;*/
+		/*overflow :auto;*/
+		overflow   : hidden;
+	}
+
+	/*** css: 底 floor ***/
+    .zk_footer {
+        /*// position: fixed;*/
+        /*// bottom: 0px;*/
+        /*// left: 0px;*/
+        width      : 100%;
+        height     : 32px;
+        line-height: 32px;
+        text-align: center;
+        overflow   : hidden;
+        padding    : 0;
+        /*-webkit-flex: 0 0 38px;*/
+        overflow   : hidden;
+        border-top: 0px solid hsl(@primary-color, 0.63, 0.9);
+    }
+
+    .zk_wrapper {
+        /*position: absolute;*/
+        /*left: 250px;*/
+        /*top: 45px;*/
+        /*bottom: 20px;*/
+        /*right: 20px;*/
+
+        flex: 1 1 auto;
+
+        /*width: 100%;*/
+        height: 100%; /* 不能用用 auto，使用 auto ZKScrollTable 高度无法自动填满 */
+        /*min-height: 100%;
+        max-height: auto;*/
+        margin    : 0px 0px 0px 0px;
+        padding   : 0px 0px 0px 0px;
+        background: #fff;
+        /*overflow  : auto;*/
+        /*border  : 1px solid #f0f*/
+
+        display: flex;
+        flex-direction: column;
+
+        .switch>div {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .zk_main_panel {
+    	display: flex;
+        flex-direction: column;
+    	/*height: 100%;*/ /* 不能用用 auto，使用 auto ZKScrollTable 高度无法自动填满 */
+   		width: 100%;
+    	flex: 1 1 auto;
+	    margin: 0px 0px 0px 0px;
+	    padding: 6px 8px 6px 8px;
+    }
+
+    /* css: 其他 ======================================== */
+    .zk_navDiv:hover {
+		cursor: pointer;
+	}
+
+    .ant-spin-blur {
+        -webkit-transform    : none !important;
+        /*或 -webkit-transform: none*/
+    }
+
+    /* 版本 modal 窗口的 样式；*/
+	.zk_versionInfo_modal div[class='ant-modal-confirm-content'] {
+		margin-left: 6px;
+		padding-top: 6px;
+	}
+
+	.zk_scrollbars {
+		height: 100%; 
+		background: #fff;
+        padding   : 0px 0px 0px 0px;
+	}
+}
+
+
+/* --------------------------------------------------------------- */
+
+.display_flex {
+    display: flex;
+}
+
+.display_flex_col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex {
+    flex: 1 1 auto;
+}
+

@@ -1,0 +1,89 @@
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-12 10:25:33
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2021-03-09 23:33:18
+ */
+
+
+.exception_panel {
+	/*border: 1px solid red;*/
+	margin    : 0px 0px;
+	padding   : 66px 42px;
+	/*width   : 100%;*/
+	height    : 92%;
+	min-height: 500px;
+	/*display : flex;*/
+	/*flex    : 1 1 auto;*/
+
+	.e_box {
+		/*border: 1px solid red;*/
+		width      : 100%;
+		height     : 80%;
+		min-height : 500px;
+		display    : flex;
+		align-items: center;
+
+		.e_imgBlock {
+
+			flex         : 0 0 62.5%;
+			width        : 62.5%;
+			padding-right: 88px;
+
+			.e_imgEle {
+				float              : right;
+				width              : 100%;
+				max-width          : 430px;
+				height             : 360px;
+				background-repeat  : no-repeat;
+				background-position: 50% 50%;
+				background-size    : contain;
+			}
+		}
+
+		.e_content {
+			flex   : auto;
+			margin : 0px 0px;
+			padding: 0px 0px;
+
+			.e_title {
+				margin-bottom: 24px;
+				color        : #434e59;
+				font-weight  : 600;
+				font-size    : 72px;
+				line-height  : 72px;
+			}
+
+			.e_declare {
+				margin-bottom: 16px;
+				color        : rgba(0, 0, 0, .45);
+				font-size    : 20px;
+				line-height  : 28px;
+			}
+
+			.e_detail {
+				border       : 1px solid @primary-color;
+				margin       : 0px 0px 8px 0px;
+				padding      : 9px 9px;
+				color        : rgba(0, 0, 0, .45);
+				font-size    : 18px;
+				border-radius: 6px 6px;
+				min-height   : 28px;
+				line-height  : 28px;
+			}
+		}
+	}
+}
+
+.img_bg_500 {
+	background-image: url("../../../public/assets/svg/error.500.svg");
+}
+
+.img_bg_404 {
+	background-image: url("../../../public/assets/svg/error.404.svg");
+}
+
+.img_bg_403 {
+	background-image: url("../../../public/assets/svg/error.403.svg");
+}

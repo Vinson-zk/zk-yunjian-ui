@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/picture/favicon_64x64.ico" media="screen" />
+  <title id="app_title_id"></title>
+
+  <!--
+    <base> 标签必须位于 head 元素内部。
+    <base> 标签为页面上的所有链接规定默认地址或默认目标。
+    我的理解 base 中 href 是指定相对路径的前缀; 以斜扛 "/" 结尾
+  -->
+  <base href="/" />
+
+  <!-- -->
+  <script src="assets/js/zkJsUtils.js" crossorigin="anonymous"></script>
+  <!-- <script src="assets/js/zkJsSortTwoArray.js" crossorigin="anonymous"></script> -->
+  <script src="assets/js/zkJsEvent.js" crossorigin="anonymous"></script>
+  <script src="assets/js/zkJsValidates.js" crossorigin="anonymous"></script>
+
+  <script src="assets/lib/js/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
+
+  <!-- 
+  	<link rel="stylesheet" href="/index.css" />
+  -->
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <!--
+	<script src="/build.js"></script>
+	<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+	<script type="text/javascript" src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+	<% } %>
+	-->
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script type="text/javascript" src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %>
+
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-12 10:12:45
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2021-04-02 13:22:41
+ */
+
+
+.table {
+
+    /*
+    table {
+        margin: 0px;
+        padding: 0px;
+        border-collapse: collapse;
+            border-spacing: 0;
+        empty-cells: show;
+        border: 0px solid #e9e9e9;
+        width: 100%;
+        margin: 0px 0px;
+        font-size: 13px;
+    }
+
+    table tbody tr:nth-child(even) td,
+    table tbody tr:nth-child(even) th {
+        background-color:#F5FFFA;
+    }
+    table tbody tr:nth-child(odd) td,
+    table tbody tr:nth-child(odd) th {
+        background-color:#ffffff;
+    }
+
+    table tbody tr:hover td {
+        background: #fcffe6;
+    }
+    */
+
+    .row_num_column {
+        /*overflow : hidden;*/
+        text-overflow: ellipsis;
+    }
+    .row_num_column_zh_CN {
+        width    : 50px;
+        max-width: 50px;
+        min-width: 50px;
+    }
+    .row_num_column_en_US {
+        width    : 88px;
+        max-width: 88px;
+        min-width: 88px;
+    }
+
+    .column_text_align_center {
+        text-align: center;
+    }
+
+    .column_text_align_left {
+        text-align: left;
+    }
+
+    .column_text_align_right {
+        text-align: right;
+    }
+
+    :global {
+        /*去除一些 ant 的原有样式，使得前面设置的 zk-table 样式生效*/
+        /*.ant-spin-container {
+            display: flex;
+            flex-direction: column;
+        */
+        .ant-table {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /*
+        .ant-table-selection{
+            width: 20px !important;
+            max-width: 20px !important;
+            min-width: 20px !important;
+            padding: 0px !important;
+        }*/
+        /* 表格头 */
+        .ant-table-title {
+            top    : 0px;
+            padding: 0px;
+
+            /*border: 2px solid red;*/
+            /*background-color: red;*/
+        }
+
+        /* 表格 分页标签 */
+        .ant-table-pagination {
+            margin: 8px 16px;
+        }
+
+        .ant-table.ant-table-bordered .ant-table-title {
+            padding: 0px;
+        }
+
+        .ant-table-placeholder {
+            /*border-bottom: 0px solid;*/
+        }
+
+        .ant-table-thead>tr>th {
+            padding    : 1px 9px;
+            text-align : center;
+            font-weight: 600;
+            white-space: nowrap;
+            /*overflow: hidden; // 添加这行，表头固定阴影会消失 */ 
+            /*
+            color    : #5c6b77;
+            width      :20px;
+            max-width  : 20px;
+            height     :10px; 
+            */
+        }
+
+        .ant-table-selection-column {
+            width    : 50px;
+            max-width: 50px;
+            min-width: 50px;
+
+            /*width: 50px !important; */
+            /*max-width: 50px !important;*/
+            /*min-width: 50px !important;*/
+            /*margin: 0px !important;*/
+        }
+
+        /*边框*/
+        /*.ant-table-thead {
+            border-top   : 1px solid #e9e9e9;
+            border-right : 0px solid #e9e9e9;
+            border-bottom: 0px solid #e9e9e9;
+            border-left  : 1px solid #e9e9e9;
+        }
+        .ant-table-tbody {
+            border-top   : 0px solid #e9e9e9;
+            border-right : 0px solid #e9e9e9;
+            border-bottom: 0px solid #e9e9e9;
+            border-left  : 1px solid #e9e9e9;
+        }
+        .ant-table-thead>tr {
+            border-top   : 0px solid #e9e9e9;
+            border-right : 0px solid #e9e9e9;
+            border-bottom: 1px solid #e9e9e9;
+            border-left  : 0px solid #e9e9e9;
+        }
+        .ant-table-tbody>tr {
+            border-top   : 0px solid #e9e9e9;
+            border-right : 0px solid #e9e9e9;
+            border-bottom: 1px solid #e9e9e9;
+            border-left  : 0px solid #e9e9e9;
+        }
+        .ant-table-thead>tr>th {
+            background   : #f7f7f7;
+            border-top   : 0px solid #e9e9e9;
+            border-right : 1px solid #e9e9e9;
+            border-bottom: 0px solid #e9e9e9;
+            border-left  : 0px solid #e9e9e9;
+        }
+        .ant-table-tbody>tr>td {
+            border-top   : 0px solid #e9e9e9;
+            border-right : 1px solid #e9e9e9;
+            border-bottom: 0px solid #e9e9e9;
+            border-left  : 0px solid #e9e9e9;
+            padding      : 6px 0px;
+        }*/
+    }
+}
+
+.table table {
+    margin         : 0px;
+    padding        : 0px;
+    /*border-collapse: collapse;*/
+    /*border-spacing : 0;*/
+    empty-cells    : show;
+    /*border         : 0px solid #e9e9e9;*/
+    width          : 100%;
+    margin         : 0px 0px;
+    font-size      : 13px;
+}
+
+.table table tbody tr td {
+    padding: 3px 9px;
+}
+
+/*奇偶行底色*/
+.table table tbody tr:nth-child(even) td,
+table tbody tr:nth-child(even) th {
+    background-color: #F5FFFA;
+}
+
+.table table tbody tr:nth-child(odd) td,
+table tbody tr:nth-child(odd) th {
+    background-color: #ffffff;
+}
+
+/*鼠标在行上的颜色*/
+.table table tbody tr:hover td {
+    background: #fcffe6;
+}
+
+.table>div {
+    margin       : 0px 0px;
+    padding      : 2px 2px;
+    border-radius: 4px 4px;
+    border : 1px solid hsl(@primary-color, 0.63, 0.9);    
+}
+
+.table_fixed table {
+    /*table-layout: fixed !important; */
+}
+
+
+
+
+

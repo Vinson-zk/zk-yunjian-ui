@@ -1,0 +1,65 @@
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-12 11:08:39
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2021-03-31 17:44:54
+ */
+
+/*// 明细容器*/
+.detail_panel {
+    border-radius: 4px 4px;
+	border : 1px solid hsl(@primary-color, 0.63, 0.9);
+	margin : 0px 0px;
+	padding: 9px 0px 6px 0px;
+	min-height: 100%;
+	height : auto;
+	display: flex;
+    flex-direction: column;
+}
+
+/*.detail_panel:first-child {
+	padding: 9px 0px 0px 0px;
+}*/
+
+/*// 明细行*/
+.detail_row {
+	padding: 6px 3px;
+	display: flex;
+    align-items: center;
+}
+
+/*// 明细行的标签*/
+.detail_col_lable {
+	font-size : 16px;
+	color     : @label-color;
+	text-align: right;
+}
+
+/*//  明细行的内容*/
+.detail_col_content {
+	font-size : 16px;
+	text-align: left;
+}
+
+.detail_title_row {
+	display: flex;
+    margin: 0px 28px 9px 22px;
+    padding: 0px 0px 1px 0px;
+    border-bottom: 1px solid #bfbfbf;
+    /*text-align: right;*/
+}
+
+.detail_title {
+	display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    /*color: @primary-color;*/
+    padding-left: 9px;
+}
+
+.detail_title_opt {
+	flex:  1 1 auto;
+    text-align: right;
+}
