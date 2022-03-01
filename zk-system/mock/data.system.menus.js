@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-28 15:02:44
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-21 20:10:50
+ * @Last Modified time: 2021-08-23 16:41:30
  */
 
 let navCode = "sys";
@@ -72,7 +72,7 @@ tMenu = {
 }
 menus.push(tMenu);
 
-/*** 菜单 - 生成测试的静态菜单  ***/
+/*** 菜单 - 生成-应用系统  ***/
 tMenu = {
     pkId: "test_SysApplicationSystem", code: "SysApplicationSystem", name: { "zh-CN": "应用系统", "en-US": "SysApplicationSystem" },
     path: "sysApplicationSystem", navCode: navCode, funcModuleCode: "sys",
@@ -97,7 +97,56 @@ tMenu = {
     /* permission:,*/ parentId: "test_SysApplicationSystem", //children:null
 }
 menus.push(tMenu);
-
+/*** 菜单 - 生成-字典类型表  ***/
+tMenu = {
+    pkId: "test_SysDictType", code: "SysDictType", name: { "zh-CN": "字典类型", "en-US": "DictType" },
+    path: "sysDictType", navCode: navCode, funcModuleCode: "sys",
+    funcName: 'sysDictTypeIndex',
+    isIndex: 0, exact: true, isFrame: 0, isShow: 1, icon: "TagsOutlined", sort: 300,
+    /* permission:,*/ parentId: null, //children:null
+}
+menus.push(tMenu);
+tMenu = {
+    pkId: "test_SysDictType_detail", code: "SysDictType_detail", name: { "zh-CN": "明细", "en-US": "Detail" },
+    path: "detail/:pkId", navCode: navCode, funcModuleCode: "sys",
+    funcName: 'sysDictTypeDetail',
+    isIndex: 0, exact: false, isFrame: 0, isShow: 0, icon: "ToolOutlined", sort: 0,
+    /* permission:,*/ parentId: "test_SysDictType", //children:null
+}
+menus.push(tMenu);
+tMenu = {
+    pkId: "test_SysDictType_edit", code: "SysDictType_edit", name: { "zh-CN": "编辑", "en-US": "Edit" },
+    path: "edit/:pkId", navCode: navCode, funcModuleCode: "sys",
+    funcName: 'sysDictTypeEdit',
+    isIndex: 0, exact: false, isFrame: 0, isShow: 0, icon: "ToolOutlined", sort: 0,
+    /* permission:,*/ parentId: "test_SysDictType", //children:null
+}
+menus.push(tMenu);
+/*** 菜单 - 生成-字典表  ***/
+tMenu = {
+    pkId: "test_SysDict", code: "SysDict", name: { "zh-CN": "字典表", "en-US": "SysDict" },
+    path: "sysDict", navCode: navCode, funcModuleCode: "sys",
+    funcName: 'sysDictIndex',
+    isIndex: 0, exact: true, isFrame: 0, isShow: 1, icon: "TagOutlined", sort: 300,
+    /* permission:,*/ parentId: null, //children:null
+}
+menus.push(tMenu);
+tMenu = {
+    pkId: "test_SysDict_detail", code: "SysDict_detail", name: { "zh-CN": "明细", "en-US": "Detail" },
+    path: "detail/:pkId", navCode: navCode, funcModuleCode: "sys",
+    funcName: 'sysDictDetail',
+    isIndex: 0, exact: false, isFrame: 0, isShow: 0, icon: "ToolOutlined", sort: 0,
+    /* permission:,*/ parentId: "test_SysDict", //children:null
+}
+menus.push(tMenu);
+tMenu = {
+    pkId: "test_SysDict_edit", code: "SysDict_edit", name: { "zh-CN": "编辑", "en-US": "Edit" },
+    path: "edit/:pkId", navCode: navCode, funcModuleCode: "sys",
+    funcName: 'sysDictEdit',
+    isIndex: 0, exact: false, isFrame: 0, isShow: 0, icon: "ToolOutlined", sort: 0,
+    /* permission:,*/ parentId: "test_SysDict", //children:null
+}
+menus.push(tMenu);
 
 
 module.exports = {

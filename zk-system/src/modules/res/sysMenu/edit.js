@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:42
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-05-01 16:53:25
+ * @Last Modified time: 2022-01-26 10:08:30
  */
 
 import React, { Component } from 'react';
@@ -12,7 +12,7 @@ import { connect } from 'dva';
 
 import locales from "../../../locales/index";
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
-const { ZKSpin, ZKInput, ZKSelect, ZKInputNumber, ZKRadio, ZKModal } = ZKOriginalComponents;
+const { ZKSpin, ZKInput, ZKSelect, ZKInputNumber, ZKRadio, ZKModal, ZKRow, ZKCol } = ZKOriginalComponents;
 const { ZKEditForm, ZKInputJson, ZKIcon } = ZKCustomComponents;
 const { zkToolsMsg, zkToolsValidates, zkToolsNavAndMenu } = zkTools;
 
@@ -26,32 +26,68 @@ class CInitSysMenuEdit extends Component {
         this.state = {
             sysNavs:[],
             selectIcon: false,
-            icon: undefined
+            icon: undefined,
+            loading: false,
         }
     }
 
-    onSearchNavCodes = value=>{
+    f_searchNavCodes = value=>{
         let { dispatch } = this.props;
         dispatch({ type: 'mSysMenu/findNavCodes', filter: { searchValue: value }, callback: datas=>{
             this.setState({sysNavs: datas});
         }});
     }
 
+    /** 保存 */
+    f_save = (values, form, callbackFunc) => {
+        let { dispatch } = this.props;
+        dispatch({type: 'mSysMenu/editSysMenu', payload: values, 
+            callback: (errors) => {
+                if(!errors){
+                    this.setState({loading: true});
+                }
+                callbackFunc(errors);
+            }
+        });
+    }
+
+    f_getParentPath = (entity, intl)=>{
+
+        if(!entity){
+            return undefined;
+        }
+
+        let pPath = undefined;
+        if(!zkJsUtils.isEmpty(entity.parentId)){
+            // 有父节点；
+            if(entity.parent){
+                if(entity.parent.name){
+                    pPath = zkToolsMsg.getInternationInfo(entity.parent.name);
+                }else{
+                    pPath = entity.parent.pkid;
+                }
+                let tPath = this.f_getParentPath(entity.parent);
+                if(tPath){
+                    pPath = tPath + ' -> ' + pPath;
+                }
+            }else{
+                pPath = entity.parentId;
+            }
+
+            return pPath;
+        }else{
+            // 无父节点，认为是根节点
+            return zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu._top');
+        }
+    }
+
+    /** 返回 JSX 元素 */
     render() {
 
-        let { mApp, dispatch, mSysMenu, intl, loading, location } = this.props;
-        let { optEntity = {} } = mSysMenu;
+        let { location, mApp, dispatch, mSysMenu, intl, loading } = this.props;
+        let { optEntity } = mSysMenu;
         
 		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
-        // 保存
-        const save = (values, form, callbackFunc) => {
-            dispatch({type: 'mSysMenu/editSysMenu', payload: values, 
-                callback: (errors) => {
-                    callbackFunc(errors);
-                }
-            });
-        };
 
         const f_selectIcon = (value)=>{
             this.formRef.current.setFieldsValue({"icon": value});
@@ -76,9 +112,11 @@ class CInitSysMenuEdit extends Component {
             nameRule[index] = zkToolsValidates.string(intl, 1, 80, true);
         }
 
-        let spinning = loading.effects['mSysMenu/editSysMenu'] || loading.effects['mSysMenu/getSysMenu'];
+        let spinning = !optEntity || this.state.loading 
+            || loading.effects['mSysMenu/editSysMenu'] || loading.effects['mSysMenu/getSysMenu'];
         let navCodeSelLoading = loading.effects['mSysMenu/findNavCodes'];
-        return (optEntity != null && mSysMenu.pathname == location.pathname) && (
+
+        return (optEntity != undefined && mSysMenu.pathname == location.pathname) && (
             <ZKSpin spinning={spinning === true} >
                 <ZKModal
                     visible = {this.state.selectIcon}
@@ -92,8 +130,8 @@ class CInitSysMenuEdit extends Component {
                     <ZKIcon.ZKIconPanel onSelect={f_selectIcon} />
                 </ZKModal>
                 <ZKEditForm ref = {this.formRef} history={history} data={optEntity}
-                    saveFunc={save}
-                    resetFunc={() => { this.setState({ areaOneKey: undefined }); }}
+                    saveFunc={this.f_save}
+                    resetFunc={form => { return true; }}
                 >
                     {
                         // optEntity.parentId?
@@ -102,9 +140,13 @@ class CInitSysMenuEdit extends Component {
                         // </ZKEditForm.Item>:""
                     }
                     {
-                        <ZKEditForm.Item label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.parentName')}  >
-                            { optEntity.parent?zkToolsMsg.getInternationInfo(optEntity.parent.name):zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu._top') }
-                        </ZKEditForm.Item>
+                        <ZKRow>
+                          <ZKCol span={8} offset={2} >
+                            <ZKEditForm.Item label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.parentName')}  >
+                              {this.f_getParentPath(optEntity, intl)}
+                            </ZKEditForm.Item>
+                          </ZKCol>
+                        </ZKRow>
                     }
                     <ZKEditForm.Item name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.name')} 
                         rules = {[
@@ -120,8 +162,8 @@ class CInitSysMenuEdit extends Component {
                     <ZKEditForm.Item name = "navCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.navCode')} 
                         rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
                         <ZKSelect showSearch = {true} loading = { navCodeSelLoading }
-                            onDropdownVisibleChange = { open=>{if(open){this.onSearchNavCodes('');}}}
-                            onSearch = { this.onSearchNavCodes }
+                            onDropdownVisibleChange = { open=>{if(open){this.f_searchNavCodes('');}}}
+                            onSearch = { this.f_searchNavCodes }
                         >
                             {this.state.sysNavs.map((sysNav, index)=>{
                                 return <ZKSelect.Option key={index} value={sysNav.code}>{sysNav.code}[{zkToolsMsg.getInternationInfo(sysNav.name)}]</ZKSelect.Option>
@@ -192,18 +234,20 @@ class CInitSysMenuEdit extends Component {
         if (mSysMenu.pathname != location.pathname) {
             // 从 state 中取操作编辑的实体
             let optEntity = location.state ? location.state.optEntity : {};
-            dispatch({ type: 'mSysMenu/setState', payload: { optEntity: optEntity, pathname: location.pathname } });
+            let parentEntity = location.state ? location.state.parentEntity : {};
+
+            dispatch({ type: 'mSysMenu/setState', payload: { pathname: location.pathname, optEntity: undefined } });
             if("_new" == params.pkId){
-                // 新增
                 if("_top" == params.parentId){
-                    // 添加顶级节点
+                    // 新增根结点；不需要查父节点信息；
+                    dispatch({ type: 'mSysMenu/setState', payload: { optEntity:{} } });
                 }else{
-                    // 添加子级节点，需要查出父节点；
-                    dispatch({ type: 'mSysMenu/getSysMenu', payload: { pkId: params.parentId }, isParent: true});
+                    // 新增子节点；需要查父节点信息；不管父节点存不存在，都从后台查询
+                    dispatch({ type: 'mSysMenu/getSysMenu', payload: { pkId: params.parentId }, isParent:true });
                 }
             }else{
-                // 修改，则根据 id 取后台数据；
-                dispatch({ type: 'mSysMenu/getSysMenu', payload: { pkId: params.pkId }, isParent: false  });
+                // 编辑；则根据 id 取后台数据；
+                dispatch({ type: 'mSysMenu/getSysMenu', payload: { pkId: params.pkId } });
             }
         }
     }

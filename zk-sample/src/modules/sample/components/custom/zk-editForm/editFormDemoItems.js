@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-05 15:42:57
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-03-08 12:06:32
+* @Last Modified time: 2022-01-25 19:58:44
 * 
 * 
 * 
@@ -18,7 +18,7 @@ import styles from "../../../styles.less";
 import zkJsUtils from 'zkJsUtils';
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
 const { ZKEditForm, ZKInputJson } = ZKCustomComponents;
-const { ZKModal, ZKDatePicker, ZKInput, ZKInputNumber, ZKSelect, ZKForm } = ZKOriginalComponents;
+const { ZKModal, ZKDatePicker, ZKInput, ZKInputNumber, ZKSelect, ZKForm, ZKRow, ZKCol } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
 const { Option } = ZKSelect;
 
@@ -73,6 +73,20 @@ const attrs = { 'zh_CN': { 'name': '简体中文' }, 'en_US': { 'name': 'English
 // <React.Fragment></React.Fragment>
 const f_getItems = (namePrefix)=>{
 	return [
+		<ZKRow key="1">
+			<ZKCol key="2" span={24}>
+				<ZKEditForm.Item key = {`${namePrefix}-Input`} labelCol = {{ span: 5 }} name = {`${namePrefix}-Input-`} label="Input-more" >
+					<ZKInputJson styleType="compact" style={{ width: '100px' }} primaryAttr="zh_CN" onChange={(e) => { console.log('ZKInputJson-smart ', e) }} attrs={attrs} />
+					<Input style={{ width: 100 }} />
+					<ZKSelect>
+						<ZKSelect.Option value="">请选择</ZKSelect.Option>
+						{areas.map((item, index) => {
+							return <ZKSelect.Option key={`Select-parent-${index}`} value={item.key}>{item.name}</ZKSelect.Option>
+						})}
+					</ZKSelect>
+				</ZKEditForm.Item>
+			</ZKCol>
+		</ZKRow>,
 		<ZKEditForm.Item key = {`${namePrefix}-Input`} name = {`${namePrefix}-Input`} label="Input" >
 			<Input style={{ width: 300 }} />
 		</ZKEditForm.Item>,

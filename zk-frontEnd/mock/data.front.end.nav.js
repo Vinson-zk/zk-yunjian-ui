@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-29 16:13:59
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-03-29 16:15:24
+* @Last Modified time: 2021-08-23 11:55:46
 * 
 * 
 * 
@@ -13,7 +13,7 @@ const navItems = [
     {
         pkId:"sys",
         name:{"zh-CN":"系统管理", "en-US":"System"},
-        navCode:"system",        
+        code:"sys",        
         funcModuleCode: "system", 
         funcName:"sysIndex",          
         path:"sys",                
@@ -24,7 +24,7 @@ const navItems = [
     },{
         pkId:"sample",
         name:{"zh-CN":"样例", "en-US":"Sample"},
-        navCode:"sample",        // 栏目代码，唯一
+        code:"sample",        // 栏目代码，唯一
         funcModuleCode:"sample", // 不能为空，功能模块代码，在哪个功能模块中实现就写哪个功能模块的代码，也是功能模块目录
         funcName:"navIndex",          // 不能为空，功能名称，导航栏的首页组件名；将根据这名称查找到对应功能组件；
         path:"sample",                // 不能为空

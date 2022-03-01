@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 09:04:45
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-21 16:40:01
+ * @Last Modified time: 2021-11-17 16:59:52
  */
 
 import React from 'react';
@@ -92,7 +92,7 @@ const f_makeDynamicComponent = (dvaApp, models, component) => {
 /*** ----------------------------------- Separator - begin 头部导航相关处理函数 ------------ ***/
 /**
  * 生成头部导航及头部导航的路由; 
- * 生成的导航路由会向路由的组件中传入：{dvaApp:dvaApp, navCode:item.navCode, dynamicImportHelper:dynamicImportHelper} 这三个属性；
+ * 生成的导航路由会向路由的组件中传入：{dvaApp:dvaApp, navCode:item.code, dynamicImportHelper:dynamicImportHelper} 这三个属性；
  * @param {object} dvaApp dva app 对象；
  * @param {string} prefixPath 路由路径前缀，不能为 null 或 undefined；
  * @param {Array.of(object)} navDatas 导航栏目数据数组，不支持树形结构；
@@ -117,6 +117,7 @@ const f_getRoutesByNavs = (dvaApp, prefixPath, navDatas, dynamicImportHelper) =>
 			navComponentObj = dynamicImportHelper.dynamicImport(item);
 			if(!navComponentObj){
 				console.error("[>_<:20210214-0844-001] item 未找对应定义的功能组件：", item, dynamicImportHelper);
+				return;
 			}
 			navDynamicComponent = f_makeDynamicComponent(dvaApp, navComponentObj.models, navComponentObj.component);
 			// console.log("[^_^:20200813-1951-001] f_getRoutesByNavs: ", item, navComponentObj, navDynamicComponent);
@@ -125,7 +126,7 @@ const f_getRoutesByNavs = (dvaApp, prefixPath, navDatas, dynamicImportHelper) =>
 					key={item.pkId + "-nav"}
 					path={`${prefixPath}/${item.path}`} component={navDynamicComponent}
 					onEnter={navComponentObj.onEnter}
-					propsToComponent={{ dvaApp: dvaApp, navCode: item.navCode, dynamicImportHelper: dynamicImportHelper }}
+					propsToComponent={{ dvaApp: dvaApp, navCode: item.code, dynamicImportHelper: dynamicImportHelper }}
 				/>
 			)
 		}
@@ -446,7 +447,6 @@ const f_getDynamicImportHelper = (funcModuleMppingObj) => {
 			} catch (err) {
 				if(console)console.error("[>_<:20200811-2322-001] 动态加载组件错误！", item, this.funcModuleMppingObj, err);
 			}
-			return null;
 		}
 	}
 

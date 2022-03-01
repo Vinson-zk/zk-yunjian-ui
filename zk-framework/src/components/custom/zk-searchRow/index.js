@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 12:01:03
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-15 19:35:52
+ * @Last Modified time: 2021-11-02 23:05:03
  */
 
 
@@ -101,11 +101,15 @@ class CInitSearchRow extends React.Component {
 	formRef = null;
 
 	constructor(props) {
-		super(props)
+		super(props);
+		this.state = {
+            isResetForm: false, // 是否需要重置 form 
+            defaultValues: props.filter || props.initialValues,
+        }
 	}
 
 	render() {
-		let { className, searchFunc, resetFunc, showBtnName, children, intl, forwardedRef, ...props } = this.props;
+		let { className, searchFunc, resetFunc, showBtnName, children, intl, forwardedRef, initialValues, filter, ...props } = this.props;
 
 		// 查询函数 
 		const f_search = (values) => {
@@ -118,7 +122,10 @@ class CInitSearchRow extends React.Component {
 			this.formRef.current.resetFields();
 			if (resetFunc instanceof Function) {
 				const values = this.formRef.current.getFieldsValue();
-				resetFunc.call(this, values);
+				resetFunc.call(this, values, this.formRef.current);
+			}
+			if(this.state.defaultValues != initialValues){
+				this.setState({defaultValues:initialValues, isResetForm: true});
 			}
 		}
 
@@ -126,7 +133,8 @@ class CInitSearchRow extends React.Component {
 
 		// undo minus-square-o
 		return (
-			<Form {...props} onFinish = {f_search} ref = {this.formRef} layout="inline" className={`${styles.searchRow} ${className}`} >
+			<Form {...props} layout="inline" className={`${styles.searchRow} ${className}`}  
+				initialValues={this.state.defaultValues} onFinish = {f_search} ref = {this.formRef} >
 				{children}
 				<Form.Item >
 					<Button htmlType="submit" icon = {<SearchOutlined />} className={styles.optBtn} >{showBtnName ? zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_search') : ""}</Button>
@@ -135,6 +143,15 @@ class CInitSearchRow extends React.Component {
 			</Form>
 		)
 	}
+
+	// 6、修改时；更新发生后立即调用。初始渲染不会调用此方法。
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.isResetForm){
+        	// console.log("[^_^:20211102-1713-002]", this.state);
+            this.formRef.current.resetFields();
+            this.setState({isResetForm: false});
+        }
+    }
 }
 
 // children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.instanceOf(ZKSearchItem).isRequired]),
@@ -143,6 +160,8 @@ CInitSearchRow.propTypes = {
 	btnName: PropTypes.bool,
 	searchFunc: PropTypes.func,
 	resetFunc: PropTypes.func,
+	initialValues: PropTypes.object, 
+	filter: PropTypes.object, 
 	children: function (props, propName, componentName) {
 		if (props.children instanceof Array) {
 			for (let c of props.children) {
@@ -181,13 +200,15 @@ CInitSearchRow.propTypes = {
 	// ])
 }
 
-// 查询行参数默认值
+// 查询行参数默认值   
 CInitSearchRow.defaultProps = {
 	...Form.defaultProps,
 	className: ' ',
 	showBtnName: true,
 	searchFunc: undefined,
-	resetFunc: undefined
+	resetFunc: undefined,
+	initialValues: undefined, // 查询行默认值；重置时优先级高于 filter
+	filter: undefined,  // 查询行当前值；非重置时，filter 优先级高于 initialValues
 }
 
 const FUCSearchRow = injectIntl(CInitSearchRow);

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:23:07
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-31 08:24:03
+ * @Last Modified time: 2022-01-26 15:12:30
  */
 
 import React from 'react';
@@ -28,19 +28,17 @@ function FInitZKDetailGridDemo({ intl }) {
 						<Col>原生 Row, 原生 Col</Col>
 					</Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>左边列：</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>右边列</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>👈：</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>👉🏻</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>标签: </ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>👈</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>内容值: </ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>👉🏻</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 				</ZKDetailGrid>
 			</div>
 			<div className={styles.sample_detail_section}>
 				<h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
 				<div>
-					ZKDetailGrid, &nbsp;&nbsp;ZKDetailGrid.Row, &nbsp;&nbsp;ZKDetailGrid.ColLeft, &nbsp;&nbsp;ZKDetailGrid.ColRight &nbsp;&nbsp;组件：<br />
+					ZKDetailGrid, &nbsp;&nbsp;ZKDetailGrid.Row, &nbsp;&nbsp;ZKDetailGrid.ColLabel, &nbsp;&nbsp;ZKDetailGrid.ColValue &nbsp;&nbsp;组件：<br />
 					<div style={{ color: 'red' }}>注：这些封装就是给 原生 Row, 原生 Col 定义了一些默认值；</div>
 					<table className={styles.sample_detail_section_table}>
 						<thead>
@@ -75,12 +73,12 @@ function FInitZKDetailGridDemo({ intl }) {
 								<td>行；接受 Row 原生属性</td>
 							</tr>
 							<tr>
-								<td>ZKDetailGrid.ColLeft</td>
-								<td>左边列：接受 Col 原生属性</td>
+								<td>ZKDetailGrid.ColLabel</td>
+								<td>左边列：接受 Col 原生属性; 默认占 3 格，偏移 2 格</td>
 							</tr>
 							<tr>
-								<td>ZKDetailGrid.ColRight</td>
-								<td>右边列：接受 Col 原生属性</td>
+								<td>ZKDetailGrid.ColValue</td>
+								<td>右边列：接受 Col 原生属性; 默认占 5格，偏移 0 格</td>
 							</tr>
 						</tbody>
 					</table>

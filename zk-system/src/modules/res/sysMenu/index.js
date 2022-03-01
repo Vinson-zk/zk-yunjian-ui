@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-29 17:39:59
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-29 14:53:10
+ * @Last Modified time: 2021-11-03 09:43:15
  */
 
 
@@ -28,7 +28,6 @@ class CInitSysMenuIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {}
-        // props.dispatch({type: 'xxx/xxx', payload:{}})
     }
 
     // static getDerivedStateFromProps(props, state) {
@@ -36,71 +35,10 @@ class CInitSysMenuIndex extends Component {
     // }
 
     render() {
-        let { mApp, mSysMenu, dispatch, history, match, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
-        let searchItemProps = {
-            loading: loading,
-            dispatch: dispatch,
-            filter: mSysMenu.filter,
-            lang: lang,
-			onSearch: filter=>{
-                if(!filter){
-                    filter = mSysMenu.initFilter;
-                }
-                dispatch({ type: "mSysMenu/findSysMenusTree", filter: {...mSysMenu.filter, ...filter}, callback: e => { } });
-            },
-        }
-
-        let gridProps = {
-            loading: loading.effects['mSysMenu/findSysMenusTree'],
-            page: mSysMenu.page || {},
-            lang: lang,
-            gridData: mSysMenu.gridData || [],
-            gridSelKeys: mSysMenu.gridSelKeys,
-            onChangeSelKeys: (selKeys)=>{
-                dispatch({ type: "mSysMenu/setState", payload: { gridSelKeys: selKeys } });
-            },
-            onDetail: (entity)=>{
-                history.push({ pathname: `${match.path}/detail/${entity.pkId}`, state: { optEntity: entity } });
-            },
-            onEdit: (entity)=>{
-                entity = entity || {};
-
-                let parentId = "_top";
-                let pkId = "_new";
-
-                if(!zkJsUtils.isEmpty(entity.parentId)){
-                    parentId = entity.parentId ;
-                }
-                if(entity && entity.pkId){
-                    pkId = entity.pkId;
-                }
-
-                let state = {optEntity: entity};
-                history.push({ pathname: `${match.path}/edit/${parentId}/${pkId}`, state: state });
-            },
-            onDelete: pkIds=>{
-                dispatch({
-                    type: "mSysMenu/deleteSysMenu", payload: { pkId: pkIds },
-                    callback: () => {
-                        this.props.dispatch({ type: 'mSysMenu/findSysMenusTree', filter: mSysMenu.filter, callback: e => { } })
-                    }
-                })
-            },
-            onChange: (pagination, filters, sorter)=>{
-                this.props.dispatch({ type: 'mSysMenu/findSysMenusTree', 
-                    filter: mSysMenu.filter,
-                    page: pagination,
-                    sorter: sorter
-                });
-            }
-        }
-
         return (
             <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`}>
-                <SearchItem {...searchItemProps} />
-                <GridItem {...gridProps} />
+                <SearchItem {...this.props} />
+                <GridItem {...this.props} />
             </div>
         );
     }

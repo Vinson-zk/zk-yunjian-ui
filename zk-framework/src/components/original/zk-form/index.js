@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 09:34:49
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-31 00:08:34
+ * @Last Modified time: 2022-01-26 10:23:03
  */
 import React from 'react';
 import { Form } from 'antd';
@@ -20,14 +20,16 @@ FWrapFormItem.propTypes = {
 // 定义属性默认值
 FWrapFormItem.defaultProps = {
 	...Form.Item.defaultProps,
-	labelCol: {
+	labelCol: { // 使用 9:15 为配合 editForm 下栅格分布，正好是 label 占 3 格
 		xs: { span: 24 },
-		sm: { span: 9 },
+		sm: { span: 9 },    
 	},
 	wrapperCol: {
 		xs: { span: 24 },
 		sm: { span: 15 },
 	},
+	// labelCol: { span: 9 },
+	// wrapperCol: { span: 15 },
 }
 
 /*** 做一层封装，以使用 Form 的其他函数 ***/

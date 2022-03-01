@@ -3,10 +3,10 @@
  * @Author: Vinson
  * @Date: 2021-02-14 12:23:04
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-21 17:17:41
+ * @Last Modified time: 2021-11-03 19:17:46
  */
 
-import { getNavItems } from "./sysService.js";
+import { getNavMenus } from "./sysService.js";
 
 // import zkJsUtils from 'zkJsUtils';
 import { zkTools } from 'zkFramework';
@@ -26,7 +26,7 @@ const model = {
     effects: {
         // 取菜单
         *getMenus({ navCode, payload }, { call, put }) {
-            let res = yield call(getNavItems, navCode, payload);
+            let res = yield call(getNavMenus, navCode, payload);
             if (res.code == "zk.0") {
                 let menus = res.data;
                 menus = zkJsUtils.makeTree(menus, null);

@@ -3,13 +3,11 @@
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:53
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-22 21:24:22
+ * @Last Modified time: 2021-11-11 11:21:13
  */
 
 
 import React, { Component } from 'react';
-//  import { connect } from 'dva';
-import { injectIntl } from 'react-intl';
 
 import locales from "../../../locales/index";
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
@@ -27,30 +25,33 @@ class CInitSysMenuSearch extends React.Component {
         }
     }
 
-    onSearchNavCodes = value=>{
+    f_searchNavCodes = value=>{
         let { dispatch } = this.props;
         dispatch({ type: 'mSysMenu/findNavCodes', filter: { code: value }, callback: datas=>{
             this.setState({sysNavs: datas});
         }});
     }
 
+    f_search = filter=>{
+        let { dispatch, mSysMenu } = this.props;
+        if(!filter){
+            filter = mSysMenu.initFilter;
+        }
+        dispatch({ type: "mSysMenu/findSysMenusTree", filter: {...mSysMenu.filter, ...filter}, callback: e => { } });
+    }
+
     render(){
-        let { intl, loading, lang, filter = {}, onSearch, onResetFilter} = this.props;
+        let { intl, mApp, mSysMenu, loading } = this.props;
+        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         let selLoading = loading.effects['mSysMenu/findNavCodes'];
         return (
-            <ZKSearchRow resetFunc={values => {
-                    if (onResetFilter instanceof Function) {
-                        onResetFilter.call(this, values);
-                    }
-                    // if(onSearch instanceof Function){
-                    // 	onSearch.call(this, null)
-                    // }
-                }}
+            <ZKSearchRow 
+                initialValues={ mSysMenu.initFilter } 
+                filter={mSysMenu.filter || mSysMenu.initFilter}
+                resetFunc={(values, form) => {}}
                 searchFunc={values => {
-                    if (onSearch instanceof Function) {
-                        onSearch.call(this, values)
-                    }
+                    this.f_search.call(this, values);
                 }}
             >
                 <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.name')} >
@@ -61,8 +62,8 @@ class CInitSysMenuSearch extends React.Component {
                         showSearch = {true}
                         filterOption = {false}
                         loading = { selLoading }
-                        onDropdownVisibleChange = { open=>{if(open){this.onSearchNavCodes('');}}}
-                        onSearch = { this.onSearchNavCodes }
+                        onDropdownVisibleChange = { open=>{if(open){this.f_searchNavCodes('');}}}
+                        onSearch = { this.f_searchNavCodes }
                     >
                         {this.state.sysNavs.map((sysNav, index)=>{
                             return <ZKSelect.Option key={index} value={sysNav.code}>{sysNav.code}[{zkToolsMsg.getInternationInfo(sysNav.name)}]</ZKSelect.Option>
@@ -83,4 +84,10 @@ class CInitSysMenuSearch extends React.Component {
     }
 }
 
-export default injectIntl(CInitSysMenuSearch);
+export default CInitSysMenuSearch;
+// export default injectIntl(CInitSysMenuSearch);
+// export default injectIntl(connect(({ mSysMenu }) => ({ mSysMenu}))(CInitSysMenuSearch));
+
+
+
+

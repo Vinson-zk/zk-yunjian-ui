@@ -4,6 +4,7 @@ const messages = {
 	"global.app.msg.success": "Success!",
 	"global.app.msg.warning": "Unknown Warning!",
 	"global.app.msg.error": "Unknown Error!",
+	"global.app.msg.error.connect.failed": "Failed to connect to server!",
 	"global.app.msg.error.500": "启禀主公！您要找的文臣武将睡着了！",
 	"global.app.msg.error.404": "The request is not found！",
 	"global.app.msg.error.403": "启禀主公！您还需要多读书才有权限求见贤能！",
@@ -13,6 +14,9 @@ const messages = {
 	"global.app.msg.beforeunload": "离开当前页后，所编辑的数据将不可恢复",
 	"global.app.msg.leave":"确认离开此页面？",
 	"global.app.msg.leave.save":"您确定要放弃编辑的内容，离开此页面？",
+
+	// 全局标签
+	"global.app.lable.platform": "Platform",
 
 	// 全局名称定义
 	"global.app.user.nickname": "Guest",
@@ -34,6 +38,8 @@ const messages = {
 	"global.app.info.show": "Show",
 	"global.app.info.hide": "Hide",
 	"global.app.info.all": "All",
+	"global.app.info.enable": "Enable",
+	"global.app.info.disabled": "Disabled",
 
 	// 单位全部名
 	"global.unit.name.k": "k",
@@ -45,14 +51,15 @@ const messages = {
 	"global.opt.name._key_settings": "Settings",
 	"global.opt.name._key_add": "Add",
 	"global.opt.name._key_add_child": "Add Child",
-	"global.opt.name._key_edit": "edit",
-	"global.opt.name._key_del": "del",
-	"global.opt.name._key_login": "login",
-	"global.opt.name._key_logout": "logout",
+	"global.opt.name._key_edit": "Edit",
+	"global.opt.name._key_del": "Del",
+	"global.opt.name._key_login": "Login",
+	"global.opt.name._key_logout": "Logout",
 	"global.opt.name._key_search": "Search",
 	"global.opt.name._key_reset": "Reset",
 	"global.opt.name._key_select": "Select",
 	"global.opt.name._key_back": "Back",
+	"global.opt.name._key_ok": "确定",
 	"global.opt.name._key_cancel": "Canel",
 	"global.opt.name._key_save": "Save",
 	"global.opt.name._key_submit": "Submit",

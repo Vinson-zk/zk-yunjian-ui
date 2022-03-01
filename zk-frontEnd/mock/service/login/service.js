@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-07-01 23:08:53
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 09:57:17
+* @Last Modified time: 2021-08-24 11:31:09
 * 
 * 
 * 
@@ -54,7 +54,8 @@ module.exports = {
         	if (dataBody.pwd == "admin") {
         		resJsonData.data = { 
         			_tID: 'apiMock-accountLogin',
-        			user: { "pkId": "pkId", "username": dataBody.username, "nickname": "Mock 账号", "newMsg": 6 } 
+        			user: { "pkId": "pkId", "username": dataBody.username, "nickname": "Mock 账号", "newMsg": 6},
+                    platformCode:'_default_platform_code_' 
         		};
         	}else{
         		resJsonData.code = 'zk.security.000002';

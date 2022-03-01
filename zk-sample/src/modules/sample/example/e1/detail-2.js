@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-17 14:20:35
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-08 23:56:46
+ * @Last Modified time: 2022-01-26 14:51:15
  */
 
 
@@ -104,40 +104,40 @@ class CInitE1_Detail extends React.Component {
 			<ZKSpin spinning={spinning === true} >
 				<ZKDetailGrid >
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.name')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{optEntity.name}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.name')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{optEntity.name}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.stature')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{optEntity.stature}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.stature')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{optEntity.stature}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.birthday')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{optEntity.birthday}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.birthday')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{optEntity.birthday}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.areaOne')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{areaOne ? zkToolsMsg.getInternationInfo(areaOne.name) : ''}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.areaOne')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{areaOne ? zkToolsMsg.getInternationInfo(areaOne.name) : ''}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.areaTwo')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{areaTwo ? zkToolsMsg.getInternationInfo(areaTwo.name) : ''}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.areaTwo')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{areaTwo ? zkToolsMsg.getInternationInfo(areaTwo.name) : ''}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.sex')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{sex}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.sex')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{sex}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.education')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{optEntity.education}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.education')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{optEntity.education}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.hobby')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{optEntity.hobby}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.hobby')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{optEntity.hobby}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.addr')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>{optEntity.addr ? optEntity.addr[lang] : ""}</ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.addr')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>{optEntity.addr ? optEntity.addr[lang] : ""}</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 
 				</ZKDetailGrid>

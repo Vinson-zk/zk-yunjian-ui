@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:28:24
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-07 05:43:16
+ * @Last Modified time: 2021-11-02 23:01:44
  */
 
 import React from 'react';
@@ -220,6 +220,20 @@ function FInitZKSearchRowDemo({ intl }) {
 								<td>否</td>
 								<td>查询按钮点击回调函数 searchFunc.call(this, values);</td>
 								<td>PropTypes.func</td>
+								<td>undefined</td>
+							</tr>
+							<tr>
+								<td>initialValues</td>
+								<td>否</td>
+								<td>查询行默认值；重置时优先级高于 filter</td>
+								<td>PropTypes.object</td>
+								<td>undefined</td>
+							</tr>
+							<tr>
+								<td>filter</td>
+								<td>否</td>
+								<td>查询行当前值；非重置时，filter 优先级高于 initialValues</td>
+								<td>PropTypes.object</td>
 								<td>undefined</td>
 							</tr>
 						</tbody>

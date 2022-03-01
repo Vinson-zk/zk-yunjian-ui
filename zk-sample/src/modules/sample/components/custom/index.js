@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:36:01
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 19:53:43
+ * @Last Modified time: 2021-12-08 00:00:12
  */
 
 import React from 'react';
@@ -41,6 +41,7 @@ function FInitCustomComponentsDemo({ intl }) {
 						"    ZKDateFormatPicker",
 						"    ZKDetailGrid",
 						"    ZKEditForm",
+						"    ZKEditJsonArray",
 						"    ZKInputJson",
 						"    ZKLanguageSelect",
 						"    ZKLogo",

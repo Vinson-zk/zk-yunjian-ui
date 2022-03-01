@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-10 15:54:54
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-01 10:24:47
+ * @Last Modified time: 2021-11-19 20:38:28
 */
 
 const defaultThemeColor = {
@@ -12,7 +12,7 @@ const defaultThemeColor = {
     // ,"@background-color":"#f7f7f7"     // 背景色
 
     // "@primary-color": "#1890ff",         // 主题色
-     "@primary-color": "#FF0000",         // 主题色
+     "@primary-color": "#00bcd4",         // 主题色
     "@label-color": "#888",              // 标签颜色
     "@background-color": "#f7f7f7"       // 背景色
 

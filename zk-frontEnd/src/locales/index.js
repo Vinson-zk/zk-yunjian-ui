@@ -3,12 +3,14 @@
  * @Author: Vinson
  * @Date: 2020-08-23 22:53:23
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 14:22:33
+ * @Last Modified time: 2022-01-09 10:19:57
  */
 
 import { locales as zkFrameworkLocales, zkTools } from 'zkFramework'; 
 import { locales as sampleLocales } from 'zkSample';
 import { locales as sysLocales } from 'zkSystem';
+import { locales as developmentToolLocales } from 'zkDevelopmentTool';
+import { locales as wechatLocales } from 'zkWechat';
 import frontEndLocales from '../modules/locales/index.js';
 
 import enLocaleData from "react-intl/locale-data/en";
@@ -33,9 +35,10 @@ let localDatas = [];
 localDatas.push(locals);
 localDatas.push(frontEndLocales);
 localDatas.push(sysLocales);
-localDatas.push(sysLocales);
+localDatas.push(developmentToolLocales);
 localDatas.push(zkFrameworkLocales);
 localDatas.push(sampleLocales);
+localDatas.push(wechatLocales);
 
 locals = zkTools.zkToolsMsg.mergeLocalMsgs(localDatas);
 // console.log("[^_^: 20200810-0907-001] locals: ", locals);

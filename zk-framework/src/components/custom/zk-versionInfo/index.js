@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 12:44:33
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-09 10:29:28
+ * @Last Modified time: 2021-11-24 10:59:32
  */
 
 import React from "react";
@@ -11,6 +11,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { Tooltip, Icon, Collapse, Card } from "antd";
 import { InfoCircleOutlined } from '@ant-design/icons';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const { Meta } = Card;
 
@@ -88,7 +89,7 @@ const FInitVersionInfo = ({ versionInfo, dependenceInfos, intl }) => {
 	let dependencePanel = f_makeDependenceInfos(dependenceInfos, intl);
 
 	return (
-		<div className={styles.version_info} >
+		<Scrollbars className={styles.version_info} style={{ 'minHeight':'33vh', height: 'auto' }} >
 			{versionInfoCard}
 			<Collapse accordion={true} className={styles.dependences_info} >
 				<Collapse.Panel key={`_key_Collapse.Panel_`} className={styles.dependences_info_panel}
@@ -96,7 +97,7 @@ const FInitVersionInfo = ({ versionInfo, dependenceInfos, intl }) => {
 					{dependencePanel}
 				</Collapse.Panel>
 			</Collapse>
-		</div>
+		</Scrollbars>
 	)
 }
 

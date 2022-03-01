@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 12:30:13
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-30 00:09:42
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-01-03 15:05:10
  */
 
 
@@ -28,7 +28,10 @@ class CInitZKToolsMsgDemo extends React.Component {
 	}
 
 	render() {
-		let { intl, match } = this.props;
+		let { intl, match, location } = this.props;
+
+		console.log("----- ", match, location);
+
 		return (
 			<div className={styles.sample_detail_panel}>
 				<div className={styles.sample_detail_top_affix} >
@@ -144,7 +147,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 								<tr>
 									<td>opt</td>
 									<td>false</td>
-									<td>消息国际化时需要替换的参数; 在配置的 key 对应的值中，用 {"{ + opt 中属性名称 + }"} 来配置需要替换的参数</td>
+									<td>消息国际化时需要替换的参数; 在配置的 key 对应的值中，用 {"{ opt 的属性名称 }"} 来配置需要替换的参数</td>
 									<td>Object</td>
 									<td>{"{}"}</td>
 								</tr>
@@ -405,7 +408,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 								<tr>
 									<td>opt</td>
 									<td>true</td>
-									<td>消息对象</td>
+									<td>消息对象; 可接收原生 Modal.method() 参数</td>
 									<td>Object</td>
 									<td>无</td>
 								</tr>

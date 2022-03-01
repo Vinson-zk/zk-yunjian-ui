@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-29 16:21:08
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 09:22:15
+* @Last Modified time: 2022-01-09 23:39:39
 * 
 * 
 * 
@@ -30,17 +30,25 @@ import zkFrameworkInfo from 'zkFramework/package.json';
 import zkPackageInfo from 'zkPackage/package.json';
 import zkSample from 'zkSample/package.json';
 import zkSystem from 'zkSystem/package.json';
+import zkDevelopmentTool from 'zkDevelopmentTool/package.json';
+import zkWechat from 'zkWechat/package.json';
 
-const dependenceInfos = [zkPackageInfo, zkFrameworkInfo, zkSample, zkSystem];
+const dependenceInfos = [zkPackageInfo, zkFrameworkInfo, zkSample, zkSystem, zkDevelopmentTool, zkWechat];
 import versionInfo from '../../package.json';
 
 /*** 引入依赖功能模块 ***/
 import {funcModule as sampleFuncModule} from 'zkSample';
 import {funcModule as systemFuncModule} from 'zkSystem';
+import {funcModule as developmentToolFuncModule} from 'zkDevelopmentTool';
+import {funcModule as wechatFuncModule} from 'zkWechat';
+import generalApplicationFuncModule from './generalApplication/func.js';
 
 const funcModuleMppingObj = { 
-    "system": systemFuncModule,
+    "sys": systemFuncModule,
     "sample": sampleFuncModule,
+    "developmentTool": developmentToolFuncModule,
+    "wechat": wechatFuncModule,
+    "generalApplication": generalApplicationFuncModule,
 }
 
 /*** 动态加载组件助手 ***/
@@ -57,15 +65,12 @@ class CInitLayoutPrivate extends React.PureComponent {
     }
 
     componentDidMount() {
-
         const { intl, dispatch, mApp } = this.props;
-
         // 请求菜单
         if(mApp.menuFlag === 0){
             // 尚未向后请求过菜单，请求菜单
             dispatch({ type: "mApp/getMenus" });
         }
-
     }
 
     static getDerivedStateFromProps(props, state){
@@ -93,11 +98,11 @@ class CInitLayoutPrivate extends React.PureComponent {
 	        }
 	    };
 
-	    let f_onLogin = () => {
-	        if (!mApp.user) {
-	            dispatch({ type: 'mApp/setState', payload: { user: { "loginName": "test", "nickname": "游客", "newMsg": 6 } } });
-	        }
-	    }
+	    // let f_onLogin = () => {
+	    //     if (!mApp.user) {
+	    //         dispatch({ type: 'mApp/setState', payload: { user: { "loginName": "test", "nickname": "游客", "newMsg": 6 } } });
+	    //     }
+	    // }
 
 	    let f_onUserDropDownCallBack = key => {
 	        switch (key) {
@@ -130,7 +135,7 @@ class CInitLayoutPrivate extends React.PureComponent {
 	            <Header className={zkStyles.zk_header}>
 	                <ZKLogo logoImgUrl="assets/img/logo-zk.png" />
 	                <ZKNavigation prefixPath={`${match.path}`} navItems={mApp.navItems?mApp.navItems:[]} />
-	                <ZKUserDropDown user={mApp.user} onLogin={f_onLogin} optKeys={optKeys} callBack={f_onUserDropDownCallBack} />
+	                <ZKUserDropDown user={mApp.user} optKeys={optKeys} callBack={f_onUserDropDownCallBack} />
 	                <ZKLanguageSelect {...languageSwitchProps} />
 	            </Header>
 	            <Content className={zkStyles.zk_content}>
@@ -154,9 +159,24 @@ const CLayoutPrivate = injectIntl(CInitLayoutPrivate);
 // 判断登录情况
 const FInitLayoutPrivateAuth = ({ redirectPath, ...props }) => {
 
-	// console.log("[^_^:20210702-0846-001] ", zkToolsAuth.isLogin());
-
-    /** 如果未登录，跳转到指定的路由路径 */
+	if(!globalAppConfig.isAuth){
+		// 关闭了权限认证；
+		zkToolsAuth.setTicket("_not_auth_isAuth_false");
+		if( !props.mApp.user || zkJsUtils.isEmpty(props.mApp.user.pkId) ){
+			// 无用户信息 默认设置一游客用户
+			props.dispatch({ 
+				type: 'mApp/setState', 
+				payload: { 
+					user: { pkId:"test_user_pkId", "loginName": "test", "nickname": "游客", "newMsg": 6 }, 
+					platformCode:'_default_platform_code_' 
+				} 
+			});	
+		}	
+		console.log("[^_^:20210823-1201-001] ", globalAppConfig.isAuth, zkToolsAuth.isLogin(), props.mApp.user);
+	}
+	// console.log("[^_^:20210702-0846-001] ", globalAppConfig.isAuth, zkToolsAuth.isLogin(), props.mApp.user);
+	
+	/** 如果未登录，跳转到指定的路由路径 */
     if(!zkToolsAuth.isLogin()){
         return <Redirect to={{ pathname: redirectPath, state: { fromLocation: props.location } }}/>
     }
@@ -168,7 +188,6 @@ const FInitLayoutPrivateAuth = ({ redirectPath, ...props }) => {
     }
 
     return <CLayoutPrivate {...props} />
-
 }
 
 export default FInitLayoutPrivateAuth;

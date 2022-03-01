@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 09:05:30
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 09:42:22
+ * @Last Modified time: 2021-11-20 09:16:20
  */
 
 // jquery ajax 暂未使用 
@@ -195,18 +195,24 @@ const f_responseError = (xhr, status, err) => {
 
     // 默认提示信息
     let errMsg = null
-    if(err.status = 404){
-        errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.404');
-    }else if(err.status = 403){
-        errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.403');
-    }else if(err.status = 500){
-        errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.500');
+    if(err){
+        if(err.status = 404){
+            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.404');
+        }else if(err.status = 403){
+            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.403');
+        }else if(err.status = 500){
+            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.500');
+        }else{
+            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
+        }
+        
+        // zkToolsMsg.alertMsg(null, null, {type:'error', msg:`${errMsg}:${err.readyState}`}, null, null)
+        return { "code": "-2", "msg": errMsg, "data": err.readyState };
     }else{
-        errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
+        errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.connect.failed');
+        return { "code": "-3", "msg": errMsg };
     }
     
-    // zkToolsMsg.alertMsg(null, null, {type:'error', msg:`${errMsg}:${err.readyState}`}, null, null)
-    return { "code": "-2", "msg": errMsg, "data": err.readyState };
 };
 
 /**

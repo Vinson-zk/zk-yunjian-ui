@@ -1,0 +1,15 @@
+{
+  "name": "developmentTool",
+  "version": "1.0.1",
+  "description": "zk Development Tool",
+  "main": "index.js",
+  "module": "es/index.js",
+  "files": [
+    "es"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vinson",
+  "license": "ISC"
+}

@@ -1,11 +1,21 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 13:59:32 
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-09-17 21:01:46
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-01-03 11:25:21
  */
 
 (function (global) {
+
+    /* 暂未启用，感觉可以自定义的全局函数
+        //用于生成uuid
+        function S4() {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        }
+        function guid() {
+            return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+        }
+    */
 
     /*** 数组属性扩展 ***/
     // 查询元素，不存在返回 -1; 存在 返回其位置
@@ -482,3 +492,4 @@
     }
     global.zkJsUtils = _zkJsUtils
 })(typeof window !== "undefined" ? window : this);
+

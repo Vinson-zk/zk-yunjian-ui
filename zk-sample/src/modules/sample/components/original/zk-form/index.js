@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:30:54
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-08 12:06:30
+ * @Last Modified time: 2021-11-02 16:08:17
  */
 
 import React from 'react';
@@ -192,7 +192,7 @@ class CInitZKFormDemo extends React.Component {
 						<ZKInput />
 					</ZKForm.Item>
 					<ZKForm.Item label="ZKInputNumber" name = 'ZKInputNumber'>
-						<ZKInputNumber isShowNumLabel={true} onChange={(value) => { console.log(" ZKInputNumber onchange; value: ", value) }} />
+						<ZKInputNumber onChange={(value) => { console.log(" ZKInputNumber onchange; value: ", value) }} />
 					</ZKForm.Item>
 					<ZKForm.Item label="联动 Select-parent" name = "Select-parent">
 						<ZKSelect>

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:48
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-04-22 10:08:17
+ * @Last Modified time: 2021-11-17 12:02:22
  */
 
 
@@ -26,6 +26,7 @@ class CInitSysNavEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: false,
             selIconAttrName: "",
             icon: {
 
@@ -37,6 +38,21 @@ class CInitSysNavEdit extends Component {
     //     return true;
     // }
 
+    // 保存
+    f_save = (values, form, callbackFunc) => {
+        this.props.dispatch({
+            type: 'mSysNav/editSysNav', 
+            payload: values, 
+            callback: (errors) => {
+                if(!errors){
+                    this.setState({loading: true});
+                }
+                callbackFunc(errors);
+            }
+        });
+    };
+
+    /** 返回 JSX 元素 */
     render() {
 
         let { mApp, dispatch, mSysNav, intl, loading, location } = this.props;
@@ -44,16 +60,6 @@ class CInitSysNavEdit extends Component {
         
 		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-        // 保存
-        const save = (values, form, callbackFunc) => {
-            dispatch({
-                type: 'mSysNav/editSysNav', 
-                payload: values, 
-                callback: (errors) => {
-                    callbackFunc(errors);
-                }
-            });
-        };
         const f_selectIcon = (value)=>{
             let selIconAttrName = this.state.selIconAttrName;
             let setIcon = {};
@@ -80,7 +86,7 @@ class CInitSysNavEdit extends Component {
             nameRule[index] = zkToolsValidates.string(intl, 1, 80, true);
         }
 
-        let spinning = loading.effects['mSysNav/editSysNav'] || loading.effects['mSysNav/getSysNav'];
+        let spinning = this.state.loading || loading.effects['mSysNav/editSysNav'] || loading.effects['mSysNav/getSysNav'];
         return (optEntity != null && mSysNav.pathname == location.pathname) && (
             <ZKSpin spinning={spinning === true} >
                 <ZKModal
@@ -95,8 +101,8 @@ class CInitSysNavEdit extends Component {
                     <ZKIcon.ZKIconPanel onSelect={f_selectIcon} />
                 </ZKModal>
                 <ZKEditForm ref = {this.formRef} history={history} data={optEntity}
-                    saveFunc={save}
-                    resetFunc={() => { this.setState({ areaOneKey: undefined }); }}
+                    saveFunc={this.f_save}
+                    resetFunc={form => { return true; }}
                 >
                     <ZKEditForm.Item name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.name')} rules = {[
                                 // zkToolsValidates.notNull(intl), 
@@ -155,15 +161,11 @@ class CInitSysNavEdit extends Component {
 
         // 地址栏改变了 
         if (mSysNav.pathname != location.pathname) {
-            let optEntity = location.state ? location.state.optEntity : undefined;
-            if (optEntity && optEntity.pkId && optEntity.pkId == params.pkId) {
-                dispatch({ type: 'mSysNav/setState', payload: { optEntity: optEntity, pathname: location.pathname } });
-            } else {
-
-                dispatch({ type: 'mSysNav/setState', payload: { pathname: location.pathname, optEntity:optEntity } });
-                if("_new" != params.pkId){
-                    dispatch({ type: 'mSysNav/getSysNav', payload: { pkId: params.pkId } });
-                }
+            dispatch({ type: 'mSysNav/setState', payload: { pathname: location.pathname, optEntity: undefined } });
+            if("_new" == params.pkId){
+                dispatch({ type: 'mSysNav/setState', payload: { optEntity: {} } });
+            }else{
+                dispatch({ type: 'mSysNav/getSysNav', payload: { pkId: params.pkId } });
             }
         }
     }

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-13 20:47:33
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 19:54:53
+ * @Last Modified time: 2021-12-07 23:56:03
  */
 
 
@@ -56,6 +56,7 @@ const msg = {
 	"sample.components.custom.upload":"ZKUpload",
 	"sample.components.custom.userDropDown":"ZKUserDropDown",
 	"sample.components.custom.versionInfo":"ZKVersionInfo",
+	"sample.components.custom.editJsonArray":"ZKEditJsonArray",
 
 	"sample.general.function":"General purpose Function or Confing",
 	"sample.business.example":"Business Example",

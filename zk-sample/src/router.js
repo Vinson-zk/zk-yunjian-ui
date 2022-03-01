@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 16:39:49 
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-30 11:33:02
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2021-11-08 19:42:51
  */
 
 import React from 'react';
@@ -12,7 +12,7 @@ import dynamic from 'dva/dynamic';
 
 import { ZKCustomComponents } from 'zkFramework';
 
-const { BrowserRouter, ZKPrivateRoute, Switch } = ZKCustomComponents.ZKRouter;
+const { HashRouter, BrowserRouter, ZKPrivateRoute, Switch } = ZKCustomComponents.ZKRouter;
 
 import cIndex from './index.js';
 import mApp from './model.js';

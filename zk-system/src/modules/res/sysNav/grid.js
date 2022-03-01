@@ -3,11 +3,12 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:50
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-04-01 18:30:43
+ * @Last Modified time: 2021-11-03 15:32:17
  */
 
 
 import React from 'react';
+ import { connect } from 'dva';
 import { injectIntl } from 'react-intl';
 import { Table } from 'antd';
 
@@ -20,12 +21,13 @@ import zkStyles from 'zkFramework/css/styles.less';
 
 /**
  * 取 table 列表
- * @param {Function} editFunc 编辑函数
- * @param {Function} detailFunc 明细函数
- * @param {Function} deleteFunc 删除函数
+ * @param {Function} onEditFunc 编辑函数
+ * @param {Function} onDetailFunc 明细函数
+ * @param {Function} onDeleteFunc 删除函数
  * @param {object} intl 国际化语言对象
+ * @param {string} lang 当前语言标识
  */
-const f_getTableColumns = (editFunc, detailFunc, deleteFunc, intl, lang) => {
+const f_getTableColumns = (onEditFunc, onDetailFunc, onDeleteFunc, intl, lang) => {
 
 	return [
 		{
@@ -85,19 +87,19 @@ const f_getTableColumns = (editFunc, detailFunc, deleteFunc, intl, lang) => {
 					<ZKOptRow key={`grid-${record.pkId}`} >
 						<ZKOptRow.OptGroup isAutoPurseUp={true} >
 							<ZKOptRow.OptGroup.OptItem onClick={() => { // 编辑
-								editFunc(record);
+								onEditFunc(record);
 							}}>
 								{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_edit')}
 							</ZKOptRow.OptGroup.OptItem>
 							<ZKOptRow.OptGroup.OptItem onClick={() => { // 明细/详情
-								detailFunc(record);
+								onDetailFunc(record);
 							}}>
 								{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_detail')}
 							</ZKOptRow.OptGroup.OptItem>
 						</ZKOptRow.OptGroup>
 						<ZKPopconfirm type="delete" placement="top"
 							onConfirm={() => { // 删除
-								deleteFunc([record.pkId])
+								onDeleteFunc([record.pkId], false);
 							}}>
 							<ZKButton>{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_del')}</ZKButton>
 						</ZKPopconfirm>
@@ -113,18 +115,40 @@ class CInitSysNavGrid extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sh: 360
+			sh: 360,
+			// selKeys: []
 		}
 	}
 
-	// 删除，删除的提示等，真正的数据删除是 f_deleteAction 删除执行函数进行
-	f_delete = (keys, isConfirm)=>{
+	/** 编辑 */
+	f_edit = entity => {
+		let state = {
+            optEntity: {}
+        };
+        if(entity && entity.pkId){
+            state.optEntity = entity;
+            this.props.history.push({ pathname: `${this.props.match.path}/edit/${entity.pkId}`, state: state });
+        }else{
+            this.props.history.push({ pathname: `${this.props.match.path}/edit/_new`, state: state });
+        }
+	}
+	 
+	/** 详情明细 */
+	f_detail = (entity) => {
+		this.props.history.push({ pathname: `${this.props.match.path}/detail/${entity.pkId}`, state: { optEntity: entity } });
+	}
 
-		let executeDelete = (keys) => {
-			// 执行删除
-			if (this.props.onDelete instanceof Function) {
-				this.props.onDelete.call(this, keys);
-			}
+	/** 删除，删除的提示等，真正的数据删除是 f_deleteAction 删除执行函数进行 */
+	f_delete = (keys, isConfirm) => {
+
+		// 执行删除
+		let f_executeDelete = (keys) => {
+			this.props.dispatch({
+                type: "mSysNav/deleteSysNav", payload: { pkId: keys },
+                callback: () => {
+                    this.props.dispatch({ type: 'mSysNav/findSysNavs', filter: this.props.mSysNav.filter, callback: e => { } })
+                }
+            })
 		};
 		
 		if (keys === null || keys === undefined || keys.length < 1) {
@@ -133,55 +157,52 @@ class CInitSysNavGrid extends React.Component {
 			if (isConfirm) {
 				zkToolsMsg.alertMsgByType(this.props.intl, null, 'delConfirm', () => {
 					// ok
-					executeDelete(keys);
+					f_executeDelete(keys);
 				}, () => {
 					// cancel
 				})
 			} else {
 				// 执行删除
-				executeDelete(keys);
+				f_executeDelete(keys);
 			}
 		}
 	}
+	
+	/** 选择行改变 */
+	f_changeSelKeys = (selRowKeys, selRows) => {
+		this.props.dispatch({ type: "mSysNav/setState", payload: { gridSelKeys: selRowKeys } });
+		// this.setState({selKeys: selRowKeys});
+	}
 
+	/** 列表改变 */
+	f_changeGrid = (pagination, filters, sorter) => {
+        // 注意这里要将 zkToolsUtils.convertSortParam(mSysNav.filter, sorter) 放在前面，以便后面新的分页参数覆盖旧的分页参数；在排序处理函数中会处理旧排序的问题
+        this.props.dispatch({ type: 'mSysNav/findSysNavs', 
+            filter: mSysNav.filter,
+            page: pagination,
+            sorter: sorter
+        });
+    }
+
+	/** 返回 JSX 元素 */
 	render() {
 
-		let { page = {}, gridData = [], gridSelKeys = [], onChange, onChangeSelKeys, onDetail, onEdit, lang, intl, loading } = this.props
+		let { intl, mApp, mSysNav, loading } = this.props;
+        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+        let page = mSysNav.page || {};
+        let gridData = mSysNav.gridData || [];
+        let gridSelKeys = mSysNav.gridSelKeys;
 
-		// 改变选择行
-		const changeSelKeysFunc = (selRowKeys, selRows) => {
-			if (onChangeSelKeys instanceof Function) {
-				onChangeSelKeys.call(this, selRowKeys);
-			}
-		};
+		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang);
 
-		// 明细
-		const detailFunc = (entity) => {
-			if (onDetail instanceof Function) {
-				onDetail.call(this, entity);
-			}
-		};
-
-		// 删除
-		const deleteFunc = ids => {
-			this.f_delete(ids, false);
-		};
-
-		// 新增/编辑
-		const editFunc = entity => {
-			if (onEdit instanceof Function) {
-				onEdit.call(this, entity)
-			}
-		};
-
-		let tableColumns = f_getTableColumns(editFunc, detailFunc, deleteFunc, intl, lang);
-
+		let loadingFlag = loading.effects['mSysNav/findSysNavs'];
 		return (
-			<ZKScrollTable loading = { loading }
+			<ZKScrollTable loading = { loadingFlag }
 				autoHeight = {true}
 				rowSelection = {{
-					onChange: (selRowKeys, selRows) => { changeSelKeysFunc(selRowKeys, selRows) },
-					selectedRowKeys: gridSelKeys, columnWidth: '32px'
+					onChange: (selRowKeys, selRows) => { this.f_changeSelKeys(selRowKeys, selRows) },
+					selectedRowKeys: this.gridSelKeys, 
+					columnWidth: '32px'
 				}}
 				rowKey = "pkId"
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
@@ -191,13 +212,13 @@ class CInitSysNavGrid extends React.Component {
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {gridData}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
-                onChange = {onChange}
-				className = {zkStyles.flex}
+                onChange = { this.f_changeGrid }
+				className = { zkStyles.flex }
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>
 						<ZKOptRow.OptGroup.OptItem onClick={(e) => {
-							editFunc({});
+							this.f_edit({});
 						}} >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_add')}</ZKOptRow.OptGroup.OptItem>
 						<ZKOptRow.OptGroup.OptItem onClick={(e) => {
 							// 删除
@@ -210,8 +231,10 @@ class CInitSysNavGrid extends React.Component {
 	}
 }
 
-export default injectIntl(CInitSysNavGrid);
-// loading
-// export default injectIntl(connect(({loading})=>({loading}))(CInitE1_Grid));
+export default CInitSysNavGrid;
+// export default injectIntl(CInitSysNavGrid);
+// export default injectIntl(connect(({ mApp, mSysNav, loading }) => ({ mApp, mSysNav, loading }))(CInitSysNavGrid));
+
+
 
 

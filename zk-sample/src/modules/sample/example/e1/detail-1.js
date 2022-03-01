@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-17 14:18:25
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-08 23:56:46
+ * @Last Modified time: 2022-01-26 14:51:16
  */
 
 import React from 'react';
@@ -105,22 +105,22 @@ class CInitE1_Detail extends React.Component {
 				<ZKDetailGrid >
 
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.name')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight><ZKInput disabled value={optEntity.name} /></ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.name')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue><ZKInput disabled value={optEntity.name} /></ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.stature')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight><ZKInputNumber disabled value={optEntity.stature} formatValueFunc={value => value + " CM"} /></ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.stature')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue><ZKInputNumber disabled value={optEntity.stature} formatValueFunc={value => value + " CM"} /></ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.birthday')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.birthday')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							<ZKDateFormatPicker disabled value={optEntity.birthday} format="YYYY-MM-DD" />
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.areaOne')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.areaOne')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							<ZKSelect disabled value={optEntity.areaOne} >
 								{
 									areaTree.map(item => {
@@ -130,11 +130,11 @@ class CInitE1_Detail extends React.Component {
 									})
 								}
 							</ZKSelect>
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.areaTwo')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.areaTwo')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							<ZKSelect disabled value={optEntity.areaTwo} >
 								{
 									areaTwos.map(item => {
@@ -144,28 +144,28 @@ class CInitE1_Detail extends React.Component {
 									})
 								}
 							</ZKSelect>
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.sex')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.sex')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							<ZKSelect disabled value={optEntity.sex}>
 								<ZKSelect.Option value={1}>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.man')}</ZKSelect.Option>
 								<ZKSelect.Option value={0}>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.woman')}</ZKSelect.Option>
 							</ZKSelect>
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.education')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight><ZKInput disabled value={optEntity.education} /></ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.education')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue><ZKInput disabled value={optEntity.education} /></ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.hobby')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight><ZKInput disabled value={optEntity.hobby} /></ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.hobby')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue><ZKInput disabled value={optEntity.hobby} /></ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.addr')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.addr')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							<ZKInputJson
 								readOnly={false}
 								disabled
@@ -173,11 +173,11 @@ class CInitE1_Detail extends React.Component {
 								primaryAttr={lang}
 								value={optEntity.addr ? optEntity.addr : {}}
 								attrs={{ 'zh-CN': { 'name': '简体中文' }, 'en-US': { 'name': 'English' }, 'zh-TW': { 'name': '繁體中文' } }} />
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.addr')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'example.table.col.addr')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							<ZKInputJson
 								readOnly={false}
 								disabled={true}
@@ -185,7 +185,7 @@ class CInitE1_Detail extends React.Component {
 								primaryAttr={lang}
 								value={optEntity.addr}
 								attrs={{ 'zh-CN': { 'name': '简体中文' }, 'en-US': { 'name': 'English' }, 'zh-TW': { 'name': '繁體中文' } }} />
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 				</ZKDetailGrid>
 

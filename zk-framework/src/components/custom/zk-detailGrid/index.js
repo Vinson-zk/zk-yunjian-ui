@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:08:52
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-31 08:22:45
+ * @Last Modified time: 2022-01-26 14:48:55
  */
 
 import React from 'react';
@@ -14,6 +14,9 @@ import ZKIcon from '../zk-icon';
 import { ZKRow, ZKCol } from '../../original';
 import styles from "./styles.less";
 
+/////////////////////////////////////////////////////
+// title
+/////////////////////////////////////////////////////
 const FInitTitle = props=>{
 	return <div className = {styles.detail_title} {...props} />
 }
@@ -27,8 +30,9 @@ FInitTitleRow.Title = FInitTitle;
 FInitTitleRow.Opt = FInitOpt;
 
 /////////////////////////////////////////////////////
+// row lable value
 /////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
+
 const FInitDetailRow = props => {
 	return <ZKRow {...props} />
 }
@@ -38,24 +42,26 @@ FInitDetailRow.defaultProps = {
 	className: styles.detail_row
 }
 
-const FInitDetailColLeft = props => {
+const FInitDetailLabel = props => {
 	return <ZKCol {...props} />
 }
-FInitDetailColLeft.defaultProps = {
-	span: 9,
+FInitDetailLabel.defaultProps = {
+	span: 3,
+	offset: 2,
 	className: styles.detail_col_lable
 }
 
-const FInitDetailColRight = props => {
+const FInitDetailValue = props => {
 	return <ZKCol {...props} />
 }
-FInitDetailColRight.defaultProps = {
-	span: 15,
+FInitDetailValue.defaultProps = {
+	span: 5,
+	offset: 0,
 	className: styles.detail_col_content
 }
 
 /////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
+// 
 /////////////////////////////////////////////////////
 class CInitDetailGrid extends React.Component {
 
@@ -86,8 +92,11 @@ CInitDetailGrid.defaultProps = {
 
 CInitDetailGrid.TitleRow = FInitTitleRow;
 CInitDetailGrid.Row = FInitDetailRow;
-CInitDetailGrid.ColLeft = FInitDetailColLeft;
-CInitDetailGrid.ColRight = FInitDetailColRight;
+CInitDetailGrid.ColLeft = FInitDetailLabel;
+CInitDetailGrid.ColRight = FInitDetailValue;
+CInitDetailGrid.ColLabel = FInitDetailLabel;
+CInitDetailGrid.ColValue = FInitDetailValue;
+
 
 export default CInitDetailGrid;
 

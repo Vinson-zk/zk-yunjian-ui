@@ -4,6 +4,7 @@ const messages = {
 	"global.app.msg.success": "成功!",
 	"global.app.msg.warning": "未知警告!",
 	"global.app.msg.error": "未知错误!",
+	"global.app.msg.error.connect.failed": "连接服务器失败!",
 	"global.app.msg.error.500": "启禀主公！您要找的文臣武将睡着了！",
 	"global.app.msg.error.404": "启禀主公！您要找的文臣武将不知道跑哪去了！",
 	"global.app.msg.error.403": "启禀主公！您还需要多读书才有权限求见贤能！",
@@ -13,6 +14,9 @@ const messages = {
 	"global.app.msg.beforeunload": "离开当前页后，所编辑的数据将不可恢复",
 	"global.app.msg.leave":"确认离开此页面？",
 	"global.app.msg.leave.save":"您确定要放弃编辑的内容，离开此页面？",
+
+	// 全局标签
+	"global.app.lable.platform": "平台",
 
 	// 全局名称定义
 	"global.app.user.nickname": "游客",
@@ -34,6 +38,8 @@ const messages = {
 	"global.app.info.show": "显示",
 	"global.app.info.hide": "隐藏",
 	"global.app.info.all": "全部",
+	"global.app.info.enable": "启用",
+	"global.app.info.disabled": "禁用",
 
 	// 单位全部名
 	"global.unit.name.k": "千",
@@ -53,6 +59,7 @@ const messages = {
 	"global.opt.name._key_reset": "重置",
 	"global.opt.name._key_select": "请选择",
 	"global.opt.name._key_back": "返回",
+	"global.opt.name._key_ok": "确定",
 	"global.opt.name._key_cancel": "取消",
 	"global.opt.name._key_save": "保存",
 	"global.opt.name._key_submit": "提交",

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-10 17:12:12
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-29 15:55:40
+ * @Last Modified time: 2022-01-09 10:14:27
  */
 
 const webpackPublicConfig = require('../../zk-package/conf/webpack.public.config.js');
@@ -43,6 +43,8 @@ module.exports = (env, args)=>{
         "zkFramework":path.resolve(__dirname, '../../zk-framework'),
         "zkSample":path.resolve(__dirname, '../../zk-sample'),
         "zkSystem":path.resolve(__dirname, '../../zk-system'),
+        "zkDevelopmentTool":path.resolve(__dirname, '../../zk-developmentTool'),
+        "zkWechat":path.resolve(__dirname, '../../zk-wechat'),
     })
 
     webpackConfigObj.module.rules.forEach(item=>{

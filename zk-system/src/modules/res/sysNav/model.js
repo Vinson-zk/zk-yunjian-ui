@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:27:32
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-30 12:01:26
+ * @Last Modified time: 2021-11-03 17:03:51
  */
 
 
@@ -16,11 +16,13 @@ const model = {
     namespace: 'mSysNav',
     state: {
         gridData: undefined,    // 列表数据
-        gridSelKeys: [],        // 列表选中的 KEY
+        gridSelKeys: [],        // 列表选中的 KEY; 将行选择 key 放在 model 中方便优化体检，如选择行在操作中保持；
         initFilter: {           // 初始过滤条件
-            name: '',
+            code: '',
+            isShow: '',
+            name: undefined
         }, 
-        filter: {},             // 过滤条件     
+        filter: undefined,             // 过滤条件     
         pathname: null,         // 当前访问的地址路径
         optEntity: undefined,   // 当前操作实体
         page:{
@@ -84,9 +86,9 @@ const model = {
                 params = { ...params, ...zkToolsUtils.convertPageParam(page) };
             }
             let res = yield call(findSysNavs, params);
-            let restState = {}
+            let nextState = {}
             if (res.code == 'zk.0') {
-                restState = {
+                nextState = {
                     "filter": params,
                     "gridData": res.data.result,
                     "page": {
@@ -97,7 +99,7 @@ const model = {
                         "showQuickJumper": true
                     }
                 }
-                yield put({ type: 'setState', payload: restState });
+                yield put({ type: 'setState', payload: nextState });
                 if (callback instanceof Function) {
                     callback.call(this);
                 }
@@ -106,6 +108,7 @@ const model = {
     },
     reducers: { // 结果
         setState(state, action) {
+            // console.log("[^_^:20211102-1722-001]", state, action)
             return { ...state, ...action.payload }
         }
     }

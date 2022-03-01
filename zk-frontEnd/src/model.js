@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-28 15:22:47
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 09:45:08
+ * @Last Modified time: 2021-08-24 11:28:33
  */
 
 // import zkJsUtils from 'zkJsUtils';
@@ -18,7 +18,7 @@ const loginResDispose = (res)=>{
     if(res.code == "zk.0"){
         // 登录成功
         zkToolsAuth.setTicket(res.data[globalAppConfig.transferKey.ticket]);
-        return {user: res.data.user};
+        return {user: res.data.user, platformCode: res.data.platformCode};
     }else{
         // zkToolsMsg.alertMsg(null, null, {type:"error", msg:res.msg});
     }
@@ -31,6 +31,7 @@ const model = {
         lang: zkToolsMsg.getLocale(),
         // 登录用户
         user: undefined,
+        platformCode: undefined,
         navItems:undefined,
     },
     subscriptions: {
@@ -42,13 +43,11 @@ const model = {
                 }
             );
 
-            if(zkToolsAuth.isLogin()){
-                // 如果已登录，取用户信息
+            if(globalAppConfig.isAuth && zkToolsAuth.isLogin()){
+                // 如果已登录且开启了权限认识，取用户信息
                 dispatch({ type: "getUser" }).then(()=>{
                   // dispatch({type:"getUaidLicenseInfo"})
                 });
-            }else{
-                // 未登录
             }
         }
     },

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 10:13:11
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-04-02 13:21:51
+ * @Last Modified time: 2021-12-17 16:26:19
  */
 
 
@@ -210,6 +210,7 @@ const FInitTable = ({ rowNum, pagination, dataSource, columns, children, intl, c
 		}
 	}
 
+	// console.log("[^_^:20211202-1641-001] table.pagination: ", pagination);
 	return (
 		<Table className = {`${styles.table} ${className}`} {...props}
 			title = {title} 

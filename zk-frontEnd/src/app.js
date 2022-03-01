@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-28 15:22:52
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-23 18:43:00
+ * @Last Modified time: 2021-11-26 11:59:01
  */
 
 import React from 'react';
@@ -11,7 +11,7 @@ import dva from 'dva';
 import createLoading from 'dva-loading';
 // import { message } from 'antd';
 import createBrowserHistory from 'history/createBrowserHistory';
-// import createHashHistory from 'history/createHashHistory';
+// import createHashHistory from 'history/createHashHistory'; // 使用 hash 路由，antd 锚点无法使用
 
 import router from './router.js';
 

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 00:12:59
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-06 20:07:27
+ * @Last Modified time: 2021-11-03 15:27:30
  */
 
 
@@ -57,7 +57,7 @@ class CInitReactDva extends React.Component {
     }
 
 
-    // 4、 类组件中唯一必需的方法。
+    // 4、 类组件中唯一必需的方法, 返回 JSX 元素
     render() {
 
         // if(this.state.componentState < 5){

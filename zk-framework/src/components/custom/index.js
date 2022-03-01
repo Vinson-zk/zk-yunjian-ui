@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 17:46:03
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 19:56:21
+ * @Last Modified time: 2021-12-11 15:55:17
  */
 
 export { default as ZKAutoMenu } from './zk-autoMenu';
@@ -12,6 +12,7 @@ export { default as ZKBreadcrumb } from './zk-breadcrumb';
 export { default as ZKDateFormatPicker } from './zk-dateFormatPicker';
 export { default as ZKDetailGrid } from './zk-detailGrid';
 export { default as ZKEditForm } from './zk-editForm';
+export { default as ZKEditJsonArray } from './zk-editJsonArray';
 export { default as ZKIcon } from './zk-icon';
 export { default as ZKInputJson } from './zk-inputJson';
 export { default as ZKLanguageDropdown } from './zk-languageDropdown';

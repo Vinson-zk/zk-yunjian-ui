@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:35:44
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 19:53:07
+ * @Last Modified time: 2021-12-07 23:59:17
  */
 
 import cIndex from './index.js';
@@ -13,6 +13,7 @@ import cBreadcrumb from './zk-breadcrumb/index.js';
 import cDateFormatPicker from './zk-dateFormatPicker/index.js';
 import cDetailGrid from './zk-detailGrid/index.js';
 import cEditForm from './zk-editForm/index.js';
+import cEditJsonArray from './zk-editJsonArray';
 import cIcon from './zk-icon/index.js';
 import cInputJson from './zk-inputJson/index.js';
 import cLanguageSelect from './zk-languageSelect/index.js';
@@ -37,6 +38,7 @@ const customBreadcrumb = { component:cBreadcrumb, models:[]};
 const customDateFormatPicker = { component:cDateFormatPicker, models:[]};
 const customDetailGrid = { component:cDetailGrid, models:[]};
 const customEditForm = { component:cEditForm, models:[]};
+const customEditJsonArray = { component:cEditJsonArray, models:[]};
 const customIcon = { component:cIcon, models:[]};
 const customInputJson = { component:cInputJson, models:[]};
 const customLanguageSelect = { component:cLanguageSelect, models:[]};
@@ -61,6 +63,7 @@ export default {
 	customDateFormatPicker,
 	customDetailGrid,
 	customEditForm,
+	customEditJsonArray,
 	customIcon,
 	customInputJson,
 	customLanguageSelect,

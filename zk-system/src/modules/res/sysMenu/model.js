@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-26 16:36:59
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-22 21:12:53
+ * @Last Modified time: 2021-11-14 19:00:21
  */
 
 import { editSysMenu, deleteSysMenu, getSysMenu, findSysMenusTree, findSysNavs } from './service';
@@ -18,8 +18,11 @@ const model = {
         gridSelKeys: [],        // 列表选中的 KEY
         initFilter: {           // 初始过滤条件
             name: '',
+            code: '',
+            navCode:'',
+            isShow:'',
         }, 
-        filter: {},             // 过滤条件     
+        filter: undefined,      // 过滤条件     
         pathname: null,         // 当前访问的地址路径
         optEntity: undefined,   // 当前操作实体
         page:{
@@ -37,9 +40,11 @@ const model = {
     effects: { // action
         // 编辑 
         *editSysMenu({ payload, callback }, { call }) {
-            if(payload.parentId == ""){
+            
+            if(zkJsUtils.isEmpty(payload.parentId)){
                 delete payload.parentId;
             }
+
             let res = yield call(editSysMenu, payload);
             let f = (errors)=>{
                 if (callback instanceof Function) {
@@ -71,7 +76,10 @@ const model = {
             let res = yield call(getSysMenu, payload);
             if (res.code == 'zk.0') {
                 if(isParent){
-                    yield put({ type: 'setState', payload: { optEntity: {parentId: res.data.pkId, parent: res.data} } });
+                    let optEntity = {};
+                    optEntity.parentId = res.data.pkId;
+                    optEntity.parent = res.data;
+                    yield put({ type: 'setState', payload: { optEntity: optEntity } });
                 }else{
                     yield put({ type: 'setState', payload: { optEntity: res.data } });
                 }
@@ -88,9 +96,9 @@ const model = {
                 params = { ...params, ...zkToolsUtils.convertPageParam(page) };
             }
             let res = yield call(findSysMenusTree, params);
-            let restState = {};
+            let nextState = {};
             if (res.code == 'zk.0') {
-                restState = {
+                nextState = {
                     "filter": params,
                     "gridData": res.data.result,
                     "page": {
@@ -101,7 +109,7 @@ const model = {
                         "showQuickJumper": true
                     }
                 }
-                yield put({ type: 'setState', payload: restState });
+                yield put({ type: 'setState', payload: nextState });
                 if (callback instanceof Function) {
                     callback.call(this);
                 }
@@ -114,7 +122,6 @@ const model = {
             params = { ...params, ...zkToolsUtils.convertPageParam(page) };
 
             let res = yield call(findSysNavs, params);
-            let restState = {};
             if (res.code == 'zk.0') {
                 if (callback instanceof Function) {
                     callback.call(this, res.data.result);

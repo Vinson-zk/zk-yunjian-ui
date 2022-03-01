@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:44
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-30 12:46:08
+ * @Last Modified time: 2022-01-26 14:55:12
  */
 
 import React, { Component } from 'react';
@@ -40,69 +40,61 @@ class CInitSysNavDetail extends Component {
 
 	render() {
 
-		let { mApp, mSysNav, intl, loading } = this.props;
-		let { optEntity = {} } = mSysNav;
+		let { location, mApp, mSysNav, intl, loading } = this.props;
+		let { optEntity } = mSysNav;
 		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = loading.effects['mSysNav/getSysNav'];
 
-		return (
+		return (optEntity != null && mSysNav.pathname == location.pathname) && (
 			<ZKSpin spinning={spinning === true} >
 				<ZKDetailGrid >
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.name')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.name')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
 							{/* {optEntity.name?zkToolsMsg.getInternationInfo(optEntity.name):""} */}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.code')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.code')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.code}
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.funcModuleCode')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.funcModuleCode')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.funcModuleCode}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.funcName')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.funcName')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.funcName}
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.path')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.path')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.path}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.sort')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.sort')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.sort}
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.isIndex')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.isIndex')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.isIndex==1?zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.yes'):zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.no')}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.isShow')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.isShow')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.isShow==1?zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.show'):zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.hide')}
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.icon')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.icon')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.icon}&nbsp;&nbsp;&nbsp;&nbsp;{optEntity.icon?<ZKIcon.Antd4Icon icon = {optEntity.icon} />:""} 
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 				</ZKDetailGrid>
 			</ZKSpin>
@@ -114,14 +106,9 @@ class CInitSysNavDetail extends Component {
         let { location, dispatch, match, mSysNav } = this.props;
 		let { params } = match;
 		// 地址栏改变了 
-		if (mSysNav.pathname != location.pathname ) {
-			let optEntity = location.state ? location.state.optEntity : {};
-			if (optEntity && optEntity.pkId && optEntity.pkId == params.pkId) {
-				dispatch({ type: 'mSysNav/setState', payload: { optEntity: optEntity, pathname: location.pathname } });
-			} else {
-				dispatch({ type: 'mSysNav/setState', payload: { pathname: location.pathname } });
-				dispatch({ type: 'mSysNav/getSysNav', payload: { pkId: params.pkId } });
-			}
+		if (mSysNav.pathname != location.pathname ) {	
+			dispatch({ type: 'mSysNav/setState', payload: { pathname: location.pathname, optEntity: undefined} });
+			dispatch({ type: 'mSysNav/getSysNav', payload: { pkId: params.pkId } });
 		}
     }
 

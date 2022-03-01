@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-29 16:26:49
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-08-21 23:04:15
+* @Last Modified time: 2021-08-23 23:01:10
 * 
 * 
 * 
@@ -27,7 +27,7 @@ import navItems from "../mock/data.front.end.nav.js";
 
 // 取 nav item
 export async function getNavItems(params) {
-	return zkToolsAjax.reqPretreatment(`/${globalAppConfig.apiPrefixSys}/getNavItems`, {method:'GET', data:params});
+	return zkToolsAjax.reqPretreatment(`/${globalAppConfig.apiPrefixSys}/res/getNavItems`, {method:'GET', data:params});
 }
 
 export async function getUser(params){

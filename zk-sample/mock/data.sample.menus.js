@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 00:23:27
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 19:51:51
+ * @Last Modified time: 2021-12-08 00:00:54
  */
 
 let tMenu = null;
@@ -566,12 +566,21 @@ tMenu = {
 	permission:null, parentId:"sample_zkCustomComponents", children:null
 }
 sampleMenus.push(tMenu);
+// 自定组件的子菜单：ZKEditJsonArray
+tMenu = {
+	pkId:"sample_zkCustomComponents_editJsonArray", key:"sample_zkCustomComponents_editJsonArray", name:{"zh-CN":"ZK编辑JsonArray","en-US":"ZKEditJsonArray"}, 
+	path:"editJsonArray", navCode:navCode, funcModuleCode:funcCode, 
+	funcName:"customEditJsonArray",
+	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:55, 
+	permission:null, parentId:"sample_zkCustomComponents", children:null
+}
+sampleMenus.push(tMenu);
 // 自定组件的子菜单：ZKIcon
 tMenu = {
 	pkId:"sample_zkCustomComponents_icon", key:"sample_zkCustomComponents_icon", name:{"zh-CN":"ZK图标","en-US":"ZKIcon"}, 
 	path:"customIcon", navCode:navCode, funcModuleCode:funcCode, 
 	funcName:"customIcon",
-	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:50, 
+	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:59, 
 	permission:null, parentId:"sample_zkCustomComponents", children:null
 }
 sampleMenus.push(tMenu);

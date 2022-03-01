@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 12:29:58
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-04-02 15:16:23
+ * @Last Modified time: 2021-08-23 11:56:41
  */
 
 
@@ -119,7 +119,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                         {[
                             "/**",
                             " * 生成头部导航及头部导航的路由;  注意，导航栏不显示时，不生成路由，这一点和菜单 menu 不同；",
-                            " * 生成的导航路由会向路由的组件中传入：{dvaApp:dvaApp, navCode:item.navCode, dynamicImportHelper:dynamicImportHelper} 这三个属性； ",
+                            " * 生成的导航路由会向路由的组件中传入：{dvaApp:dvaApp, navCode:item.code, dynamicImportHelper:dynamicImportHelper} 这三个属性； ",
                             " * @param {object} dvaApp dva app 对象； ",
                             " * @param {string} prefixPath 路由路径前缀，不能为 null 或 undefined； ",
                             " * @param {Array.of(object)} navDatas 导航栏目数据数组，不支持树形结构； ",

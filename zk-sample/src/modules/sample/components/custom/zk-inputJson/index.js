@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:24:23
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-07 00:02:00
+ * @Last Modified time: 2022-01-26 08:38:20
  */
 
 import React, {useState} from 'react';
@@ -298,66 +298,65 @@ function FInitZKInputJsonDemo({ dispatch, intl }) {
 					<ZKInputJson styleType="expanding" style={{ width: 450 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
-					/>
+					/><br /><br />
 					<ZKInputJson styleType="compact" style={{ width: 430 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
-					/>
+					/><br /><br />
 					<ZKInputJson styleType="smart" style={{ width: 410 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
-					/><br />
+					/><br /><br />
 					<ZKInputJson styleType="expanding" style={{ width: 450 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs} value={initData}
-					/>
+					/><br /><br />
 					<ZKInputJson styleType="compact" style={{ width: 430 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs}
 						value={initData}
-					/>
+					/><br /><br />
 					<ZKInputJson styleType="smart" style={{ width: 410 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs}
 						value={initData}
-					/>
+					/><br />
 					<br /><br />--- isShowExpBtn=false 展开、收起、smart <br />
 					<ZKInputJson styleType="expanding" isShowExpBtn={false} style={{ width: 450 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs}
 						value={{ 'zh_CN': 'v_zh_CN' }}
-					/>
+					/><br /><br />
 					<ZKInputJson styleType="compact" isShowExpBtn={false} style={{ width: 430 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs}
 						value={{ 'zh_CN': 'v_zh_CN' }}
-					/>
+					/><br /><br />
 					<ZKInputJson styleType="smart" isShowExpBtn={false} style={{ width: 410 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs}
 						value={{ 'zh_CN': 'v_zh_CN' }}
-					/><br />
+					/><br /><br />
 					<ZKInputJson styleType="expanding" isShowExpBtn={false} style={{ width: 450 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs}
 						value={initData}
-					/>
+					/><br /><br />
 					<ZKInputJson styleType="compact" isShowExpBtn={false} style={{ width: 430 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs}
 						value={initData}
-					/>
+					/><br /><br />
 					<ZKInputJson styleType="smart" isShowExpBtn={false} style={{ width: 410 }}
 						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
 						attrs={attrs}
 						value={initData}
-					/>
+					/><br />
 					<br /><br />
 					<div className={stylesSample.sample_detail_section_row} >
 						--- Form ---------------------------------------------- <br />
 						<TestFormNode />
-					</div>
-					<br />
+					</div><br /><br />
 					<div className={stylesSample.sample_detail_section_row} >
 						--- ZKForm ---------------------------------------------- <br />
 						<TestZKFormNode />

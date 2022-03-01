@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-29 21:52:35
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-21 11:44:05
+ * @Last Modified time: 2021-11-03 19:33:11
  */
 
 
@@ -49,7 +49,7 @@ import { navItems } from '../mock/data.system.nav.js';
 let navRoutes = null;
 let indexNavRoute = null;
 
-const FInitNaveHome = ({dvaApp, match, mApp, dispatch, locales, lang, intl}) => {
+const FInitNavHome = ({dvaApp, match, mApp, dispatch, locales, lang, intl}) => {
     // console.log("[^_^:20210213-1108-001] ", navItems, dynamicImportHelper);
     if(navRoutes == null){
         navRoutes = zkToolsNavAndMenu.getRoutesByNavs(dvaApp, match.path, navItems, dynamicImportHelper);
@@ -86,7 +86,7 @@ const FInitNaveHome = ({dvaApp, match, mApp, dispatch, locales, lang, intl}) => 
     )
 }
 
-export default injectIntl(FInitNaveHome);
+export default injectIntl(FInitNavHome);
 
 
 

@@ -6,11 +6,12 @@
  * @Author: Vinson 
  * @Date: 2020-08-10 15:37:45 
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 09:44:06
+ * @Last Modified time: 2021-08-24 11:28:01
  */
 
 /*** 应用的全局常量配置 ***/
 module.exports = {
+    // platformCode: "_default_platform_code_";
     basename: "zk",             // 会在配置值前面自动加 "/" 前缀；且不要以斜扛结尾；
     isAuth: true,               // 是否开启身份认证，默认不开启
     localKey:{  // 本地存储 key

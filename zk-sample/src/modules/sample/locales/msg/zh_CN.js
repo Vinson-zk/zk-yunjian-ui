@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-13 20:47:21
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 19:54:42
+ * @Last Modified time: 2021-12-07 23:55:52
  */
 
 
@@ -56,6 +56,8 @@ const msg = {
 	"sample.components.custom.upload":"ZKUpload 上传",
 	"sample.components.custom.userDropDown":"ZKUserDropDown 用户下拉框",
 	"sample.components.custom.versionInfo":"ZKVersionInfo 版本信息",
+	"sample.components.custom.editJsonArray":"ZKEditJsonArray Json 数组编辑",
+
 
 	"sample.general.function":"公共方法或配置",
 	"sample.business.example":"业务样例"

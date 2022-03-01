@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:23:27
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-30 23:53:06
+ * @Last Modified time: 2022-01-25 17:35:49
  */
 
 import React from 'react';
@@ -58,6 +58,13 @@ function FInitZKEditFormDemo({ history, intl }) {
 							</tr>
 						</thead>
 						<tbody>
+							<tr>
+								<td>viewLayout</td>
+								<td>true</td>
+								<td>字段布局方式，默认会将连续的 ZKEditForm.Item 每两个设置为一行。</td>
+								<td>PropTypes.oneOf(["default", "custom"])</td>
+								<td>default</td>
+							</tr>
 							<tr>
 								<td>icon</td>
 								<td>false</td>

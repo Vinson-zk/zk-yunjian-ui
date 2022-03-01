@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:40
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-05-01 16:54:18
+ * @Last Modified time: 2022-01-26 14:55:12
  */
 
 import React, { Component } from 'react';
@@ -27,77 +27,103 @@ class CInitSysMenuDetail extends Component {
 		this.state = {};
     }
 
+    f_getParentPath = (entity, intl)=>{
+
+    	if(!entity){
+    		return undefined;
+    	}
+
+    	let pPath = undefined;
+    	if(!zkJsUtils.isEmpty(entity.parentId)){
+    		// 有父节点；
+    		if(entity.parent){
+	    		if(entity.parent.name){
+	    			pPath = zkToolsMsg.getInternationInfo(entity.parent.name);
+	    		}else{
+	    			pPath = entity.parent.pkid;
+	    		}
+	    		let tPath = this.f_getParentPath(entity.parent);
+	    		if(tPath){
+	    			pPath = tPath + ' -> ' + pPath;
+	    		}
+	    	}else{
+	    		pPath = entity.parentId;
+	    	}
+
+	    	return pPath;
+    	}else{
+    		// 无父节点，认为是根节点
+    		return zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu._top');
+    	}
+    }
+
     render() {
 
-		let { mApp, mSysMenu, intl, loading } = this.props;
-		let { optEntity = {} } = mSysMenu;
+		let { location, mApp, mSysMenu, intl, loading } = this.props;
+		let { optEntity } = mSysMenu;
 		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let spinning = loading.effects['mSysMenu/getSysMenu'];
+		let spinning = !optEntity || loading.effects['mSysMenu/getSysMenu'];
 
-		return (
+		return (optEntity != undefined && mSysMenu.pathname == location.pathname) &&(
 			<ZKSpin spinning={spinning === true} >
 				<ZKDetailGrid >
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.name')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.parentName')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
+							{this.f_getParentPath(optEntity, intl)}
+						</ZKDetailGrid.ColValue>
+					</ZKDetailGrid.Row>
+					<ZKDetailGrid.Row>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.name')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
 							{/* {optEntity.name?zkToolsMsg.getInternationInfo(optEntity.name):""} */}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-                    <ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.code')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.code')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.code}
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.navCode')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.navCode')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.navCode}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.funcModuleCode')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.funcModuleCode')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.funcModuleCode}
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.funcName')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.funcName')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.funcName}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.path')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.path')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.path}
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.sort')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.sort')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.sort}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.isIndex')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.isIndex')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.isIndex==1?zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.yes'):zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.no')}
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.isShow')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.isShow')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.isShow==1?zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.show'):zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.hide')}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>
-					<ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.icon')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
+						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.icon')}:</ZKDetailGrid.ColLabel>
+						<ZKDetailGrid.ColValue>
 							{optEntity.icon}&nbsp;&nbsp;&nbsp;&nbsp;{optEntity.icon?<ZKIcon.Antd4Icon icon = {optEntity.icon} />:""} 
-						</ZKDetailGrid.ColRight>
+						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 				</ZKDetailGrid>
 			</ZKSpin>
@@ -110,13 +136,9 @@ class CInitSysMenuDetail extends Component {
 		let { params } = match;
 		// 地址栏改变了 
 		if (mSysMenu.pathname != location.pathname ) {
-			let optEntity = location.state ? location.state.optEntity : {};
-				dispatch({ type: 'mSysMenu/setState', payload: { optEntity: optEntity, pathname: location.pathname } });
-			if (optEntity && optEntity.pkId && optEntity.pkId == params.pkId) {
-				
-			} else {
-				dispatch({ type: 'mSysMenu/getSysMenu', payload: { pkId: params.pkId } });
-			}
+			// let optEntity = location.state ? location.state.optEntity : {};
+			dispatch({ type: 'mSysMenu/setState', payload: { pathname: location.pathname, optEntity: undefined } });
+			dispatch({ type: 'mSysMenu/getSysMenu', payload: { pkId: params.pkId }});
 		}
     }
 

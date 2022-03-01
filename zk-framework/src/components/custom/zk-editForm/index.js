@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:15:36
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-30 23:50:05
+ * @Last Modified time: 2022-01-26 12:08:32
  */
 
 import React from 'react';
@@ -19,7 +19,7 @@ import { injectIntl } from 'react-intl';
 import { zkToolsMsg } from '../../../tools';
 
 import ZKIcon from '../zk-icon';
-import { ZKButton, ZKForm } from '../../original';
+import { ZKButton, ZKForm, ZKRow, ZKCol } from '../../original';
 
 import styles from "./styles.less";
 
@@ -28,15 +28,39 @@ const FInitEditItem = (itemProps) => {
 	return <ZKForm.Item {...itemProps} />
 }
 
-// const f_getFormItem = (children) => {
-// 	if (children instanceof Array) {
-// 		return children.map((item, index) => {
-// 			return <FInitEditItem {...item.props} key={`_make_key_${index}`} />
-// 		})
-// 	} else {
-// 		return <FInitEditItem {...children.props} key={`_make_key_0`} />
-// 	}
-// }
+const f_getViewDefaultFormItem = (children) => {
+
+	let span = 8;
+	let offset = 2;
+	if (children instanceof Array) {
+		let cs = [];
+		let firstItem = null;
+		children.forEach((item, index)=>{
+			if(item){
+				if(item.type != undefined && item.type.name == 'FInitEditItem'){
+					if(firstItem == null){
+						firstItem = item;
+					}else{
+						cs.push(<ZKRow key={`_make_row_1_key_${index}`} ><ZKCol key={`_make_col_1_key_${index}`} span={span} offset={offset}>{firstItem}</ZKCol><ZKCol key={`_make_col_2_key_${index}`} span={span} offset={offset}>{item}</ZKCol></ZKRow>);
+						firstItem = null;
+					}
+				}else{
+					if(firstItem != null){
+						cs.push(<ZKRow key={`_make_row_2_key_${index}`} ><ZKCol key={`_make_col_3_key_${index}`} span={span} offset={offset}>{firstItem}</ZKCol></ZKRow>);
+					}
+					cs.push(item);
+					firstItem = null;
+				}			
+			}
+		});
+		if(firstItem != null){
+			cs.push(<ZKRow key={`_make_row_3_key_f_getViewDefaultFormItem`} ><ZKCol key={`_make_col_4_key_f_getViewDefaultFormItem`} span={span} offset={offset}>{firstItem}</ZKCol></ZKRow>);
+		}
+		return cs;
+	} else {
+		return <FInitEditItem {...children.props} key={`_make_key_0`} />
+	}
+}
 
 FInitEditItem.propTypes = {
 	...ZKForm.Item.propTypes
@@ -197,7 +221,7 @@ class CInitEditForm extends React.Component {
 
 	render() {
 		// console.log("[^_^:20210308-1312-001] CInitEditForm.render: ", this.props.data, this.state.data);
-		let { icon, title, forwardedRef, saveFunc, resetFunc, nextFunc, goBackFunc, location, children, intl, leaveConfirm, reloadConfirm, staticContext, ...props } = this.props;
+		let { viewLayout, icon, title, forwardedRef, saveFunc, resetFunc, nextFunc, goBackFunc, location, children, intl, leaveConfirm, reloadConfirm, staticContext, ...props } = this.props;
 
 		// console.log("[^_^:20210305-1424-001] forwardedRef: ", forwardedRef, staticContext);
 		
@@ -237,7 +261,7 @@ class CInitEditForm extends React.Component {
 				<div className={styles.content}>
 					{
 						// f_getFormItem(children)
-						children
+						(viewLayout == 'default') ? f_getViewDefaultFormItem(children):children
 					}
 				</div>
 			</ZKForm>
@@ -263,6 +287,7 @@ class CInitEditForm extends React.Component {
 
 // 定义属性
 CInitEditForm.propTypes = {
+	viewLayout: PropTypes.oneOf(["default", "custom"]).isRequired,
 	history: PropTypes.object.isRequired,
 	location: PropTypes.object.isRequired,
 	data: PropTypes.object.isRequired,
@@ -274,19 +299,24 @@ CInitEditForm.propTypes = {
 	goBackFunc: PropTypes.func,               // 返回函数 
 	icon: PropTypes.string,                 // 显示在左上角的图标，默认为：FormOutlined
 	title: PropTypes.string,                // 编辑框标题；默认为空；
-	children: function (props, propName, componentName) { // 只接受 'FInitEditItem' 子元素
-		if (props.children instanceof Array) {
-			for (let c of props.children) {
-				if (c.type.name != 'FInitEditItem') {
-					return new Error(`Invalid prop ${propName}:'${c.type.name}' supplied to '${componentName}'. Validation failed.`);
-				}
-			}
-		} else {
-			if (props.children.type.name != 'FInitEditItem') {
-				return new Error(`Invalid prop ${propName}:'${props.children.type.name}' supplied to '${componentName}'. Validation failed.`);
-			}
-		}
-	},
+	// children: function (props, propName, componentName) { // 只接受 'FInitEditItem' 子元素
+	// 	if (props.children instanceof Array) {
+	// 		for (let c of props.children) {
+	// 			if(c != undefined && c.type != undefined){
+	// 				if (c.type.name != 'FInitEditItem'){
+	// 					return new Error(`Invalid prop ${propName}:'${c.type.name}' supplied to '${componentName}'. Validation failed.`);
+	// 				}
+	// 			}
+	// 		}
+	// 	} else {
+	// 		let c = props.children;
+	// 		if(c != undefined && c.type != undefined){
+	// 			if (c.type.name != 'FInitEditItem'){
+	// 				return new Error(`Invalid prop ${propName}:'${c.type.name}' supplied to '${componentName}'. Validation failed.`);
+	// 			}
+	// 		}
+	// 	}
+	// },
 }
 
 // 定义属性默认值
@@ -299,6 +329,7 @@ CInitEditForm.defaultProps = {
 	goBackFunc: null,
 	icon: 'FormOutlined',
 	title: '',
+	viewLayout: 'default',
 }
 
 const FUCEditForm = injectIntl(withRouter(CInitEditForm));

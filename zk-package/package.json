@@ -36,7 +36,8 @@
     "react-intl": "2.7.1",
     "react-router": "5.2.0",
     "react-syntax-highlighter": "9.0.1",
-    "robe-ajax": "1.0.1"
+    "robe-ajax": "1.0.1",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@babel/core": "7.12.13",
