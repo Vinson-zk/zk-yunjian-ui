@@ -107,9 +107,12 @@ class CInitSysMenuEdit extends Component {
         // }
 
         // 各语言指定校验
-        let nameRule = {};
-        for(let index in locales.localLanguage){
-            nameRule[index] = zkToolsValidates.string(intl, 1, 80, true);
+        let f_makeObjRuls = required=>{
+            let objRule = {};
+            for(let index in locales){
+                objRule[index] = zkToolsValidates.string(intl, 1, 64, required);
+            }
+            return objRule;
         }
 
         let spinning = !optEntity || this.state.loading 
@@ -151,7 +154,7 @@ class CInitSysMenuEdit extends Component {
                     <ZKEditForm.Item name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.name')} 
                         rules = {[
                                 // zkToolsValidates.notNull(intl), 
-                                zkToolsValidates.object(intl, locales.localLanguage, undefined, nameRule),
+                                zkToolsValidates.object(intl, locales.localLanguage, undefined, f_makeObjRuls(true), true),
                             ]} >
                         <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
                     </ZKEditForm.Item>

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:35:22
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-24 11:08:50
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-05-09 15:23:26
  */
 
 import cIndex from './index.js';
@@ -20,8 +20,11 @@ import cRadio from "./zk-radio/index.js";
 import cRow from './zk-row/index.js';
 import cSelect from './zk-select/index.js';
 import cSpin from './zk-spin/index.js';
+import cSwitch from './zk-switch/index.js';
 import cTable from './zk-table/index.js';
 import cTransfer from "./zk-transfer/index.js";
+import cTree from "./zk-tree/index.js";
+import cTreeSelect from "./zk-treeSelect/index.js";
 
 const originalIndex = { component:cIndex, models:[]}
 const originalAnchor = { component:cAnchor, models:[]}
@@ -37,8 +40,11 @@ const originalRadio = {component:cRadio, models:[]};
 const originalRow = {component:cRow, models:[]};
 const originalSelect = {component:cSelect, models:[]};
 const originalSpin = {component:cSpin, models:[]};
+const originalSwitch = {component:cSwitch, models:[]};
 const originalTable = {component:cTable, models:[]};
 const originalTransfer = {component:cTransfer, models:[]};
+const originalTree = {component:cTree, models:[]};
+const originalTreeSelect = {component:cTreeSelect, models:[]};
 
 export default {
 	originalIndex,
@@ -55,6 +61,9 @@ export default {
 	originalRow,
 	originalSelect,
 	originalSpin,
+	originalSwitch,
 	originalTable,
 	originalTransfer,
+	originalTree,
+	originalTreeSelect
 }

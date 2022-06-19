@@ -30,7 +30,7 @@ class CInitPayGetNotifyIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitPayGetNotifyIndex extends Component {
         let { location, dispatch, mPayGetNotify } = this.props;
 		if (location.pathname != mPayGetNotify.pathname) {
 			dispatch({ type: 'mPayGetNotify/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mPayGetNotify/findPayGetNotifys", filter: mPayGetNotify.filter, callback: e => { } })
+			dispatch({ type: "mPayGetNotify/findPayGetNotifys", filter: mPayGetNotify.filter, pagination: mPayGetNotify.pagination, callback: e => { } })
 		}
     }
 }

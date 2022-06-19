@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-11 18:13:59
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-03-31 16:33:23
+* @Last Modified time: 2022-04-15 19:25:53
 * 
 * 
 * 
@@ -193,6 +193,10 @@ class CInitScrollTable extends React.Component {
 
 		let tableDiv = $(`#${this.tableId}`);
 		let tableDom = $('.ant-table', tableDiv);
+		// console.log("[^_^: 20220415-1918-001] dom:", tableDiv, tableDom);
+		// console.log("[^_^: 20220415-1918-002] ZKTable.clientHeight:", tableDiv[0].clientHeight, tableDom[0].parentElement.clientHeight, tableDom[0].clientHeight);
+		// console.log("[^_^: 20220415-1918-003] ZKTable.calcTableHeight:", ZKTable.calcTableHeight(tableDom[0]));
+
 		if(tableDom[0]){
 			if(this.props.pagination){
 				if(this.props.pagination.position && (this.props.pagination.position instanceof Array)){
@@ -204,6 +208,7 @@ class CInitScrollTable extends React.Component {
 				scrollY = ZKTable.calcTableHeight(tableDom[0], 0);
 			}
 		}
+		// console.log("[^_^: 20220415-1918-004] scrollY:", scrollY);
 		this.setState({ scrollY: scrollY });
 	}
 

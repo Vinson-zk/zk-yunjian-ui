@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-29 18:33:25
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-25 19:27:47
+* @Last Modified time: 2022-04-19 20:00:42
 * 
 * 
 * 
@@ -48,7 +48,7 @@ class CInitCodeGenFuncModuleIndex extends Component {
 
         let gridProps = {
             loading: loading.effects['mFuncModule/findFuncModules'],
-            page: mFuncModule.page || {},
+            pagination: mFuncModule.pagination || {},
             lang: lang,
             gridData: mFuncModule.gridData || [],
             gridSelKeys: mFuncModule.gridSelKeys,
@@ -81,7 +81,7 @@ class CInitCodeGenFuncModuleIndex extends Component {
                 // 注意这里要将 zkToolsUtils.convertSortParam(mFuncModule.filter, sorter) 放在前面，以便后面新的分页参数覆盖旧的分页参数；在排序处理函数中会处理旧排序的问题
                 this.props.dispatch({ type: 'mFuncModule/findFuncModules', 
                     filter: mFuncModule.filter,
-                    page: pagination,
+                    pagination: pagination,
                     sorter: sorter
                 });
             },
@@ -99,7 +99,7 @@ class CInitCodeGenFuncModuleIndex extends Component {
         }
 
         return (
-            <div className={`${zkStyles.zk_main_panel} ${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.zk_main_panel} ${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...searchItemProps} />
                 <GridItem {...gridProps} />
             </div>
@@ -117,7 +117,7 @@ class CInitCodeGenFuncModuleIndex extends Component {
         let { location, dispatch, mFuncModule } = this.props;
     if (location.pathname != mFuncModule.pathname) {
       dispatch({ type: 'mFuncModule/setState', payload: { pathname: location.pathname } });
-      dispatch({ type: "mFuncModule/findFuncModules", payload: mFuncModule.filter, callback: e => { } })
+      dispatch({ type: "mFuncModule/findFuncModules", payload: mFuncModule.filter, pagination:mFuncModule.pagination, callback: e => { } })
     }
     }
 

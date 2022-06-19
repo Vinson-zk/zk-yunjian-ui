@@ -30,7 +30,7 @@ class CInitPayGetBusinessTypeIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitPayGetBusinessTypeIndex extends Component {
         let { location, dispatch, mPayGetBusinessType } = this.props;
 		if (location.pathname != mPayGetBusinessType.pathname) {
 			dispatch({ type: 'mPayGetBusinessType/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mPayGetBusinessType/findPayGetBusinessTypes", filter: mPayGetBusinessType.filter, callback: e => { } })
+			dispatch({ type: "mPayGetBusinessType/findPayGetBusinessTypes", filter: mPayGetBusinessType.filter, pagination: mPayGetBusinessType.pagination, callback: e => { } })
 		}
     }
 }

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 09:13:47
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 23:12:23
+ * @Last Modified time: 2022-05-09 15:20:09
  */
 
 export { default as ZKAnchor } from './zk-anchor';
@@ -23,9 +23,12 @@ export { default as ZKRadio } from './zk-radio';
 export { default as ZKRow } from './zk-row';
 export { default as ZKSelect } from './zk-select';
 export { default as ZKSpin } from './zk-spin';
+export { default as ZKSwitch } from './zk-switch';
 export { default as ZKTable } from './zk-table';
 export { default as ZKTabs } from './zk-tabs';
 export { default as ZKTransfer } from './zk-transfer';
+export { default as ZKTree } from './zk-tree';
+export { default as ZKTreeSelect } from './zk-treeSelect';
 
 // import ZKAnchor from './zk-anchor';
 // import ZKButton from './zk-button';

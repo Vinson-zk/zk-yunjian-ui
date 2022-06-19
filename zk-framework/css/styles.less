@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-29 11:37:28
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-08-20 09:55:06
+* @Last Modified time: 2022-05-18 17:38:46
 * 
 * 
 * 
@@ -107,9 +107,8 @@ body {
         padding          : 0px 0px 30px 0px;
         /*// overflow    :hidden;*/
         /*// z-index     : 1;*/
-        flex             : 1 1 auto;
         max-width        : 300px;
-        min-width        : 300px;
+        min-width        : 200px;
         width            : 300px;
         height           : 100%;
     }
@@ -174,8 +173,8 @@ body {
     }
 
     .zk_main_panel {
-    	display: flex;
-        flex-direction: column;
+    	/*display: flex;
+        flex-direction: column;*/
     	/*height: 100%;*/ /* 不能用用 auto，使用 auto ZKScrollTable 高度无法自动填满 */
    		width: 100%;
     	flex: 1 1 auto;
@@ -206,6 +205,29 @@ body {
 	}
 }
 
+.zk_scroll_border {
+	border: 1px solid hsl(@primary-color, 0.63, 0.9);
+	border-radius: 4px 4px;
+}
+
+.zk_tree_padding {
+	padding: 6px 4px;
+}
+
+.zk_modal_padding {
+	padding: 12px 21px;
+}
+
+/* 禁止选择 */
+.zk_unselect {
+	moz-user-select    : -moz-none;
+   -moz-user-select   : none;
+   -o-user-select     : none;
+   -khtml-user-select : none;
+   -webkit-user-select: none;
+   -ms-user-select    : none;
+   user-select        : none;
+}
 
 /* --------------------------------------------------------------- */
 
@@ -218,7 +240,12 @@ body {
     flex-direction: column;
 }
 
-.flex {
+.display_flex_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex_1_auto {
     flex: 1 1 auto;
 }
 

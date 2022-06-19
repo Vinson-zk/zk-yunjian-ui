@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 09:05:30
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-20 09:16:20
+ * @Last Modified time: 2022-04-27 10:24:49
  */
 
 // jquery ajax 暂未使用 
@@ -159,18 +159,27 @@ const f_pretreatment = (res) => {
 /**
  * 请求身份认证处理；也是默认处理函数；
  * @param {object} res 请求响应的数据对象；
- * @return {object} 请求响应的数据对象
+ * @return {boolean} false-权限异常; true-权限正常；
  */
 const f_auth = (res) => {
     // 是否开启身份认证，默认不开启，开启进行登录跳转等操作
     if (globalAppConfig.isAuth) {
         if (res && !zkJsUtils.isEmpty(res.code)) {
-            if (res.code === '119302') {
+            if (res.code === 'zk.sec.000004') {
+                // 用户未登录
                 zkToolsAuth.logout();
+                zkToolsMsg.alertMsg(null, null, { type: "error", msg: res.msg });
+                return false;
+            }
+            if (res.code === 'zk.sec.000012') {
+                // 用户已在其他地方登录，请重新登录
+                zkToolsAuth.logout();
+                zkToolsMsg.alertMsg(null, null, { type: "error", msg: res.msg });
+                return false;
             }
         }
     }
-    return res;
+    return true;
 };
 
 /**
@@ -231,7 +240,11 @@ const f_req = (url, options, fCallback) => {
     // console.log("[^_^:20190123-1452-001] Ajax.ajax:", Ajax.ajax);
 
     return Ajax.ajax(requstBody).done(function(data, status, xhr){
+        if(!f_auth(data)){
+            return;
+        }
         let rData = data;
+        
         // 如果有返回前回调处理函数，先回调，再返回
         if (fCallback) {
             fCallback.call(this, data, status, xhr);
@@ -258,6 +271,9 @@ const f_reqData = (url, options, fCallback) => {
     // console.log("[^_^:20190123-1452-002] requstBody:", requstBody)
 
     Ajax.ajax(requstBody).done(function(data){
+        if(!f_auth(data)){
+            return;
+        }
         resultData = data;
         // if(isResponsePretreatment == true){
         //     // 如需要预处理；默认为 true
@@ -265,8 +281,6 @@ const f_reqData = (url, options, fCallback) => {
         // }else{
         //     resultData = data;
         // }
-        // f_auth(data);
-
         // 如果有返回前回调处理函数，先回调，再返回
         if (fCallback) {
             fCallback.call(this, data, status, error);
@@ -307,6 +321,9 @@ const f_reqPretreatment = (url, options, fFilter, fCallback) => {
     }
 
     return Ajax.ajax(requstBody).done((data) => {
+        if(!f_auth(data)){
+            return;
+        }
         return f_disposeResult(data);
     }).fail((err) => {
         let rData = f_responseError(err);

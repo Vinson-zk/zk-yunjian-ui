@@ -110,7 +110,7 @@ class CInitSysResDictTypeGrid extends React.Component {
             _this.props.dispatch({
                 type: "mSysResDictType/delSysResDictType", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mSysResDictType/findSysResDictTypes', filter: mSysResDictType.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mSysResDictType/findSysResDictTypes', filter: mSysResDictType.filter, pagination: mSysResDictType.pagination, callback: e => { } })
                 }
             });
 		};
@@ -142,7 +142,7 @@ class CInitSysResDictTypeGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mSysResDictType/findSysResDictTypes', 
             filter: mSysResDictType.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -169,12 +169,12 @@ class CInitSysResDictTypeGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mSysResDictType.page||{}}
+				pagination = {mSysResDictType.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mSysResDictType.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

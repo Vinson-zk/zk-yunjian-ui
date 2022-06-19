@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-30 11:54:38
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-26 14:46:20
+* @Last Modified time: 2022-04-19 19:59:29
 * 
 * 
 * 
@@ -143,7 +143,7 @@ class CInitSysNavGrid extends React.Component {
 
   render() {
 
-  let { page = {}, gridData = [], gridSelKeys = [], onChange, onChangeSelKeys, onDetail, onEdit, onGenCode, lang, intl, loading } = this.props
+  let { pagination = {}, gridData = [], gridSelKeys = [], onChange, onChangeSelKeys, onDetail, onEdit, onGenCode, lang, intl, loading } = this.props
 
   // 改变选择行
   const changeSelKeysFunc = (selRowKeys, selRows) => {
@@ -191,12 +191,12 @@ class CInitSysNavGrid extends React.Component {
     rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
     columns = {tableColumns}
     scroll = {{ x:1440, y: this.state.sh }}
-    pagination = {page}
-    // pagination = {{position: ['topRight'], ...page}}
+    pagination = {pagination}
+    // pagination = {{position: ['topRight'], ...pagination}}
         dataSource = {gridData}
         // (pagination, filters, sorter, extra: { currentDataSource: [] })
         onChange = {onChange}
-    className = {zkStyles.flex}
+    className = {zkStyles.flex_1_auto}
     >
     <ZKOptRow>
       <ZKOptRow.OptGroup>

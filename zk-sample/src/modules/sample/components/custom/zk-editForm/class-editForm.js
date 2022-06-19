@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-03 22:42:43
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-03-08 23:33:45
+* @Last Modified time: 2022-04-28 13:13:51
 * 
 * 
 * 
@@ -125,7 +125,9 @@ class CInitEditFormDemo extends React.Component {
 					} }
 					nextFunc={ this.saveAndNext } >
 
-					{ f_demoFormItems('c') }
+					{ 
+						f_demoFormItems('c', null) 
+					}
 
 				</ZKEditForm>
 			</div>

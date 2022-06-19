@@ -3,7 +3,7 @@
 * @Author: Vinson
 * @Date:   2021-11-11 09:28:31
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-09 23:39:19
+* @Last Modified time: 2022-04-18 08:58:45
 * 
 * 
 * 
@@ -62,13 +62,13 @@ class CInitHome extends Component {
         let { match } = this.props;
         return (
             <Layout className={zkStyles.zk_content}>
-                <ZKSider className={zkStyles.zk_left_sider}>
+                <ZKSider className={`${zkStyles.zk_left_sider} ${zkStyles.flex_1_auto}`}>
                     <ZKAutoMenu menus={ this.props.mGeneralApplication.menus } path={`${match.path}`} routerMappingObj={this.state.routerMappingObj} />
                 </ZKSider>
                 <Layout>
                     <Scrollbars style={{ height: '100%', background: '#fff' }} >
                         <Content id="right-content" className={zkStyles.zk_wrapper}>
-                            <div className={ zkStyles.zk_main_panel }>
+                            <div className={ `${zkStyles.zk_main_panel} ${zkStyles.display_flex_col}` }>
                                 <ZKBreadcrumb routerMappingObj={this.state.routerMappingObj} />
                                 <Switch>
                                     {this.state.indexMenuRouter?

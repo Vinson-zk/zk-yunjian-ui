@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-29 21:52:35
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-09 23:38:33
+ * @Last Modified time: 2022-04-18 09:00:37
  */
 
 
@@ -68,7 +68,7 @@ const FInitCodeGenHome = ({dvaApp, match, mApp, dispatch, locales, lang, intl}) 
             <Header className={zkStyles.zk_header}>
                 <ZKLogo logoImgUrl="assets/img/logo-zk.png" />
                 <ZKNavigation prefixPath={`${match.path}`} navItems={navItems} />
-                <div className = {zkStyles.flex}></div>
+                <div className = {zkStyles.flex_1_auto}></div>
                 <ZKLanguageSelect {...languageSwitchProps} />
             </Header>
             <Content className={zkStyles.zk_content}>

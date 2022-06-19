@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-06-24 23:10:32
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 10:03:25
+* @Last Modified time: 2022-04-21 14:44:16
 * 
 * 
 * 
@@ -51,7 +51,7 @@ class CInitLoginPanel extends React.PureComponent {
 			}else if(userType == 2){
 				return  <CEnterpriseUserLogin { ...this.props } className = {styles.login_panel_block} onChangeUserType={this.onChangeUserType} locales = {locales} />
 			}
-			return <CPersonalUserLogin { ...this.props } className="" onChangeUserType={this.onChangeUserType} locales = {locales} />;;
+			return <CEnterpriseUserLogin { ...this.props } className="" onChangeUserType={this.onChangeUserType} locales = {locales} />;
 		}
 
 		let spinning = loading.effects['mApp/accountLogin'] || loading.effects['mApp/phoneNumberLogin'];

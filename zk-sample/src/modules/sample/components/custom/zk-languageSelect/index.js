@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:24:55
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 19:54:36
+ * @Last Modified time: 2022-05-25 19:07:48
  */
 
 import React from 'react';
@@ -12,7 +12,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
-import locales from '../../../locales';
+import locales from '../../../../../locales/sample/index.js';
 import { zkTools, ZKCustomComponents } from "zkFramework";
 const { ZKLanguageSelect } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;

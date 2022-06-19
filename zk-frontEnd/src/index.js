@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-23 22:57:05
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 10:10:26
+ * @Last Modified time: 2022-05-11 19:21:56
  */
 
 import React from 'react';
@@ -41,6 +41,7 @@ const FInitIndex = ({ mApp, ...props }) => {
 
     // console.log("[^_^:20210628-2331-001] ", zkToolsAuth.isLogin());
     const isOpenPage = zkToolsAuth.isPublicItem(globalAppConfig.basename, publicRouteItems, location.pathname);
+    // console.log("[^_^:20210628-2331-002] isOpenPage:", isOpenPage, location.pathname);
 
     return (
         <ConfigProvider locale={locales[lang].antd}>
@@ -48,7 +49,7 @@ const FInitIndex = ({ mApp, ...props }) => {
                 {isOpenPage ?
                     <CLayoutPublic {...props} locales={locales} lang={lang} mApp={mApp} />
                     : 
-                    <CLayoutPrivate { ...props } redirectPath={`${match.path=="/"?"":match.path}/_login`} locales={locales} lang={lang} mApp={mApp} />
+                    <CLayoutPrivate { ...props } redirectPath={`${match.path=="/"?"":match.path}/_login`} locales={locales} lang={lang} mApp={mApp} user = {mApp.user} />
                 }
             </IntlProvider>
         </ConfigProvider>

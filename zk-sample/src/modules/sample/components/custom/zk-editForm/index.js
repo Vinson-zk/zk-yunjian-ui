@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:23:27
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-25 17:35:49
+ * @Last Modified time: 2022-04-28 16:48:17
  */
 
 import React from 'react';
@@ -27,13 +27,15 @@ import ClassEditForm from './class-editForm.js';
 
 function FInitZKEditFormDemo({ history, intl }) {
 	/*
-	上传图像 
+	上传图像  <ClassEditForm />
 	*/
 	return (
 		<div className={styles.sample_detail_panel} style={{ margin: '0px 0px 50px 0px' }}>
 			<div className={styles.sample_detail_section}>
 				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.editForm')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
 				<div>
+					<font color = "red" >还有个联动的问题没有解决，Form.Item shouldUpdate 死循环的问题</font>
+					<br /><br />
 					<ClassEditForm />
 					<br /><br />
 					<FuncEditForm />

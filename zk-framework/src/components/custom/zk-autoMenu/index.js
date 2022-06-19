@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:43:24
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 18:40:19
+ * @Last Modified time: 2022-04-29 19:04:51
  */
 
 import React from 'react';
@@ -20,7 +20,51 @@ import { zkToolsNavAndMenu } from '../../../tools';
 import styles from "./styles.less";
 
 /********************************************/
-/*** 生成菜单 ***/
+// /*** 生成菜单1, <4.20.0 可用，>=4.20.0 时不推荐 ***/
+// const f_genMenu = (menus, path, history, openKeys, selMenuIds, toPathFunc) => {
+//     path = path || '';
+//     openKeys = openKeys || []
+//     return menus.map(item => {
+//         // 判断是否是显示
+//         if (zkToolsNavAndMenu.menuIsShow(item)) {
+//             let tPath = zkJsUtils.isEmpty(item.path) ? path : (path + '/' + item.path);
+//             // 判断是否为叶子结点 
+//             if (zkToolsNavAndMenu.menuIsLeaf(item)) {
+//                 // 是叶子结点 
+//                 return (
+//                     <Menu.Item key={item.pkId} title={zkToolsNavAndMenu.getMenuName(item)}>
+//                         <NavLink to={tPath}>
+//                             {zkJsUtils.isEmpty(item.icon) ? '' : <ZKIcon.Antd4Icon icon = {item.icon} />}
+//                             <span>{zkToolsNavAndMenu.getMenuName(item)}</span>
+//                         </NavLink>
+//                     </Menu.Item>
+//                 )
+//             } else {
+//                 openKeys.push(item.pkId);
+//                 const f_subMenuOnClick = (e) => {
+//                     if (!zkJsUtils.isEmpty(item.path)) {
+//                         // console.log("[20181022-0846-002] 点击了菜单", item, tPath)
+//                         toPathFunc(tPath, openKeys, item);
+//                     }
+//                 }
+//                 return (
+//                     <Menu.SubMenu key={item.pkId}
+//                         className={`${styles.menu_sub} ${(selMenuIds.indexOf(item.pkId) === -1) ? "" : styles.menu_sub_selected}`}
+//                         title={
+//                             (<span onClick={f_subMenuOnClick}>
+//                                 {zkJsUtils.isEmpty(item.icon) ? '' : (<ZKIcon.Antd4Icon icon = {item.icon} />)}
+//                                 {zkToolsNavAndMenu.getMenuName(item)}
+//                             </span>)
+//                         }
+//                     >
+//                         {f_genMenu(item.children, tPath, history, openKeys, selMenuIds, toPathFunc)}
+//                     </Menu.SubMenu>
+//                 )
+//             }
+//         }
+//     })
+// }
+/*** 生成菜单2, >=4.20.0 可用，推荐的写法 ***/
 const f_genMenu = (menus, path, history, openKeys, selMenuIds, toPathFunc) => {
     path = path || '';
     openKeys = openKeys || []
@@ -31,14 +75,20 @@ const f_genMenu = (menus, path, history, openKeys, selMenuIds, toPathFunc) => {
             // 判断是否为叶子结点 
             if (zkToolsNavAndMenu.menuIsLeaf(item)) {
                 // 是叶子结点 
-                return (
-                    <Menu.Item key={item.pkId} title={zkToolsNavAndMenu.getMenuName(item)}>
-                        <NavLink to={tPath}>
-                            {zkJsUtils.isEmpty(item.icon) ? '' : <ZKIcon.Antd4Icon icon = {item.icon} />}
-                            <span>{zkToolsNavAndMenu.getMenuName(item)}</span>
-                        </NavLink>
-                    </Menu.Item>
-                )
+                // return (
+                //     <Menu.Item key={item.pkId} title={zkToolsNavAndMenu.getMenuName(item)}>
+                //         <NavLink to={tPath}>
+                //             {zkJsUtils.isEmpty(item.icon) ? '' : <ZKIcon.Antd4Icon icon = {item.icon} />}
+                //             <span>{zkToolsNavAndMenu.getMenuName(item)}</span>
+                //         </NavLink>
+                //     </Menu.Item>
+                // )
+                return {
+                    'key': item.pkId,
+                    'icon': zkJsUtils.isEmpty(item.icon) ? '' : <ZKIcon.Antd4Icon icon = {item.icon} />,
+                    'label': <NavLink to={tPath}><span>{zkToolsNavAndMenu.getMenuName(item)}</span></NavLink>,
+                    'title':zkToolsNavAndMenu.getMenuName(item)
+                }
             } else {
                 openKeys.push(item.pkId);
                 const f_subMenuOnClick = (e) => {
@@ -47,19 +97,26 @@ const f_genMenu = (menus, path, history, openKeys, selMenuIds, toPathFunc) => {
                         toPathFunc(tPath, openKeys, item);
                     }
                 }
-                return (
-                    <Menu.SubMenu key={item.pkId}
-                        className={`${styles.menu_sub} ${(selMenuIds.indexOf(item.pkId) === -1) ? "" : styles.menu_sub_selected}`}
-                        title={
-                            (<span onClick={f_subMenuOnClick}>
-                                {zkJsUtils.isEmpty(item.icon) ? '' : (<ZKIcon.Antd4Icon icon = {item.icon} />)}
-                                {zkToolsNavAndMenu.getMenuName(item)}
-                            </span>)
-                        }
-                    >
-                        {f_genMenu(item.children, tPath, history, openKeys, selMenuIds, toPathFunc)}
-                    </Menu.SubMenu>
-                )
+                // return (
+                //     <Menu.SubMenu key={item.pkId}
+                //         className={`${styles.menu_sub} ${(selMenuIds.indexOf(item.pkId) === -1) ? "" : styles.menu_sub_selected}`}
+                //         title={
+                //             (<span onClick={f_subMenuOnClick}>
+                //                 {zkJsUtils.isEmpty(item.icon) ? '' : (<ZKIcon.Antd4Icon icon = {item.icon} />)}
+                //                 {zkToolsNavAndMenu.getMenuName(item)}
+                //             </span>)
+                //         }
+                //     >
+                //         {f_genMenu(item.children, tPath, history, openKeys, selMenuIds, toPathFunc)}
+                //     </Menu.SubMenu>
+                // )
+                return {
+                    'key': item.pkId,
+                    'icon': zkJsUtils.isEmpty(item.icon) ? '' : <ZKIcon.Antd4Icon icon = {item.icon} />,
+                    'label': <span onClick={f_subMenuOnClick}>{zkToolsNavAndMenu.getMenuName(item)}</span>,
+                    // onTitleClick:f_subMenuOnClick,
+                    'children':f_genMenu(item.children, tPath, history, openKeys, selMenuIds, toPathFunc)
+                }
             }
         }
     })
@@ -284,11 +341,9 @@ class CInitAutoMenu extends React.Component {
         //     let { key, keyPath } = e;
         //     this.setState({ isForce: 1, openMenuIds: keyPath, selMenuIds: [key] })
         // }
-
         let prefixPath = path == '/' ? '' : path
-
         let menusElement = f_genMenu(menus, prefixPath, history, [], selMenuIds, f_toPathFunc);
-
+        // >{menusElement} </Menu>
         return (
             <Scrollbars style={{ height: '100%' }}>
                 <Menu className={styles.menu}
@@ -297,9 +352,8 @@ class CInitAutoMenu extends React.Component {
                     onOpenChange={this.onOpenChange}
                     // onClick={f_menuLinkOnClik}
                     // theme="dark"
-                    mode="inline" >
-                    {menusElement}
-                </Menu>
+                    mode="inline"
+                    items={menusElement} />
                 <br />
             </Scrollbars>
         )

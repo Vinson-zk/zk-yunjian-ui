@@ -22,8 +22,9 @@ import zkStyles from 'zkFramework/css/styles.less';
  * @param {Function} onDelete 删除函数
  * @param {object} intl 国际化语言对象
  * @param {string} lang 当前语言标识
+ * @param {Function} showChannelEdit 接口请求渠道编辑页面控制函数
  */
-const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang) => {
+const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang, onShowChannelEdit) => {
 
 	return [
 		{
@@ -132,6 +133,11 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang) => {
 				return (
 					<ZKOptRow key={`grid-${record.pkId}`} >
 						<ZKOptRow.OptGroup isAutoPurseUp={true} >
+							<ZKOptRow.OptGroup.OptItem onClick={() => { // 编辑请求渠道
+								onShowChannelEdit(true, record);
+							}}>
+								{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.opt.channel.set')}
+							</ZKOptRow.OptGroup.OptItem>
 							<ZKOptRow.OptGroup.OptItem onClick={() => { // 编辑
 								onEedit(record);
 							}}>
@@ -161,7 +167,7 @@ class CInitSysResFuncApiGrid extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sh: 360
+			sh: 360,
 		}
 	}
 
@@ -191,7 +197,7 @@ class CInitSysResFuncApiGrid extends React.Component {
             _this.props.dispatch({
                 type: "mSysResFuncApi/delSysResFuncApi", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mSysResFuncApi/findSysResFuncApis', filter: _this.props.mSysResFuncApi.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mSysResFuncApi/findSysResFuncApis', filter: _this.props.mSysResFuncApi.filter, pagination: _this.props.mSysResFuncApi.pagination, callback: e => { } })
                 }
             });
 		};
@@ -223,7 +229,7 @@ class CInitSysResFuncApiGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mSysResFuncApi/findSysResFuncApis', 
             filter: this.props.mSysResFuncApi.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -231,10 +237,10 @@ class CInitSysResFuncApiGrid extends React.Component {
 	/** 返回 JSX 元素 */
 	render() {
 
-		let { intl, mApp, mSysResFuncApi, loading } = this.props;
+		let { intl, mApp, mSysResFuncApi, loading, onShowChannelEdit } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang);
+		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang, onShowChannelEdit);
 
 		let gridLoading = loading.effects['mSysResFuncApi/findSysResFuncApis'];
 
@@ -250,12 +256,12 @@ class CInitSysResFuncApiGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mSysResFuncApi.page||{}}
+				pagination = {mSysResFuncApi.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mSysResFuncApi.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>
@@ -274,3 +280,5 @@ class CInitSysResFuncApiGrid extends React.Component {
 }
 
 export default CInitSysResFuncApiGrid;
+
+

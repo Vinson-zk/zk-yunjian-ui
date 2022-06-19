@@ -27,6 +27,10 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, onCustomSet, intl, lang)
 
 	return [
 		{
+			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.collectionCode'),
+			textAlign: 'center', dataIndex: 'collectionCode', key: 'collectionCode', width: 100, 
+		},
+		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.type'),
 			textAlign: 'center', dataIndex: 'type', key: 'type', width: 100, 
 			render: (text, record, index) => {
@@ -52,8 +56,25 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, onCustomSet, intl, lang)
 			}
 		},
 		{
+			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.valueType'),
+			textAlign: 'center', dataIndex: 'valueType', key: 'value', width: 100, 
+			render: (text, record, index) => {
+				return zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.valueType.' + text);
+			}
+		},
+		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.value'),
 			textAlign: 'center', dataIndex: 'value', key: 'value', width: 100, 
+			render: (text, record, index) => {
+				switch(record.valueType){
+					case 1: 
+						if(text == '1'){
+							return zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.enable');
+						}
+						return zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.disabled');
+					default: return text;
+				}
+			}
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.groupCode'),
@@ -136,7 +157,7 @@ class CInitSysSetItemGrid extends React.Component {
             _this.props.dispatch({
                 type: "mSysSetItem/delSysSetItem", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mSysSetItem/findSysSetItems', filter: _this.props.mSysSetItem.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mSysSetItem/findSysSetItems', filter: _this.props.mSysSetItem.filter, pagination: _this.props.mSysSetItem.pagination, callback: e => { } })
                 }
             });
 		};
@@ -168,7 +189,7 @@ class CInitSysSetItemGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mSysSetItem/findSysSetItems', 
             filter: this.props.mSysSetItem.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -200,12 +221,12 @@ class CInitSysSetItemGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mSysSetItem.page||{}}
+				pagination = {mSysSetItem.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mSysSetItem.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

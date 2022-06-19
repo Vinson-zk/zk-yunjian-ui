@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 09:41:45
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-29 17:59:37
+ * @Last Modified time: 2022-05-26 18:58:38
  */
 
 import React from 'react';
@@ -30,5 +30,6 @@ FWrapInput.Search.defaultProps = {
 }
 
 FWrapInput.Password = Input.Password;
+FWrapInput.TextArea = Input.TextArea;
 
 export default FWrapInput;

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:27:19
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-07 03:59:56
+ * @Last Modified time: 2022-05-25 19:07:49
  */
 
 import React from 'react';
@@ -12,7 +12,7 @@ import { Button } from 'antd';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { docco } from '../../../helper';
-import locales from '../../../locales';
+import locales from '../../../../../locales/sample/index.js';
 import styles from "../../../styles.less";
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
 const { ZKOptRow, ZKIcon } = ZKCustomComponents;

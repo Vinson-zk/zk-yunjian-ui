@@ -6,7 +6,7 @@
  * @Author: Vinson 
  * @Date: 2020-08-10 15:37:45 
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-24 11:28:01
+ * @Last Modified time: 2022-04-21 17:41:42
  */
 
 /*** 应用的全局常量配置 ***/
@@ -20,7 +20,7 @@ module.exports = {
         pageSize:"_key_page.size",     // 分页数量，本地记录标识；用于记录用户操作习惯；
     },
     transferKey:{ // 与服务器传输 参数名
-        ticket: "_tID",                // 令牌上遂参数名
+        ticket: "_tkId",               // 令牌上遂参数名
         page:{                         // 请求后台时的分页参数
             pageNo: "page.no",
             pageSize: "page.size"

@@ -2,7 +2,7 @@
  * @Author: Vinson 
  * @Date: 2020-08-06 13:59:32 
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-03 11:25:21
+ * @Last Modified time: 2022-05-09 16:41:09
  */
 
 (function (global) {
@@ -18,12 +18,38 @@
     */
 
     /*** 数组属性扩展 ***/
-    // 查询元素，不存在返回 -1; 存在 返回其位置
-    Array.prototype.indexOf = function (val) {
+    /**
+     * 查询元素
+     * @f_compare 为比较函数，返回: <0 - item1<item2;  =0 - item1<==item2;  >0 - item1>item2; 
+            传入值是 item1; 默认用 == 比较
+     * @return -1 - 不存在; 其他数字 - 所在位置
+     */
+    Array.prototype.indexOf = function (val, f_compare) {
         for (let i = 0; i < this.length; i++) {
-            if (this[i] == val) return i;
+            if(f_compare instanceof Function){
+                if (f_compare(val, this[i]) === 0) return i;
+            }else{
+                if (this[i] == val) return i;
+            }
         }
         return -1;
+    };
+    /**
+     * 查询元素; 暂未启动此函数; 
+     * @f_compare 为比较函数，返回: <0 - item1<item2;  =0 - item1<==item2;  >0 - item1>item2; 
+            传入值是 item1; 默认用 == 比较
+     * @return 未找匹配元素，返回空数组；否则返回匹配的元素数组
+     */
+    Array.prototype.valueOf = function (val, f_compare) {
+        let res = [];
+        for (let i = 0; i < this.length; i++) {
+            if(f_compare instanceof Function){
+                if (f_compare(val, this[i]) === 0) res.push(this[i]);
+            }else{
+                if (this[i] == val) res.push(this[i]);
+            }
+        }
+        return res;
     };
     // 移除指定元素
     Array.prototype.remove = function (val) {
@@ -39,15 +65,27 @@
             this[index] = sub
         }
     }
-    // 统计数据某个值的个数；f_compare 为比较函数，返回0为相等，默认用 == 比较
+    /**
+     * 统计数据某个值的个数；
+     * @f_compare 为比较函数，返回: <0 - item1<item2;  =0 - item1<==item2;  >0 - item1>item2; 
+            传入值是 item1; 默认用 == 比较
+     */
     Array.prototype.countValue = function (val, f_compare) {
         let count = 0
         for (let i = 0; i < this.length; i++) {
-            if (this[i] == val) ++count;
+            if(f_compare instanceof Function){
+                if (f_compare(val, this[i]) == 0) ++count;
+            }else{
+                if (this[i] == val) ++count;
+            }
         }
         return count;
     }
-    // 数组去重，不递归; f_compare 为比较函数，返回0为相等，默认用 == 比较
+    /**
+     * 数组去重，不递归; 
+     * @f_compare 为比较函数，返回: <0 - item1<item2;  =0 - item1<==item2;  >0 - item1>item2; 
+            传入值是 item1; 默认用 == 比较
+     */
     Array.prototype.removeSameValue = function (f_compare) {
         // 第一种去重方式 
         // let tmp = [].concat(this)
@@ -60,10 +98,25 @@
         // }
         // 第二种去重方式 
         for (let i = 0; i < this.length; ++i) {
-            while (this.countValue(this[i]) > 1) {
+            while (this.countValue(this[i], f_compare) > 1) {
                 this.remove(this[i])
             }
         }
+    }
+    /**
+     * 查询 this 数组中不在 arr 数组中的元素；
+     * @f_compare 为比较函数，返回: <0 - item1<item2;  =0 - item1<==item2;  >0 - item1>item2; 
+            传入值是 item1; 默认用 == 比较
+     */
+    Array.prototype.notIn = function (arr=[], f_compare) {
+        let result = [];
+        for(let item of this){
+            if(arr.indexOf(item, f_compare) == -1){
+                // 不在 this 数组中
+                result.push(item);
+            }
+        }
+        return result;
     }
     /*** Separator - end 数组属性扩展 --------------------------------------------------------------------- ***/
 
@@ -326,13 +379,13 @@
 
 	/** 
      * 从树形结构结构数组中递归查找 父节点;
-	 * @pObjs: 数据对象树形结构数组; 对象包含 pkId, parentId，children 三个属性；
+	 * @treeDatas: 数据对象树形结构数组; 对象包含 pkId, parentId，children 三个属性；
 	 * @childId: 子节点的 pkId;
 	 * @return: 查出的所有父节点的数组，数组中包含子节点本身。 
 	 */
-    const f_findTreeParent = (pObjs, childId) => {
+    const f_findTreeParent = (treeDatas, childId) => {
         let parentObjs = [] // 结果集
-        for (let item of pObjs) {
+        for (let item of treeDatas) {
             if (item.pkId == childId) {
                 parentObjs.push(item);
                 return parentObjs;
@@ -347,6 +400,70 @@
             }
         }
         return parentObjs;
+    }
+    /** 
+     * 从树形结构结构数组中递归查找父节点下的所有子节点;
+     * @treeDatas: 数据对象树形结构数组; 对象包含 pkId, parentId，children 三个属性；
+     * @parentId: 父节点的 pkId;
+     * @return: 查出父节点的 pkId 下所有的子节点，数组中包含父节点本身。 
+     */
+    const f_findTreeChild = (treeDatas=[], parentId) => {
+        let childObjs = [] // 结果集
+        let f_getC = (cTreeDatas)=>{
+            let cs = [];
+            for (let item of cTreeDatas) {
+                if(item.children && item.children.length > 0){
+                    cs = cs.concat(item.children);
+                    cs = cs.concat(f_getC(item.children));
+                }
+            }
+            return cs;
+        }
+        for (let item of treeDatas) {
+            if (item.pkId == parentId) {
+                childObjs.push(item);
+                if(item.children && item.children.length > 0){
+                    childObjs = childObjs.concat(item.children);
+                    childObjs = childObjs.concat(f_getC(item.children));
+                }
+            } else {
+                if (item.children instanceof Array) {
+                    childObjs = childObjs.concat(f_findTreeChild(item.children, parentId));
+                }
+            }
+        }
+        return childObjs;
+    }
+
+    // 从树形结构中找出指定的节点集合，查到的所有节点都返回
+    const f_findNodesByTree = (treeDatas, pkId) => {
+        let objs = [] // 结果集
+        for (let item of treeDatas) {
+            if (item.pkId == pkId) {
+                objs.push(item);
+            } 
+            if (item.children instanceof Array) {
+                objs = objs.concat(f_findNodesByTree(item.children, pkId));
+            }
+        }
+        return objs;
+    }
+
+    // 从树形结构中找出指定的节点，找到一个就返回
+    const f_findByTree = (treeDatas, pkId) => {
+        let obj = null;
+        for (let item of treeDatas) {
+            if (item.pkId == pkId) {
+                return item;
+            } 
+            if (item.children instanceof Array) {
+                obj = f_findByTree(item.children, pkId);
+                if(obj != null){
+                    return obj;
+                }
+            }
+        }
+        return null;
     }
 
 	/** 国际化转换，将国际化标识转在本项目中对应的格式 
@@ -476,7 +593,7 @@
     }
 
     const _zkJsUtils = {
-        queryURL: f_queryURL,					     // 查询获取 url 中的参数，
+        queryURL: f_queryURL,					 // 查询获取 url 中的参数，
         base64Decode: f_Base64Decode,			 // 64 编码解密
         removeObjUnAttr: f_removeObjUnAttr,	     // 删除对象一个属性
         isEmpty: f_isEmpty,						 // 对象是否是空
@@ -484,11 +601,14 @@
         objToStr: f_objToStr,					 // json对象 转 json字符串，
         redirectUrl: f_redirectUrl,				 // url 重定向
         makeTree: f_makeTree,					 // 做成树状结构
+        findTreeChild: f_findTreeChild,          // 从树形结构结构数组中递归查找父节点下的所有子节点
         findTreeParent: f_findTreeParent,		 // 从树形结构结构数组中递归查找 父节点;
+        findNodesByTree: f_findNodesByTree,      // 从树形结构中找出指定的节点集合，查到的所有节点都返回
+        findByTree: f_findByTree,                // 从树形结构中找出指定的节点，找到一个就返回
         getLang: f_getLang,						 // 国际化转换
         strReplace: f_strReplace,				 // 字符串 按参数名 {argName} 替换成对象的值
         getJsonAttr: f_getJsonAttr,				 // 取 JSON 字符中的某个属性
-        sort: f_sort,                             // 排序
+        sort: f_sort,                            // 排序
     }
     global.zkJsUtils = _zkJsUtils
 })(typeof window !== "undefined" ? window : this);

@@ -143,7 +143,7 @@ class CInitPayMerchantGrid extends React.Component {
             _this.props.dispatch({
                 type: "mPayMerchant/delPayMerchant", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mPayMerchant/findPayMerchants', filter: mPayMerchant.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mPayMerchant/findPayMerchants', filter: mPayMerchant.filter, pagination: mPayMerchant.pagination, callback: e => { } })
                 }
             });
 		};
@@ -175,7 +175,7 @@ class CInitPayMerchantGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mPayMerchant/findPayMerchants', 
             filter: mPayMerchant.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -202,12 +202,12 @@ class CInitPayMerchantGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mPayMerchant.page||{}}
+				pagination = {mPayMerchant.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mPayMerchant.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

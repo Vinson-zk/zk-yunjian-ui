@@ -2,8 +2,8 @@
  * 此模块下的功能定义；
  * @Author: Vinson
  * @Date: 2020-08-12 00:15:57
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-25 12:05:35
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-04-28 09:33:26
  */
 
  /** 引入模块功能 */
@@ -14,8 +14,9 @@ import cHome from './home.js';
 
 // ReactDva, es6, 业务样例
 import cEs6 from "./es6/index.js"; 
-import cReactDva from './react-dva/index.js';
-import mReactDva from './react-dva/model.js';
+import cReactDva from './react/dva/index.js';
+import mReactDva from './react/dva/model.js';
+import cReactCommonLifecyles from './react/commonLifecycles.js';
 
 // zkJs
 import cZKJsIndex from "./zkJs/index.js";
@@ -58,6 +59,8 @@ import mExample1 from './example/e1/model.js';
 import cExample1Edit from "./example/e1/edit.js";
 import cExample1Detail1 from "./example/e1/detail-1.js";
 import cExample1Detail2 from "./example/e1/detail-2.js";
+// 测试 demo 页
+import cTestDemo from './testDemo/index.js';
 
  /** 定义模块功能 */
  const navIndex = {
@@ -68,6 +71,8 @@ import cExample1Detail2 from "./example/e1/detail-2.js";
 const home = { onEnter:undefined, component:cHome, models:[]};
 const es6 = {component:cEs6, models:[]};
 const reactDva = { onEnter:undefined, component:cReactDva, models:[mReactDva]};
+const reactCommonLifecyles = {component:cReactCommonLifecyles, models:[]};
+
 // const e1 = { onEnter:undefined, component:cE1, models:[mE1]};
 // const e1Detail = { onEnter:undefined, component:cE1Detail, models:[mE1]};
 // const e1Detail2 = { onEnter:undefined, component:cE1Detail2, models:[mE1]};
@@ -111,16 +116,16 @@ const e1 = {onEnter: undefined, component: cExample1, models: [mExample1]};
 const e1Edit = {onEnter: undefined, component: cExample1Edit, models: [mExample1]};
 const e1Detail_1 = {onEnter: undefined, component: cExample1Detail1, models: [mExample1]};
 const e1Detail_2 = {onEnter: undefined, component: cExample1Detail2, models: [mExample1]};
-
-
+// 测试 demo 页
+const tTestDemo = {onEnter: undefined, component: cTestDemo, models: []};
 
 export default {
     navIndex, home, 
-    es6, reactDva, 
+    es6, reactDva, reactCommonLifecyles,
     zkJsIndex, zkJsUtils, zkJsEvent, zkJsSortTwoArray,
     router, routerStatic, routerMenu, routerMenuIndex, routerMenuL2c1, routerMenuL2c2, routerMenuL2c3, routerMenuL2c4, routerMenuL2c5, routerMenuL2c1c1, routerMenuL2c2c1, routerMenuL2c3index, routerMenuL2c3c1, routerMenuL2c4c1,
     zkTools, zkToolsMsg, zkToolsAjax, zkToolsAuth, zkToolsNavAndMenu, zkToolsUtils, zkToolsValidates,
     ...componentsFunc,
-    sampleExample, e1, e1Edit, e1Detail_1, e1Detail_2
+    sampleExample, e1, e1Edit, e1Detail_1, e1Detail_2, tTestDemo
  };
  

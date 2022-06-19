@@ -30,7 +30,7 @@ class CInitPayGroupIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitPayGroupIndex extends Component {
         let { location, dispatch, mPayGroup } = this.props;
 		if (location.pathname != mPayGroup.pathname) {
 			dispatch({ type: 'mPayGroup/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mPayGroup/findPayGroups", filter: mPayGroup.filter, callback: e => { } })
+			dispatch({ type: "mPayGroup/findPayGroups", filter: mPayGroup.filter, pagination: mPayGroup.pagination, callback: e => { } })
 		}
     }
 }

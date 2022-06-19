@@ -30,7 +30,7 @@ class CInitSysResDictIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitSysResDictIndex extends Component {
         let { location, dispatch, mSysResDict } = this.props;
 		if (location.pathname != mSysResDict.pathname) {
 			dispatch({ type: 'mSysResDict/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mSysResDict/findSysResDicts", filter: mSysResDict.filter, callback: e => { } })
+			dispatch({ type: "mSysResDict/findSysResDictsTree", filter: mSysResDict.filter, pagination: mSysResDict.pagination, callback: e => { } })
 		}
     }
 }

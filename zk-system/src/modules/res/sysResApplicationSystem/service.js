@@ -2,8 +2,8 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   
- * @Last Modified time: 
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-05-03 18:28:47
  */
 
 import { zkTools } from "zkFramework";
@@ -44,3 +44,7 @@ export async function getSysResApplicationSystem(params) {
 export async function findSysResApplicationSystems(params) {
 	return zkToolsAjax.reqPretreatment(`/${api}/res/sysResApplicationSystem/sysResApplicationSystemsPage`, {method:'GET', data:params});
 }
+
+
+
+

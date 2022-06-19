@@ -30,7 +30,7 @@ class CInitPayGetOrderIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitPayGetOrderIndex extends Component {
         let { location, dispatch, mPayGetOrder } = this.props;
 		if (location.pathname != mPayGetOrder.pathname) {
 			dispatch({ type: 'mPayGetOrder/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mPayGetOrder/findPayGetOrders", filter: mPayGetOrder.filter, callback: e => { } })
+			dispatch({ type: "mPayGetOrder/findPayGetOrders", filter: mPayGetOrder.filter, pagination: mPayGetOrder.pagination, callback: e => { } })
 		}
     }
 }

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:33:59
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-12-06 18:44:34
+ * @Last Modified time: 2022-05-03 16:52:33
  */
 
 import React from 'react';
@@ -70,13 +70,12 @@ class CInitInputJson extends React.Component {
 		if (onChange) {
 			onChange(changedValue);
 		}
-	}
-
+	};
 	/*** JSON 编辑 ***/
 	// 取编辑的 JSON 值
 	getValue = ()=>{
 		return this.state.value || {}
-	}
+	};
 	// 编辑某个属性的值
 	editAttr = (key, value)=>{
 		if (key) {
@@ -85,12 +84,11 @@ class CInitInputJson extends React.Component {
 			this.setState({ value: aData, isInput: true });
 			this.triggerChange(aData);
 		}
-	}
+	};
 	// 当前维护属性改变
 	changePrimaryAttr = (key)=>{
 		this.setState({ primaryAttr: key, isInput: true });
-	}
-
+	};
 	/*** 取 需要编辑的属性数组 ***/
 	getEditAttrs = ()=>{
 		const attrs = []
@@ -98,12 +96,10 @@ class CInitInputJson extends React.Component {
 			attrs.push({ key: index, name: this.props.attrs[index].name })
 		}
 		return attrs
-	}
-
+	};
 	/************************************************************/
 	/*** UI 处理 ***/
 	/************************************************************/
-
 	/*** Json 编辑框前缀结点 element ***/
 	getBeforeNodeElement = (flag = "select", label = "")=>{
 		/*** 属性选择框 前缀元素 ***/
@@ -139,9 +135,7 @@ class CInitInputJson extends React.Component {
 				return f_normalNodeElement(label)
 				break;
 		}
-
-	}
-
+	};
 	/*** Json 编辑框后缀结点 element ***/
 	getAfterNodeElement = (flag = "smart")=>{
 
@@ -205,8 +199,7 @@ class CInitInputJson extends React.Component {
 				return f_attrCardNodeElement(zkToolsMsg.msgFormatByIntl(this.props.intl, "global.opt.name._key_detail"))
 				break;
 		}
-	}
-
+	};
 	/*** 展开风格的编辑UI ***/
 	getExpandingEditNode = ()=>{
 		// 需要编辑的属性数组
@@ -255,8 +248,7 @@ class CInitInputJson extends React.Component {
 				/>
 			)
 		})
-	}
-
+	};
 	/*** 紧凑风格的编辑UI ***/
 	getCompactEditNode = ()=>{
 
@@ -281,8 +273,7 @@ class CInitInputJson extends React.Component {
 				addonAfter={addonAfter}
 			/>
 		)
-	}
-
+	};
 	/*** 聪明风格的编辑的UI ***/
 	getSmartEditNode = ()=>{
 		// 前缀节点元素
@@ -304,8 +295,8 @@ class CInitInputJson extends React.Component {
 				addonAfter={addonAfter}
 			/>
 		)
-	}
-
+	};
+	
 	render() {
 		// console.log("[^_^:20210306-2346-001] CInitInputJson: ", this.props);
 		let { style = {}, className = "", 

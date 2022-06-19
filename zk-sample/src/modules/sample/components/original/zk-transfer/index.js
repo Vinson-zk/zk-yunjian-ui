@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:34:12
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-29 15:46:31
+ * @Last Modified time: 2022-03-22 11:20:42
  */
 
 import React, { Component } from 'react';
@@ -128,8 +128,9 @@ class CInitZKTransferDemo extends Component {
           <div>
             <SyntaxHighlighter language='jsx' style={docco}>
               {[
-                "ZKTransfer 原生态封装组件：暂不做处理",
-                "接受原生属性。"
+                "ZKTransfer 原生态封装组件：暂不做处理；",
+                "接受原生属性。",
+                "使用建议: 穿框不需要分页，如果数据量大，需要分页的话，使用列表勾选，比较直观; "
               ].join('\n')}
             </SyntaxHighlighter>
           </div>

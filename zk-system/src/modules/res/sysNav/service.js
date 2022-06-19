@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:19:18
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-29 17:03:25
+ * @Last Modified time: 2022-05-09 11:47:10
  */
 
 import { zkTools } from "zkFramework";
@@ -43,3 +43,6 @@ export async function getSysNav(params) {
 export async function findSysNavs(params) {
 	return zkToolsAjax.reqPretreatment(`/${api}/res/nav/sysNavs`, {method:'GET', data:params});
 }
+
+
+

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:50
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-03 15:32:17
+ * @Last Modified time: 2022-04-19 19:43:21
  */
 
 
@@ -146,7 +146,7 @@ class CInitSysNavGrid extends React.Component {
 			this.props.dispatch({
                 type: "mSysNav/deleteSysNav", payload: { pkId: keys },
                 callback: () => {
-                    this.props.dispatch({ type: 'mSysNav/findSysNavs', filter: this.props.mSysNav.filter, callback: e => { } })
+                    this.props.dispatch({ type: 'mSysNav/findSysNavs', filter: this.props.mSysNav.filter, pagination: this.props.mSysNav.pagination, callback: e => { } })
                 }
             })
 		};
@@ -179,7 +179,7 @@ class CInitSysNavGrid extends React.Component {
         // 注意这里要将 zkToolsUtils.convertSortParam(mSysNav.filter, sorter) 放在前面，以便后面新的分页参数覆盖旧的分页参数；在排序处理函数中会处理旧排序的问题
         this.props.dispatch({ type: 'mSysNav/findSysNavs', 
             filter: mSysNav.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -189,7 +189,7 @@ class CInitSysNavGrid extends React.Component {
 
 		let { intl, mApp, mSysNav, loading } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-        let page = mSysNav.page || {};
+        let page = mSysNav.pagination || {};
         let gridData = mSysNav.gridData || [];
         let gridSelKeys = mSysNav.gridSelKeys;
 
@@ -213,7 +213,7 @@ class CInitSysNavGrid extends React.Component {
                 dataSource = {gridData}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = { this.f_changeGrid }
-				className = { zkStyles.flex }
+				className = { zkStyles.flex_1_auto }
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

@@ -92,13 +92,8 @@ class CInitThirdPartyDetail extends Component {
 		let { params } = match;
 		// 第一次进来或地址栏改变了 
 		if (mThirdParty.pathname != location.pathname ) {
-			let optEntity = location.state ? location.state.optEntity : {};
-			if (optEntity && optEntity.pkId && optEntity.pkId == params.pkId) {
-				dispatch({ type: 'mThirdParty/setState', payload: { optEntity: optEntity, pathname: location.pathname } });
-			} else {
-				dispatch({ type: 'mThirdParty/setState', payload: { pathname: location.pathname } });
-				dispatch({ type: 'mThirdParty/getThirdParty', payload: { pkId: params.pkId } });
-			}
+			dispatch({ type: 'mSysNav/setState', payload: { pathname: location.pathname, optEntity: undefined} });
+			dispatch({ type: 'mThirdParty/getThirdParty', payload: { pkId: params.pkId } });
 		}
     }
 

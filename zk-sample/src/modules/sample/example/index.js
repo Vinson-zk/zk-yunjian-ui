@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 16:42:24
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-17 15:39:16
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-04-28 10:38:54
  */
 
 import React from 'react';
@@ -26,8 +26,8 @@ const FInitExampleIndex = ({ match, dvaApp, menus = [], dynamicImportHelper, int
   let liLinks = [];
   menus.forEach(item => {
     liLinks.push(
-      <li key={`${item.id}-li-link`} >
-        <Link key={`${item.id}-link`} to={`${match.path}/${item.path}`}>{zkToolsNavAndMenu.getMenuName(item, intl)}</Link>
+      <li key={`${item.pkId}-li-link`} >
+        <Link key={`${item.pkId}-link`} to={`${match.path}/${item.path}`}>{zkToolsNavAndMenu.getMenuName(item, intl)}</Link>
       </li>
     )
   })

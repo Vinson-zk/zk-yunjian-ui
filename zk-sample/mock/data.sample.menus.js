@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 00:23:27
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-12-08 00:00:54
+ * @Last Modified time: 2022-05-09 15:24:31
  */
 
 let tMenu = null;
@@ -155,13 +155,22 @@ tMenu = {
 	/* permission:,*/ parentId: null, //children:null
 }
 sampleMenus.push(tMenu);
-/********************************************* react-dva 学习 */
+/********************************************* react 学习 */
+tMenu = {
+	pkId: "sample_react-common-lifecycles", code: "sample_react-common-lifecycles", name: { "zh-CN": "React组件生命周期", "en-US": "ReactCommonLifecyles" },
+	path: "react-common-lifecycles", navCode: navCode, funcModuleCode: funcCode,
+	funcName: 'reactCommonLifecyles',
+	isIndex: 0, exact: true, isFrame: 0, isShow: 1, icon: "TagsOutlined", sort: 9,
+	/* permission:'', */ parentId: null, //children:null
+}
+sampleMenus.push(tMenu);
+
 tMenu = {
 	pkId: "sample_react-dva", code: "sample_react-dva", name: { "zh-CN": "React-dva", "en-US": "React-dva" },
 	path: "react-dva", navCode: navCode, funcModuleCode: funcCode,
 	funcName: 'reactDva',
 	isIndex: 0, exact: false, isFrame: 0, isShow: 1, icon: "TagsOutlined", sort: 9,
-	/* permission:'', */ parentId: null, //children:null
+	/* permission:'', */ parentId: 'sample_react-common-lifecycles', //children:null
 }
 sampleMenus.push(tMenu);
 
@@ -484,6 +493,15 @@ tMenu = {
 	permission:null, parentId:"sample_zkOriginalComponents", children:null
 }
 sampleMenus.push(tMenu);
+// 原生组件封装的子菜单：ZKSwitch
+tMenu = {
+	pkId:"sample_zkOriginalComponents_switch", key:"sample_zkOriginalComponents_switch", name:{"zh-CN":"ZK开关","en-US":"ZKSwitch"}, 
+	path:"switch", navCode:navCode, funcModuleCode:funcCode, 
+	funcName:"originalSwitch",
+	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:125, 
+	permission:null, parentId:"sample_zkOriginalComponents", children:null
+}
+sampleMenus.push(tMenu);
 // 原生组件封装的子菜单：ZKTable
 tMenu = {
 	pkId:"sample_zkOriginalComponents_table", key:"sample_zkOriginalComponents_table", name:{"zh-CN":"ZK表格","en-US":"ZKTable"}, 
@@ -502,6 +520,25 @@ tMenu = {
 	permission:null, parentId:"sample_zkOriginalComponents", children:null
 }
 sampleMenus.push(tMenu);
+// 原生组件封装的子菜单： ZKTree
+tMenu = {
+	pkId:"sample_zkOriginalComponents_tree", key:"sample_zkOriginalComponents_tree", name:{"zh-CN":"ZK树形控件","en-US":"ZKTee"}, 
+	path:"tree", navCode:navCode, funcModuleCode:funcCode, 
+	funcName:"originalTree",
+	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:150, 
+	permission:null, parentId:"sample_zkOriginalComponents", children:null
+}
+sampleMenus.push(tMenu);
+// 原生组件封装的子菜单： ZKTreeSelect
+tMenu = {
+	pkId:"sample_zkOriginalComponents_ZKTreeSelect", key:"sample_zkOriginalComponents_ZKTreeSelect", name:{"zh-CN":"ZK树形选择","en-US":"ZKTreeSelect"}, 
+	path:"treeSelect", navCode:navCode, funcModuleCode:funcCode, 
+	funcName:"originalTreeSelect",
+	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:160, 
+	permission:null, parentId:"sample_zkOriginalComponents", children:null
+}
+sampleMenus.push(tMenu);
+
 
 /** ------------------------------------- 自定组件 */
 tMenu = {
@@ -753,6 +790,18 @@ tMenu = {
 	funcName:"e500",
 	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:40, 
 	permission:null, parentId:"sample_zkException", children:null
+}
+sampleMenus.push(tMenu);
+
+
+/********************************************* 测试 demo，封装前试一下的样例 */
+// 测试 demo，封装前试一下
+tMenu = {
+    pkId:"sample_test_demo", key:"sample_test_demo", name:{"zh-CN":"测试","en-US":"TestDemo"}, 
+    path:"testDemo", navCode:navCode, funcModuleCode:funcCode, 
+	funcName:'tTestDemo',
+    isIndex:0, exact:true, isFrame:1, isShow:1, icon:"TagsOutlined", sort:1, 
+    /* permission:'', */ parentId:null, //children:null
 }
 sampleMenus.push(tMenu);
 

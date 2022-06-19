@@ -30,7 +30,7 @@ class CInitSysSetItemIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitSysSetItemIndex extends Component {
         let { location, dispatch, mSysSetItem } = this.props;
 		if (location.pathname != mSysSetItem.pathname) {
 			dispatch({ type: 'mSysSetItem/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mSysSetItem/findSysSetItems", filter: mSysSetItem.filter, callback: e => { } })
+			dispatch({ type: "mSysSetItem/findSysSetItems", filter: mSysSetItem.filter, pagination: mSysSetItem.pagination, callback: e => { } })
 		}
     }
 }

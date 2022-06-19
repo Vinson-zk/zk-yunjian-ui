@@ -28,7 +28,7 @@ class CInitSysResDictEdit extends Component {
             loading: false,
             resDictTypes: []
         }
-    }
+    };
 	
 	// static getDerivedStateFromProps(props, state) {
     //     return true;
@@ -39,7 +39,7 @@ class CInitSysResDictEdit extends Component {
         dispatch({ type: 'mSysResDict/findSysResDictTypes', filter: { typeCode: value }, callback: datas=>{
             this.setState({resDictTypes: datas});
         }});
-    }
+    };
 
     /** 保存 */
     f_save = (values, form, callbackFunc) => {
@@ -74,7 +74,7 @@ class CInitSysResDictEdit extends Component {
 
         let spinning = !optEntity || this.state.loading 
             || loading.effects['mSysResDict/editSysResDict'] || loading.effects['mSysResDict/getSysResDict'];
-        let typeCodeSelLoading = loading.effects['mSysResDict/findSysResDicts'];
+        let typeCodeSelLoading = loading.effects['mSysResDict/findSysResDictTypes'];
 
         return (optEntity != undefined && mSysResDict.pathname == location.pathname) && (
             <ZKSpin spinning={spinning === true} >
@@ -104,7 +104,7 @@ class CInitSysResDictEdit extends Component {
                                             </ZKSelect.Option>
                                         </ZKSelect>
                                     ):(
-                                        <ZKSelect showSearch = {true} loading = { typeCodeSelLoading } onSearch = { this.f_searchResDictTypes }
+                                        <ZKSelect showSearch = {true} filterOption = {false} loading = { typeCodeSelLoading } onSearch = { this.f_searchResDictTypes }
                                             onDropdownVisibleChange = { open=>{if(open){this.f_searchResDictTypes('');}}} >
                                             {this.state.resDictTypes.map((item, index)=>{
                                                 return <ZKSelect.Option key={index} value={item.typeCode}>{zkToolsMsg.getInternationInfo(item.typeName)}[{item.typeCode}]</ZKSelect.Option>
@@ -124,26 +124,24 @@ class CInitSysResDictEdit extends Component {
                             </ZKEditForm.Item>
                         </ZKCol>
                     </ZKRow>
-                    <ZKRow>
-                        <ZKCol span={8} offset={2} >
-                        	<ZKEditForm.Item name = "dictName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDict.dictName')} 
-                        		rules = {[
-        							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
-                                ]} 
-        					>
-                                <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
-                        	</ZKEditForm.Item>
-                        </ZKCol>
-                        <ZKCol span={8 } offset = {2} >
-                        	<ZKEditForm.Item name = "dictDesc" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDict.dictDesc')} 
-                        		rules = {[
-        							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
-                                ]} 
-        					>
-                                <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
-                        	</ZKEditForm.Item>
-                        </ZKCol>
-                    </ZKRow>
+                    <ZKRow><ZKCol span = {24} >
+                        <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "dictName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDict.dictName')} 
+                    		rules = {[
+    							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
+                            ]} 
+    					>
+                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                    	</ZKEditForm.Item>
+                    </ZKCol></ZKRow>
+                    <ZKRow><ZKCol span = {24} >
+                        <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "dictDesc" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDict.dictDesc')} 
+                    		rules = {[
+    							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
+                            ]} 
+    					>
+                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                    	</ZKEditForm.Item>
+                    </ZKCol></ZKRow>
             	</ZKEditForm>
             </ZKSpin>
         )

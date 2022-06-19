@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-23 15:26:04
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-14 07:46:12
+ * @Last Modified time: 2022-05-07 10:45:18
  */
 
 import { zkTools } from "zkFramework";
@@ -47,3 +47,7 @@ export async function findSysMenusTree(params) {
 export async function findSysNavs(params) {
     return zkToolsAjax.reqPretreatment(`/${api}/res/nav/sysNavs`, {method:'GET', data:params});
 }
+
+
+
+

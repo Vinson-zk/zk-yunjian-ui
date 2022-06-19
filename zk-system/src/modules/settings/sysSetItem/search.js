@@ -11,15 +11,12 @@ import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
 
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";        
-const {
-ZKInput, ZKSelect, } = ZKOriginalComponents;
-
-const { 
-	ZKSearchRow, 	
-ZKInputJson, } = ZKCustomComponents;
-
+const { ZKInput, ZKSelect, } = ZKOriginalComponents;
+const { ZKSearchRow, ZKInputJson, } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 const ZKSearchItem = ZKSearchRow.Item;
+
+import CSetCollectionSelect from "./setCollectionSelect.js";
 
 class CInitSysSetItemSearch extends React.Component {
 
@@ -60,11 +57,11 @@ class CInitSysSetItemSearch extends React.Component {
                         <ZKSelect.Option value={2}>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.type.2')}</ZKSelect.Option>
                     </ZKSelect>
                 </ZKSearchItem>       
-                <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.name')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
-                </ZKSearchItem>       
-                <ZKSearchItem name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.code')} >
+                <ZKSearchItem name = "searchValue" label = {`${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.name')}/${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.code')}`} >
                     <ZKInput style = {{width:"180px"}}  />
+                </ZKSearchItem>       
+                <ZKSearchItem name = "collectionId" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.collectionId')} >
+                    <CSetCollectionSelect />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "groupCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.groupCode')} >
                     <ZKInput style = {{width:"180px"}}  />
@@ -78,3 +75,6 @@ class CInitSysSetItemSearch extends React.Component {
 }
 
 export default CInitSysSetItemSearch;
+
+
+

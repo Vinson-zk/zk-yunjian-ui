@@ -3,11 +3,11 @@
  * @Author: Vinson
  * @Date: 2020-08-23 22:53:23
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-09 10:21:21
+ * @Last Modified time: 2022-05-25 19:20:09
  */
 
 import { locales as zkFrameworkLocales, zkTools } from 'zkFramework'; 
-import wechatLocales from '../modules/locales/index.js';
+import wechatLocales from './wechat/index.js';
 
 import enLocaleData from "react-intl/locale-data/en";
 import enAntd from "antd/lib/locale-provider/en_US";

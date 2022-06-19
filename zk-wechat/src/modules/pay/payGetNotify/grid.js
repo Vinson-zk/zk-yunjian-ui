@@ -116,7 +116,7 @@ class CInitPayGetNotifyGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mPayGetNotify/findPayGetNotifys', 
             filter: mPayGetNotify.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -138,12 +138,12 @@ class CInitPayGetNotifyGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mPayGetNotify.page||{}}
+				pagination = {mPayGetNotify.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mPayGetNotify.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 			</ZKScrollTable>
 		)

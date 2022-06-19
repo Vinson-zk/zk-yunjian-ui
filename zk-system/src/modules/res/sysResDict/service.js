@@ -3,7 +3,7 @@
  * @Author: 
  * @Date: 
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-13 16:46:31
+ * @Last Modified time: 2022-05-02 19:13:53
  */
 
 import { zkTools } from "zkFramework";
@@ -40,7 +40,15 @@ export async function getSysResDict(params) {
 	return zkToolsAjax.reqPretreatment(`/${api}/res/sysResDict/sysResDict`, {method:'GET', data:params});
 }
 
-// 查询 分页列表
-export async function findSysResDicts(params) {
+// 查询 分页树形列表
+export async function findSysResDictsTree(params) {
 	return zkToolsAjax.reqPretreatment(`/${api}/res/sysResDict/sysResDictsTree`, {method:'GET', data:params});
 }
+
+// 查询 分页列表
+export async function findSysResDicts(params) {
+    return zkToolsAjax.reqPretreatment(`/${api}/res/sysResDict/sysResDicts`, {method:'GET', data:params});
+}
+
+
+

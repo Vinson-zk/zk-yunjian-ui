@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 16:07:22
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 09:46:12
+ * @Last Modified time: 2022-04-19 19:24:08
  */
 
 /**
@@ -34,10 +34,10 @@ const f_convertResPage=(resPage)=>{
   }
 }
 // 分页请求参数转换
-const f_convertPageParam=(page)=>{
+const f_convertPageParam=(pagination={})=>{
   let pageParams = {};
-  pageParams[globalAppConfig.transferKey.page.pageNo] = page.pageNo||0;
-  pageParams[globalAppConfig.transferKey.page.pageSize] = page.pageSize||10;
+  pageParams[globalAppConfig.transferKey.page.pageNo] = (pagination.current||1)-1;
+  pageParams[globalAppConfig.transferKey.page.pageSize] = pagination.pageSize||10;
   return pageParams;
 }
 

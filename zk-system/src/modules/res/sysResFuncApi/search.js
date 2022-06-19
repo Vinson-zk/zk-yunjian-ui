@@ -10,13 +10,10 @@ import React, { Component } from 'react';
 //  import { connect } from 'dva';
 import { injectIntl } from 'react-intl';
 
-import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";        
-const {
-ZKInput, ZKSelect, } = ZKOriginalComponents;
-
-const { 
-	ZKSearchRow, 	
-ZKInputJson, } = ZKCustomComponents;
+import { zkTools, ZKCustomComponents, ZKBusinessComponents, ZKOriginalComponents } from "zkFramework";        
+const { ZKInput, ZKSelect, } = ZKOriginalComponents;
+const { ZKSearchRow, ZKInputJson, } = ZKCustomComponents;
+const { ZKApplicationSystemSelect } = ZKBusinessComponents;
 
 const { zkToolsMsg } = zkTools;
 const ZKSearchItem = ZKSearchRow.Item;
@@ -60,10 +57,7 @@ class CInitSysResFuncApiSearch extends React.Component {
                     <ZKInput style = {{width:"180px"}}  />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "systemCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.systemCode')} >
-                    <ZKSelect fillValue = {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.all')} >
-                        <ZKSelect.Option value={1}>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.yes')}</ZKSelect.Option>
-                        <ZKSelect.Option value={0}>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.no')}</ZKSelect.Option>
-                    </ZKSelect>
+                    <ZKApplicationSystemSelect valueKey="code" />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "originalUri" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.originalUri')} >
                     <ZKInput style = {{width:"180px"}}  />

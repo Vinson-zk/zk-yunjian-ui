@@ -172,3 +172,5 @@ class CInitSysResFuncApiDetail extends Component {
 }
 
 export default injectIntl(connect(({ mApp, mSysResFuncApi, loading }) => ({ mApp, mSysResFuncApi, loading }))(CInitSysResFuncApiDetail));
+
+

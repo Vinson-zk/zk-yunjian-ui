@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-07-01 09:16:54
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 10:24:39
+* @Last Modified time: 2022-04-21 14:55:19
 * 
 * 
 * 
@@ -35,7 +35,7 @@ class CInitAccountLogin extends React.PureComponent {
     	let { dispatch } = this.props;
 	    // console.log("[^_^:20210629-1717-001] FInitAccountLogin.values: ", values);
 	    // dispatch({type:'mApp/login',history,payload:values}).then(()=>{dispatch({type:'mApp/getUaidLicenseInfo'})})
-	    dispatch({type:'mApp/accountLogin', params:values});
+	    dispatch({type:'mApp/accountLogin', loginFlag:1,  params:values});
 	};
 
 	render(){

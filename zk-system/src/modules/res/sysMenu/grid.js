@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:45
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-09 11:07:52
+ * @Last Modified time: 2022-04-19 19:43:21
  */
 
 
@@ -42,19 +42,19 @@ const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang) => {
         },
         {
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.code'),
-			dataIndex: 'code', key: 'code', width: 80, textAlign: 'center'
+			dataIndex: 'code', key: 'code', width: 80, textAlign: 'left'
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.navCode'),
-			dataIndex: 'navCode', key: 'navCode', width: 90, textAlign: 'center'
+			dataIndex: 'navCode', key: 'navCode', width: 90, textAlign: 'left'
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.funcModuleCode'),
-            dataIndex: 'funcModuleCode', width: 90, key: 'funcModuleCode', textAlign: 'center', sorter: true
+            dataIndex: 'funcModuleCode', width: 90, key: 'funcModuleCode', textAlign: 'left', sorter: true
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.funcName'),
-			dataIndex: 'funcName', key: 'funcName', width: 120, textAlign: 'center',
+			dataIndex: 'funcName', key: 'funcName', width: 120, textAlign: 'left',
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.path'),
@@ -148,7 +148,7 @@ class CInitSysMenuGrid extends React.Component {
 			this.props.dispatch({
                 type: "mSysMenu/deleteSysMenu", payload: { pkId: keys },
                 callback: () => {
-                    this.props.dispatch({ type: 'mSysMenu/findSysMenusTree', filter: this.props.mSysMenu.filter, callback: e => { } })
+                    this.props.dispatch({ type: 'mSysMenu/findSysMenusTree', filter: this.props.mSysMenu.filter, pagination: this.props.mSysMenu.pagination, callback: e => { } })
                 }
             })
 		};
@@ -179,7 +179,7 @@ class CInitSysMenuGrid extends React.Component {
 	f_change = (pagination, filters, sorter)=>{
         this.props.dispatch({ type: 'mSysMenu/findSysMenusTree', 
             filter: this.props.mSysMenu.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -208,12 +208,12 @@ class CInitSysMenuGrid extends React.Component {
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: 600 }}
 				// scroll = {{ y: this.state.sh }}
-				pagination = {mSysMenu.page||{}}
-				// pagination={{ position: ['topRight', 'bottomRight'], ...page}}
+				pagination = {mSysMenu.pagination||{}}
+				// pagination={{ position: ['topRight', 'bottomRight'], ...pagination}}
                 dataSource = {mSysMenu.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_change}
-				className = { zkStyles.flex }
+				className = { zkStyles.flex_1_auto }
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

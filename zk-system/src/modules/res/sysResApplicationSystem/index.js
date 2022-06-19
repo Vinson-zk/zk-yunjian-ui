@@ -30,7 +30,7 @@ class CInitSysResApplicationSystemIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitSysResApplicationSystemIndex extends Component {
         let { location, dispatch, mSysResApplicationSystem } = this.props;
 		if (location.pathname != mSysResApplicationSystem.pathname) {
 			dispatch({ type: 'mSysResApplicationSystem/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mSysResApplicationSystem/findSysResApplicationSystems", filter: mSysResApplicationSystem.filter, callback: e => { } })
+			dispatch({ type: "mSysResApplicationSystem/findSysResApplicationSystems", filter: mSysResApplicationSystem.filter, pagination: mSysResApplicationSystem.pagination, callback: e => { } })
 		}
     }
 }

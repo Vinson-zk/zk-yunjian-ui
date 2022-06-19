@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:27:32
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-03 17:03:51
+ * @Last Modified time: 2022-04-19 19:54:42
  */
 
 
@@ -25,7 +25,7 @@ const model = {
         filter: undefined,             // 过滤条件     
         pathname: null,         // 当前访问的地址路径
         optEntity: undefined,   // 当前操作实体
-        page:{
+        pagination:{
             current:1,    // 当前行
             pageSize: zkToolsUtils.getPageSize(),  // 当前行数量
             total:0,      // 总行数
@@ -76,14 +76,13 @@ const model = {
             }
         },
         /*** 查询 分页列表
-         * @param {object} page 分页; {pageNo: 0, pageSize:10}
+         * @param {object} pagination 分页; {pageNo: 0, pageSize:10}
          * @param {object} sorter 数组; {field:'xxx', order: ['ascend', 'descend']}
          */
-        *findSysNavs({ filter, page, sorter, callback }, { call, put, select }) {
+        *findSysNavs({ filter, pagination, sorter, callback }, { call, put, select }) {
             let params = zkToolsUtils.convertSortParam(filter, sorter); 
-            if(page){
-                page.pageNo = page.pageNo - 1;
-                params = { ...params, ...zkToolsUtils.convertPageParam(page) };
+            if(pagination){
+                params = { ...params, ...zkToolsUtils.convertPageParam(pagination) };
             }
             let res = yield call(findSysNavs, params);
             let nextState = {}
@@ -91,7 +90,7 @@ const model = {
                 nextState = {
                     "filter": params,
                     "gridData": res.data.result,
-                    "page": {
+                    "pagination": {
                         "current": res.data.pageNo + 1,
                         "pageSize": res.data.pageSize,
                         // "pageSize": zkToolsUtils.getPageSize(),

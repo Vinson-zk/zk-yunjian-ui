@@ -110,7 +110,7 @@ class CInitSysResApplicationSystemGrid extends React.Component {
             _this.props.dispatch({
                 type: "mSysResApplicationSystem/delSysResApplicationSystem", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mSysResApplicationSystem/findSysResApplicationSystems', filter: _this.props.mSysResApplicationSystem.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mSysResApplicationSystem/findSysResApplicationSystems', filter: _this.props.mSysResApplicationSystem.filter, pagination: _this.props.mSysResApplicationSystem.pagination, callback: e => { } })
                 }
             });
 		};
@@ -142,7 +142,7 @@ class CInitSysResApplicationSystemGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mSysResApplicationSystem/findSysResApplicationSystems', 
             filter: this.props.mSysResApplicationSystem.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -169,12 +169,12 @@ class CInitSysResApplicationSystemGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mSysResApplicationSystem.page||{}}
+				pagination = {mSysResApplicationSystem.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mSysResApplicationSystem.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

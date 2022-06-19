@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 22:26:57
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-07 05:50:13
+ * @Last Modified time: 2022-04-27 16:12:55
  */
 
 import React from 'react';
@@ -15,7 +15,8 @@ import { ZKDatePicker } from '../../original/index';
 /**
  * 日期范围格式化控件，取值时按设置的 format 格式返回对应格式日期字符串
  */
-class CInitDateFormatRangePicker extends DatePicker.RangePicker {
+// class CInitDateFormatRangePicker extends DatePicker.RangePicker {
+class CInitDateFormatRangePicker extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -84,14 +85,22 @@ class CInitDateFormatRangePicker extends DatePicker.RangePicker {
 	}
 }
 
+// 定义属性
+CInitDateFormatRangePicker.propTypes = {
+	...DatePicker.RangePicker.propTypes
+}
+
+// 定义属性默认值
 CInitDateFormatRangePicker.defaultProps = {
+	...DatePicker.RangePicker.defaultProps,
 	format: "YYYY-MM-DD"
 }
 
 /**
 	日期格式化控件，取值时按设置的 format 格式返回对应格式日期字符串
 */
-class CInitDateFormatPicker extends DatePicker {
+// class CInitDateFormatPicker extends DatePicker {
+class CInitDateFormatPicker extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -141,7 +150,14 @@ class CInitDateFormatPicker extends DatePicker {
 	}
 }
 
+// 定义属性
+CInitDateFormatPicker.propTypes = {
+	...ZKDatePicker.propTypes
+}
+
+// 定义属性默认值
 CInitDateFormatPicker.defaultProps = {
+	...ZKDatePicker.defaultProps,
 	format: "YYYY-MM-DD"
 }
 

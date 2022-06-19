@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-03 22:36:25
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-03-09 10:18:15
+* @Last Modified time: 2022-04-28 11:44:00
 * 
 * 
 * 
@@ -18,7 +18,7 @@ import styles from "../../../styles.less";
 import zkJsUtils from 'zkJsUtils';
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
 const { ZKEditForm, ZKInputJson } = ZKCustomComponents;
-const { ZKModal, ZKDatePicker, ZKInput, ZKInputNumber, ZKSelect, ZKForm } = ZKOriginalComponents;
+const { ZKModal, ZKDatePicker, ZKInput, ZKInputNumber, ZKSelect, ZKForm, ZKRow, ZKCol } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
 const { Option } = ZKSelect;
 
@@ -99,10 +99,10 @@ const FInitEditFormDemo = ()=>{
 					form.resetFields();
 					return false;
 				}}
-				nextFunc={ f_saveAndNext } >
-				
-				{ f_demoFormItems('f') } 
-
+				nextFunc={ f_saveAndNext } >				
+				{ 
+					f_demoFormItems('f', form) 
+				}
 			</ZKEditForm>
 		</div>
 	)

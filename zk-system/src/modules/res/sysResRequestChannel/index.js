@@ -30,7 +30,7 @@ class CInitSysResRequestChannelIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitSysResRequestChannelIndex extends Component {
         let { location, dispatch, mSysResRequestChannel } = this.props;
 		if (location.pathname != mSysResRequestChannel.pathname) {
 			dispatch({ type: 'mSysResRequestChannel/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mSysResRequestChannel/findSysResRequestChannels", filter: mSysResRequestChannel.filter, callback: e => { } })
+			dispatch({ type: "mSysResRequestChannel/findSysResRequestChannels", filter: mSysResRequestChannel.filter, pagination: mSysResRequestChannel.pagination, callback: e => { } })
 		}
     }
 }

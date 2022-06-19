@@ -81,9 +81,13 @@ class CInitSysNavEdit extends Component {
         // }
 
         // 各语言指定校验
-        let nameRule = {};
-        for(let index in locales.localLanguage){
-            nameRule[index] = zkToolsValidates.string(intl, 1, 80, true);
+        // ZKJson 自定义校验规则对象
+        let f_makeObjRuls = required=>{
+            let objRule = {};
+            for(let index in locales){
+                objRule[index] = zkToolsValidates.string(intl, 1, 64, required);
+            }
+            return objRule;
         }
 
         let spinning = this.state.loading || loading.effects['mSysNav/editSysNav'] || loading.effects['mSysNav/getSysNav'];
@@ -106,7 +110,7 @@ class CInitSysNavEdit extends Component {
                 >
                     <ZKEditForm.Item name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.name')} rules = {[
                                 // zkToolsValidates.notNull(intl), 
-                                zkToolsValidates.object(intl, locales.localLanguage, undefined, nameRule),
+                                zkToolsValidates.object(intl, locales.localLanguage, undefined, f_makeObjRuls(ture), true),
                             ]} >
                         <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
                     </ZKEditForm.Item>

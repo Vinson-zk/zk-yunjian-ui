@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 22:42:51
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-01 23:24:16
+ * @Last Modified time: 2022-05-02 19:26:38
  */
 
 
@@ -80,16 +80,33 @@ const f_getUserMsg = (intl, user, callBack) => {
 }
 const f_getOptMenu = (intl, keys, callBack) => {
     if (keys instanceof Array && keys.length > 0) {
+        /*** 生成菜单1, <4.20.0 可用，>=4.20.0 时不推荐 ***/
+        // let menuItem = []
+        // for (let key of keys) {
+        //     menuItem.push((<Menu.Item key={key}>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)}</Menu.Item>))
+        // }
+        // let menu = (<Menu onClick={({ item, key, keyPath }) => {
+        //     if (callBack instanceof Function) {
+        //         callBack(key, keyPath, item)
+        //     }
+        // }}>{menuItem}</Menu>)
+        /*** 生成菜单2, >=4.20.0 可用，推荐的写法 ***/
         let menuItem = []
         for (let key of keys) {
-            menuItem.push((<Menu.Item key={key}>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)}</Menu.Item>))
+            menuItem.push({
+                'key': key,
+                // 'icon': zkJsUtils.isEmpty(item.icon) ? '' : <ZKIcon.Antd4Icon icon = {item.icon} />,
+                'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)}</span>,
+                'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)
+            })
         }
-
-        let menu = (<Menu onClick={({ item, key, keyPath }) => {
-            if (callBack instanceof Function) {
-                callBack(key, keyPath, item)
-            }
-        }}>{menuItem}</Menu>)
+        let menu = (
+            <Menu items = {menuItem} onClick={({ item, key, keyPath }) => {
+                if (callBack instanceof Function) {
+                    callBack(key, keyPath, item)
+                }
+            }} />
+        );
 
         return (
             <div>

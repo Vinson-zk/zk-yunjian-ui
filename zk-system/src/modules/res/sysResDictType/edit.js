@@ -13,8 +13,7 @@ import { Icon } from "antd";
 
 import locales from "../../../locales/index";
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";        
-const { ZKSpin, ZKModal,
-ZKInput, } = ZKOriginalComponents;
+const { ZKSpin, ZKModal, ZKInput, ZKCol, ZKRow } = ZKOriginalComponents;
 const { 
 	ZKEditForm, 	
 ZKInputJson, } = ZKCustomComponents;
@@ -77,20 +76,24 @@ class CInitSysResDictTypeEdit extends Component {
 					>
                         <ZKInput disabled = {optEntity.pkId?true:false} />
                 	</ZKEditForm.Item>
-                	<ZKEditForm.Item name = "typeName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDictType.typeName')} 
-                		rules = {[
-							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
-                        ]} 
-					>
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
-                	</ZKEditForm.Item>
-                	<ZKEditForm.Item name = "typeDesc" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDictType.typeDesc')} 
-                		rules = {[
-							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
-                        ]} 
-					>
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
-                	</ZKEditForm.Item>
+                    <ZKRow><ZKCol span = {24} >
+                        <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "typeName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDictType.typeName')} 
+                    		rules = {[
+    							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
+                            ]} 
+    					>
+                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                    	</ZKEditForm.Item>
+                    </ZKCol></ZKRow>
+                    <ZKRow><ZKCol span = {24} >
+                        <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "typeDesc" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDictType.typeDesc')} 
+                    		rules = {[
+    							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
+                            ]} 
+    					>
+                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                    	</ZKEditForm.Item>
+                    </ZKCol></ZKRow>
             	</ZKEditForm>
             </ZKSpin>
         )

@@ -43,7 +43,7 @@ class CInitSysResDictSearch extends React.Component {
             filter = mSysResDict.initFilter;
         }
         dispatch({ 
-            type: "mSysResDict/findSysResDicts", 
+            type: "mSysResDict/findSysResDictsTree", 
             filter: {...mSysResDict.filter, ...filter}, 
             callback: e => { } 
         });
@@ -53,7 +53,7 @@ class CInitSysResDictSearch extends React.Component {
         let { intl, mApp, mSysResDict, locales, loading } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-        let selLoading = loading.effects['mSysResDict/findSysResDicts'];
+        let selLoading = loading.effects['mSysResDict/findSysResDictsTree'];
         return (
             <ZKSearchRow 
                 initialValues={mSysResDict.initFilter} 

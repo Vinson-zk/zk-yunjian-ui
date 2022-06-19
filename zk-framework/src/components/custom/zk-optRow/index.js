@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:54:24
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 20:03:07
+ * @Last Modified time: 2022-05-02 19:29:13
  */
 
 import React from 'react';
@@ -70,18 +70,33 @@ const FInitOptGroup = ({ children, isAutoPurseUp, key }) => {
 				purseUpOpts[e.key].props.onClick.call(this, e)
 			}
 		}
-
+		/*** 生成菜单1, <4.20.0 可用，>=4.20.0 时不推荐 ***/
+		// let overlay = (
+		// 	<Menu onClick={menuOptFun}>
+		// 		{purseUpOpts.map((item, index) => {
+		// 			return (
+		// 				<Menu.Item key={index}>
+		// 					{item.props.icon?<ZKIcon.Antd4Icon icon = {item.props.icon} /> : ""}
+		// 					{item.props.children}
+		// 				</Menu.Item>
+		// 			)
+		// 		})}
+		// 	</Menu>
+		// );
+		/*** 生成菜单2, >=4.20.0 可用，推荐的写法 ***/
 		let overlay = (
-			<Menu onClick={menuOptFun}>
-				{purseUpOpts.map((item, index) => {
+			<Menu onClick={menuOptFun} items={
+				purseUpOpts.map((item, index) => {
 					return (
-						<Menu.Item key={index}>
-							{item.props.icon?<ZKIcon.Antd4Icon icon = {item.props.icon} /> : ""}
-							{item.props.children}
-						</Menu.Item>
+						{
+							'key': index,
+			                'icon': item.props.icon?<ZKIcon.Antd4Icon icon = {item.props.icon} /> : "",
+			                'label': item.props.children,
+			                'title': item.props.children
+						}
 					)
-				})}
-			</Menu>
+				})
+			} />
 		);
 
 		optItems.push(

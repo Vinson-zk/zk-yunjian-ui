@@ -123,7 +123,7 @@ class CInitSysResDictGrid extends React.Component {
             _this.props.dispatch({
                 type: "mSysResDict/delSysResDict", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mSysResDict/findSysResDicts', filter: _this.props.mSysResDict.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mSysResDict/findSysResDictsTree', filter: _this.props.mSysResDict.filter, pagination: _this.props.mSysResDict.pagination, callback: e => { } })
                 }
             });
 		};
@@ -153,9 +153,9 @@ class CInitSysResDictGrid extends React.Component {
 	f_changeGrid = (pagination, filters, sorter) => {
         // 注意这里要将 zkToolsUtils.convertSortParam(xxx.filter, sorter) 放在前面，以便后面新的分页参数覆盖旧的分页参数；在排序处理函数中会处理旧排序的问题
         this.props.dispatch({ 
-        	type: 'mSysResDict/findSysResDicts', 
+        	type: 'mSysResDict/findSysResDictsTree', 
             filter: mSysResDict.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -167,7 +167,7 @@ class CInitSysResDictGrid extends React.Component {
 
 		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang);
 
-		let gridLoading = loading.effects['mSysResDict/findSysResDicts'];
+		let gridLoading = loading.effects['mSysResDict/findSysResDictsTree'];
 		return (
 			<ZKScrollTable loading = { gridLoading }
 				autoHeight = {true}
@@ -180,12 +180,12 @@ class CInitSysResDictGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mSysResDict.page || {}}
+				pagination = {mSysResDict.pagination || {}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mSysResDict.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

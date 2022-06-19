@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 15:08:56
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 18:44:55
+ * @Last Modified time: 2022-04-18 08:58:56
  */
 
 
@@ -41,7 +41,7 @@ const FInitBlendNavIndex = ({ dvaApp, match, dynamicImportHelper }) => {
 
     return (
         <Layout className={zkStyles.zk_content}>
-            <ZKSider className={zkStyles.zk_left_sider}>
+            <ZKSider className={`${zkStyles.zk_left_sider} ${zkStyles.flex_1_auto}`}>
                 <ZKAutoMenu menus={menus} path={`${match.path}`} routerMappingObj={routerMappingObj} />
             </ZKSider>
             <Layout>

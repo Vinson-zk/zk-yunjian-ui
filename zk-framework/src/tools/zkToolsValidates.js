@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-25 15:36:02
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-21 15:27:16
+ * @Last Modified time: 2022-05-18 11:00:36
  */
 
 import AsyncValidator from 'async-validator';
@@ -54,11 +54,11 @@ const f_boolean = (intl, required=false, transform, msg)=>{
  */
 const f_string = (intl, min, max, required=false, transform, msg)=>{
     if(!msg){
-        if(min && max){
+        if(min != undefined && max != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.string.rang", {"min":min, "max":max});
-        }else if(min){
+        }else if(min != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.string.min", {"min":min});
-        }else if(max){
+        }else if(max != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.string.max", {"max":max});
         }else{
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.string");
@@ -67,8 +67,8 @@ const f_string = (intl, min, max, required=false, transform, msg)=>{
     return {
         type: 'string', 
         required: required,
-        min: min?min:undefined,
-        max: max?max:undefined,
+        min: min != undefined?min:undefined,
+        max: max != undefined?max:undefined,
         transform: transform?transform:undefined,
         message: msg,
     }
@@ -85,11 +85,11 @@ const f_string = (intl, min, max, required=false, transform, msg)=>{
  */
 const f_number = (intl, min, max, required=false, transform, msg)=>{
     if(!msg){
-        if(min && max){
+        if(min != undefined && max != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.number.rang", {"min":min, "max":max});
-        }else if(min){
+        }else if(min != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.number.min", {"min":min});
-        }else if(max){
+        }else if(max != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.number.max", {"max":max});
         }else{
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.number");
@@ -98,8 +98,8 @@ const f_number = (intl, min, max, required=false, transform, msg)=>{
     return {
         type: "number", 
         required: required,
-        min: min?min:undefined,  
-        max: max?max:undefined,
+        min: min != undefined?min:undefined,  
+        max: max != undefined?max:undefined,
         transform: transform?transform:undefined,
         message: msg,
     }
@@ -116,11 +116,11 @@ const f_number = (intl, min, max, required=false, transform, msg)=>{
  */
 const f_integer = (intl, min, max, required=false, transform, msg)=>{
     if(!msg){
-        if(min && max){
+        if(min != undefined && max != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.integer.rang", {"min":min, "max":max});
-        }else if(min){
+        }else if(min != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.integer.min", {"min":min});
-        }else if(max){
+        }else if(max != undefined){
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.integer.max", {"max":max});
         }else{
             msg = zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.integer");
@@ -129,8 +129,8 @@ const f_integer = (intl, min, max, required=false, transform, msg)=>{
     return {
         type: "integer", 
         required: required,
-        min: min?min:undefined,  
-        max: max?max:undefined,
+        min: min != undefined?min:undefined,  
+        max: max != undefined?max:undefined,
         transform: transform?transform:undefined,
         message: msg,
     }

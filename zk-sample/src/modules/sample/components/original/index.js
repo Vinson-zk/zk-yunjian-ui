@@ -2,8 +2,8 @@
  * 原生组件的封装；封装是为了：统一默认情况下的风格与功能；这些默认处理，除个别强制要求的外，都可覆盖，且不影响原生功能与属性；
  * @Author: Vinson
  * @Date: 2020-08-12 09:13:47
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 22:37:10
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-04-17 16:24:36
  */
 
 import React from 'react';
@@ -49,6 +49,7 @@ function FInitOriginalIndexDemo({intl}){
 					"    ZKSpin",
 					"    ZKTable",
 					"    ZKTransfer",
+					"    ZKTee",
 					].join('\n')}
 		        </SyntaxHighlighter>
 			</div>

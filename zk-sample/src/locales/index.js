@@ -1,14 +1,14 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 16:45:31 
- * @Last Modified by: Vinson
- * @Last Modified time: 2021-02-16 20:56:25
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-05-25 19:03:20
  */
 
 // 相关依赖的国际化信息
 import { locales as zkFrameworkLocales, zkTools } from 'zkFramework'; 
 // console.log("[^_^: 20200807-1505-001] zkFrameworkLocales: ", zkFrameworkLocales);
-import sampleLocales from "../modules/sample/locales/index.js";
+import sampleLocales from "./sample/index.js";
 import zh_CN from './zh_CN';
 import en_US from './en_US';
 

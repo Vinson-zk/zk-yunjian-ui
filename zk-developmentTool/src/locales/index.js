@@ -3,11 +3,11 @@
  * @Author: Vinson
  * @Date: 2020-08-23 22:53:23
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-09 10:05:48
+ * @Last Modified time: 2022-05-25 19:03:20
  */
 
 import { locales as zkFrameworkLocales, zkTools } from 'zkFramework'; 
-import codeGenLocales from '../modules/codeGen/locales/index.js';
+import codeGenLocales from './codeGen/index.js';
 
 import enLocaleData from "react-intl/locale-data/en";
 import enAntd from "antd/lib/locale-provider/en_US";

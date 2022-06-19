@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2021-02-13 23:15:22
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-09 23:37:34
+ * @Last Modified time: 2022-04-18 08:57:59
  */
 
 import React, { Component } from 'react';
@@ -58,14 +58,14 @@ class CInitHome extends Component {
         let { match, mDevelopmentTool } = this.props;
         return (
             <Layout className={zkStyles.zk_content}>
-                <ZKSider className={zkStyles.zk_left_sider}>
+                <ZKSider className={`${zkStyles.zk_left_sider} ${zkStyles.flex_1_auto}`}>
                     <ZKAutoMenu menus={ mDevelopmentTool.menus?mDevelopmentTool.menus:[] } path={`${match.path}`} routerMappingObj={this.state.routerMappingObj} />
                 </ZKSider>
                 <Layout>
                     <ZKBreadcrumb routerMappingObj={this.state.routerMappingObj} />
                         <Scrollbars className = {zkStyles.zk_scrollbars} >
                     <Content id="right-content" className={zkStyles.zk_wrapper}>
-                            <div className={`${zkStyles.zk_main_panel}`}>
+                            <div className={`${zkStyles.zk_main_panel} ${zkStyles.display_flex_col}`}>
                                 <Switch>
                                     {this.state.indexMenuRouter ?
                                         (<Route exact path={`${match.path}`} render={(props) => { return <Redirect to={`${this.state.indexMenuRouter.path}`} /> }} />)

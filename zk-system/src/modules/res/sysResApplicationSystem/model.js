@@ -2,8 +2,8 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   
- * @Last Modified time: 
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-04-19 19:54:42
  */
 
 import { editSysResApplicationSystem, delSysResApplicationSystem, getSysResApplicationSystem, findSysResApplicationSystems } from './service';
@@ -23,7 +23,7 @@ const model = {
         filter: {},             // 过滤条件     
         pathname: null,         // 当前访问的地址路径
         optEntity: undefined,   // 当前操作实体
-        page:{
+        pagination:{
             current:1,    // 当前行
             pageSize: zkToolsUtils.getPageSize(),  // 当前行数量
             total:0,      // 总行数
@@ -73,15 +73,14 @@ const model = {
         },
         /*** 查询 分页列表
          * @param {object} filter 过滤条件; {}
-         * @param {object} page 分页; {pageNo: 0, pageSize:10}
+         * @param {object} pagination 分页; {pageNo: 0, pageSize:10}
          * @param {object} sorter 数组; {field:'xxx', order: ['ascend', 'descend']}
          * @param {callback} 回调整函数; ()=>{}
          */
-        *findSysResApplicationSystems({ filter, page, sorter, callback }, { call, put, select }) {
+        *findSysResApplicationSystems({ filter, pagination, sorter, callback }, { call, put, select }) {
             let params = zkToolsUtils.convertSortParam(filter, sorter); 
-            if(page){
-                page.pageNo = page.pageNo - 1;
-                params = { ...params, ...zkToolsUtils.convertPageParam(page) };
+            if(pagination){
+                params = { ...params, ...zkToolsUtils.convertPageParam(pagination) };
             }
             let res = yield call(findSysResApplicationSystems, params);
             let restState = {}
@@ -89,7 +88,7 @@ const model = {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
-                    "page": {
+                    "pagination": {
                         "current": res.data.pageNo + 1,
                         "pageSize": res.data.pageSize,
                         // "pageSize": zkToolsUtils.getPageSize(),

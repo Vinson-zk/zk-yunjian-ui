@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:15:36
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 12:08:32
+ * @Last Modified time: 2022-05-18 10:49:36
  */
 
 import React from 'react';
@@ -72,8 +72,8 @@ FInitEditItem.defaultProps = {
 
 class CInitEditForm extends React.Component {
 
-	formRef = null;
-	// formRef = React.createRef();
+	// formRef = null;
+	formRef = React.createRef();
 
 	constructor(props) {
 		super(props)

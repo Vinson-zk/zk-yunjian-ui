@@ -110,7 +110,7 @@ class CInitSysResRequestChannelGrid extends React.Component {
             _this.props.dispatch({
                 type: "mSysResRequestChannel/delSysResRequestChannel", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mSysResRequestChannel/findSysResRequestChannels', filter: _this.props.mSysResRequestChannel.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mSysResRequestChannel/findSysResRequestChannels', filter: _this.props.mSysResRequestChannel.filter, pagination: _this.props.mSysResRequestChannel.pagination, callback: e => { } })
                 }
             });
 		};
@@ -142,7 +142,7 @@ class CInitSysResRequestChannelGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mSysResRequestChannel/findSysResRequestChannels', 
             filter: this.props.mSysResRequestChannel.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -169,12 +169,12 @@ class CInitSysResRequestChannelGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mSysResRequestChannel.page||{}}
+				pagination = {mSysResRequestChannel.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mSysResRequestChannel.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

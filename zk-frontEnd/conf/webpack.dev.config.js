@@ -2,7 +2,7 @@
  * @Author: Vinson 
  * @Date: 2020-08-06 17:23:52 
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-29 15:55:59
+ * @Last Modified time: 2022-05-18 11:46:05
  */
 
 const webpackPublicConfig = require('../../zk-package/conf/webpack.public.config.js');
@@ -20,6 +20,7 @@ module.exports = WebpckMerge(baseWebpackConfig(null, null), {
     mode:"development",
     devServer: {
         contentBase: path.resolve(__dirname, '../dist'), // 默认会以根文件夹提供本地服务器，这里指定文件夹
+        disableHostCheck: true, // webpack -dev-server 出于安全考虑，默认检查 hostname，如果 hostname 不是配置内的就不能访问。关闭 这个检测
 	    historyApiFallback: true,                        // 在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
 	    host: "0.0.0.0",
         port: 11110,                                     // 如果省略，默认8080，也可以在 npm 指令中指定

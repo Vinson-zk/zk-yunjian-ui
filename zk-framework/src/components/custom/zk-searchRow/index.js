@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 12:01:03
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-02 23:05:03
+ * @Last Modified time: 2022-05-18 10:48:31
  */
 
 
@@ -98,7 +98,8 @@ FInitSearchItem.defaultProps = {
 // class CInitSearchRow extends Form {
 class CInitSearchRow extends React.Component {
 
-	formRef = null;
+	// formRef = null;
+	formRef = React.createRef();
 
 	constructor(props) {
 		super(props);

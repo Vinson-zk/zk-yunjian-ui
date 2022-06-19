@@ -3,13 +3,13 @@
  * @Author: Vinson
  * @Date: 2020-08-28 15:22:47
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-24 11:28:33
+ * @Last Modified time: 2022-04-27 08:32:11
  */
 
 // import zkJsUtils from 'zkJsUtils';
 import { zkTools } from 'zkFramework';
 
-import { getNavItems, getUser, accountLogin, phoneNumberLogin } from './service.js';
+import { getNavItems, loginUserInfo, accountLogin, phoneNumberLogin } from './service.js';
 
 let { zkToolsMsg, zkToolsAuth } = zkTools;
 
@@ -18,9 +18,10 @@ const loginResDispose = (res)=>{
     if(res.code == "zk.0"){
         // 登录成功
         zkToolsAuth.setTicket(res.data[globalAppConfig.transferKey.ticket]);
-        return {user: res.data.user, platformCode: res.data.platformCode};
+        return true;
     }else{
         // zkToolsMsg.alertMsg(null, null, {type:"error", msg:res.msg});
+        return false;
     }
 }
 
@@ -45,7 +46,7 @@ const model = {
 
             if(globalAppConfig.isAuth && zkToolsAuth.isLogin()){
                 // 如果已登录且开启了权限认识，取用户信息
-                dispatch({ type: "getUser" }).then(()=>{
+                dispatch({ type: "loginUserInfo" }).then(()=>{
                   // dispatch({type:"getUaidLicenseInfo"})
                 });
             }
@@ -69,7 +70,6 @@ const model = {
         // 取民航栏目
         *getNavItems({ params }, { call, put }){
             let res = yield call(getNavItems, params);
-            
             switch(res.code){
                 case "zk.0": 
                     yield put({ type: 'setState', payload: { navItems: res.data } });
@@ -80,32 +80,30 @@ const model = {
                     break;
             }
         },
-        *getUser({ params }, { call, put }){
-            let res = yield call(getUser, params);
+        *loginUserInfo({ }, { call, put }){
+            let res = yield call(loginUserInfo);
             if(res.code == "zk.0"){
-                let loginInfo = res.data;
-                if(loginInfo){
-                    yield put({ type: 'setState', payload: loginInfo });
-                }
+                console.log("[^_^:20220426-1726-001] 当前登录用户信息: ", res.data);
+                yield put({ type: 'setState', payload: res.data });
             }else{
                 zkToolsAuth.logout();
             }
         },
-        *accountLogin({ params }, { call, put }){
+        // loginFlag 1-个人用户登录；2-企业用户登录
+        *accountLogin({ loginFlag, params }, { call, put }){
             let res = yield call(accountLogin, params);
-            let loginInfo = loginResDispose(res);
-            if(loginInfo){
-                yield put({ type: 'setState', payload: loginInfo });
+            if(loginResDispose(res)){
+                 yield put({ type: 'loginUserInfo' });
+                // yield put({ type: 'setState', payload: loginInfo });
             }
         },
         *phoneNumberLogin({ params }, { call, put }){
             let res = yield call(phoneNumberLogin, params);
-            let loginInfo = loginResDispose(res);
-            if(loginInfo){
-                yield put({ type: 'setState', payload: loginInfo });
+            if(loginResDispose(res)){
+                 yield put({ type: 'loginUserInfo' });
+                // yield put({ type: 'setState', payload: loginInfo });
             }
         },
-
     },
 
     reducers: {

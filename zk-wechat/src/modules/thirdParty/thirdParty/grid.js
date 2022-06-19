@@ -27,8 +27,16 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang) => {
 
 	return [
 		{
+			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.thirdParty.ThirdParty.groupCode'),
+			textAlign: 'center', dataIndex: 'groupCode', key: 'groupCode', width: 100, 
+		},
+		{
+			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.thirdParty.ThirdParty.companyCode'),
+			textAlign: 'center', dataIndex: 'companyCode', key: 'companyCode', width: 100, 
+		},  
+		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.thirdParty.ThirdParty.pkId'),
-			textAlign: 'center', dataIndex: 'pkId', key: 'pkId', width: 100, 
+			textAlign: 'center', dataIndex: 'pkId', key: 'pkId', width: 300, 
 		},
 		// {
 		// 	title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.thirdParty.ThirdParty.wxAppSecret'),
@@ -48,7 +56,7 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang) => {
 		// },
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.thirdParty.ThirdParty.wxTicketUpdateDate'),
-			textAlign: 'center', dataIndex: 'wxTicketUpdateDate', key: 'wxTicketUpdateDate', width: 100, 
+			textAlign: 'center', dataIndex: 'wxTicketUpdateDate', key: 'wxTicketUpdateDate', width: 300, 
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_name'),
@@ -116,7 +124,7 @@ class CInitThirdPartyGrid extends React.Component {
             _this.props.dispatch({
                 type: "mThirdParty/delThirdParty", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mThirdParty/findThirdPartys', filter: mThirdParty.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mThirdParty/findThirdPartys', filter: mThirdParty.filter, pagination: mThirdParty.pagination, callback: e => { } })
                 }
             });
 		};
@@ -148,7 +156,7 @@ class CInitThirdPartyGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mThirdParty/findThirdPartys', 
             filter: mThirdParty.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -174,13 +182,13 @@ class CInitThirdPartyGrid extends React.Component {
 				rowKey = "pkId"
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
-				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mThirdParty.page||{}}
+				scroll = {{ x:1040, y: this.state.sh }}
+				pagination = {mThirdParty.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mThirdParty.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

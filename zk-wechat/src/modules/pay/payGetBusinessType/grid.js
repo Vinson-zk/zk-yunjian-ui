@@ -122,7 +122,7 @@ class CInitPayGetBusinessTypeGrid extends React.Component {
             _this.props.dispatch({
                 type: "mPayGetBusinessType/delPayGetBusinessType", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mPayGetBusinessType/findPayGetBusinessTypes', filter: mPayGetBusinessType.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mPayGetBusinessType/findPayGetBusinessTypes', filter: mPayGetBusinessType.filter, pagination: mPayGetBusinessType.pagination, callback: e => { } })
                 }
             });
 		};
@@ -154,7 +154,7 @@ class CInitPayGetBusinessTypeGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mPayGetBusinessType/findPayGetBusinessTypes', 
             filter: mPayGetBusinessType.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -181,12 +181,12 @@ class CInitPayGetBusinessTypeGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mPayGetBusinessType.page||{}}
+				pagination = {mPayGetBusinessType.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mPayGetBusinessType.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

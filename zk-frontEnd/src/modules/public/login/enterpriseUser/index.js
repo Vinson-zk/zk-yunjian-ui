@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-07-01 16:19:27
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 10:31:13
+* @Last Modified time: 2022-04-21 14:43:19
 * 
 * 
 * 
@@ -23,8 +23,8 @@ const { ZKRouter, ZKLanguageDropdown } = ZKCustomComponents;
 const { Link } = ZKRouter;
 const { zkToolsMsg, zkToolsValidates } = zkTools;
 
-// import CAccountLogin from './accountLogin.js';
-// import CPhoneNumberLogin from './phoneNumberLogin.js';
+
+import CAccountLogin from './accountLogin.js';
 
 const FInitEnterpriseLoginForm = ({locales, intl, match, dispatch, mApp, onChangeUserType, className})=>{
 
@@ -43,7 +43,7 @@ const FInitEnterpriseLoginForm = ({locales, intl, match, dispatch, mApp, onChang
 				<span className = {`${loginStyles.login_span_btn} ${loginStyles.login_span_btn_userType}`} onClick = {()=>{onChangeUserType(1)}}>{zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.login.user.type.personalUser')}</span>
     		} >
 	    		<ZKTabs.TabPane tab = {zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.login.type.account')} key="account">
-	    			<div>fghjk</div>
+	    			<CAccountLogin dispatch = {dispatch} />
 			    </ZKTabs.TabPane>
 			</ZKTabs>
 			<ZKRow gutter={24} >

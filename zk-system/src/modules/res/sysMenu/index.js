@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-29 17:39:59
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-03 09:43:15
+ * @Last Modified time: 2022-04-19 19:31:37
  */
 
 
@@ -36,7 +36,7 @@ class CInitSysMenuIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`}>
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`}>
                 <SearchItem {...this.props} />
                 <GridItem {...this.props} />
             </div>
@@ -48,7 +48,7 @@ class CInitSysMenuIndex extends Component {
         let { location, dispatch, mSysMenu } = this.props;
 		if (location.pathname != mSysMenu.pathname) {
 			dispatch({ type: 'mSysMenu/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mSysMenu/findSysMenusTree", filter: mSysMenu.filter, callback: e => { } })
+			dispatch({ type: "mSysMenu/findSysMenusTree", filter: mSysMenu.filter, pagination:mSysMenu.pagination, callback: e => { } })
 		}
     }
 

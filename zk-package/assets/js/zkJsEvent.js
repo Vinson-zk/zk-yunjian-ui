@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 13:41:29 
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-06 13:51:45
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-05-11 19:51:28
  */
 (function (global) {
 
@@ -107,7 +107,7 @@
 	 * @useCapture [Boolean]: 事件类型，默认 false; true=捕获; false=冒泡; 这个参与绑定与移除必须一致。
 	 * @return [void]
 	 */
-    const f_eventBinding = (eventTarget, eventType, evrntHandler, useCapture) => {
+    const f_eventBinding = (eventTarget, eventType, evrntHandler, useCapture=false) => {
         if (eventTarget.addEventListener) { //IE9等其他现代浏览器
             eventTarget.addEventListener(eventType, evrntHandler, useCapture)
         } else if (eventTarget.attachEvent) { //IE6、7、8 
@@ -125,7 +125,7 @@
 	 * @useCapture [Boolean]: 事件类型，默认 false; true=捕获; false=冒泡; 这个参与绑定与移除必须一致。
 	 * @return [void]
 	 */
-    const f_eventRemove = (eventTarget, eventType, evrntHandler, useCapture) => {
+    const f_eventRemove = (eventTarget, eventType, evrntHandler, useCapture=false) => {
         if (eventTarget.removeEventListener) { //IE9等其他现代浏览器 
             eventTarget.removeEventListener(eventType, evrntHandler, useCapture)
         } else if (eventTarget.attachEvent) { //IE6、7、8
@@ -180,3 +180,5 @@
     global.zkJsEvent = _event;
 
 })(typeof window !== "undefined" ? window : this);
+
+

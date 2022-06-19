@@ -130,7 +130,7 @@ class CInitPayGroupGrid extends React.Component {
             _this.props.dispatch({
                 type: "mPayGroup/delPayGroup", payload: { pkId: pkIds },
                 callback: () => {
-                    _this.props.dispatch({ type: 'mPayGroup/findPayGroups', filter: mPayGroup.filter, callback: e => { } })
+                    _this.props.dispatch({ type: 'mPayGroup/findPayGroups', filter: mPayGroup.filter, pagination: mPayGroup.pagination, callback: e => { } })
                 }
             });
 		};
@@ -162,7 +162,7 @@ class CInitPayGroupGrid extends React.Component {
         this.props.dispatch({ 
         	type: 'mPayGroup/findPayGroups', 
             filter: mPayGroup.filter,
-            page: pagination,
+            pagination: pagination,
             sorter: sorter
         });
     }
@@ -189,12 +189,12 @@ class CInitPayGroupGrid extends React.Component {
 				rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
 				columns = {tableColumns}
 				scroll = {{ x:1440, y: this.state.sh }}
-				pagination = {mPayGroup.page||{}}
+				pagination = {mPayGroup.pagination||{}}
 				// pagination = {{position: ['topRight'], ...page}}
                 dataSource = {mPayGroup.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.flex_1_auto}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-29 16:21:08
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-09 23:39:39
+* @Last Modified by:   Vinson-zk
+* @Last Modified time: 2022-05-25 15:02:02
 * 
 * 
 * 
@@ -12,6 +12,7 @@
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
 import { Layout } from 'antd';
+// import { connect } from 'dva';
 
 import zkStyles from 'zkFramework/css/styles.less';
 
@@ -26,14 +27,16 @@ const { Switch, Redirect } = ZKRouter;
 const { zkToolsNavAndMenu, zkToolsMsg, zkToolsAuth } = zkTools;
 
 /*** 版本信息 ***/
-import zkFrameworkInfo from 'zkFramework/package.json';
-import zkPackageInfo from 'zkPackage/package.json';
-import zkSample from 'zkSample/package.json';
-import zkSystem from 'zkSystem/package.json';
-import zkDevelopmentTool from 'zkDevelopmentTool/package.json';
-import zkWechat from 'zkWechat/package.json';
+import zkPackagePackageInfo from 'zkPackage/package.json';
+import zkFrameworkPackageInfo from 'zkFramework/package.json';
+import zkSamplePackageInfo from 'zkSample/package.json';
+import zkSystemPackageInfo from 'zkSystem/package.json';
+import zkDevelopmentToolPackageInfo from 'zkDevelopmentTool/package.json';
+import zkWechatPackageInfo from 'zkWechat/package.json';
+import zkMailPackageInfo from 'zkMail/package.json';
 
-const dependenceInfos = [zkPackageInfo, zkFrameworkInfo, zkSample, zkSystem, zkDevelopmentTool, zkWechat];
+const dependenceInfos = [zkPackagePackageInfo, zkFrameworkPackageInfo, zkSamplePackageInfo, zkSystemPackageInfo, 
+	zkDevelopmentToolPackageInfo, zkWechatPackageInfo, zkMailPackageInfo];
 import versionInfo from '../../package.json';
 
 /*** 引入依赖功能模块 ***/
@@ -41,6 +44,7 @@ import {funcModule as sampleFuncModule} from 'zkSample';
 import {funcModule as systemFuncModule} from 'zkSystem';
 import {funcModule as developmentToolFuncModule} from 'zkDevelopmentTool';
 import {funcModule as wechatFuncModule} from 'zkWechat';
+import {funcModule as mailFuncModule} from 'zkMail';
 import generalApplicationFuncModule from './generalApplication/func.js';
 
 const funcModuleMppingObj = { 
@@ -49,6 +53,7 @@ const funcModuleMppingObj = {
     "developmentTool": developmentToolFuncModule,
     "wechat": wechatFuncModule,
     "generalApplication": generalApplicationFuncModule,
+    "mail": mailFuncModule,
 }
 
 /*** 动态加载组件助手 ***/
@@ -135,7 +140,7 @@ class CInitLayoutPrivate extends React.PureComponent {
 	            <Header className={zkStyles.zk_header}>
 	                <ZKLogo logoImgUrl="assets/img/logo-zk.png" />
 	                <ZKNavigation prefixPath={`${match.path}`} navItems={mApp.navItems?mApp.navItems:[]} />
-	                <ZKUserDropDown user={mApp.user} optKeys={optKeys} callBack={f_onUserDropDownCallBack} />
+	                <ZKUserDropDown user={{username:mApp.user.account, ...mApp.user}} optKeys={optKeys} callBack={f_onUserDropDownCallBack} />
 	                <ZKLanguageSelect {...languageSwitchProps} />
 	            </Header>
 	            <Content className={zkStyles.zk_content}>
@@ -181,6 +186,8 @@ const FInitLayoutPrivateAuth = ({ redirectPath, ...props }) => {
         return <Redirect to={{ pathname: redirectPath, state: { fromLocation: props.location } }}/>
     }
 
+    // console.log("[^_^:20220421-2208-001] ", props.mApp.user);
+
     /** 等待获取用户信息 */
     if( !props.mApp.user || zkJsUtils.isEmpty(props.mApp.user.pkId) ){
         // 此处待优化，laoding 显示
@@ -191,5 +198,14 @@ const FInitLayoutPrivateAuth = ({ redirectPath, ...props }) => {
 }
 
 export default FInitLayoutPrivateAuth;
+// export default connect(({ mApp }) => ({ mApp }))(FInitIndex)
+
+
+
+
+
+
+
+
 
 

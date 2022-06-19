@@ -2,8 +2,8 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   
- * @Last Modified time: 
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-03-22 12:52:44
  */
 
 import { zkTools } from "zkFramework";
@@ -27,7 +27,7 @@ export async function editSysResRequestChannel(params) {
             } 
             return false
         }
-        );
+    );
 }
 
 // 删除

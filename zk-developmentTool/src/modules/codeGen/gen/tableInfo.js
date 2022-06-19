@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-31 08:29:59
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-25 19:27:47
+* @Last Modified time: 2022-04-19 20:02:20
 * 
 * 
 * 
@@ -402,7 +402,7 @@ class CInitTableInfo extends Component {
           columns = { mergedColumns }
           scroll = {{ x:1440, y: 450 }}
           pagination = {false}
-          // pagination = {{position: ['topRight'], ...page}}
+          // pagination = {{position: ['topRight'], ...pagination}}
                   dataSource = { f_gridFilter(tableInfos) }
                   // (pagination, filters, sorter, extra: { currentDataSource: [] })
                   // onChange = {onChange}

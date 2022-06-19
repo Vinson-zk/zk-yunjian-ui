@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 00:04:35
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 18:44:21
+ * @Last Modified time: 2022-04-18 08:59:04
  */
 
 import React, { Component } from 'react';
@@ -92,14 +92,14 @@ class CInitSampleNavIndex extends Component {
 
     return (
       <Layout className={zkStyles.zk_content}>
-        <ZKSider className={zkStyles.zk_left_sider}>
+        <ZKSider className={`${zkStyles.zk_left_sider} ${zkStyles.flex_1_auto}`}>
           <ZKAutoMenu menus={menus} path={`${match.path}`} routerMappingObj={this.state.routerMappingObj} />
         </ZKSider>
         <Layout>
           <ZKBreadcrumb routerMappingObj={this.state.routerMappingObj} />
             <Scrollbars className = {zkStyles.zk_scrollbars} >
                 <Content id="right-content" className={zkStyles.zk_wrapper}>
-                  <div className={ zkStyles.zk_main_panel }>
+                  <div className={ `${zkStyles.zk_main_panel} ${zkStyles.display_flex_col}` }>
                     <Switch>
                       {this.state.indexMenuRouter ?
                         (<Route exact path={`${match.path}`} render={(props) => { return <Redirect to={`${this.state.indexMenuRouter.path}`} /> }} />)

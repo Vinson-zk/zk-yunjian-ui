@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 11:23:00
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 09:42:57
+ * @Last Modified time: 2022-05-11 20:11:34
  */
 
 // import zkToolsNavAndMenu from './zkToolsNavAndMenu.js';
@@ -18,7 +18,8 @@ import zkJsEvent from 'zkJsEvent';
  * @return {string} 用户令牌ID
  */
 const f_getTicket = () => {
-  return sessionStorage.getItem(globalAppConfig.localKey.ticket); // ticketParamName
+  return localStorage.getItem(globalAppConfig.localKey.ticket);
+  // return sessionStorage.getItem(globalAppConfig.localKey.ticket); 
 }
 
 /**
@@ -27,7 +28,9 @@ const f_getTicket = () => {
  * @return void
  */
 const f_setTicket = (tkId) => {
-  sessionStorage.setItem(globalAppConfig.localKey.ticket, tkId);
+  localStorage.setItem(globalAppConfig.localKey.ticket, tkId);
+  // sessionStorage.setItem(globalAppConfig.localKey.ticket, tkId);
+  // localStorage.setItem("tkDate", new Date());
 }
 
 /**
@@ -35,7 +38,8 @@ const f_setTicket = (tkId) => {
  * @return void
  */
 const f_removeTicket = () => {
-  sessionStorage.removeItem(globalAppConfig.localKey.ticket);
+  localStorage.removeItem(globalAppConfig.localKey.ticket);
+  // sessionStorage.removeItem(globalAppConfig.localKey.ticket);
 }
 
 /**
@@ -98,10 +102,19 @@ const f_isPublicItem = (basename, publicItems, currentPath) => {
 
   let isPublicItem = false;
   for (let item of publicItems) {
-    if (item.path === currentPath) {
+    // if (item.path === currentPath) {
+    //   isPublicItem = true;
+    //   break;
+    // }
+    let pathReStr = item.path;
+    pathReStr = pathReStr.replace(/:(.*?)\//, "(.*?)\/");
+    pathReStr = pathReStr.replace(/:(.*)/, "(.*)");
+    let rePath = new RegExp(pathReStr);
+    if(rePath.test(currentPath) == true){
       isPublicItem = true;
       break;
     }
+    
   }
   return isPublicItem;
 }

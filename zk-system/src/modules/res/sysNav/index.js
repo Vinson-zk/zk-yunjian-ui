@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-23 21:39:43
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-02 17:15:47
+ * @Last Modified time: 2022-04-19 19:43:21
  */
 
 import React, { Component } from 'react';
@@ -36,7 +36,7 @@ class CInitSysNavIndex extends Component {
     render() {
         // console.log("[^_^:202111021635-001]", this.props.mSysNav.filter)
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} />
                 <GridItem {...this.props} />
             </div>
@@ -48,7 +48,7 @@ class CInitSysNavIndex extends Component {
         let { location, dispatch, mSysNav } = this.props;
 		if (location.pathname != mSysNav.pathname) {
 			dispatch({ type: 'mSysNav/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mSysNav/findSysNavs", filter: mSysNav.filter, callback: e => { } })
+			dispatch({ type: "mSysNav/findSysNavs", filter: mSysNav.filter, pagination: mSysNav.pagination, callback: e => { } })
 		}
     }
 

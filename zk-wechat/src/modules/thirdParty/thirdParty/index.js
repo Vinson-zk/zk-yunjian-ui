@@ -30,7 +30,7 @@ class CInitThirdPartyIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex}`} >
+            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} />
             </div>
@@ -42,7 +42,7 @@ class CInitThirdPartyIndex extends Component {
         let { location, dispatch, mThirdParty } = this.props;
 		if (location.pathname != mThirdParty.pathname) {
 			dispatch({ type: 'mThirdParty/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mThirdParty/findThirdPartys", filter: mThirdParty.filter, callback: e => { } })
+			dispatch({ type: "mThirdParty/findThirdPartys", filter: mThirdParty.filter, pagination: mThirdParty.pagination, callback: e => { } })
 		}
     }
 }

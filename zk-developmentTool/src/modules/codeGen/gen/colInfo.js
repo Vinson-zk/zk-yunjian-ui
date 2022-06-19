@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-04-01 09:47:49
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-25 19:27:47
+* @Last Modified time: 2022-04-19 20:02:15
 * 
 * 
 * 
@@ -509,7 +509,7 @@ class CInitColInfo extends Component {
           columns = { mergedColumns }
           scroll = {{ x:1640, y: 600 }}
           pagination = {false}
-          // pagination = {{position: ['topRight'], ...page}}
+          // pagination = {{position: ['topRight'], ...pagination}}
                   // dataSource = { f_gridFilter(mColInfo.colInfos) }
                   dataSource = { f_gridFilter(mColInfo.colInfos) }
                   // (pagination, filters, sorter, extra: { currentDataSource: [] })

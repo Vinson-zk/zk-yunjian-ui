@@ -12,9 +12,10 @@ import { connect } from 'dva';
 import { Icon } from "antd";
 
 import locales from "../../../locales/index";
-import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";        
+import { zkTools, ZKCustomComponents, ZKOriginalComponents, ZKBusinessComponents } from "zkFramework";        
 const { ZKSpin, ZKModal, ZKInput, ZKSelect, ZKInputNumber, ZKTable, ZKForm, ZKRow, ZKCol } = ZKOriginalComponents;
 const { ZKEditForm, ZKInputJson, ZKOptRow, ZKEditJsonArray } = ZKCustomComponents;
+const { ZKApplicationSystemSelect } = ZKBusinessComponents;
 const { zkToolsMsg, zkToolsValidates, zkToolsNavAndMenu } = zkTools;
 
 import { useContext, useState, useEffect, useRef } from 'react';
@@ -194,57 +195,48 @@ class CInitSysResFuncApiEdit extends Component {
                             zkToolsValidates.string(intl, 1, 64, true), 
                         ]} 
                     >
-                        {optEntity.systemCode?
-                            (
-                                <ZKSelect disabled={true} loading = { applicationSystemCodeSelLoading }>
-                                    <ZKSelect.Option selected={true} key={optEntity.systemCode} value={optEntity.systemCode}>
-                                        {
-                                            `${(optEntity.sysResApplicationSystem&&optEntity.sysResApplicationSystem.name)?zkToolsMsg.getInternationInfo(optEntity.sysResApplicationSystem.name):''}[`}{optEntity.systemCode}{']'
-                                        }
-                                    </ZKSelect.Option>
-                                </ZKSelect>
-                            ):(
-                                <ZKSelect showSearch = {true} loading = { applicationSystemCodeSelLoading } onSearch = { this.f_searchApplicationSystems }
-                                    onDropdownVisibleChange = { open=>{if(open){this.f_searchApplicationSystems('');}}} >
-                                    {this.state.applicationSystems.map((item, index)=>{
-                                        return <ZKSelect.Option key={index} value={item.code}>{zkToolsMsg.getInternationInfo(item.name)}[{item.code}]</ZKSelect.Option>
-                                    })}
-                                </ZKSelect>
-                            )
-                        }
+                        <ZKApplicationSystemSelect disabled = {optEntity.pkId?true:false} valueKey="code" />
                     </ZKEditForm.Item>
-                	<ZKEditForm.Item name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.name')} 
-                		rules = {[
-							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
-                        ]} 
-					>
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
-                	</ZKEditForm.Item>
-                    <ZKEditForm.Item name = "reqDesc" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.reqDesc')} 
-                        rules = {[
-                            zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
-                        ]} 
-                    >
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
-                    </ZKEditForm.Item>
-                     <ZKEditForm.Item name = "useContext" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.useContext')} 
-                        rules = {[
-                            zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
-                        ]} 
-                    >
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
-                    </ZKEditForm.Item>
-                	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.code')} 
-                		rules = {[
-							zkToolsValidates.string(intl, 1, 64, true), 
-                        ]} 
-					>
-                        <ZKInput style={{ width: '100%' }} />
-                	</ZKEditForm.Item>
+                    <ZKRow><ZKCol span = {24} >
+                        <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.name')} 
+                    		rules = {[
+    							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
+                            ]} 
+    					>
+                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                    	</ZKEditForm.Item>
+                    </ZKCol></ZKRow>
+                    <ZKRow><ZKCol span = {24} >
+                        <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "reqDesc" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.reqDesc')} 
+                            rules = {[
+                                zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
+                            ]} 
+                        >
+                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                        </ZKEditForm.Item>
+                    </ZKCol></ZKRow> 
+                    <ZKRow><ZKCol span = {24} >
+                        <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "useContext" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.useContext')} 
+                            rules = {[
+                                zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
+                            ]} 
+                        >
+                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                        </ZKEditForm.Item>
+                    </ZKCol></ZKRow>
+                	<ZKRow><ZKCol span = {24} >
+                        <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.code')} 
+                    		rules = {[
+    							zkToolsValidates.string(intl, 1, 64, true), 
+                            ]} 
+    					>
+                            <ZKInput disabled = {optEntity.pkId?true:false} style={{ width: '100%' }} />
+                    	</ZKEditForm.Item>
+                    </ZKCol></ZKRow> 
                     <ZKEditForm.Item name = "reqMethods" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.reqMethods')} 
                         rules = {[{required: true}]} 
                     >
-                        <ZKSelect className={"-"} style={{ width: '100%' }} mode="multiple" >
+                        <ZKSelect style={{width:480}} className={"-"} mode="multiple" >
                             <ZKSelect.Option value={1}>GET</ZKSelect.Option>
                             <ZKSelect.Option value={2}>POST</ZKSelect.Option>
                             <ZKSelect.Option value={4}>DELETE</ZKSelect.Option>
@@ -255,7 +247,7 @@ class CInitSysResFuncApiEdit extends Component {
                             <ZKSelect.Option value={128}>TRACE</ZKSelect.Option>
                         </ZKSelect>
                     </ZKEditForm.Item>
-                     <ZKRow><ZKCol span = {24} >
+                    <ZKRow><ZKCol span = {24} >
                         <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "originalUri" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.originalUri')} 
                             rules = {[
                                 zkToolsValidates.string(intl, 1, 512, true), 

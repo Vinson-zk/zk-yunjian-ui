@@ -3,12 +3,12 @@
  * @Author: Vinson
  * @Date: 2020-08-23 22:53:23
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 14:37:42
+ * @Last Modified time: 2022-05-25 19:03:20
  */
 
 import { locales as zkFrameworkLocales, zkTools } from 'zkFramework'; 
 import { locales as sampleLocales} from 'zkSample';
-import sysLocales from '../modules/locales/index.js';
+import sysLocales from './sys/index.js';
 
 import enLocaleData from "react-intl/locale-data/en";
 import enAntd from "antd/lib/locale-provider/en_US";
