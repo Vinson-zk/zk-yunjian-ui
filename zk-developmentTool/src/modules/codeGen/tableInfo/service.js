@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-31 10:56:37
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-09 17:08:40
+* @Last Modified time: 2022-06-24 17:02:02
 * 
 * 
 * 
@@ -11,7 +11,7 @@
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
-const api = globalAppConfig.apiPrefixDevelopmentTool;
+const api = globalAppConfig.apiPrefixDevTool;
 // const api = "apiMock";
 
 // 查询; 取模块表的列表信息；不分页，仅查询已更新到代码生成库的表列表，不会自动取模块数据中新创建的表；

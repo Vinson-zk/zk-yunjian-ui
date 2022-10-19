@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-30 11:55:26
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-25 19:27:47
+* @Last Modified time: 2022-06-24 17:01:58
 * 
 * 
 * 
@@ -12,7 +12,7 @@
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
-const api = globalAppConfig.apiPrefixDevelopmentTool;
+const api = globalAppConfig.apiPrefixDevTool;
 // const api = "apiMock";
 
 // 编辑 

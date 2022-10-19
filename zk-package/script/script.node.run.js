@@ -2,7 +2,7 @@
  * @Author: Vinson 
  * @Date: 2020-08-10 15:32:40 
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-04-02 14:09:20
+ * @Last Modified time: 2022-07-03 00:34:54
  */
 
 const path = require('path');
@@ -99,13 +99,13 @@ if ("start" == command) {
     // 设置默认配置或统一设置一些配置
     webpackServerConfig = Object.assign(
         {
-            host: 'localhost'
-            , port: 8000
-            , open: process.env.open && (process.env.open != 'false') || false
+            host: 'localhost', 
+            port: 8000, 
+            open: process.env.open && (process.env.open != 'false') || false
             // ,openPage:'/'
-        }
-        , webpackServerConfig
-        , {
+        }, 
+        webpackServerConfig, 
+        {
             stats: {
                 colors: true,
             },

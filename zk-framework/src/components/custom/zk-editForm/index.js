@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:15:36
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-18 10:49:36
+ * @Last Modified time: 2022-07-03 18:00:10
  */
 
 import React from 'react';
@@ -23,10 +23,14 @@ import { ZKButton, ZKForm, ZKRow, ZKCol } from '../../original';
 
 import styles from "./styles.less";
 
+ import {findDOMNode} from 'react-dom';
+
 const FInitEditItem = (itemProps) => {
 	// console.log("[^_^:202103051611-001] itemProps: ", itemProps);
 	return <ZKForm.Item {...itemProps} />
 }
+
+FInitEditItem.typeName = "FInitEditItem";
 
 const f_getViewDefaultFormItem = (children) => {
 
@@ -37,7 +41,7 @@ const f_getViewDefaultFormItem = (children) => {
 		let firstItem = null;
 		children.forEach((item, index)=>{
 			if(item){
-				if(item.type != undefined && item.type.name == 'FInitEditItem'){
+				if(item.type != undefined && item.type.typeName == 'FInitEditItem'){
 					if(firstItem == null){
 						firstItem = item;
 					}else{

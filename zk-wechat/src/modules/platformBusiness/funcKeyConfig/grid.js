@@ -55,21 +55,21 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang) => {
 				return zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.platformBusiness.funcKeyConfig.status.' + text);
 			}
 		},
-		{
-			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.platformBusiness.funcKeyConfig.redirectOriginalUrl'),
-			textAlign: 'center', dataIndex: 'redirectOriginalUrl', key: 'redirectOriginalUrl', width: 100, 
-		},
-		{
-			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.platformBusiness.funcKeyConfig.redirectProxyUrl'),
-			textAlign: 'center', dataIndex: 'redirectProxyUrl', key: 'redirectProxyUrl', width: 100, 
-		},
-		{
-			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.platformBusiness.funcKeyConfig.funcDesc'),
-			textAlign: 'center', dataIndex: 'funcDesc', key: 'funcDesc', width: 100, 
-			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.funcDesc?record.funcDesc:{}, lang);
-			}
-		},
+		// {
+		// 	title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.platformBusiness.funcKeyConfig.redirectOriginalUrl'),
+		// 	textAlign: 'center', dataIndex: 'redirectOriginalUrl', key: 'redirectOriginalUrl', width: 100, 
+		// },
+		// {
+		// 	title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.platformBusiness.funcKeyConfig.redirectProxyUrl'),
+		// 	textAlign: 'center', dataIndex: 'redirectProxyUrl', key: 'redirectProxyUrl', width: 100, 
+		// },
+		// {
+		// 	title: zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.platformBusiness.funcKeyConfig.funcDesc'),
+		// 	textAlign: 'center', dataIndex: 'funcDesc', key: 'funcDesc', width: 100, 
+		// 	render: (text, record, index) => {
+		// 		return zkToolsMsg.getInternationInfo(record.funcDesc?record.funcDesc:{}, lang);
+		// 	}
+		// },
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_name'),
 			key: 'opt', width: 100, fixed: 'right', 

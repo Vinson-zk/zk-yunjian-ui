@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:48
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-17 12:02:22
+ * @Last Modified time: 2022-07-03 00:10:44
  */
 
 
@@ -110,7 +110,7 @@ class CInitSysNavEdit extends Component {
                 >
                     <ZKEditForm.Item name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.name')} rules = {[
                                 // zkToolsValidates.notNull(intl), 
-                                zkToolsValidates.object(intl, locales.localLanguage, undefined, f_makeObjRuls(ture), true),
+                                zkToolsValidates.object(intl, locales.localLanguage, undefined, f_makeObjRuls(true), true),
                             ]} >
                         <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
                     </ZKEditForm.Item>

@@ -1,0 +1,15 @@
+{
+  "name": "portal",
+  "version": "1.0.0",
+  "description": "zk portal",
+  "main": "index.js",
+  "module": "es/index.js",
+  "files": [
+    "es"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vinson",
+  "license": "ISC"
+}

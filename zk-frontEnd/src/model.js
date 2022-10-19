@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-28 15:22:47
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-27 08:32:11
+ * @Last Modified time: 2022-07-03 16:47:55
  */
 
 // import zkJsUtils from 'zkJsUtils';
@@ -83,7 +83,7 @@ const model = {
         *loginUserInfo({ }, { call, put }){
             let res = yield call(loginUserInfo);
             if(res.code == "zk.0"){
-                console.log("[^_^:20220426-1726-001] 当前登录用户信息: ", res.data);
+                // console.log("[^_^:20220426-1726-001] 当前登录用户信息: ", res.data);
                 yield put({ type: 'setState', payload: res.data });
             }else{
                 zkToolsAuth.logout();

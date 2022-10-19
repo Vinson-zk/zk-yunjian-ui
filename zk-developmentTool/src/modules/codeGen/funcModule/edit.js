@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-30 11:54:11
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-26 14:45:25
+* @Last Modified time: 2022-06-25 10:05:16
 * 
 * 
 * 
@@ -14,7 +14,7 @@ import { connect } from 'dva';
 import { Icon } from "antd";
 
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
-const { ZKSpin, ZKInput, ZKSelect, ZKInputNumber, ZKRadio, ZKModal } = ZKOriginalComponents;
+const { ZKSpin, ZKInput, ZKSelect, ZKInputNumber, ZKRadio, ZKModal, ZKRow, ZKCol } = ZKOriginalComponents;
 const { ZKEditForm, ZKInputJson, ZKIcon } = ZKCustomComponents;
 const { zkToolsMsg, zkToolsValidates, zkToolsNavAndMenu } = zkTools;
 
@@ -62,16 +62,16 @@ class CInitFuncModuleEdit extends Component {
           resetFunc={() => { this.setState({ areaOneKey: undefined }); }}
         >
           <ZKEditForm.Item name = "labelName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.labelName')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "moduleName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.moduleName')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "modulePrefix" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.modulePrefix')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "packagePrefix" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.packagePrefix')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "isRemovePrefix" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.isRemovePrefix')} rules = {[zkToolsValidates.notNull(intl, "boolean")]} >
             <ZKSelect>
@@ -80,25 +80,27 @@ class CInitFuncModuleEdit extends Component {
             </ZKSelect>
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "tableNamePrefix" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.tableNamePrefix')} rules = {[zkToolsValidates.string(intl, 0, 64)]} >
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "colNamePrefix" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.colNamePrefix')} rules = {[zkToolsValidates.string(intl, 0, 64)]} >
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "driver" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.driver')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 128)]}>
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "dbType" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.dbType')}  rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 32)]} >
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
-          <ZKEditForm.Item name = "url" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.url')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 128)]}>
-            <ZKInput />
-          </ZKEditForm.Item>
+          <ZKRow><ZKCol span = {24} >
+            <ZKEditForm.Item labelCol = {{span: 5}} wrapperCol = {{span:15}} name = "url" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.url')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 128)]}>
+              <ZKInput style={{'width': '100%'}} />
+            </ZKEditForm.Item>
+          </ZKCol></ZKRow>
           <ZKEditForm.Item name = "username" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.username')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]}>
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
           <ZKEditForm.Item name = "password" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.funcModule.password')} rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]}>
-            <ZKInput />
+            <ZKInput style={{'width': '100%'}} />
           </ZKEditForm.Item>
         </ZKEditForm>
       </ZKSpin>

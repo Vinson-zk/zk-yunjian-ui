@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 12:01:03
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-18 10:48:31
+ * @Last Modified time: 2022-07-03 17:33:19
  */
 
 
@@ -166,6 +166,7 @@ CInitSearchRow.propTypes = {
 	children: function (props, propName, componentName) {
 		if (props.children instanceof Array) {
 			for (let c of props.children) {
+				console.log("======= 111 ", props.children.type)
 				if (c.type.name != 'FInitSearchItem') {
 					return new Error(
 						'Invalid prop `' + propName + '`:`' + c.type.name + '` supplied to' +
@@ -175,6 +176,7 @@ CInitSearchRow.propTypes = {
 			}
 		} else {
 			if (props.children.type.name != 'FInitSearchItem') {
+				console.log("======= 222 ", props.children.type)
 				return new Error(
 					'Invalid prop `' + propName + '`:`' + props.children.type.name + '` supplied to' +
 					' `' + componentName + '`. Validation failed.'

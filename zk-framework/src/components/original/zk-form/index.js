@@ -3,11 +3,11 @@
  * @Author: Vinson
  * @Date: 2020-08-12 09:34:49
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 10:23:03
+ * @Last Modified time: 2022-07-03 17:14:26
  */
 import React from 'react';
 import { Form } from 'antd';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const FWrapFormItem = (props)=>{
 	// console.log("[^_^:20210301-0750-001] FWrapFormItem: ", this.props);

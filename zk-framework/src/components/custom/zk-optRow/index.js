@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:54:24
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-02 19:29:13
+ * @Last Modified time: 2022-07-03 17:53:59
  */
 
 import React from 'react';
@@ -36,15 +36,15 @@ FInitOptItem.defaultProps = {
 	isExpand: true,
 }
 
+FInitOptItem.typeName = "FInitOptItem";
+
 /*** 操作组 ***/
 const FInitOptGroup = ({ children, isAutoPurseUp, key }) => {
 	let optItems = []    // 操作 item; 展开的操作，直接做为操作 item;
 	let purseUpOpts = [] // 收起的操作
 
 	let f_disposeItem = item => {
-
-		// console.log("[^_^:20200816-1841-001] item.type.name: ", (item instanceof Object)?item.type.name:"");
-		if ((item instanceof Object) && item.type.name === 'FInitOptItem') {
+		if ((item instanceof Object) && item.type.typeName === 'FInitOptItem') {
 			if (isAutoPurseUp || !item.props.isExpand) {
 				purseUpOpts.push(item)
 			} else {
@@ -109,6 +109,8 @@ const FInitOptGroup = ({ children, isAutoPurseUp, key }) => {
 	return optItems;
 }
 
+FInitOptGroup.typeName = "FInitOptGroup";
+
 // 操作组 属性类型
 FInitOptGroup.propTypes = {
 	isAutoPurseUp: PropTypes.bool, // 组内操作是否自动收拢操作？默认为否；设置为 true 将忽略 操作 Item 中的展开属性设置
@@ -128,10 +130,9 @@ const FInitOptRow = ({ children, lang, languageChangeFunc, locales }) => {
 		let noGropItems = []
 		let f_disposeItem = (item, index) => {
 			if ((item instanceof Object)) {
-				// console.log("[^_^:20200816-1839-001] item.type.name: ", item.type.name);
-				if (item.type.name === 'FInitOptGroup') {
+				if (item.type.typeName === 'FInitOptGroup') {
 					items.push(FInitOptGroup({ ...item.props, key: '_key_' + index }))
-				} else if (item.type.name === 'FInitOptItem') {
+				} else if (item.type.typeName === 'FInitOptItem') {
 					noGropItems.push(item)
 				} else {
 					items.push(item);

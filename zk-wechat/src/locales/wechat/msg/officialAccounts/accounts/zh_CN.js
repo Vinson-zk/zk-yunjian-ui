@@ -36,6 +36,7 @@ module.exports = {
 	"zk.wechat.officialAccounts.accounts.auth.byeType":"授权方式",   
 	"zk.wechat.officialAccounts.accounts.auth.byeType.0":"网页登录授权", 
 	"zk.wechat.officialAccounts.accounts.auth.byeType.1":"移动设备打开链接授权", 
+	"zk.wechat.officialAccounts.accounts.auth.thirdPartyAppid":"第三方平台Appid", 
 	"zk.wechat.officialAccounts.accounts.auth.bizAppid":"授权方原始ID", 
 	"zk.wechat.officialAccounts.accounts.auth.authType":"授权的帐号类型",   
 	"zk.wechat.officialAccounts.accounts.auth.authType.1":"公众号",  

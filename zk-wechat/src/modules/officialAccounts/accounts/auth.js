@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-05-18 01:13:42
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-22 01:35:55
+* @Last Modified time: 2022-07-03 23:26:22
 * 
 * 向第三方平台授权
 * 
@@ -143,10 +143,10 @@ class CInitThridPartyAuth extends Component {
 						>
 							<ZKInput className="" style={{'width':'230'}} placeholder = {zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.auth.companyCode')} />
 						</Form.Item>
-						<Form.Item name="wxAccountAppid" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.wxAccountAppid')}
+						<Form.Item name="thirdPartyAppid" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.auth.thirdPartyAppid')}
 							initialValue={""} rules = {[ zkToolsValidates.string(intl, 1, 64)]} 
 						>
-							<ZKInput className="" style={{'width':'230'}} placeholder= {zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.wxAccountAppid')} /> 
+							<ZKInput className="" style={{'width':'230'}} placeholder= {zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.auth.thirdPartyAppid')} /> 
 						</Form.Item>
 						<Form.Item name="bizAppid" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.auth.bizAppid')}
 							initialValue={""} rules = {[ zkToolsValidates.string(intl, 1, 64)]} 
