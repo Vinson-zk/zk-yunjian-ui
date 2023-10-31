@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-13 20:47:33
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 15:22:29
+ * @Last Modified time: 2022-12-06 11:16:42
  */
 
 
@@ -17,6 +17,10 @@ const msg = {
     "sample.table.col1":"Col 1",
     "sample.table.col2":"Col 2",
 	"sample.table.col3":"Col 3",
+    "sample.table.col4":"Col 4",
+	"sample.table.col5":"Col 5",
+    "sample.table.col6":"Col 6",
+	"sample.table.col7":"Col 7",
 	
 	"sample.components.original.anchor":"ZKAnchor",
 	"sample.components.original.button":"ZKButton",
@@ -55,7 +59,9 @@ const msg = {
 	"sample.components.custom.scrollTable":"ZKScrollTable",
 	"sample.components.custom.searchRow":"ZKSearchRow",
 	"sample.components.custom.sider":"ZKSider",
+	"sample.components.custom.popoverPanel":"ZKPopoverPanel",
 	"sample.components.custom.textEditor":"ZKTextEditor",
+	"sample.components.custom.touchControl":"ZKTouchControl",
 	"sample.components.custom.upload":"ZKUpload",
 	"sample.components.custom.userDropDown":"ZKUserDropDown",
 	"sample.components.custom.versionInfo":"ZKVersionInfo",

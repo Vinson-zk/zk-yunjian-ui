@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 12:01:03
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-03 17:33:19
+ * @Last Modified time: 2022-11-11 11:53:52
  */
 
 
@@ -99,7 +99,7 @@ FInitSearchItem.defaultProps = {
 class CInitSearchRow extends React.Component {
 
 	// formRef = null;
-	formRef = React.createRef();
+	formRef = null;
 
 	constructor(props) {
 		super(props);
@@ -107,6 +107,7 @@ class CInitSearchRow extends React.Component {
             isResetForm: false, // 是否需要重置 form 
             defaultValues: props.filter || props.initialValues,
         }
+        this.formRef = props.forwardedRef?props.forwardedRef : React.createRef();
 	}
 
 	render() {
@@ -130,9 +131,6 @@ class CInitSearchRow extends React.Component {
 			}
 		}
 
-		this.formRef =  forwardedRef?forwardedRef : React.createRef();
-
-		// undo minus-square-o
 		return (
 			<Form {...props} layout="inline" className={`${styles.searchRow} ${className}`}  
 				initialValues={this.state.defaultValues} onFinish = {f_search} ref = {this.formRef} >
@@ -166,7 +164,6 @@ CInitSearchRow.propTypes = {
 	children: function (props, propName, componentName) {
 		if (props.children instanceof Array) {
 			for (let c of props.children) {
-				console.log("======= 111 ", props.children.type)
 				if (c.type.name != 'FInitSearchItem') {
 					return new Error(
 						'Invalid prop `' + propName + '`:`' + c.type.name + '` supplied to' +
@@ -176,7 +173,6 @@ CInitSearchRow.propTypes = {
 			}
 		} else {
 			if (props.children.type.name != 'FInitSearchItem') {
-				console.log("======= 222 ", props.children.type)
 				return new Error(
 					'Invalid prop `' + propName + '`:`' + props.children.type.name + '` supplied to' +
 					' `' + componentName + '`. Validation failed.'

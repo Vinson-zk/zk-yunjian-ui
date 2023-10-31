@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-07 01:23:55
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-03-07 04:47:49
+* @Last Modified by: vinson
+* @Last Modified time: 2023-09-06 10:07:07
 * 
 * 
 * 
@@ -572,15 +572,15 @@ const getIconPanelEditor = (f_onAntd4IconClick) => {
         <br />
         <p>ZoomOutOutlined</p>
       </div>
-      <div onClick={() => f_onAntd4IconClick("pColorsOutlined")} >
-        <Antd4Icon icon = "pColorsOutlined" />
+      <div onClick={() => f_onAntd4IconClick("ColorsOutlined")} >
+        <Antd4Icon icon = "ColorsOutlined" />
         <br />
-        <p>pColorsOutlined</p>
+        <p>ColorsOutlined</p>
       </div>
-      <div onClick={() => f_onAntd4IconClick("pSizeOutlined")} >
-        <Antd4Icon icon = "pSizeOutlined" />
+      <div onClick={() => f_onAntd4IconClick("SizeOutlined")} >
+        <Antd4Icon icon = "SizeOutlined" />
         <br />
-        <p>pSizeOutlined</p>
+        <p>SizeOutlined</p>
       </div>
       <div onClick={() => f_onAntd4IconClick("LineHeightOutlined")} >
         <Antd4Icon icon = "LineHeightOutlined" />

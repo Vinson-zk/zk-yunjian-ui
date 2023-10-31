@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:43:24
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-29 19:04:51
+ * @Last Modified time: 2022-12-05 12:37:29
  */
 
 import React from 'react';
@@ -115,7 +115,7 @@ const f_genMenu = (menus, path, history, openKeys, selMenuIds, toPathFunc) => {
                     'icon': zkJsUtils.isEmpty(item.icon) ? '' : <ZKIcon.Antd4Icon icon = {item.icon} />,
                     'label': <span onClick={f_subMenuOnClick}>{zkToolsNavAndMenu.getMenuName(item)}</span>,
                     // onTitleClick:f_subMenuOnClick,
-                    'children':f_genMenu(item.children, tPath, history, openKeys, selMenuIds, toPathFunc)
+                    'children':f_genMenu(item.children, tPath, history, openKeys, selMenuIds, toPathFunc),
                 }
             }
         }
@@ -346,7 +346,7 @@ class CInitAutoMenu extends React.Component {
         // >{menusElement} </Menu>
         return (
             <Scrollbars style={{ height: '100%' }}>
-                <Menu className={styles.menu}
+                <Menu className={styles.zk_menu}
                     selectedKeys={selMenuIds}
                     openKeys={openMenuIds}
                     onOpenChange={this.onOpenChange}
@@ -373,3 +373,6 @@ CInitAutoMenu.defaultProps = {
 }
 
 export default withRouter(CInitAutoMenu);
+
+
+

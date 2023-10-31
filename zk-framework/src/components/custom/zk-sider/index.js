@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 12:03:19
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-07 21:31:19
+ * @Last Modified time: 2022-12-01 18:30:56
  */
 
 
@@ -21,118 +21,81 @@ class CInitSider extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			collapsed: false,
-			mouseDown: false, // 鼠标在 目标div上按下状态 true 有按下，否则没有按下
-			mouseMove: false, // 目标div 移动状态 true 有移动，否则没有移动
-			initTop: 60,
-			initLeft: 0,
-			startX: 0,
-			startY: 0,
-			top: 60,
-			left: 0,
-		}
+			// initCollapsed: props.collapsed, // 初始滑块展开收起状态，当外面部的此状态变化时，以外部为准；
+			collapsed: props.collapsed, // 当前滑块收起状态；false-未收起；true-收起；
+		};
 	}
 
-	toggle = (e)=>{
-		this.setState({ collapsed: !this.state.collapsed });
-	}
-
-	// 计算偏移量
-	computeOffset = (x, y)=>{
-		let offset = { x: 0, y: 0 }
-		offset.y = y - this.state.startY
-
-		let maxX = 234
-		maxX = -1
-
-		offset.x = x - this.state.startX
-
-		if (maxX > 0) {
-			offset.x = offset.x > maxX ? maxX : offset.x
-		}
-		return offset
-	}
-
-	// 鼠标在div上按下
-	mouseDown = (e)=>{
-		this.setState({ mouseDown: true, startX: e.clientX, startY: e.clientY });
-	}
-	// 鼠标在div上松开
-	mouseUp = (e)=>{
-		if (this.state.mouseDown == true) { // 在 目标 div 上有按下
-			if (this.state.mouseMove == false) {
-				this.setState({ collapsed: !this.state.collapsed });
-			}
-			this.setState({ mouseDown: false, mouseMove: false })
-			this.setState({ top: this.state.top, left: this.state.initLeft, initTop: this.state.top })
-		}
-	}
-	mouseMove = (e)=>{
-		if (this.state.mouseDown == true) {// 在 目标 div 上有按下
-			this.setState({ mouseMove: true })
-			let offset = this.computeOffset(e.clientX, e.clientY)
-			this.setState({ top: this.state.initTop + offset.y, left: this.state.initLeft + offset.x })
-
-		}
-	}
+	f_toggle = (e)=>{
+		// console.log("[^_^:20221201-1302-001] f_toggle: ", e);
+		let collapsed = this.state.collapsed;
+		this.setState({ collapsed: !collapsed });
+		if(this.props.onCollapsedChange instanceof Function){
+    		this.props.onCollapsedChange.call(this, e, !collapsed);
+    	}
+	};
+	
+	// 2、调用render方法之前调用，无论是在初始安装还是后续更新。它应该返回一个更新状态的对象，或者返回null以不更新任何状态。
+    // static getDerivedStateFromProps(props, state) {
+    //     if(props.collapsed != state.initCollapsed){
+    //     	state.initCollapsed = props.collapsed;
+    //     	if(props.collapsed != state.collapsed){
+    //     		state.collapsed = props.collapsed;
+    //     	}
+    //     }
+    //     return true;
+    // }
 
 	render() {
-
-		let { miniName, className, children } = this.props;
-
-		if (this.state.collapsed) {
-			// 绑定鼠标松开事件
-			zkJsEvent.eventBinding(window, 'mouseup', this.mouseUp, false)
-			// 绑定鼠标移动事件
-			zkJsEvent.eventBinding(window, 'mousemove', this.mouseMove, false)
-			return (
-				<div className={`${styles.sliderClose}  ${this.state.mouseMove ? "" : styles.sliderCloseTransition}`}
-					style={{ top: this.state.top + 'px', left: this.state.left + 'px' }}
-					// onClick = {this.toggle}
-					onMouseDown={this.mouseDown}
-				// onMouseMove = {this.mouseMove}
-				// onMouseUp = {this.mouseUp}
-				// onMouseOut = {this.mouseOut}
-				>
-					<span>{miniName}</span>
+		let { isHead, className, children, collapsed, collapsedWidth, ...resProps } = this.props;
+		return (
+			<Sider { ...resProps } ref = {this.thisRef} className={`${styles.slider} ${className ? className : ""}`}
+				trigger={<div>sss</div>}
+				collapsed={this.state.collapsed}
+				collapsedWidth = { collapsedWidth }
+				// collapsible
+				// onCollapse={this.onCollapse}
+				// onClick = { this.f_eventCancel }
+			>
+				<div className = { styles.slider_head }>
+				{ this.state.collapsed ?
+					<MenuUnfoldOutlined className={`${styles.trigger} ${styles.trigger_open}`} onClick={ this.f_toggle } />
+					: <MenuFoldOutlined className={`${styles.trigger} ${styles.trigger_open}`} onClick={ this.f_toggle } />
+				}
 				</div>
-			)
-		} else {
-			// 移除鼠标松开事件
-			zkJsEvent.eventRemove(window, 'mouseup', this.mouseUp, false)
-			// 移除鼠标移动事件
-			zkJsEvent.eventRemove(window, 'mousemove', this.mouseMove, false)
-			return (
-				<Sider className={`${styles.slider} ${className ? className : ""}`}
-					trigger={null}
-					collapsed={this.state.collapsed}
-					// collapsible
-					// onCollapse={this.onCollapse}
-				>
-					{ this.state.collapsed ?
-						<MenuUnfoldOutlined className={`${styles.trigger} ${styles.trigger_open}`} onClick={this.toggle} />
-						: <MenuFoldOutlined className={`${styles.trigger} ${styles.trigger_open}`} onClick={this.toggle} />
-					}
-					{children}
-				</Sider>
-			)
-		}
+				{children}
+			</Sider>
+		)
 	}
+
+	// 6、创建时；安装组件（插入树中）后立即调用；此方法是设置任何订阅的好地方。如果您这样做，请不要忘记取消订阅componentWillUnmount()。
+    componentDidMount() {
+
+    }
+
+    componentWillUnmount(){
+
+    }
+
 }
 
 // 定义属性
 CInitSider.propTypes = {
-	// ...Sider.propTypes,     // 原生定义的属性
-	miniName: PropTypes.string, // 滑块最小化时显示的名称
+	...Sider.propTypes,     // 原生定义的属性
 	className: PropTypes.string,
 	children: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.object, PropTypes.string]), // 子节点
 	
 }
 // 定义属性默认值
 CInitSider.defaultProps = {
-	// ...Sider.defaultProps, // 原生定义的属性 
-	miniName: "Navigation", // // 滑块最小化时显示的名称，默认 Navigation
-	// className: " ",
+	...Sider.defaultProps, // 原生定义的属性 
+	collapsed: false,
+	collapsedWidth: 60, 
 }
 
 export default CInitSider;
+
+
+
+
+

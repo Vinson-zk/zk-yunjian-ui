@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-29 21:52:35
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 09:08:31
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 22:05:56
  */
 
 
@@ -41,7 +41,8 @@ const funcModuleMppingObj = {
 const dynamicImportHelper = zkToolsNavAndMenu.getDynamicImportHelper(funcModuleMppingObj);
 
 /*** 添加导航栏目 */
-import { navItems } from '../mock/data.wechat.nav.js';
+import mockDataWechat from '../mock/mock.data.wechat.js';
+const navItems = mockDataWechat.navItems;
 
 let navRoutes = null;
 let indexNavRoute = null;

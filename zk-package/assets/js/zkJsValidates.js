@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 14:01:38 
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-06 14:02:13
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 16:29:29
  */
 
 (function (global) {
@@ -84,5 +84,7 @@
     }
 
     global.zkJsValidates = _Validates;
-
+    return _Validates;
 })(typeof window !== "undefined" ? window : this);
+
+

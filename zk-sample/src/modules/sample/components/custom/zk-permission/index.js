@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-16 08:57:56
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-17 10:46:50
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:44
  */
 
 import React from 'react';
@@ -189,7 +189,7 @@ const FInitZKPermissionDemo = ({ intl }) => {
         <h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
         <div>
           ZKPermission, 权限判断组件;
-				          	<SyntaxHighlighter language='jsx' style={docco}>
+				          	<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
             {[
               "递归判断子节点的权限",
               "1、先判断子组件是否需要角色或权限；如果都不需要，显示子节点;",
@@ -237,7 +237,7 @@ const FInitZKPermissionDemo = ({ intl }) => {
       <div className={styles.sample_detail_section}>
         <h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
         <div>
-          <SyntaxHighlighter language='jsx' style={docco}>
+          <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
             {[
               "参考框架样例代码",
             ].join('\n')}

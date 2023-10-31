@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 15:08:56
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 08:58:56
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 16:07:02
  */
 
 
@@ -12,6 +12,7 @@ import { Layout } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import { ZKCustomComponents, zkTools } from 'zkFramework';
+import zkJsUtils from 'zkJsUtils';
 
 import zkStyles from 'zkFramework/css/styles.less';
 
@@ -21,7 +22,17 @@ const { Switch, Route, Redirect } = ZKRouter;
 const { zkToolsNavAndMenu } = zkTools;
 
 /*** 定义菜单 ***/
-import menus from './data.menus';
+import mockBlendMenus from '../../../mock/mock.data.sample.menus.blend.js';
+
+let menus = [];
+for (let menu of mockBlendMenus) {
+    if (menu.navCode === 'blend') {
+        menus = menus.concat(menu);
+    }
+}
+
+menus = zkJsUtils.makeTree(menus, null);
+menus = zkJsUtils.sort(menus, 1);
 
 let routers = null;
 let routerMappingObj = {};

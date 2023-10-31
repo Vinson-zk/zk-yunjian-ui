@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:27:55
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-16 18:01:32
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:44
  */
 
 import React from 'react';
@@ -26,7 +26,7 @@ function FInitZKRouterDemo({ match, history, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.router')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"ZKPrivateRoute ",
 						].join('\n')}

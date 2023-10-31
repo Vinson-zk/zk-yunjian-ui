@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 09:05:30
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-27 10:24:49
+ * @Last Modified time: 2023-08-24 22:01:30
  */
 
 // jquery ajax 暂未使用 
@@ -165,14 +165,13 @@ const f_auth = (res) => {
     // 是否开启身份认证，默认不开启，开启进行登录跳转等操作
     if (globalAppConfig.isAuth) {
         if (res && !zkJsUtils.isEmpty(res.code)) {
-            if (res.code === 'zk.sec.000004') {
+            if (['zk.sec.000004', 'zk.sec.000012', 'zk.sec.000020'].indexOf(res.code) != -1){
+                /*
+                zk.sec.000004=用户未登录
+                zk.sec.000012=用户已在其他地方登录，请重新登录
+                zk.sec.000020=登录已过期，请重新登录
+                */
                 // 用户未登录
-                zkToolsAuth.logout();
-                zkToolsMsg.alertMsg(null, null, { type: "error", msg: res.msg });
-                return false;
-            }
-            if (res.code === 'zk.sec.000012') {
-                // 用户已在其他地方登录，请重新登录
                 zkToolsAuth.logout();
                 zkToolsMsg.alertMsg(null, null, { type: "error", msg: res.msg });
                 return false;
@@ -200,16 +199,20 @@ const f_responseError = (xhr, status, err) => {
     resultData = data;
     ***/
 
-    if(console)console.error('[>_<:20190507-1538-002]  - ajax.request err :', xhr, status, err);
+    if(console){
+        console.error('[>_<:20190507-1539-001]  - ajax.request xhr: ', xhr);
+        console.error('[>_<:20190507-1539-002]  - ajax.request status: ', status);
+        console.error('[>_<:20190507-1539-003]  - ajax.request err: ', err);
+    }
 
     // 默认提示信息
     let errMsg = null
     if(err){
-        if(err.status = 404){
+        if(err.status == 404){
             errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.404');
-        }else if(err.status = 403){
+        }else if(err.status == 403){
             errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.403');
-        }else if(err.status = 500){
+        }else if(err.status == 500){
             errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.500');
         }else{
             errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
@@ -268,9 +271,10 @@ const f_reqData = (url, options, fCallback) => {
     let requstBody = f_makeRequstBody(url, options);
     let resultData = undefined;
 
-    // console.log("[^_^:20190123-1452-002] requstBody:", requstBody)
+    // console.log("[^_^:20190123-1453-001] requstBody:", requstBody);
 
     Ajax.ajax(requstBody).done(function(data){
+        // console.log("[^_^:20190123-1453-002] data:", data);
         if(!f_auth(data)){
             return;
         }

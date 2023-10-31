@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 16:44:53
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-17 18:08:23
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 14:30:09
  */
 
 import React from 'react';
@@ -21,7 +21,7 @@ const FInitTryHome = ({intl, match})=>{
 	return (
 		<div>测试一下，试试；
 			<br /><br />
-			<font color="red">没有从 mock 中取菜单，菜单改为本地定义了；// 取菜单设置了延迟！！！ </font>
+			<font color="red">没有从 mock 中取菜单，菜单改为本地定义了； </font>
 			<br /><br />
 			match.path: <font color="red">{match.path} </font>
 			<br /><br />

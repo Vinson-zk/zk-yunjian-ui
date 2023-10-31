@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 10:11:03
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-02 08:04:23
+ * @Last Modified time: 2022-11-11 10:50:24
  */
 
 import React from 'react';
@@ -11,7 +11,8 @@ import { Spin } from 'antd'
 
 const FWrapSpin = (props)=>{
 	// className = { styles.spin_mask } 
-	return <Spin {...props} />
+	let { forwardRef, ...resProps} = props;
+	return <Spin {...resProps} ref = { forwardRef } />
 }
 
 // 定义属性

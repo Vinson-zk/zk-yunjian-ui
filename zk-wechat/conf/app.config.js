@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 16:42:28
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-09 10:22:13
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 21:59:52
  */
 
 /*** 应用的全局常量配置 ***/
@@ -14,4 +14,5 @@ module.exports = {
     routerSample: 'router'
   },
   apiPrefixWechat: 'apiWechat',   // api 请求前缀
+  apiPrefixSys: 'apiSys',
 }

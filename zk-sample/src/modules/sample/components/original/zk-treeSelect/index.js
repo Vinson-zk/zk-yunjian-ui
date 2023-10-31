@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-04-28 17:25:58
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-28 17:30:01
+* @Last Modified time: 2022-12-05 11:46:41
 * 
 * 
 * 
@@ -92,7 +92,7 @@ class CInitZKTreeSelectferDemo extends Component {
         <div className={styles.sample_detail_section}>
           <h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
           <div>
-            <SyntaxHighlighter language='jsx' style={docco}>
+            <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
               {[
                 "ZKTreeSelect 原生态封装组件：暂不做处理；",
                 "接受原生属性。",
@@ -103,7 +103,7 @@ class CInitZKTreeSelectferDemo extends Component {
         <div className={styles.sample_detail_section}>
           <h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
           <div>
-            <SyntaxHighlighter language='jsx' style={docco}>
+            <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
               {[
                 "参考框架样例代码",
               ].join('\n')}

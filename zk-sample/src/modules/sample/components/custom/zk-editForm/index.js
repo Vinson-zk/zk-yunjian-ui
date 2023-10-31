@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:23:27
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-28 16:48:17
+ * @Last Modified time: 2023-05-29 17:14:17
  */
 
 import React from 'react';
@@ -105,7 +105,7 @@ function FInitZKEditFormDemo({ history, intl }) {
 							<tr>
 								<td>saveFunc</td>
 								<td>true</td>
-								<td>保存方法; 方法：{'saveFunc.call(this, data, form, (errs)=>{...}'}; 注: 如果 errs 存在，设置报错状态；如果不存在，返回上一级。</td>
+								<td>保存方法; 方法：{'saveFunc.call(this, data, form, (errs, isBlock)=>{...}'}; 注: 如果 errs 存在，设置报错状态，此时 isBlock 不生效；如果不存在，isBlock 为 true 返回上一级。</td>
 								<td>PropTypes.func</td>
 								<td></td>
 							</tr>
@@ -180,7 +180,7 @@ function FInitZKEditFormDemo({ history, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"参考框架代码",
 						].join('\n')}

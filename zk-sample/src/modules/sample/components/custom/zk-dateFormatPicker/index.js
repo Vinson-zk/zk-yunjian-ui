@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:22:44
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-06 09:44:13
+ * @Last Modified time: 2022-12-05 11:46:43
  */
 
 import React from 'react';
@@ -90,7 +90,7 @@ function FInitZKDateFormatPickerDemo({ history, intl }) {
 				<div>
 					ZKDateFormatPicker、ZKDateFormatPicker.RangePicker 组件：<br />
 					<div style={{ color: 'red' }}>注：组件的 format 属性默认为: YYYY-MM-DD </div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"ZKDateFormatPicker 自定义组件，日期格式化控件，取值时按设置的 format 格式返回对应格式日期字符串；",
 							"    可接受原生组件 DatePicker 的原生属性； ",
@@ -104,7 +104,7 @@ function FInitZKDateFormatPickerDemo({ history, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"参考框架代码",
 						].join('\n')}

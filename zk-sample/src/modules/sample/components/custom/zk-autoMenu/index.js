@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:25:42
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 18:47:16
+ * @Last Modified time: 2022-12-05 11:46:43
  */
 
 import React from 'react';
@@ -25,7 +25,7 @@ function FInitZKAutoMenuDemo({ history, match, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.autoMenu')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							'<ZKAutoMenu menus={menus} path="/sys" routerMappingObj={routerMappingObj} />',
 							'',
@@ -89,7 +89,7 @@ function FInitZKAutoMenuDemo({ history, match, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"参考框架代码",
 						].join('\n')}

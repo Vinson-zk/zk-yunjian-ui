@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:34:12
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-03-22 11:20:42
+ * @Last Modified time: 2022-12-05 11:46:41
  */
 
 import React, { Component } from 'react';
@@ -126,7 +126,7 @@ class CInitZKTransferDemo extends Component {
         <div className={styles.sample_detail_section}>
           <h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
           <div>
-            <SyntaxHighlighter language='jsx' style={docco}>
+            <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
               {[
                 "ZKTransfer 原生态封装组件：暂不做处理；",
                 "接受原生属性。",
@@ -138,7 +138,7 @@ class CInitZKTransferDemo extends Component {
         <div className={styles.sample_detail_section}>
           <h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
           <div>
-            <SyntaxHighlighter language='jsx' style={docco}>
+            <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
               {[
                 "参考框架样例代码",
               ].join('\n')}

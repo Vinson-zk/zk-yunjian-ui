@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:24:23
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 08:38:20
+ * @Last Modified time: 2022-12-05 11:46:43
  */
 
 import React, {useState} from 'react';
@@ -177,7 +177,7 @@ class CInitFormNode extends React.Component {
 					visible={this.state.visible}
 					onOk={this.handleOk}
 					onCancel={this.handleCancel}>
-					<SyntaxHighlighter language="jsx" style={docco}>
+					<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{
 							"{\n" + this.state.values.join(",\n") + "\n}"
 						}
@@ -231,7 +231,7 @@ class CInitZKFormNode extends React.Component {
 					visible={this.state.visible}
 					onOk={this.handleOk}
 					onCancel={this.handleCancel}>
-					<SyntaxHighlighter language="jsx" style={docco}>
+					<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{
 							"{\n" + this.state.values.join(",\n") + "\n}"
 						}
@@ -479,7 +479,7 @@ function FInitZKInputJsonDemo({ dispatch, intl }) {
 			<div className={stylesSample.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"参考框架代码",
 							"<ZKInputJson />"

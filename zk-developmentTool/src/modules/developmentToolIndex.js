@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2021-02-13 23:15:22
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 08:57:59
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 16:40:12
  */
 
 import React, { Component } from 'react';
@@ -36,14 +36,14 @@ class CInitHome extends Component {
 
         // console.log("[^_^:20200813-1941-001] CInitHome.constructor.props", props);
 
-        props.dispatch({ type: 'mDevelopmentTool/getNavMenus', navCode:'developmentTool', payload: {} });
+        props.dispatch({ type: 'mDevelopmentTool/getNavMenus', navCode: props.navCode, payload: {} });
     }
 
     static getDerivedStateFromProps(props, state) {
 
         let {  match, mDevelopmentTool, dispatch, dvaApp, dynamicImportHelper } = props;
         if (state.menuRoutes == null && props.mDevelopmentTool.menus != undefined) {
-            console.log("[^_^:20200811-1044-001] getDerivedStateFromProps ", mDevelopmentTool, props);
+            // console.log("[^_^:20200811-1044-001] getDerivedStateFromProps ", mDevelopmentTool, props);
             // 生成菜单与路由的映射数据，用于根据路由路径打开菜单和面包屑展示
             state.routerMappingObj = zkToolsNavAndMenu.getRouterMapping(match.path, mDevelopmentTool.menus, null);
             // 生成菜单路由

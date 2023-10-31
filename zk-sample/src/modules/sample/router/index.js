@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 10:31:13
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-19 18:10:08
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2023-05-27 12:45:51
  */
 
 import React from 'react';
@@ -37,84 +37,16 @@ const FRouteDemoHome = ({ match, intl }) => {
 
             <div className={styles.sample_detail_section} >
                 <h2>1、导航栏目数据结构定义</h2>
-                <SyntaxHighlighter language='jsx' style={docco}>
+                <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                     {[
                         "生成导航栏目及对应路由！",
+                        "同菜单格式，将一级菜单做为导航"
                     ].join('\n')}
                 </SyntaxHighlighter>
-                <table className = {styles.sample_detail_section_table}>
-                    <thead>
-                        <tr>
-                            <th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.column.name')}</th>
-                            <th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
-                            <th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
-                            <th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
-                            <th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>pkId</td>
-                            <td>true</td>
-                            <td>数据的唯一 pkId，也是根据数据生成组件时的做为组件 key 的关键；</td>
-                            <td>String</td>
-                            <td>无</td>
-                        </tr>
-                        <tr>
-                            <td>name</td>
-                            <td>true</td>
-                            <td>菜单(路由)的名称, 国际化json对象；</td>
-                            <td>Json</td>
-                            <td>无</td>
-                        </tr>
-                        <tr>
-                            <td>navCode</td>
-                            <td>true</td>
-                            <td>导航栏目代码，唯一</td>
-                            <td>String</td>
-                            <td>无</td>
-                        </tr>
-                        <tr>
-                            <td>funcModuleCode</td>
-                            <td>true</td>
-                            <td>功能模块代码，在哪个功能模块中实现就写哪个功能模块的代码，也是功能模块目录；</td>
-                            <td>String</td>
-                            <td>无</td>
-                        </tr>
-                        <tr>
-                            <td>funcName</td>
-                            <td>true</td>
-                            <td>功能名称，将根据这名称查找到对应功能组件；</td>
-                            <td>String</td>
-                            <td>无</td>
-                        </tr>
-                        <tr>
-                            <td>path</td>
-                            <td>false</td>
-                            <td>不能为空</td>
-                            <td>String</td>
-                            <td>无</td>
-                        </tr>
-                        <tr>
-                            <td>isIndex</td>
-                            <td>false</td>
-                            <td>是否是默认栏目，1-是；0-不是</td>
-                            <td>Number</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>sort</td>
-                            <td>false</td>
-                            <td>排序</td>
-                            <td>Number</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
             <div className={styles.sample_detail_section} >
                 <h2>2、菜单数据结构定义</h2>
-                <SyntaxHighlighter language='jsx' style={docco}>
+                <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                     {[
                         "生成菜单及对应路由！",
                     ].join('\n')}
@@ -149,13 +81,6 @@ const FRouteDemoHome = ({ match, intl }) => {
                             <td>true</td>
                             <td>菜单(路由)的名称, 国际化json对象；</td>
                             <td>Json</td>
-                            <td>无</td>
-                        </tr>
-                        <tr>
-                            <td>navCode</td>
-                            <td>true</td>
-                            <td>导航栏目代码，即功能菜单的分组代码；</td>
-                            <td>String</td>
                             <td>无</td>
                         </tr>
                         <tr>
@@ -250,7 +175,7 @@ const FRouteDemoHome = ({ match, intl }) => {
             </div>
             <div className={styles.sample_detail_section} >
                 <h2>3、routerMappingObj 路径映射对象；</h2>
-                <SyntaxHighlighter language='jsx' style={docco}>
+                <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                     {[
                         "映射对象供面包屑与菜单使用来级联打开菜单的显示面包屑；",
                     ].join('\n')}

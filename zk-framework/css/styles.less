@@ -2,12 +2,12 @@
 * @Author: Vinson
 * @Date:   2021-03-29 11:37:28
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-18 17:38:46
+* @Last Modified time: 2023-05-10 15:10:38
 * 
 * 
 * 
 */
-@import "~antd/dist/antd.less";
+@import "./colors.less";
 
 html,
 body {
@@ -16,6 +16,7 @@ body {
 	margin      : 0px;
 	padding     : 0px;
 	overflow    : hidden;
+	background-color: @p-bg-color;
 	/*background:#ececec;*/
 }
 
@@ -75,27 +76,23 @@ body {
 		width             : 100%;
 		height            : 45px;
 		line-height       : 45px;
-		background        : #f7f7f7;
+		/*background-color  : #f7f7f7;*/
+		background-color  : @p-bg-color;
 		z-index           : 999;
 		display           : flex;
 		padding           : 0 16px;
-		/* box-shadow     : 0 2px 4px 0 rgba(0, 0, 0, 0.1);*/
-		/* border-bottom  : 1px solid #e5e5e5;*/
-		/* box-shadow     : 0 2px 4px 0 rgba(138, 192, 7, 0.1);*/
-		/*background-color:color(~`colorPalette("@{primary-color}", 1)`);*/
-		box-shadow        : 0 2px 4px 0 color(~`colorPalette("@{primary-color}", 0.1)`);
-		/*border-bottom   : 1px solid color(~`colorPalette("@{primary-color}", 2)`);*/
-		/*box-shadow      : 0 2px 4px 0 hsl(@primary-color, 0.13, 0.9);*/
-		border-bottom     : 1px solid hsl(@primary-color, 0.63, 0.9);
+		box-shadow        : 0 1px 3px 0 @p-border-color-hover;
+		border-bottom     : 0px solid @p-border-color-hover;
 	}
 
 	.zk_header>div {
 		align-self: center;
+		/*height: 44px;*/
 	}
 
 	/* css: 侧边栏 */
 	.zk_left_sider {
-        background       : #fff;
+        background       : @p-bg-color;
         /*// position    : fixed;*/
         /*// top         : 45px;*/
         /*// bottom      : 0px;*/
@@ -121,7 +118,7 @@ body {
 		padding    : 0px 0px 0px 0px;
 		height     : 100%;
 		/*min-height: 100%;*/
-		background : #fff;
+		background : @p-bg-color;
 		/* overflow: initial;*/
 		/*overflow :auto;*/
 		overflow   : hidden;
@@ -140,7 +137,8 @@ body {
         padding    : 0;
         /*-webkit-flex: 0 0 38px;*/
         overflow   : hidden;
-        border-top: 0px solid hsl(@primary-color, 0.63, 0.9);
+        background-color: @p-bg-color;
+        border-top: 1px solid @p-border-color-active;
     }
 
     .zk_wrapper {
@@ -158,7 +156,7 @@ body {
         max-height: auto;*/
         margin    : 0px 0px 0px 0px;
         padding   : 0px 0px 0px 0px;
-        background: #fff;
+        background: @p-bg-color;
         /*overflow  : auto;*/
         /*border  : 1px solid #f0f*/
 
@@ -179,7 +177,8 @@ body {
    		width: 100%;
     	flex: 1 1 auto;
 	    margin: 0px 0px 0px 0px;
-	    padding: 6px 8px 6px 8px;
+	    padding: 0px 6px 6px 4px;
+		background-color  : @p-bg-color;
     }
 
     /* css: 其他 ======================================== */
@@ -196,17 +195,18 @@ body {
 	.zk_versionInfo_modal div[class='ant-modal-confirm-content'] {
 		margin-left: 6px;
 		padding-top: 6px;
+		background-color: @p-bg-color;
 	}
 
 	.zk_scrollbars {
 		height: 100%; 
-		background: #fff;
+		background-color: @p-bg-color;
         padding   : 0px 0px 0px 0px;
 	}
 }
 
 .zk_scroll_border {
-	border: 1px solid hsl(@primary-color, 0.63, 0.9);
+	border: 1px solid @p-border-color-active;
 	border-radius: 4px 4px;
 }
 
@@ -237,7 +237,7 @@ body {
 
 .display_flex_col {
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
 }
 
 .display_flex_row {

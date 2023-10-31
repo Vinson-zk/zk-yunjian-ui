@@ -3,9 +3,9 @@
  * @Author: Vinson
  * @Date: 2020-08-12 10:12:45
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-04-02 13:22:41
+ * @Last Modified time: 2022-12-06 13:53:41
  */
-
+@import "../../../../css/colors.less";
 
 .table {
 
@@ -70,7 +70,8 @@
             flex-direction: column;
         */
         .ant-table {
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid @p-border-color;   
+            background-color: @p-bg-color;
         }
 
         /*
@@ -84,9 +85,8 @@
         .ant-table-title {
             top    : 0px;
             padding: 0px;
-
             /*border: 2px solid red;*/
-            /*background-color: red;*/
+            background-color: @p-bg-color;
         }
 
         /* 表格 分页标签 */
@@ -125,6 +125,69 @@
             /*max-width: 50px !important;*/
             /*min-width: 50px !important;*/
             /*margin: 0px !important;*/
+        }
+        /*.ant-table-cell-scrollbar {
+            border: 0px;
+        }*/
+
+        /*奇偶行底色*/
+        table tbody .ant-table-row:nth-child(even) td,
+        table tbody .ant-table-row:nth-child(even) th {
+            background-color: @primary-color-02;
+        }
+
+        table tbody tr:nth-child(odd) td,
+        table tbody tr:nth-child(odd) th {
+            background-color: @p-bg-color;
+        }
+
+        /*鼠标在行上的颜色*/
+        table tbody tr:hover td {
+            background-color: @primary-color-08 !important;
+        }
+
+        /* 表格 边框 */
+        table thead tr th {
+            border-left: 1px solid @p-border-color !important; 
+            border-top: 1px solid @p-border-color;   
+            border-right: 0px solid @p-border-color !important;
+            border-bottom: 1px solid @p-border-color !important;
+            /*background-color: @p-bg-color-hover;*/
+            background-color: @background-color-07;
+        }
+        table thead tr th:first-child {
+            border-left: 0px solid @p-border-color !important; 
+        }
+        table thead tr .ant-table-cell-scrollbar {
+            border-top: 0px !important;
+            border-right: 0px !important;
+            border-bottom: 0px !important;
+            border-left: 0px !important;
+            background-color: inherit !important;
+        }
+        table tbody tr td {
+            padding: 3px 9px;
+            border-left: 1px solid @p-border-color; 
+            border-bottom: 1px solid @p-border-color;  
+            border-right: 0px solid @p-border-color !important;
+        }
+        table tbody tr td:first-child {
+            border-left: 0px solid @p-border-color; 
+        }
+
+        /* 固定例的边框 */
+        table tr .ant-table-cell-fix-right-first {
+            /*border-left: 1px solid @p-border-color !important;  */
+        }
+        table tr .ant-table-cell-fix-right-first:after {
+            border-right: 1px solid @p-border-color !important;  
+        }
+        table tr .ant-table-cell-fix-left-last:after {
+            border-left: 1px solid @p-border-color !important;  
+        }
+
+        .ant-table-tbody > tr.ant-table-row-selected > td {
+            border-color: @p-border-color; 
         }
 
         /*边框*/
@@ -179,33 +242,21 @@
     width          : 100%;
     margin         : 0px 0px;
     font-size      : 13px;
-}
-
-.table table tbody tr td {
-    padding: 3px 9px;
-}
-
-/*奇偶行底色*/
-.table table tbody tr:nth-child(even) td,
-table tbody tr:nth-child(even) th {
-    background-color: #F5FFFA;
-}
-
-.table table tbody tr:nth-child(odd) td,
-table tbody tr:nth-child(odd) th {
-    background-color: #ffffff;
-}
-
-/*鼠标在行上的颜色*/
-.table table tbody tr:hover td {
-    background: #fcffe6;
+    background-color: @p-bg-color;
+    /*border-left: 1px solid @p-border-color;  */
+    border-top: 0px solid @p-border-color !important;  
+    border-right: 0px solid @p-border-color;  
 }
 
 .table>div {
     margin       : 0px 0px;
-    padding      : 2px 2px;
+    padding      : 2px 0px;
     border-radius: 4px 4px;
-    border : 1px solid hsl(@primary-color, 0.63, 0.9);    
+    border : 1px solid @p-border-color-hover;    
+    background-color: @p-bg-color;
+}
+.table>div>div {
+    background-color: @p-bg-color;
 }
 
 .table_fixed table {

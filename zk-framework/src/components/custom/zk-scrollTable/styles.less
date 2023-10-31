@@ -2,22 +2,33 @@
 * @Author: Vinson
 * @Date:   2021-03-11 18:41:22
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-03-13 16:05:55
+* @Last Modified time: 2023-05-29 18:07:39
 * 
 * 
 * 
 */
+@import "../../../../css/colors.less";
 
 .s_scrollbars_table {
 	:global {
+		.ant-table-title {
+			/*background-color: @p-bg-color;*/
+		}
 		.ant-table-body {
-
+			/*background-color: @p-bg-color;*/
 		}
 		.ant-table {
 			.ant-table-header>table>thead>tr>.ant-table-cell-fix-right-first {
 				right: 0px !important;
 			}
 		}
+		.ant-spin-container{
+			height: 99%;
+		}
+
+		table thead tr .ant-table-cell-scrollbar {
+            display: none;
+        }
 	}
 }
 
@@ -39,14 +50,10 @@
 
 .s_body_scrollbars > div {
 	z-index: 2;
-
 }
 
 .s_body_scrollbars > div > table > tbody > tr > td {
-	border-right: 1px solid #f0f0f0;
-    border-right-width: 1px;
-    border-right-style: solid;
-    border-right-color: rgb(240, 240, 240);
+	/*border-right: 1px solid @p-border-color;*/
 }
 
 .s_scrollbars_table_div {

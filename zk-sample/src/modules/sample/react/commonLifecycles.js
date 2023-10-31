@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-03-28 15:10:20
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-03-28 23:32:11
+* @Last Modified time: 2022-12-05 11:46:41
 * 
 * 
 * 
@@ -69,7 +69,7 @@ class CInitReactCommonLifecycles extends React.Component {
             <div className={styles.sample_detail_panel}>
                 <h1> react 组件生命周期学习 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
                 <div className={styles.sample_detail_section}>
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "react 组件生命周期学习；官网组件生命周期说明图，此图说明的是 React 16.4 以上的版本的生命周期；",
                         ].join('\n')
@@ -81,7 +81,7 @@ class CInitReactCommonLifecycles extends React.Component {
                 <div className={styles.sample_detail_section}>
                     <h2>组件状态-componentState</h2>
                     <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "组件状态-componentState:",
                                 "组件状态发生了变化，请查看 console 日志中的生命周期打印结果：",
@@ -94,28 +94,28 @@ class CInitReactCommonLifecycles extends React.Component {
                 <div className={styles.sample_detail_section}>
                     <h2>Mounting</h2>
                     <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "constructor()",
                                 "",
                             ].join('\n')}
                         </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "static getDerivedStateFromProps()",
                                 "",
                             ].join('\n')}
                         </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "render()",
                                 "",
                             ].join('\n')}
                         </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "componentDidMount()",
-                                "",
+                                "创建时；安装组件（插入树中）后立即调用；此方法是设置任何订阅的好地方。如果您这样做，请不要忘记取消订阅componentWillUnmount()",
                             ].join('\n')}
                         </SyntaxHighlighter>
                     </div>
@@ -123,31 +123,31 @@ class CInitReactCommonLifecycles extends React.Component {
                 <div className={styles.sample_detail_section}>
                     <h2>Updating</h2>
                     <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "static getDerivedStateFromProps()",
                                 "",
                             ].join('\n')}
                         </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "shouldComponentUpdate()",
                                 "",
                             ].join('\n')}
                         </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "render()",
                                 "",
                             ].join('\n')}
                         </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "getSnapshotBeforeUpdate()",
                                 "",
                             ].join('\n')}
                         </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "componentDidUpdate()",
                                 "",
@@ -158,10 +158,11 @@ class CInitReactCommonLifecycles extends React.Component {
                 <div className={styles.sample_detail_section}>
                     <h2>Unmounting</h2>
                     <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "componentWillUnmount()",
-                                "",
+                                "在卸载和销毁组件之前立即被调用。在此方法中执行任何必要的清理，例如使计时器失效、取消网络请求或清除在componentDidMount()中创建的任何订阅。",
+                                "你不应该在此方法中调用setState()，因为组件永远不会被重新呈现。一旦组件实例被卸载，它将永远不会被再次安装。",
                             ].join('\n')}
                         </SyntaxHighlighter>
                     </div>

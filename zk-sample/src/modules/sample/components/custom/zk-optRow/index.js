@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:27:19
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-25 19:07:49
+ * @Last Modified time: 2022-12-05 11:46:44
  */
 
 import React from 'react';
@@ -305,7 +305,7 @@ function FInitZKOptRowDemo({ intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"// 参见样例源码",
 						].join('\n')}

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-13 20:47:21
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 15:22:23
+ * @Last Modified time: 2022-12-06 11:16:42
  */
 
 
@@ -17,6 +17,10 @@ const msg = {
     "sample.table.col1":"列1",
     "sample.table.col2":"列2",
 	"sample.table.col3":"列3",
+    "sample.table.col4":"列4",
+	"sample.table.col5":"列5",
+    "sample.table.col6":"列6",
+	"sample.table.col7":"列7",
 	
 	"sample.components.original.anchor":"ZKAnchor 锚点",
 	"sample.components.original.button":"ZKButton 按钮",
@@ -55,7 +59,9 @@ const msg = {
 	"sample.components.custom.scrollTable":"ZKScrollTable 滚动条表格",
 	"sample.components.custom.searchRow":"ZKSearchRow 查询行",
 	"sample.components.custom.sider":"ZKSider 滑块",
+	"sample.components.custom.popoverPanel":"弹窗菜单",
 	"sample.components.custom.textEditor":"ZKTextEditor 富文本框",
+	"sample.components.custom.touchControl":"触控点",
 	"sample.components.custom.upload":"ZKUpload 上传",
 	"sample.components.custom.userDropDown":"ZKUserDropDown 用户下拉框",
 	"sample.components.custom.versionInfo":"ZKVersionInfo 版本信息",

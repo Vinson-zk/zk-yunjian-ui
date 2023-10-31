@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 12:29:32
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-21 18:02:21
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:42
  */
 
 
@@ -23,7 +23,7 @@ const FInitZKToolsAjaxDemo = ({ intl }) => {
 		<div className={styles.sample_detail_panel}>
 			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsAjax {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
 			<div className={styles.sample_detail_section} >
-				<SyntaxHighlighter language='jsx' style={docco}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
 						"robe-ajax 所有原生方法",
 						"req              // 定制 ajax 请求方式 1 ",
@@ -37,7 +37,7 @@ const FInitZKToolsAjaxDemo = ({ intl }) => {
 			<div className={styles.sample_detail_section} >
 				<h2>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
 				<div id="req" >
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** 定制 ajax 请求方式 1；",
 							" * @param {string} url 请求地址",
@@ -106,7 +106,7 @@ const FInitZKToolsAjaxDemo = ({ intl }) => {
 					<br />
 				</div>
 				<div id="reqData" >
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** ",
 							" * 定制 ajax 请求方式 2；不建议使用；建议使用 定制 ajax 请求方式 1",
@@ -121,7 +121,7 @@ const FInitZKToolsAjaxDemo = ({ intl }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="reqPretreatment" >
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** ",
 							" * 请求会调用默认预处理；建议使用",
@@ -136,7 +136,7 @@ const FInitZKToolsAjaxDemo = ({ intl }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="auth" >
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** ",
 							" * 请求身份认证处理；也是默认处理函数；",
@@ -148,7 +148,7 @@ const FInitZKToolsAjaxDemo = ({ intl }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="pretreatment" >
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** ",
 							" * 请求消息返回预处理；也是默认处理函数；",

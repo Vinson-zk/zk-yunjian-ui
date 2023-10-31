@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-05-09 15:20:46
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-09 15:22:33
+* @Last Modified time: 2022-12-05 11:46:41
 * 
 * 
 * 
@@ -29,7 +29,7 @@ function FInitZKSwitchDemo({ intl }) {
 			</div>
 			<div className={styles.sample_detail_section}>
 				<h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
-				<SyntaxHighlighter language='jsx' style={docco}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
 						"ZKSwitch 组件：暂不做处理",
 						"原生态封装，接受原生属性。"
@@ -39,7 +39,7 @@ function FInitZKSwitchDemo({ intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"原生态封装",
 							"<ZKSwitch >原生态封装</ZKSwitch>"

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:36:01
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-12-08 00:00:12
+ * @Last Modified time: 2022-12-05 11:46:43
  */
 
 import React from 'react';
@@ -21,7 +21,7 @@ function FInitCustomComponentsDemo({ intl }) {
 		<div className={styles.sample_detail_panel}>
 			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.framework.components.custom')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
 			<div className={styles.sample_detail_section} >
-				<SyntaxHighlighter language='jsx' style={docco}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
 						"封装一些业务组件；\n",
 						"封装的原因：\n",
@@ -32,7 +32,7 @@ function FInitCustomComponentsDemo({ intl }) {
 				</SyntaxHighlighter>
 			</div>
 			<div className={styles.sample_detail_section} >
-				<SyntaxHighlighter language='jsx' style={docco}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
 						"自定义组件；",
 						"    ZKAutoMenu",
@@ -49,11 +49,13 @@ function FInitCustomComponentsDemo({ intl }) {
 						"    ZKOptRow",
 						"    ZKPageSelect",
 						"    ZKPermission",
+						"    ZKPopoverPanel",
 						"    ZKRouter",
 						"    ZKScrollTable",
 						"    ZKSearchRow",
 						"    ZKSider",
 						"    ZKTextEditor",
+						"    ZKTouchControl",
 						"    ZKUpload",
 						"    ZKUserDropDown",
 						"    ZKVersiionInfo",

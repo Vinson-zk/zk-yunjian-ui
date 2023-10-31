@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-13 15:22:52
 * @Last Modified by:   Vinson
-* @Last Modified time: 2021-04-02 13:15:41
+* @Last Modified time: 2023-05-29 22:14:29
 * 
 * 
 * 
@@ -16,6 +16,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import moment from 'moment';
 
 import { docco } from '../../../helper';
+import zkJsUtils from 'zkJsUtils';
 import styles from "../../../styles.less";
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
 const { ZKInput, ZKDatePicker, ZKSelect } = ZKOriginalComponents;
@@ -41,7 +42,7 @@ function FInitZKScrollTableDemo({ intl }) {
 		{ title: zkToolsMsg.msgFormatByIntl(intl, 'sample.table.col3'), dataIndex: 'permission', key: 'permission', width: 150 },
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_name'),
-			dataIndex: 'opt', key: 'opt', width: 150, fixed: 'right', 
+			dataIndex: 'opt', key: 'opt', width: 50, fixed: 'right', 
 			render: (text, record, index) => {
 				return (
 					<ZKOptRow key={`grid-${record.pkId}`} >
@@ -117,76 +118,49 @@ function FInitZKScrollTableDemo({ intl }) {
 				<div>
 					<ZKScrollTable {...tableProps}></ZKScrollTable>
 					<br />
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable
-							// rowSelection={{onChange: (selectedRowKeys, selectedRows) => {}}} 
-							columns={columns}
-							// dataSource={[{id:91, title: '测试29', age:28, url: 'url', permission: 'permission'}]}
-							pagination={{}}
-							scroll={{ x: 1440, y: 300 }}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
-					<br /> 高度不自动填满
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable
-							rowKey = "id"
-							autoHeight = {false}
-							// rowSelection={{onChange: (selectedRowKeys, selectedRows) => {}}} 
-							columns={columns}
-							// dataSource={[{id:91, title: '测试29', age:28, url: 'url', permission: 'permission'}]}
-							pagination={{}}
-							scroll={{ x: true, y: 300 }}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
-					<br /> 不高度自动填满
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable rowSelection={{ onChange: (selectedRowKeys, selectedRows) => { } }}
-							rowKey = "id"
-							columns = {columns}
-							dataSource = {dataSource}
-							pagination={{position: ['topRight', 'bottomRight']}}
-							// scroll={{x:true, y: 300}}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
-					<br /> 高度自动填满
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable
-							rowKey = "id"
-							autoHeight = {true}
-							// rowSelection={{onChange: (selectedRowKeys, selectedRows) => {}}} 
-							columns={columns}
-							// dataSource={[{id:91, title: '测试29', age:28, url: 'url', permission: 'permission'}]}
-							pagination={{}}
-							scroll={{ x: true, y: 300 }}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
-					<br /> 高度自动填满
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
+					<br />=========================================================================================
+					<br /><font color = "red">高度自动填满 --- 分页: 上/下、滚动条: 上下/左右、固定例: 左/右</font>
+					<div style = {{height: '650px', display: 'flex', border: '1px solid', padding: '30px'}}>
 						<ZKScrollTable 
 							rowKey = "id"
-							rowSelection={{ onChange: (selectedRowKeys, selectedRows) => { } }}
+							rowSelection = {{ onChange: (selectedRowKeys, selectedRows) => { } }}
 							autoHeight = {true}
-							columns = {columns}
+							columns = {columns.map(item=>{
+								let itemClone = zkJsUtils.clone(item);
+								if(itemClone.key == 'title'){
+									itemClone['fixed'] = 'left';
+								}
+								console.log("----- ", item);
+								return itemClone;
+							})}
+							rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 30 }}
 							dataSource = {dataSource}
-							pagination={{position: ['topRight', 'bottomRight']}}
-							scroll={{x:true, y: 300}}
-							rowNum={{}}
+							pagination = {{position: ['topRight', 'bottomRight']}}
+							scroll = {{x:1440, y: 300}}
 						>
 							<ZKOptRow />
 						</ZKScrollTable>
 					</div>
+					<br />
+					<br /><font color = "red">高度自动填满 --- 分页: 下、滚动条: 上下/左右、固定例: 左/右</font>
+					
+					<br />
+					<br /><font color = "red">高度自动填满 --- 分页: 下、滚动条: 上下/左右、固定例: 右</font>
+					
+					<br />
+					<br /><font color = "red">高度自动填满 --- 分页: 下、滚动条: 上下/左右、固定例: 左</font>
+					
+					<br />
+					<br /><font color = "red">高度自动填满 --- 分页: 下、滚动条: 上下、固定例: 左/右</font>
+					
+					<br />
+					
+					<br /><br /><br />
+
+					<br />=========================================================================================
+					<br /><font color = "red">高度不自动填满 --- 上下分页、上下滚动条、左右滚动条、左固定例、右固定例</font>
+					
+					
 				</div>
 			</div>
 			<div className={styles.sample_detail_section}>
@@ -225,7 +199,7 @@ function FInitZKScrollTableDemo({ intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"// 参考框架样例代码",
 						].join('\n')}

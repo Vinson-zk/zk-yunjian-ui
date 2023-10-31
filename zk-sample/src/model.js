@@ -2,11 +2,11 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 16:58:59
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-02-21 23:57:32
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 12:52:22
  */
 
-import { getNavItemSync } from './service';
+import { getNavItems } from './service';
 
 import zkJsUtils from 'zkJsUtils';
 import { zkTools } from 'zkFramework';
@@ -47,7 +47,7 @@ const model = {
             }
         },
         *getNavItems({ payload }, { call, put }) {
-            let res = yield call(getNavItemSync, payload);
+            let res = yield call(getNavItems, {});
             if (res.code == "zk.0") {
                 let navItems = res.data;
                 navItems = zkJsUtils.sort(navItems, 1);

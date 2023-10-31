@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:30:54
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-02 16:08:17
+ * @Last Modified time: 2023-05-29 16:20:13
  */
 
 import React from 'react';
@@ -267,22 +267,6 @@ class CInitZKFormDemo extends React.Component {
 					</ZKForm.Item>
 					<ZKForm.Item label="ZKModal" >
 						<Button onClick={this.showModal}>Test ZKModal</Button>
-						<ZKModal
-							title="ZKModal"
-							visible={this.state.visible}
-							onOk={this.handleOk}
-							onCancel={this.handleCancel}>
-							<SyntaxHighlighter language="jsx" style={docco}>
-								{
-									"{\n" + this.state.values.join(",\n") + "\n}"
-								}
-							</SyntaxHighlighter>
-							<SyntaxHighlighter language="jsx" style={docco}>
-								{
-									"{\n" + this.state.valuesRemove.join(",\n") + "\n}"
-								}
-							</SyntaxHighlighter>
-						</ZKModal>
 					</ZKForm.Item>
 					<ZKForm.Item label="test rules" name = "test1-rules" rules = {[{ 'required': true, 'message': "Please input your note!" }]} >
 						<Input />
@@ -292,6 +276,22 @@ class CInitZKFormDemo extends React.Component {
 						<ZKButton type="primary" htmlType="submit">{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_submit")}</ZKButton>
 						<ZKButton type="primary" onClick = {this.onResetFields} >{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_reset")}</ZKButton>
 					</ZKForm.Item>
+					<ZKModal
+						title="ZKModal"
+						open={this.state.visible}
+						onOk={this.handleOk}
+						onCancel={this.handleCancel}>
+						<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+							{
+								"{\n" + this.state.values.join(",\n") + "\n}"
+							}
+						</SyntaxHighlighter>
+						<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+							{
+								"{\n" + this.state.valuesRemove.join(",\n") + "\n}"
+							}
+						</SyntaxHighlighter>
+					</ZKModal>
 				</ZKForm><br /><br />
 			</div>
 			<div className={styles.sample_detail_section}>
@@ -306,7 +306,7 @@ class CInitZKFormDemo extends React.Component {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"参考样例代码:",
 							"参考组件样例代码"

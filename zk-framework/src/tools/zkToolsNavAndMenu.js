@@ -2,8 +2,8 @@
  * 导航栏，菜单处理 函数方法
  * @Author: Vinson
  * @Date: 2020-08-11 09:04:45
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-17 16:59:52
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 15:56:44
  */
 
 import React from 'react';
@@ -120,7 +120,8 @@ const f_getRoutesByNavs = (dvaApp, prefixPath, navDatas, dynamicImportHelper) =>
 				return;
 			}
 			navDynamicComponent = f_makeDynamicComponent(dvaApp, navComponentObj.models, navComponentObj.component);
-			// console.log("[^_^:20200813-1951-001] f_getRoutesByNavs: ", item, navComponentObj, navDynamicComponent);
+			// console.log("[^_^:20200813-1951-001] f_getRoutesByNavs: ", item, dynamicImportHelper);
+			// console.log("[^_^:20200813-1951-002] f_getRoutesByNavs: ", navComponentObj, navDynamicComponent);
 			return (
 				<ZKPrivateRoute
 					key={item.pkId + "-nav"}

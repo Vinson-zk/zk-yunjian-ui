@@ -65,9 +65,10 @@ class CInitSysOrgDeptIndex extends Component {
     render() {
         let { intl, loading, mApp, mSysOrgDeptAdmin, dispatch } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+        //  ${zkOrgStyles.companry_tree}
         return (
             <div className={ `${zkStyles.zk_main_panel} ${zkStyles.display_flex_row}` } style={{height:'100%'}} >
-                <div className={`${zkStyles.zk_left_sider} ${zkOrgStyles.zk_left_sider_border} ${zkOrgStyles.companry_tree}`} style = {{'width':'200px'}}>
+                <div className={`${zkStyles.zk_left_sider} ${zkOrgStyles.zk_left_sider_border}`} style = {{'width':'200px'}}>
                     <ZKCompanyTree onSelect = {this.f_onSelect} optCompany = {mSysOrgDeptAdmin.targetCompany} />
                 </div>
                 {mSysOrgDeptAdmin.targetCompany.pkId?

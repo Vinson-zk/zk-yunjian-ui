@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-11 22:29:13
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 20:20:22
+ * @Last Modified time: 2022-12-05 09:06:55
  */
 
 import React from 'react';
@@ -45,4 +45,7 @@ FInitLanguageSelect.defaultProps = {
 	lang: 'en-US',
 }
 
-export default FInitLanguageSelect
+export default FInitLanguageSelect;
+
+
+

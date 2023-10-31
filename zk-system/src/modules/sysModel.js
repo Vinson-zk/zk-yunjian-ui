@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2021-02-14 12:23:04
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-03 19:17:46
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-09-05 23:45:26
  */
 
 import { getNavMenus } from "./sysService.js";
@@ -29,8 +29,7 @@ const model = {
             let res = yield call(getNavMenus, navCode, payload);
             if (res.code == "zk.0") {
                 let menus = res.data;
-                menus = zkJsUtils.makeTree(menus, null);
-                menus = zkJsUtils.sort(menus);
+                // console.log("[^_^:20230904-2303-001] sys.menus: ", menus);
                 yield put({ type: 'setState', payload: { "menus": menus||[], "menusIsUpdate":true } });
             } else {
                 throw new Error("getMenus req fail，error message: " + res.msg)

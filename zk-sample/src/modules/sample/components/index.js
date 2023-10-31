@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 21:26:52
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 23:21:21
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-11-30 15:12:04
  */
 
 import React from 'react';
@@ -19,6 +19,9 @@ const FInitComponentsIndex = ({ intl }) => {
             <h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.framework.components')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
             <div className={styles.sample_detail_section} >
                 组件封装
+            </div>
+            <div className={styles.sample_detail_section} >
+
             </div>
         </div>
     );

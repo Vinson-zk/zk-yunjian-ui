@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:21:29
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-07 02:30:27
+ * @Last Modified time: 2022-12-05 11:46:43
  */
 
 import React from 'react';
@@ -41,7 +41,7 @@ function FInitZKAutoTableDemo({ intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"参考框架代码",
 						].join('\n')}

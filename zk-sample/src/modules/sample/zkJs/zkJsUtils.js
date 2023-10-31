@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-13 13:44:59
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-02-28 13:02:53
+ * @Last Modified time: 2023-05-29 18:47:03
  */
 
 
@@ -63,12 +63,13 @@ class CInitJsUtilsDemo extends React.Component {
 						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#strReplace`} title="strReplace" ></ZKAnchor.Link>
 						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#getJsonAttr`} title="getJsonAttr" ></ZKAnchor.Link>
 						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#sort`} title="sort" ></ZKAnchor.Link>
+						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#clone`} title="clone" ></ZKAnchor.Link>
 						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#arrayPrototype`} title="Array.prototype" ></ZKAnchor.Link>
 					</ZKAnchor>
 				</div>
 				<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkJsUtils {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
 				<div className={styles.sample_detail_section}>
-					<SyntaxHighlighter id="all-func" language='jsx' style={docco}>
+					<SyntaxHighlighter id="all-func" language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"queryURL         // 查询获取 url 中的参数，",
 							"base64Decode     // 64 编码解密",
@@ -83,13 +84,14 @@ class CInitJsUtilsDemo extends React.Component {
 							"strReplace       // 字符串 按参数名 {argName} 替换成对象的值",
 							"getJsonAttr      // 取 JSON 字符中的某个属性",
 							"sort             // 排序",
+							"clone            // 深度拷贝一个对象或数组",
 						].join('\n')}
 					</SyntaxHighlighter>
 				</div>
 				<div className={styles.sample_detail_section}>
 					<h2>1、方法 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
 					<div id="queryURL">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 获取 url 中的参数；",
 								" * @href: 为url;",
@@ -101,7 +103,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="base64Decode">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 64 解码",
 								" * @str: 待解码的字符串；",
@@ -112,7 +114,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="removeObjUnAttr">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 删除对象 undefined 属性",
 								" * @obj: 待处理对象;",
@@ -123,7 +125,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="isEmpty">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 判断一个对象是否为空; 'null', 'undefined', '' 都为空 ",
 								" * @obj: 待判断的对象;",
@@ -134,7 +136,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="strToObj">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** json 字符串转为 json 对象 ",
 								" * @str: 需要转的字符串或字符串数组;",
@@ -145,7 +147,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="objToStr">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** json 对象 转为 json 字符串",
 								" * @obj: 需要转的 json 对象; ",
@@ -156,7 +158,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="redirectUrl">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** url 重定向 ",
 								" * @location: 请求 location; location.pathname 为请求地址字符串；",
@@ -172,7 +174,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="makeTree">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 做成树状结构",
 								" * @objList: 数据对象数组，对象包含：id, parentId 两个属性；处理完后对象会增加一个 children 属性，无子节点是此属性为空；",
@@ -184,7 +186,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="findTreeParent">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 递归查找 父节点;",
 								" * @pObjs: 数据对象数组; 对象包含 id, parentId，children 三个属性；",
@@ -196,7 +198,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="getLang">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 国际化转换，将国际化标识转在本项目中对应的格式 ",
 								" * @lang: 待转换的标识; ",
@@ -207,7 +209,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="strReplace">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 字符串 按参数名 {argName} 替换成对象的值 ",
 								" * @msg: 源字符串; ",
@@ -223,7 +225,7 @@ class CInitJsUtilsDemo extends React.Component {
 						<br /><br />
 					</div>
 					<div id="getJsonAttr">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 不推荐使用，将会移除此方法；取 json 字符串 或 json 对象中的某个属性 ",
 								" * @objStr: 源 json 对象或json 字符串；",
@@ -235,7 +237,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="sort">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 排序函数 ",
 								" * @items：源数据对象数组；",
@@ -248,11 +250,22 @@ class CInitJsUtilsDemo extends React.Component {
 							].join('\n')}
 						</SyntaxHighlighter>
 					</div>
+					<div id="clone">
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+							{[
+								"/** 深度拷贝一个对象或数组 ",
+								" * @obj: 源数组或对象；",
+								" * @return: 深度拷贝的结果数组或对象；",
+								" */",
+								"clone:f_clone(obj)"
+							].join('\n')}
+						</SyntaxHighlighter>
+					</div>
 				</div>
 				<div className={styles.sample_detail_section}>
 					<h2>2、数组对象属性扩展 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
 					<div id="arrayPrototype" >
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"// 查询元素，不存在返回 -1; 存在 返回其位置",
 								"Array.prototype.indexOf = function(val) ",

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:26:43
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-17 07:25:06
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:44
  */
 
 
@@ -26,7 +26,7 @@ function FInitZKNavDemo({ history, match, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.navigation')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							'<ZKNavigation navItems={navItems} prefixPath={`${match.path}`} />',
 						].join('\n')}
@@ -68,7 +68,7 @@ function FInitZKNavDemo({ history, match, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"参考框架代码",
 						].join('\n')}

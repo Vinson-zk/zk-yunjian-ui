@@ -11,8 +11,11 @@
   "files": [
     "es"
   ],
+  "sedeEffects": ["**/*.css", "**/*.less"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --config ./conf/webpack.my.dev.config.js",
+    "build": "webpack --config ./conf/webpack.my.prod.config.js"
   },
   "author": "Vinson",
   "license": "ISC"

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:22:16
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-17 11:40:30
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:43
  */
 
 
@@ -26,7 +26,7 @@ function FInitZKBredcrumbDemo({ history, match, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.breadcrumb')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"示例参考框架代码",
 							"会根据路由路径映射对象，根据当前访问路径，逐级找出菜单(路由)的名称！",
@@ -78,7 +78,7 @@ function FInitZKBredcrumbDemo({ history, match, intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"参考框架代码",
 						].join('\n')}

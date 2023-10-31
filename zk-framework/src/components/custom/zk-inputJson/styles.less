@@ -3,8 +3,10 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:32:41
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 11:20:20
+ * @Last Modified time: 2022-12-05 08:58:13
  */
+
+@import "../../../../css/colors.less";
 
 .edit_json {
 
@@ -46,7 +48,7 @@
   .attr_after_color {}
 
   .attr_after_select {
-    color: @primary-color;
+    color: @p-font-color-active;
   }
 
   .ant-input-group-addon {
@@ -56,18 +58,18 @@
 
   .ant-input-group-addon:hover,
   .attr_before_color:hover {
-    color : @primary-color;
+    color : @p-font-color-hover;
     cursor: pointer;
   }
 
   .ant-input-group-addon:hover,
   .attr_after_color:hover {
-    color : @primary-color;
+    color : @p-font-color-hover;
     cursor: pointer;
   }
 
   .ant-input-group-addon:hover span {
-    color: @primary-color;
+    color: @p-font-color-hover;
   }
 
   .ant-input-group .ant-select,
@@ -94,7 +96,7 @@
 
   .attr_popover_panel>span:nth-child(1) {
     /* 与 attr_popover_panel>span:first-child 选择的是同一个结点 */
-    color      : @label-color;
+    color      : @p-font-color;
     max-width  : 100px;
     /*min-width: 66px;*/
     width      : 60px;
@@ -119,7 +121,7 @@
   }
 
   .attr_popover_panel>span:first-child:hover {
-    color: @primary-color;
+    color: @p-font-color-hover;
   }
 }
 

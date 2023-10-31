@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 09:06:32
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 10:09:16
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:42
  */
 
 
@@ -26,7 +26,7 @@ const FInitJsEventDemo = ({ intl }) => {
 		<div className={styles.sample_detail_panel}>
 			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkJsEvent {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
 			<div className={styles.sample_detail_section} >
-				<SyntaxHighlighter language='jsx' style={docco}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
 						"eventEmitte:{            // 发布订阅类",
 						"    register // 注册事件监听; eventType 事件类型，handle 处理函数",
@@ -43,14 +43,14 @@ const FInitJsEventDemo = ({ intl }) => {
 			<div className={styles.sample_detail_section} >
 				<h2> 事件订阅发布类 eventEmitte {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
 				<div id="eventEmitte">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"自定义事件发布、订阅、派发类",
 						].join('\n')}
 					</SyntaxHighlighter>
 				</div>
 				<div id="eventEmitte.register">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** 事件注册方法 ",
 							" * @eventType [String].required: 事件类型，也就是一个事件标识；",
@@ -62,7 +62,7 @@ const FInitJsEventDemo = ({ intl }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="eventEmitte.remove">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** 移除事件处理方法；",
 							" * @eventType [String].required: 要移除的事件类型，也就是一个事件标识；",
@@ -74,7 +74,7 @@ const FInitJsEventDemo = ({ intl }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="eventEmitte.emit">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** 分发事件方法，即：触发一个事件；",
 							" * @eventType [String].required: 事件类型，也就是一个事件标识；",
@@ -89,7 +89,7 @@ const FInitJsEventDemo = ({ intl }) => {
 			<div className={styles.sample_detail_section} >
 				<h2> js 事件处理通用方法 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
 				<div id="eventBinding">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** js 注册事件监听 通用方法 ",
 							" * @eventTarget [Object].required: 绑定目标对象",
@@ -103,7 +103,7 @@ const FInitJsEventDemo = ({ intl }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="eventRemove">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** js 移除事件监听 通用方法 ",
 							" * @eventTarget [Object].required: 绑定目标对象",
@@ -117,7 +117,7 @@ const FInitJsEventDemo = ({ intl }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="eventCancelPropagation">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** js 取消冒泡事件，中断冒泡事件； ",
 							" * @event [Object].required: 事件对象",
@@ -128,7 +128,7 @@ const FInitJsEventDemo = ({ intl }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="eventCancelDefault">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** js 取消默认事件，中断事件； ",
 							" * @event [Object].required: 事件对象",
@@ -142,7 +142,7 @@ const FInitJsEventDemo = ({ intl }) => {
 			<div className={styles.sample_detail_section} >
 				<h2>js 事件 笔记，说明</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"事件捕获 <div><p></p></div>",
 							"当你使用事件捕获时，父级元素先触发，子级元素后触发，即div先触发，p后触发。",

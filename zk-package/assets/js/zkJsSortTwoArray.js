@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 13:41:03 
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 09:24:26
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 16:29:21
  */
 (function (global) {
 
@@ -75,5 +75,9 @@
     }
 
     global.zkJsSortTwoArray = _func_sort
-
+    return _func_sort;
 })(typeof window !== "undefined" ? window : this);
+
+
+
+

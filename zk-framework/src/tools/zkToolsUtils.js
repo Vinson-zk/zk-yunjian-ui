@@ -2,8 +2,8 @@
  * 一些项目公共方法，暂未使用
  * @Author: Vinson
  * @Date: 2020-08-11 16:07:22
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-19 19:24:08
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-09-04 23:10:29
  */
 
 /**
@@ -60,6 +60,15 @@ const f_convertSortParam=(filter, sorter)=>{
   return filter;
 }
 
+// 请求的公共处理函数，特殊处理，请自行定义
+const f_resPublicDispose = res=>{
+  let filterCodes = ["zk.000002"];
+  if(filterCodes.includes(res.code)){
+    return true;
+  } 
+  return false
+}
+
 export default {
   getContenScrollbarsDiv: f_getContenScrollbarsDiv,    // 取页面右边内容栏的滚动条 DIV；一般在锚点设置容器DIV 时使用；
   getPageSize: f_getPageSize,   // 取记录的用户操作时的分页数量；
@@ -67,4 +76,5 @@ export default {
   // convertResPage:f_convertResPage, // 将响应的分页数据，转为 Table 的分页数据
   convertPageParam: f_convertPageParam,
   convertSortParam: f_convertSortParam,
+  resPublicDispose: f_resPublicDispose, //
 }

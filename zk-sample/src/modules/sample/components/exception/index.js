@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:15:19
  * @Last Modified by:   Vinson
- * @Last Modified time: 2020-08-14 23:39:40
+ * @Last Modified time: 2022-12-05 11:46:40
  */
 
 
@@ -35,7 +35,7 @@ const FInitExceptionDemo = withRouter(({ intl, match, history, location }) => {
 			<div className={styles.sample_detail_section}>
 				<h2>1、ZKException &nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"import { ZKException } from \"zkFramework\";",
 							"异常组件！",
@@ -82,7 +82,7 @@ const FInitExceptionDemo = withRouter(({ intl, match, history, location }) => {
 					<div>
 						<a size={"small"} onClick={e => { history.push(`${match.path}/500`); }}>500</a>
 					</div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{["<ZKException errCode={500} />"].join('\n')}
 					</SyntaxHighlighter>
 					<div><ZKException errCode={500} /></div>
@@ -91,7 +91,7 @@ const FInitExceptionDemo = withRouter(({ intl, match, history, location }) => {
 					<div>
 						<a size={"small"} onClick={e => { history.push(`${match.path}/404`); }}>404</a>
 					</div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{["<ZKException errCode={404} />"].join('\n')}
 					</SyntaxHighlighter>
 					<div><ZKException errCode={404} /></div>
@@ -100,7 +100,7 @@ const FInitExceptionDemo = withRouter(({ intl, match, history, location }) => {
 					<div>
 						<a size={"small"} onClick={e => { history.push(`${match.path}/403`); }}>403</a>
 					</div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{["<ZKException errCode={403} />"].join('\n')}
 					</SyntaxHighlighter>
 					<div><ZKException errCode={403} /></div>

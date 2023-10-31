@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 12:29:44
  * @Last Modified by:   Vinson
- * @Last Modified time: 2020-08-14 23:39:43
+ * @Last Modified time: 2022-12-05 11:46:42
  */
 
 
@@ -35,7 +35,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 			</div>
 			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsAuth {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
 			<div className={styles.sample_detail_section} >
-				<SyntaxHighlighter language='jsx' style={docco}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
 						"一些用户权限处理函数",
 						"getTicket         // 取当前用户令牌",
@@ -51,7 +51,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 			<div className={styles.sample_detail_section} >
 				<h2>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
 				<div id="getTicket">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 取当前用户令牌",
@@ -62,7 +62,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="f_setTicket">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 设置当前用户令牌",
@@ -74,7 +74,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="removeTicket">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 移除当前用户令牌",
@@ -85,7 +85,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="isLogin">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 判断是否已登录；",
@@ -96,7 +96,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="cleanLoginInfo">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 清理用户登录信息，可删除用户信息，cookie 等信息",
@@ -107,7 +107,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="logout">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** 登出；",
 							" * @param {object} match ",
@@ -120,7 +120,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="isPublicItem">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 判断当前打开的路由地址是否为开放的路由 item；",

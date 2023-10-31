@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-29 16:21:08
-* @Last Modified by:   Vinson-zk
-* @Last Modified time: 2022-05-25 15:02:02
+* @Last Modified by: vinson
+* @Last Modified time: 2023-09-05 23:46:04
 * 
 * 
 * 
@@ -33,10 +33,11 @@ import zkSamplePackageInfo from 'zkSample/package.json';
 import zkSystemPackageInfo from 'zkSystem/package.json';
 import zkDevelopmentToolPackageInfo from 'zkDevelopmentTool/package.json';
 import zkWechatPackageInfo from 'zkWechat/package.json';
+import zkFilePackageInfo from 'zkFile/package.json';
 import zkMailPackageInfo from 'zkMail/package.json';
 
 const dependenceInfos = [zkPackagePackageInfo, zkFrameworkPackageInfo, zkSamplePackageInfo, zkSystemPackageInfo, 
-	zkDevelopmentToolPackageInfo, zkWechatPackageInfo, zkMailPackageInfo];
+	zkDevelopmentToolPackageInfo, zkWechatPackageInfo, zkFilePackageInfo, zkMailPackageInfo];
 import versionInfo from '../../package.json';
 
 /*** 引入依赖功能模块 ***/
@@ -44,6 +45,7 @@ import {funcModule as sampleFuncModule} from 'zkSample';
 import {funcModule as systemFuncModule} from 'zkSystem';
 import {funcModule as developmentToolFuncModule} from 'zkDevelopmentTool';
 import {funcModule as wechatFuncModule} from 'zkWechat';
+import {funcModule as fileFuncModule} from 'zkFile';
 import {funcModule as mailFuncModule} from 'zkMail';
 import generalApplicationFuncModule from './generalApplication/func.js';
 
@@ -53,6 +55,7 @@ const funcModuleMppingObj = {
     "developmentTool": developmentToolFuncModule,
     "wechat": wechatFuncModule,
     "generalApplication": generalApplicationFuncModule,
+    "file": fileFuncModule,
     "mail": mailFuncModule,
 }
 
@@ -177,7 +180,7 @@ const FInitLayoutPrivateAuth = ({ redirectPath, ...props }) => {
 				} 
 			});	
 		}	
-		console.log("[^_^:20210823-1201-001] ", globalAppConfig.isAuth, zkToolsAuth.isLogin(), props.mApp.user);
+		// console.log("[^_^:20210823-1201-001] ", globalAppConfig.isAuth, zkToolsAuth.isLogin(), props.mApp.user);
 	}
 	// console.log("[^_^:20210702-0846-001] ", globalAppConfig.isAuth, zkToolsAuth.isLogin(), props.mApp.user);
 	

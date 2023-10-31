@@ -1,67 +1,59 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 17:23:52 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-20 11:07:26
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 22:11:02
  */
 
-const webpackPublicConfig = require('../../zk-package/conf/webpack.public.config.js');
+const packageWebpack = require('../../zk-package/conf/webpack.package.config.js');
 
-const path = webpackPublicConfig.path;
-const WebpckMerge = webpackPublicConfig['webpack-merge'];
-const MockerApi = webpackPublicConfig['mocker-api'];
+const packagePath = packageWebpack.packagePath;
+const webpack = packageWebpack.webpack;
+// const WebpckMerge = packageWebpack.WebpckMerge;
+const MockerApi = packageWebpack.MockerApi;
 
 const proxyConfig = require('./proxy.config.js'); 
-const baseWebpackConfig = require('./webpack.base.config');
 
 let globalAppConfig = require('./app.config.js');
+let openPage = globalAppConfig.basename ? globalAppConfig.basename + "/" : "/"; // 默认打开路径，默认值为 
 
-module.exports = WebpckMerge(baseWebpackConfig(null, null), {
-    mode:"development",
-    devServer: {
-        contentBase: path.resolve(__dirname, '../dist'), // 默认会以根文件夹提供本地服务器，这里指定文件夹
-	    historyApiFallback: true,                        // 在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
-	    host: "0.0.0.0",
-        port: 11113,                                     // 如果省略，默认8080，也可以在 npm 指令中指定
-	    publicPath: "/",
-        open:true,
-        openPage: globalAppConfig.basename ? globalAppConfig.basename + "/" : "/", // 默认打开路径，默认值为 /
-        hot: true,              // 是否使用热更新
-	    proxy:proxyConfig,      // 代理设置
-        before: (app, server)=>{
-            // app.use("*", function (req, res, next) {
-            //   res.header('Access-Control-Allow-Origin', '*');
-            //   res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-            //   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-            //   if (req.method === 'OPTIONS') {
-            //     res.send(200)
-            //   } else {
-            //     next()
-            //   }
-            // });
+let prodWebpackConfig = require('./webpack.prod.config.js');
 
+module.exports = (env, args) => {
+    let webpackConfig = prodWebpackConfig(env, args, true);
+
+    webpackConfig.mode = "development";
+    webpackConfig.optimization.minimize = false;
+    // plugin 插件 源文件映射
+    webpackConfig.plugins.push(new packageWebpack.pluginsClass.SourceMapDevToolPlugin());
+
+    webpackConfig.devServer = {
+        static: {
+          directory: packagePath.resolve(__dirname, '../dist'),
+          // publicPath: '/',
+        },
+        host: '0.0.0.0',
+        port: 11113,
+        // open: [openPage], // true, 打开的断裂面
+        hot: true,
+        compress: true,
+        historyApiFallback: true, // 在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
+        proxy:proxyConfig,      // 代理设置
+        onBeforeSetupMiddleware: (devServer)=>{
+            if(!devServer){
+                console.err("[>_<:20230823-1427-001] webpack-dev-server is not defined");
+                throw new Error("[>_<:20230823-1427-001] webpack-dev-server is not defined");
+            }
             // mock 数据配置
-            MockerApi(app, path.resolve(__dirname, '../mock/mock.config.js'), {});
-
-            // // 跨域设置
-            // app.all('*', function(req, res, next) {
-            //     res.header("Access-Control-Allow-Origin", "*");
-            //     res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
-            //     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-            //     next();
-            // });
+            MockerApi(devServer.app, packagePath.resolve(__dirname, '../mock/mock.config.js'), {});
         }
-    },
-    
-//     plugins: [
-// 　　 　　 
-//         new CopyWebpackPlugin([
-//             {
-//                 from: path.resolve(__dirname, '../public/assets'),
-//                 to: 'static',
-//                 ignore: ['.*']
-//             }
-//         ]),
-//     ]
+    };
+    return webpackConfig;
+};
 
-});
+
+
+
+
+
+

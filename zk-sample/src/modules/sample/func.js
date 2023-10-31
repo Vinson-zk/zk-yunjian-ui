@@ -3,12 +3,12 @@
  * @Author: Vinson
  * @Date: 2020-08-12 00:15:57
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-28 09:33:26
+ * @Last Modified time: 2023-05-27 12:10:41
  */
 
  /** 引入模块功能 */
-import cNavIndex from './index.js';
-import mNavIndex from './model.js';
+import cSampleIndex from './index.js';
+import mSampleIndex from './model.js';
 
 import cHome from './home.js';
 
@@ -62,11 +62,14 @@ import cExample1Detail2 from "./example/e1/detail-2.js";
 // 测试 demo 页
 import cTestDemo from './testDemo/index.js';
 
- /** 定义模块功能 */
- const navIndex = {
+/** 颜色定义样例 */ 
+import cColors from './colors/index.js';
+
+/** 定义模块功能 */
+const sampleIndex = {
     onEnter: undefined,    // 路由跳转钩子
-    component: cNavIndex,  // 组件
-    models: [ mNavIndex ]             // 数据模型，不存在时，需要设置为空数组；
+    component: cSampleIndex,  // 组件
+    models: [ mSampleIndex ]             // 数据模型，不存在时，需要设置为空数组；
 };
 const home = { onEnter:undefined, component:cHome, models:[]};
 const es6 = {component:cEs6, models:[]};
@@ -118,14 +121,16 @@ const e1Detail_1 = {onEnter: undefined, component: cExample1Detail1, models: [mE
 const e1Detail_2 = {onEnter: undefined, component: cExample1Detail2, models: [mExample1]};
 // 测试 demo 页
 const tTestDemo = {onEnter: undefined, component: cTestDemo, models: []};
+// 颜色定义
+const colors = {onEnter: undefined, component: cColors, models: []};
 
 export default {
-    navIndex, home, 
+    sampleIndex, home, 
     es6, reactDva, reactCommonLifecyles,
     zkJsIndex, zkJsUtils, zkJsEvent, zkJsSortTwoArray,
     router, routerStatic, routerMenu, routerMenuIndex, routerMenuL2c1, routerMenuL2c2, routerMenuL2c3, routerMenuL2c4, routerMenuL2c5, routerMenuL2c1c1, routerMenuL2c2c1, routerMenuL2c3index, routerMenuL2c3c1, routerMenuL2c4c1,
     zkTools, zkToolsMsg, zkToolsAjax, zkToolsAuth, zkToolsNavAndMenu, zkToolsUtils, zkToolsValidates,
     ...componentsFunc,
-    sampleExample, e1, e1Edit, e1Detail_1, e1Detail_2, tTestDemo
+    sampleExample, e1, e1Edit, e1Detail_1, e1Detail_2, tTestDemo, colors
  };
  

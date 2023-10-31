@@ -3,9 +3,10 @@
  * @Author: Vinson
  * @Date: 2020-08-12 10:25:33
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-09 23:33:18
+ * @Last Modified time: 2022-12-05 08:57:21
  */
 
+@import "../../../css/colors.less";
 
 .exception_panel {
 	/*border: 1px solid red;*/
@@ -63,7 +64,7 @@
 			}
 
 			.e_detail {
-				border       : 1px solid @primary-color;
+				border       : 1px solid @p-border-color-hover;
 				margin       : 0px 0px 8px 0px;
 				padding      : 9px 9px;
 				color        : rgba(0, 0, 0, .45);
@@ -77,13 +78,17 @@
 }
 
 .img_bg_500 {
-	background-image: url("../../../public/assets/svg/error.500.svg");
+	background-image: url("../../assets/svg/error.500.svg");
 }
 
 .img_bg_404 {
-	background-image: url("../../../public/assets/svg/error.404.svg");
+	background-image: url("../../assets/svg/error.404.svg");
 }
 
 .img_bg_403 {
-	background-image: url("../../../public/assets/svg/error.403.svg");
+	background-image: url("../../assets/svg/error.403.svg");
 }
+
+
+
+

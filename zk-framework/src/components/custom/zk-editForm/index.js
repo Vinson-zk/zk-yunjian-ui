@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:15:36
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-03 18:00:10
+ * @Last Modified time: 2022-12-08 12:12:09
  */
 
 import React from 'react';
@@ -77,7 +77,7 @@ FInitEditItem.defaultProps = {
 class CInitEditForm extends React.Component {
 
 	// formRef = null;
-	formRef = React.createRef();
+	formRef = null;
 
 	constructor(props) {
 		super(props)
@@ -86,6 +86,7 @@ class CInitEditForm extends React.Component {
 			data: props.data
 		};
 		// console.log("[^_^:20210308-1312-001] CInitEditForm.constructor: ", props.data);
+		this.formRef = props.forwardedRef?props.forwardedRef:React.createRef(); // 这一行，是否应该放在构造函数中，待测试验证
 	}
 
 	static getDerivedStateFromProps(props, state) {
@@ -124,7 +125,15 @@ class CInitEditForm extends React.Component {
 		// )
 
 		if(this.props.goBackFunc instanceof Function){
-			this.props.goBackFunc.call(this);
+			// this.props.goBackFunc.call(this);
+			zkToolsMsg.alertMsgByType(this.props.intl, null, "editReset",       // 类型
+				() => { // 确定回调
+					this.props.goBackFunc.call(this);
+				},
+				() => { // 取消回调
+					
+				}
+			)
 		}else{
 			this.props.history.go(-1);
 		}
@@ -161,7 +170,7 @@ class CInitEditForm extends React.Component {
 			let saveData = { ...this.state.data, ...values };
 			// data = zkJsUtils.removeObjUnAttr(data)
 			// console.log("[^_^:20210308-1031-001] onFinish.saveData: ", saveData);
-			this.props.saveFunc.call(this, saveData, this.formRef.current, (errs) => {
+			this.props.saveFunc.call(this, saveData, this.formRef.current, (errs, goBack=true) => {
 				// errs: [{'name': 'fName', 'errors': 'error msg'}]
 				// console.log("[^_^:20210308-1031-001] onFinish.errs: ", errs);
 				if(errs){
@@ -169,7 +178,9 @@ class CInitEditForm extends React.Component {
 					this.formRef.current.setFields(errs);
 					this.formRef.current.scrollToField(errs[0].name);
 				}else{
-					this.onConfirmLeave(null);
+					if(goBack){
+						this.onConfirmLeave(null);
+					}
 				}
 			});
 		}
@@ -225,12 +236,11 @@ class CInitEditForm extends React.Component {
 
 	render() {
 		// console.log("[^_^:20210308-1312-001] CInitEditForm.render: ", this.props.data, this.state.data);
-		let { viewLayout, icon, title, forwardedRef, saveFunc, resetFunc, nextFunc, goBackFunc, location, children, intl, leaveConfirm, reloadConfirm, staticContext, ...props } = this.props;
-
+		let { viewLayout, icon, title, forwardedRef, saveFunc, resetFunc, nextFunc, goBackFunc, 
+			location, children, intl, leaveConfirm, reloadConfirm, staticContext, ...props } = this.props;
 		// console.log("[^_^:20210305-1424-001] forwardedRef: ", forwardedRef, staticContext);
-		
-		this.formRef = forwardedRef?forwardedRef:React.createRef();
-		// this.formRef = React.createRef();
+
+		// this.formRef = forwardedRef?forwardedRef:React.createRef(); // 这一行，是否应该放在构造函数中，待测试验证
 		// console.log("[^_^:20210305-1424-001] initialValues: ", this.state.data);
 
 		return (

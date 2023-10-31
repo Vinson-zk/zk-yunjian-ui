@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-04-01 09:30:42
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-06-24 17:01:56
+* @Last Modified by: vinson
+* @Last Modified time: 2023-08-28 17:58:26
 * 
 * 
 * 
@@ -12,7 +12,6 @@ import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixDevTool;
-// const api = "apiMock";
 
 // 增量更新表字段信息
 export async function updateAddCols(tableId) {

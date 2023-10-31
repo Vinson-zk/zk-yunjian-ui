@@ -2,22 +2,21 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 11:42:33
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-12 15:05:22
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 12:44:52
  */
 
-@import "~antd/dist/antd.less";
+@import "../../../../css/colors.less";
 
 /*
  :global{
  }
  */
 
-.menu {
+.zk_menu {
 
     border             : 0px;
     /*display          : none;*/
-    /*border-right     : 0px solid #e8e8e8;*/
     /*** 不允许选中文字 ***/
     moz-user-select    : -moz-none;
     -moz-user-select   : none;
@@ -26,6 +25,17 @@
     -webkit-user-select: none;
     -ms-user-select    : none;
     user-select        : none;
+    background-color: @p-bg-color;
+}
+
+.zk_menu ul {
+    background-color: @p-bg-color !important;
+}
+
+
+
+.menu_sub {
+    background-color: @p-bg-color;
 }
 
 .menu_sub>div {
@@ -33,14 +43,12 @@
 }
 
 .menu_sub_selected {
-    color             : @primary-color;
-    /*background-color:@primary-1; */
-    background-color  :color(~`colorPalette("@{primary-color}", 1)`);
-    /*background-color: hsl(@primary-color, 0.09, 0.4);*/
+    color             : @p-font-color-active;
+    background-color  : @p-bg-color-outline;
 }
 
 /*.menu_sub_selected > div{
-    border-right: 3px solid @primary-color;
+    border-right: 3px solid @p-border-color-active;
 }*/
 
 .menu_sub_selected>div:after {
@@ -49,5 +57,8 @@
     right       : 0;
     top         : 0;
     bottom      : 0;
-    border-right: 3px solid @primary-color;
+    border-right: 3px solid @p-font-color-active;
 }
+
+
+

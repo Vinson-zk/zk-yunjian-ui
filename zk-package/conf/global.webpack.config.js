@@ -3,18 +3,22 @@
  * @Author: Vinson
  * @Date: 2020-08-10 15:54:54
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-19 20:38:28
+ * @Last Modified time: 2022-12-07 09:01:42
 */
 
 const defaultThemeColor = {
-    // "@primary-color":"#8ac007"         // 主题色
-    // ,"@label-color":"#888"             // 标签颜色
-    // ,"@background-color":"#f7f7f7"     // 背景色
 
     // "@primary-color": "#1890ff",         // 主题色
-     "@primary-color": "#00bcd4",         // 主题色
-    "@label-color": "#888",              // 标签颜色
-    "@background-color": "#f7f7f7"       // 背景色
+    // "@background-color": "#fefefe"       // 背景色
+
+    "@primary-color": "#00bcd4",         // 主题色
+    "@background-color": "#fefefe",       // 背景色
+
+    // "@primary-color": "#d7000f",         // 主题色
+    // "@background-color": "#f1f2e5",       // 背景色
+
+    // "@primary-color": "#d7000f",         // 主题色
+    // "@background-color": "#fefefe",       // 背景色
 
 }
 

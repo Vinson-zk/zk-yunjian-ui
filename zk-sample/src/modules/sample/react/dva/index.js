@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 00:12:59
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-03-28 15:50:47
+ * @Last Modified time: 2022-12-05 11:46:42
  */
 
 
@@ -81,7 +81,7 @@ class CInitReactDva extends React.Component {
                 <h1> react 集成中 dva 组件生命周期学习 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
                 <div className={styles.sample_detail_section}>
                     {"mReactDva.lable: " + mReactDva.lable} <br /><br />
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "react dva 组件学习测试代码；",
                             "点击下面按钮，查看输出",
@@ -91,7 +91,7 @@ class CInitReactDva extends React.Component {
                 <div className={styles.sample_detail_section}>
                     <h2>组件状态-componentState</h2>
                     <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "组件状态-componentState:",
                                 "组件状态发生了变化，请查看 console 日志中的生命周期打印结果：",
@@ -104,7 +104,7 @@ class CInitReactDva extends React.Component {
                 <div className={styles.sample_detail_section}>
                     <h2>model状态-changeModelStateByEffects</h2>
                     <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "model状态-changeModelStateByEffects:",
                                 "dva model 状态发生了变化，请查看 console 日志中的生命周期打印结果：",
@@ -117,7 +117,7 @@ class CInitReactDva extends React.Component {
                 <div className={styles.sample_detail_section}>
                     <h2>model状态-changeModelStateByReducers</h2>
                     <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
+                        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                             {[
                                 "model状态-changeModelStateByReducers:",
                                 "dva model 状态发生了变化，请查看 console 日志中的生命周期打印结果：",

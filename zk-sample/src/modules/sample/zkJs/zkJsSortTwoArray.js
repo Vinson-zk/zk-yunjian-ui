@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 09:16:33
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 09:24:54
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:42
  */
 
 import React from 'react';
@@ -24,7 +24,7 @@ const FInitJsSortTwoArrayDemo = ({ intl }) => {
         <div className={styles.sample_detail_panel}>
             <h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkJsSortTwoArray {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
             <div className={styles.sample_detail_section}>
-                <SyntaxHighlighter language='jsx' style={docco}>
+                <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                     {[
                         "反序函数",
                         "待补充",

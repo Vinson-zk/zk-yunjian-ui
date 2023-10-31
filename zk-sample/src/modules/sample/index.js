@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 00:04:35
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 08:59:04
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 13:18:22
  */
 
 import React, { Component } from 'react';
@@ -31,7 +31,7 @@ class CInitSampleNavIndex extends Component {
       routerMappingObj: {}
     };
 
-    // console.log("[^_^:20200813-1941-001] CInitSampleNavIndex.constructor.props", props);
+    console.log("[^_^:20200813-1941-001] CInitSampleNavIndex.constructor.props", props);
 
     // 未请求过菜单，请求菜单
     props.dispatch({ type: 'mSample/setState', payload: { menus: undefined } })
@@ -40,7 +40,7 @@ class CInitSampleNavIndex extends Component {
     // if(props.mSample.menus == undefined){
     //     // 未请求过菜单，请求菜单
     //     props.dispatch({type: 'mSample/setState', payload:{menus:[]}})
-    //     props.dispatch({type: 'mSample/getMenus', payload:{navCode:props.navCode}})
+    //     props.dispatch({type: 'mSample/getMenus', payload:{parentId: props.navId}})
     // }
   }
 
@@ -95,7 +95,7 @@ class CInitSampleNavIndex extends Component {
         <ZKSider className={`${zkStyles.zk_left_sider} ${zkStyles.flex_1_auto}`}>
           <ZKAutoMenu menus={menus} path={`${match.path}`} routerMappingObj={this.state.routerMappingObj} />
         </ZKSider>
-        <Layout>
+        <Layout className={zkStyles.display_flex_col}>
           <ZKBreadcrumb routerMappingObj={this.state.routerMappingObj} />
             <Scrollbars className = {zkStyles.zk_scrollbars} >
                 <Content id="right-content" className={zkStyles.zk_wrapper}>
@@ -119,3 +119,6 @@ class CInitSampleNavIndex extends Component {
 // export default injectIntl(CInitSampleNavIndex);
 // export default connect(({ mSample }) => ({ mSample }))(CInitSampleNavIndex);
 export default injectIntl(connect(({ mSample }) => ({ mSample }))(CInitSampleNavIndex));
+
+
+

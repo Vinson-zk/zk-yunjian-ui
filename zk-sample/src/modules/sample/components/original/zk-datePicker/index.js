@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:30:32
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-17 18:15:51
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:40
  */
 
 import React from 'react';
@@ -60,7 +60,7 @@ function FInitZKDatePickerDemo({ intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							'原生态封装',
 							'    <ZKDatePicker />',

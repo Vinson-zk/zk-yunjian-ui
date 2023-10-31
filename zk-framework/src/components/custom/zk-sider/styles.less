@@ -2,10 +2,11 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 12:02:56
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-12 15:06:01
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 16:50:30
  */
 
+@import "../../../../css/colors.less";
 
 .slider {
 
@@ -16,72 +17,56 @@
 	/*display: none;*/
 	flex        : 0 0 auto;
 	background  : #fff;
-	border-right: 1px solid #e5e5e5;
+	border-right: 1px solid @p-border-color;
 	padding     : 0px 0px 30px 0px;
 	overflow    : hidden;
 	z-index     : 99;
+	transition  : width 0.45s;
 
-	// .slider_open{
+	.slider_head {
+		border-bottom: 1px solid @p-border-color;
+		height: 40px;
+	    line-height: 40px;
+    	margin: 0px 6px;
+	    padding: 3px 0px 0px 0px;
+		text-align  : right;
+	}
 
-	// }
+	.slider_open{
+
+	}
 
 	.trigger {
-		font-size    : 17px;
+		font-size    : 20px;
 		/*line-height: 64px;*/
 		padding      : 0px 12px 0px 0px;
 		cursor       : pointer;
 		/*transition : color .3s;*/
-		margin       : 8px auto auto auto;
+		/*margin       : 8px auto auto auto;*/
 	}
 
 	.trigger_open {
-		width       : 100%;
-		text-align  : right;
+		/*width       : 100%;*/
 		/*transition: color .3s;*/
 	}
-
-	.trigger_open:hover:before {
-		color: @primary-color;
+	.trigger_open:hover {
+		color: @p-font-color-hover;
 	}
+	.trigger_open:hover:before {
+		color: @p-font-color-hover;
+	}
+
 }
 
-.sliderClose {
-	position: fixed;
-	/*top   : 40px;*/
-	/*left  : 0px;*/
-	/*bottom: 0px;*/
-
-	/*margin: 0px;*/
-	padding: 0px 0px 9px 0px;
-
-	/*display: flex;*/
-	width      : 88px;
-	height     : 28px;
-	line-height: 25px;
-	/*border   : 1.5px solid hsl(@primary-color, 65%,75%);*/
-
-	text-align      : center;
-	transform       : rotate(90deg);
-	transform-origin: left bottom 0;
-
-	/*background-color: @primary-color;*/
-	background-color  : hsl(@primary-color, 0.78, 0.3);
-	/*background-color:red;*/
-	color             : #fff;
-	border-radius     : 9px 9px 0px 0px;
-	cursor            : pointer;
-	z-index           : 99999;
-
-	moz-user-select    : -moz-none;
-	-moz-user-select   : none;
-	-o-user-select     : none;
-	-khtml-user-select : none;
-	-webkit-user-select: none;
-	-ms-user-select    : none;
-	user-select        : none;
+.slider_mask {
+	border: 3px solid;
 }
 
-.sliderCloseTransition {
-	transition  : left 0.45s;
-	/*transition: top 0.8s;*/
-}
+
+
+
+
+
+
+
+

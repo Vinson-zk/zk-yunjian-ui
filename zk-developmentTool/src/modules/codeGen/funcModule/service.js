@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 11:55:26
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-06-24 17:01:58
+* @Last Modified by: vinson
+* @Last Modified time: 2023-08-28 17:58:22
 * 
 * 
 * 
@@ -13,7 +13,6 @@ import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixDevTool;
-// const api = "apiMock";
 
 // 编辑 
 export async function editFuncModule(params) {

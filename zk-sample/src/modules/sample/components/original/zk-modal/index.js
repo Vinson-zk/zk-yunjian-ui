@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:32:15
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-06 20:09:25
+ * @Last Modified time: 2023-05-29 17:35:14
  */
 
 import React from 'react';
@@ -73,7 +73,7 @@ class CInitZKModalDemo extends React.Component {
 					<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.original.modal')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
 					<div>
 						<Button onClick={this.showModal}>ZKModal</Button>
-						<ZKModal title="ZKModal" visible={this.state.visible}
+						<ZKModal title="ZKModal" open={this.state.visible}
 							onOk={this.handleOk}
 							onCancel={this.handleCancel}
 						>
@@ -81,7 +81,7 @@ class CInitZKModalDemo extends React.Component {
 						</ZKModal>
 						<br /><br />
 						<Button onClick={this.showSpinModal}>ZKModal Spin</Button>
-						<ZKModal title="ZKModal Spin" visible={this.state.spinModel}
+						<ZKModal title="ZKModal Spin" open={this.state.spinModel}
 							onOk={this.handleSpinOk}
 							onCancel={this.handleSpinCancel}
 						>
@@ -101,7 +101,7 @@ class CInitZKModalDemo extends React.Component {
 				<div className={styles.sample_detail_section}>
 					<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 					<div>
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"原生态封装",
 							].join('\n')}

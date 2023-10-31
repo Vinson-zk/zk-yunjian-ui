@@ -3,8 +3,10 @@
  * @Author: Vinson
  * @Date: 2020-08-12 11:15:24
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-31 17:44:52
+ * @Last Modified time: 2022-12-03 00:14:28
  */
+
+ @import "../../../../css/colors.less";
 
 .edit {
 	width  : 100%;
@@ -12,10 +14,8 @@
 	height : auto;
 	padding: 9px 0px 6px 0px;
 	margin : 0px 0px 0px 0px;
-	/*border : 1px solid @primary-color;*/
     border-radius: 4px 4px;
-	border : 1px solid hsl(@primary-color, 0.63, 0.9);
-    /*border: 1px solid @background-color;*/
+	border : 1px solid @p-border-color-active;
 
 	/* text-align: center;*/
 	/* position: relative;*/
@@ -24,10 +24,7 @@
 		display: flex;
 		margin: 0px 28px 9px 22px;
 	    padding: 0px 0px 1px 0px;
-	    /*border-bottom: 1px solid @primary-color;*/
-    	/*border-bottom: 1px solid hsl(@primary-color, 0.63, 0.9);*/
-    	/*border-bottom: 1px solid @background-color;*/
-    	border-bottom: 1px solid #bfbfbf;
+    	border-bottom: 1px solid @p-bg-color;
 
 	}
 
@@ -55,7 +52,6 @@
 	    align-items: center;
 	    font-size: 18px;
 	    font-weight: bold;
-	    /*color: @primary-color;*/
 	    padding-left: 9px;
 	}
 

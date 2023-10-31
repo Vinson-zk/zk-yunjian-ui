@@ -2,15 +2,15 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   
- * @Last Modified time: 
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 18:05:47
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixWechat;
-// const api = "apiMock";
+
 /*
 JSON.stringify(params)
 contentType:'application/json; charset=utf-8'}

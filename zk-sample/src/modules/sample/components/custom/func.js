@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 17:35:44
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-12-07 23:59:17
+ * @Last Modified time: 2022-11-29 10:04:59
  */
 
 import cIndex from './index.js';
@@ -26,7 +26,9 @@ import cRouter from './zk-router/index.js';
 import cScrollTable from './zk-scrollTable/index.js';
 import cSearchRow from './zk-searchRow/index.js';
 import cSider from './zk-sider/index.js';
+import cPopoverPanel from './zk-popoverPanel/index.js';
 import cTextEditor from './zk-textEditor/index.js';
+import cTouchControl from './zk-touchControl/index.js';
 import cUpload from './zk-upload/index.js';
 import cUserDropDown from './zk-userDropDown/index.js';
 import cVersionInfo from './zk-versionInfo/index.js';
@@ -51,7 +53,9 @@ const customRouter = { component:cRouter, models:[]};
 const customScrollTable = { component:cScrollTable, models:[]};
 const customSearchRow = { component:cSearchRow, models:[]};
 const customSider = { component:cSider, models:[]};
+const customPopoverPanel = { component:cPopoverPanel, models:[]};
 const customTextEditor = { component:cTextEditor, models:[]};
+const customTouchControl = { component:cTouchControl, models:[]};
 const customUpload = { component:cUpload, models:[]};
 const customUserDropDown = { component:cUserDropDown, models:[]};
 const customVersionInfo = { component:cVersionInfo, models:[]};
@@ -77,7 +81,9 @@ export default {
 	customScrollTable,
 	customSearchRow,
 	customSider,
+	customPopoverPanel,
 	customTextEditor,
+	customTouchControl,
 	customUpload,
 	customUserDropDown,
 	customVersionInfo,

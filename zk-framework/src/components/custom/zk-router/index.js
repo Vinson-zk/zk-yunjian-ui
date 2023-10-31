@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 16:32:48
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-02-28 12:49:14
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 15:57:06
  */
 
 import React, { Component } from 'react';
@@ -37,6 +37,11 @@ path	location.pathname	exact	matches?
  * @return {object} dva 路由
  */
 const FInitPrivateRoute = ({ component: Component, propsToComponent, onEnter, ...rest }) => {
+
+	// console.log("[^_^:20230828-0801-001] 路由组件的属性：", Component);
+	// console.log("[^_^:20230828-0801-002] 路由组件的属性：", propsToComponent);
+	// console.log("[^_^:20230828-0801-003] 路由组件的属性：", rest);
+
 	return (
 		<Route {...rest}
 			render={(props) => {
@@ -47,7 +52,8 @@ const FInitPrivateRoute = ({ component: Component, propsToComponent, onEnter, ..
 				if (onEnter instanceof Function) {
 					enterRult = onEnter.call(this, props.location);
 				}
-				// console.log("[^_^:20181024-1523-002] 路由组件的属性：", enterRult, Component);
+				// console.log("[^_^:20181024-1523-002] 路由组件的属性：", enterRult, Component, propsToComponent);
+				// console.log("[^_^:20181024-1523-003] 路由组件的属性：", props, propsToComponent);
 
 				if (zkJsUtils.isEmpty(enterRult)) {
 					return <Component {...props} {...propsToComponent} />

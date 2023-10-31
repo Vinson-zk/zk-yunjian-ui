@@ -1,3 +1,6 @@
+
+@import "../../../../css/colors.less";
+
 .nav {
 
 	display: flex;
@@ -25,15 +28,22 @@
 		color          : rgba(0, 0, 0, 0.65);
 	}
 
-	.nav_item_div>a :hover {
-		color: @primary-color;
+	.nav_item_div:hover {
+		background-color: @p-bg-color-hover;
+	}
+	.nav_item_div:hover>a {
+		color: @p-font-color-hover;
 	}
 
+	/*.nav_item_div>a :hover {
+		color: @p-font-color-hover;
+	}*/
+
 	.nav_item_selected {
-		background-color: hsl(@primary-color, 0.18, 0.9);
+		background-color: @p-bg-color-outline;
 	}
 	.nav_item_selected>a {
-		color: @primary-color;
+		color: @p-font-color-outline;
 	}
 
 

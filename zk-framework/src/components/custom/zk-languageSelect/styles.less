@@ -3,33 +3,39 @@
  * @Author: Vinson
  * @Date: 2020-08-11 22:31:06
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 20:20:04
+ * @Last Modified time: 2022-12-05 09:21:18
  */
+
+@import "../../../../css/colors.less";
 
 .languageSelect {
 	flex        : 0 0 100px;
 	/*text-align: right;*/
+	/*background-color: @p-bg-color;*/
 }
 
 .languageSelect:hover {
-	color  : @primary-color;
+	color  : @p-font-color-hover;
 	/*color: inherit;*/
 }
 
 .languageSelect>div {
 	display   : inline-block;
 	box-shadow: none !important;
+	background-color: @p-bg-color !important;
 }
 
 .languageSelect:hover span {
-	color  : @primary-color;
+	color  : @p-font-color-hover;
 	/*color: inherit;*/
 }
 
 .languageSelect_option {
 	/*z-index: 9999999;*/
+	background-color: @p-bg-color;
 }
 
 .languageSelect_option:hover {
-	color: @primary-color;
+	color: @p-font-color-hover;
+	background-color: @p-bg-color-hover;
 }

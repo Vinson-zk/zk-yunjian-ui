@@ -48,7 +48,7 @@ class CInitSysResDictEdit extends Component {
             payload: values, 
             callback: (errors) => {
                 if(!errors){
-                    this.setState({loading: true});
+                    this.setState({loading: false});
                 }
                 callbackFunc(errors);
             }

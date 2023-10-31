@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-14 12:29:58
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-23 11:56:41
+ * @Last Modified time: 2023-05-27 12:41:49
  */
 
 
@@ -45,7 +45,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
             </div>
             <h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsNavAndMenu {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
             <div className={styles.sample_detail_section} >
-                <SyntaxHighlighter language='jsx' style={docco}>
+                <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                     {[
                         "// ***** Separator : 公共函数",
                         "registerModel          // 注册数据模型 model ",
@@ -71,7 +71,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
             <div className={styles.sample_detail_section} >
                 <h2>1、公共函数&nbsp;&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
                 <div id="registerModel">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 数据模型注册与替换，一个 model 只能注册一次; ",
@@ -85,7 +85,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="unRegisterModel">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 数据模型 model 注销；",
@@ -98,7 +98,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="makeDynamicComponent">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 制作路由组件，按需要生成 dva 动态组件 dynamic({})",
@@ -115,11 +115,11 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
             <div className={styles.sample_detail_section} >
                 <h2>2、导航栏目函数&nbsp;&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
                 <div id="getRoutesByNavs">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 生成头部导航及头部导航的路由;  注意，导航栏不显示时，不生成路由，这一点和菜单 menu 不同；",
-                            " * 生成的导航路由会向路由的组件中传入：{dvaApp:dvaApp, navCode:item.code, dynamicImportHelper:dynamicImportHelper} 这三个属性； ",
+                            " * 生成的导航路由会向路由的组件中传入：{dvaApp:dvaApp, navId:item.pkId, dynamicImportHelper:dynamicImportHelper} 这三个属性； ",
                             " * @param {object} dvaApp dva app 对象； ",
                             " * @param {string} prefixPath 路由路径前缀，不能为 null 或 undefined； ",
                             " * @param {Array.of(object)} navDatas 导航栏目数据数组，不支持树形结构； ",
@@ -140,7 +140,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                     <br /><br />
                 </div>
                 <div id="getIndexNav">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 查找默认导航栏目",
@@ -152,7 +152,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="navIsShow">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/** ",
                             " * 判断导航栏是否是显示；",
@@ -167,7 +167,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
             <div className={styles.sample_detail_section} >
                 <h2>3、菜单路由处理函数&nbsp;&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
                 <div id="getRoutesByMenus">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 生成菜单路由； ",
@@ -197,7 +197,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                     <br /><br />
                 </div>
                 <div id="getIndexMenu">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 查找默认菜单；遇到的第一个设置为默认的菜单，再递归查找子菜单的默认菜单；",
@@ -215,7 +215,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="getMenuName">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 根据当前国际化语言取菜单的对应名称；",
@@ -228,7 +228,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="menuIsShow">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/** ",
                             " * 判断菜单是否是显示；",
@@ -240,7 +240,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="menuIsLeaf">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 判断菜单是否为叶子菜单；需要显示且无显示的子菜单，则为叶子节点；",
@@ -255,7 +255,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
             <div className={styles.sample_detail_section} >
                 <h2>4、路由路径的映射&nbsp;&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
                 <div id="getRouterMapping">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 生成路由路径的映射对象，映射对象供面包屑与菜单使用来级联打开菜单的显示面包屑；具体功能见生成方法原码注释；",
@@ -274,7 +274,7 @@ const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
             <div className={styles.sample_detail_section} >
                 <h2>5、其他导入或菜单处理函数&nbsp;&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
                 <div id="getDynamicImportHelper">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**",
                             " * 动态加载组件助手",

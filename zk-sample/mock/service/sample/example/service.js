@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-17 13:57:42
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-08 14:35:54
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-09-05 23:30:20
  */
 
 
@@ -159,7 +159,7 @@ module.exports = {
         let resJsonData = { code: '0', msg: 'mock GET /apiMock/sample/example/area/get ok', data: areaTree };
 
         setTimeout(function () {
-            console.log(`mock ----------- sample findList 休息 ${sleepTime / 1000} 秒 完成`)
+            console.log(`mock GET /apiMock/sample/example/area/get 休息 ${sleepTime / 1000} 秒 完成`)
             res.json(resJsonData)
         }, sleepTime);
     },
@@ -167,9 +167,9 @@ module.exports = {
 
         // console.log(req);
 
-        console.log("[^_^:20181220-1652-001] /apiMock/sample/example/findList, 查询参数 query 为：", req.query);
-        console.log("[^_^:20181220-1652-002] /apiMock/sample/example/findList, 查询参数 params 为：", req.params);
-        console.log("[^_^:20181220-1652-003] /apiMock/sample/example/findList, 查询参数 body 为：", req.body);
+        console.log("[^_^:20181220-1652-001] GET /apiMock/sample/example/findList, 查询参数 query 为：", req.query);
+        console.log("[^_^:20181220-1652-002] GET /apiMock/sample/example/findList, 查询参数 params 为：", req.params);
+        console.log("[^_^:20181220-1652-003] GET /apiMock/sample/example/findList, 查询参数 body 为：", req.body);
 
         let filter = req.query;
 
@@ -214,9 +214,9 @@ module.exports = {
             searchSampleDataList.push(bData);
         }
 
-        let resJsonData = { code: '0', msg: 'mock post /apiMock/sample/example/findList ok', data: searchSampleDataList };
+        let resJsonData = { code: '0', msg: 'mock GET /apiMock/sample/example/findList ok', data: searchSampleDataList };
         setTimeout(function () {
-            console.log(`mock ----------- sample findList 休息 ${sleepTime / 1000} 秒 完成`)
+            console.log(`mock GET /apiMock/sample/example/findList 休息 ${sleepTime / 1000} 秒 完成`)
             res.json(resJsonData)
         }, sleepTime);
     },
@@ -234,9 +234,9 @@ module.exports = {
             }
         }
 
-        let resJsonData = { code: '0', msg: 'mock post /apiMock/sample/example/get ok', data: sampleData };
+        let resJsonData = { code: '0', msg: 'mock GET /apiMock/sample/example/get ok', data: sampleData };
         setTimeout(function () {
-            console.log(`mock ----------- sample get 保存休息 ${sleepTime / 1000} 秒 完成`);
+            console.log(`mock GET /apiMock/sample/example/get 保存休息 ${sleepTime / 1000} 秒 完成`);
             res.json(resJsonData)
         }, sleepTime);
 
@@ -244,16 +244,16 @@ module.exports = {
     ['DELETE /apiMock/sample/example/del'](req, res) {
 
         // console.log("[^_^:20181220-1653-000] /apiMock/sample/example/del, 查询参数 req 为：", req);
-        console.log("[^_^:20181220-1653-001] /apiMock/sample/example/del, 查询参数 query 为：", req.query);
-        console.log("[^_^:20181220-1653-002] /apiMock/sample/example/del, 查询参数 params 为：", req.params);
-        console.log("[^_^:20181220-1653-003] /apiMock/sample/example/del, 查询参数 body 为：", req.body);
+        console.log("[^_^:20181220-1653-001] DELETE /apiMock/sample/example/del, 查询参数 query 为：", req.query);
+        console.log("[^_^:20181220-1653-002] DELETE /apiMock/sample/example/del, 查询参数 params 为：", req.params);
+        console.log("[^_^:20181220-1653-003] DELETE /apiMock/sample/example/del, 查询参数 body 为：", req.body);
 
         let dataBody = req.body
         let ids = dataBody.ids;
         // JSON.stringify(req.body); 
         // JSON.parse(idsStr);
 
-        let resJsonData = { code: '0', msg: 'mock post /apiMock/sample/example/del ok', ids: ids };
+        let resJsonData = { code: '0', msg: 'mock DELETE /apiMock/sample/example/del ok', ids: ids };
         setTimeout(function () {
             let sList = []
             for (tdata of sampleDataList) {
@@ -269,16 +269,16 @@ module.exports = {
                 }
             }
             sampleDataList = sList;
-            console.log(`mock ----------- sample del 删除休息 ${sleepTime / 1000} 秒 完成`);
+            console.log(`mock DELETE /apiMock/sample/example/del 删除休息 ${sleepTime / 1000} 秒 完成`);
             res.json(resJsonData)
         }, sleepTime);
     },
     ['POST /apiMock/sample/example/save'](req, res) {
 
-        console.log("[^_^:20181220-1654-001] /apiMock/sample/example/save, 查询参数 body 为：", req.body);
+        console.log("[^_^:20181220-1654-001] mock POST /apiMock/sample/example/save, 查询参数 body 为：", req.body);
 
         let dataBody = req.body;
-        let resJsonData = { code: '0', msg: 'mock post /apiMock/sample/example/save ok' }
+        let resJsonData = { code: '0', msg: 'mock POST /apiMock/sample/example/save ok' }
 
         if (dataBody.id) {
             let index = 0;
@@ -305,7 +305,7 @@ module.exports = {
         }
 
         setTimeout(function () {
-            console.log(`mock ----------- sample example save 保存休息 ${sleepTime / 1000} 秒 完成`);
+            console.log(`mock POST /apiMock/sample/example/save 保存休息 ${sleepTime / 1000} 秒 完成`);
             res.json(resJsonData)
         }, sleepTime);
     }

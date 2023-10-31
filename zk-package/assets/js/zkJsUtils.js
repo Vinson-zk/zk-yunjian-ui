@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 13:59:32 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 16:41:09
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 16:28:55
  */
 
 (function (global) {
@@ -592,6 +592,16 @@
         return flag > 0 ? sortItems : sortItems.reverse()
     }
 
+    const f_clone = obj=>{
+        if (typeof (obj) === 'Object' && obj instanceof Array) {
+            return [].concat(obj);
+        }
+        if (obj != null && typeof (obj) === 'Object') {
+            return Object.assign({}, obj);
+        }
+        return obj;
+    }
+
     const _zkJsUtils = {
         queryURL: f_queryURL,					 // 查询获取 url 中的参数，
         base64Decode: f_Base64Decode,			 // 64 编码解密
@@ -609,7 +619,9 @@
         strReplace: f_strReplace,				 // 字符串 按参数名 {argName} 替换成对象的值
         getJsonAttr: f_getJsonAttr,				 // 取 JSON 字符中的某个属性
         sort: f_sort,                            // 排序
-    }
+        clone: f_clone,                          // 深度拷贝一个对象或数组
+    } 
     global.zkJsUtils = _zkJsUtils
+    return _zkJsUtils;
 })(typeof window !== "undefined" ? window : this);
 

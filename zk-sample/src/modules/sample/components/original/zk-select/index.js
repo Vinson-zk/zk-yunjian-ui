@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-15 22:46:39
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-08 09:45:17
+ * @Last Modified time: 2022-12-05 11:46:41
  */
 
 /**
@@ -88,7 +88,7 @@ function FInitZKSelectDemo({ intl }) {
 			<div className={styles.sample_detail_section}>
 				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"原生态封装",
 							"<ZKSelect >"

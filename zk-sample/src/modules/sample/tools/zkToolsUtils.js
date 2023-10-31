@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 12:30:33
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 13:40:26
+ * @Last Modified by:   Vinson
+ * @Last Modified time: 2022-12-05 11:46:42
  */
 
 import React from 'react';
@@ -22,7 +22,7 @@ const FInitToolsUtilsDemo = ({ intl }) => {
         <div className={styles.sample_detail_panel}>
             <h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsUtils {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
             <div className={styles.sample_detail_section}>
-                <SyntaxHighlighter language='jsx' style={docco}>
+                <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                     {[
                         "一些项目公共方法，暂未使用",
                         "待补充",

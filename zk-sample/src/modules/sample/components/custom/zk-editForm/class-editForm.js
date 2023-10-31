@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-03-03 22:42:43
 * @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-28 13:13:51
+* @Last Modified time: 2023-05-29 16:43:02
 * 
 * 
 * 
@@ -106,9 +106,9 @@ class CInitEditFormDemo extends React.Component {
 		let { form, history, intl } = this.props;
 		return (
 			<div>
-				<ZKModal title="ZKModal" visible={this.state.visible}
+				<ZKModal title="ZKModal" open={this.state.visible}
 					onOk={this.handleOk} onCancel={this.handleCancel} >
-					<SyntaxHighlighter language="jsx" style={docco}>
+					<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{
 							"{\n" + this.state.values.join(",\n") + "\n}"
 						}

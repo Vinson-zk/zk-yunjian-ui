@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-07 02:20:59
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-03-09 08:38:48
+* @Last Modified by: vinson
+* @Last Modified time: 2023-09-06 08:58:12
 * 
 * 
 * 
@@ -112,7 +112,7 @@ class CInitZKIconDemo extends React.Component {
 				<div className={styles.sample_detail_section}>
 					<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
 					<div>
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"参考框架代码",
 							].join('\n')}

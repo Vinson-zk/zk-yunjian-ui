@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2021-02-13 23:15:22
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 08:59:30
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 21:49:50
  */
 
 import React, { Component } from 'react';
@@ -36,7 +36,7 @@ class CInitHome extends Component {
 
         // console.log("[^_^:20200813-1941-001] CInitHome.constructor.props", props);
 
-        props.dispatch({ type: 'mSys/getMenus', navCode:'sys', payload: {} });
+        props.dispatch({ type: 'mSys/getMenus', navCode: props.navCode, payload: {} });
     }
 
     static getDerivedStateFromProps(props, state) {

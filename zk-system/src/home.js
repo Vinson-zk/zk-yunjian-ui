@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-29 21:52:35
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 09:01:02
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 21:44:58
  */
 
 
@@ -12,6 +12,7 @@ import { injectIntl } from 'react-intl';
 import { Layout } from 'antd';
 
 import zkStyles from 'zkFramework/css/styles.less';
+import zkJsUtils from "zkJsUtils";
 
 import { ZKCustomComponents, ZKOriginalComponents, zkTools } from 'zkFramework';
 
@@ -44,7 +45,8 @@ const funcModuleMppingObj = {
 const dynamicImportHelper = zkToolsNavAndMenu.getDynamicImportHelper(funcModuleMppingObj);
 
 /*** 添加导航栏目 */
-import { navItems } from '../mock/data.system.nav.js';
+import mockDataSysNavs from '../mock/mock.data.system.nav.js';
+const navItems = mockDataSysNavs.navItems;
 
 let navRoutes = null;
 let indexNavRoute = null;
