@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 00:16:26
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-02-21 23:57:32
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 17:17:06
  */
 
 import { getMenus, getMenusSync } from './service';
@@ -24,13 +24,10 @@ const model = {
     effects: { // action
         // 取菜单
         *getMenus({ payload }, { call, put }) {
-            console.log("[^_^:20190124-1435-001] model mSample -> effects.getMenus ", payload);
-            // let res = yield call(getMenus, payload);
+            // console.log("[^_^:20190124-1435-001] model mSample -> effects.getMenus ", payload);
             let res = yield call(getMenusSync, payload);
-            if (res.code == "zk.0") {
+            if (res.ok) {
                 let menus = res.data;
-                menus = zkJsUtils.makeTree(menus, null);
-                menus = zkJsUtils.sort(menus);
                 yield put({ type: 'setState', payload: { menus: menus, isMenuUpdating: true } });
             } else {
                 throw new Error("getMenus req fail，error message: " + res.msg)

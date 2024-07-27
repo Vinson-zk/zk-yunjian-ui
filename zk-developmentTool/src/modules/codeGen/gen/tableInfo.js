@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-31 08:29:59
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-19 20:02:20
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-04 16:27:25
 * 
 * 
 * 
@@ -50,7 +50,7 @@ const f_getEditNode = (intl, itemName, editData, onShowSelIcon)=>{
   }else if("icon" == itemName){
     return (
       <ZKEditForm.Item { ...itemProps } rules = {[ zkToolsValidates.string(intl, 0, 64) ]} >
-              <ZKInput.Search className="" enterButton addonBefore={ <ZKIcon.Antd4Icon icon={editData?editData.icon:""} /> }
+              <ZKInput.Search className="" enterButton addonBefore={ <ZKIcon.AntdIcon icon={editData?editData.icon:""} /> }
                             onSearch={value=>onShowSelIcon(itemName)} />
           </ZKEditForm.Item>
         )
@@ -126,7 +126,7 @@ const f_getTableColumns = (intl, isRowEditing, onRowEdit, onRowCancelEdit, onRow
             dataIndex: 'icon', key: 'icon', width: 120, textAlign: 'center', editable: true,
             render:(text, record, index)=>{
               if(record.icon){
-                return <React.Fragment><ZKIcon.Antd4Icon icon={record.icon} /><br />{record.icon}</React.Fragment>
+                return <React.Fragment><ZKIcon.AntdIcon icon={record.icon} /><br />{record.icon}</React.Fragment>
               }else{
                 return "";
               }
@@ -374,7 +374,7 @@ class CInitTableInfo extends Component {
 
         return (mFuncModule.optEntity != null && mGen.pathname == location.pathname) && (<React.Fragment>
           <ZKModal
-                visible = {this.state.selIconAttrName != ""}
+                open = {this.state.selIconAttrName != ""}
                 onCancel  = {()=>{this.setState({selIconAttrName: ""})}}
                 title={zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_icon.select')}
                 // footer = {<font color="red">* {zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_icon.select.opt")}</font>}
@@ -411,7 +411,7 @@ class CInitTableInfo extends Component {
         >
           <div className = {styles.title_row} >
             <div className = {styles.title}>
-              <ZKIcon.Antd4Icon icon = "TableOutlined" /> &nbsp; {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.gen.tables')} 
+              <ZKIcon.AntdIcon icon = "TableOutlined" /> &nbsp; {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.gen.tables')} 
             </div>
             <div className = {styles.title_opt_left}>
               <ZKInput.Search onSearch = {this.onSearch} onChange = {e=>{this.onSearch(e.target.value)}} placeholder = {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.tableInfo.tableName')}  enterButton />

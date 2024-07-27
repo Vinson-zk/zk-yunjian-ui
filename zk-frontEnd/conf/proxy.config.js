@@ -1,21 +1,66 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-07 09:33:05 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-14 09:21:56
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-27 23:46:25
  */
-let proxy = [{
+
+/* 直接使用网关路由 */
+let proxy = [
+{
+    target: "http://127.0.0.1:8088",  // 后台接口域名
 	// "changeOrigin": true,          // 是否跨域
     // ws: true,                      // 如果要代理 websockets，配置这个参数
     // secure: false,                 // 如果是https接口，需要配置这个参数
-    context: ["/apiSys", "/apiWechat", "/apiDevTool"],
-    target: "http://127.0.0.1:8088",  // 后台接口域名
+    context: [
+        "/apiSys", 
+        "/apiDevTool", 
+        "/apiWechat", 
+        "/apiFile", 
+        "/apiMail",
+    ],
+    // target: "http://192.168.1.105:8088",  
     "pathRewrite": { 
+        "^/apiDevTool/" : "/apiDevTool/zk/dt/v1.0/",
         "^/apiSys/" : "/apiSys/zk/sys/v1.0/",
         "^/apiWechat/" : "/apiWechat/zk/wechat/v1.0/",
-        "^/apiDevTool/" : "/apiDevTool/zk/dt/v1.0/",
+        "^/apiFile/" : "/apiFile/zk/f/v1.0/",
+        "^/apiMail/" : "/apiMail/zk/mail/v1.0/",
     }
-}]
+},
+{
+    target: "http://127.0.0.1:11111",  // 后台接口域名
+    context: [
+        // "/apiSys",
+        // "/apiFile",
+    ],
+    "pathRewrite": { 
+        "^/apiSys/" : "/apiMock/",
+        "^/apiFile/" : "/apiMock/",
+    }
+},
+// {
+//     target: "http://127.0.0.1:9097",  // 后台 文件系统直连接口
+//     context: [
+//         "/apiFile",
+//     ],
+//     "pathRewrite": { 
+//         "^/apiFile/" : "/zk/f/v1.0/",
+//     }
+// }
+]
+
+/* nginx 代理 */
+// let proxy = [{
+//     "changeOrigin": true,          // 是否跨域
+//     context: ["/apiSys", "/apiWechat", "/apiDevTool"],
+//     target: "http://gf.zhgxfz.com",  // 后台接口域名
+//     // "pathRewrite": { 
+//     //     "^/apiSys/" : "/apiSys/",
+//     //     "^/apiWechat/" : "/apiWechat/",
+//     //     "^/apiDevTool/" : "/apiDevTool/",
+//     // }
+// }]
 
 // let proxy = [{
 //     "changeOrigin": true,          // 是否跨域
@@ -28,16 +73,6 @@ let proxy = [{
 //     }
 // }]
 
-// let proxy = [{
-//     "changeOrigin": true,          // 是否跨域
-//     context: ["/apiSys", "/apiWechat", "/apiDevTool"],
-//     target: "http://gf.zhgxfz.com",  // 后台接口域名
-//     // "pathRewrite": { 
-//     //     "^/apiSys/" : "/apiSys/",
-//     //     "^/apiWechat/" : "/apiWechat/",
-//     //     "^/apiDevTool/" : "/apiDevTool/",
-//     // }
-// }]
 ////////////////////////////////////////////////
 // let proxy = {
 //     '/api/': {

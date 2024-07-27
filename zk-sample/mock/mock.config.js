@@ -2,17 +2,14 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-10 17:23:50
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-28 08:58:24
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 16:53:09
  */
 
-const webpackPublicConfig = require('../../zk-package/conf/webpack.public.config.js');
-const path = webpackPublicConfig.path;
-const mockPublicConfig = webpackPublicConfig.mockPublicConfig;
+const mockPackageConfig = require('../../zk-package/mock/mock.package.config.js');
+const path = require('path');
 
+const mockServics = mockPackageConfig.readMockService(path.resolve(__dirname, './service'));
+// console.log('[^_^:20181106-2053-002] sample mockServics ', mockServics);
 
-const mockServics = mockPublicConfig.readMockService(path.resolve(__dirname, './service'));
-// console.log('[^_^:20181106-2053-002] mock ', mock)
-
-module.exports = mockServics
-
+module.exports = mockServics;

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 22:42:51
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-02 19:26:38
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 18:01:23
  */
 
 
@@ -42,7 +42,7 @@ const f_getUserOpt = (intl, user, callBack) => {
     if (zkJsUtils.isEmpty(user.username)) {
         return (
             <div onClick={() => {
-                if (callBack instanceof Function) {
+                if (zkJsUtils.assertObjType(callBack, Function)) {
                     callBack('login')
                 }
             }}>
@@ -52,7 +52,7 @@ const f_getUserOpt = (intl, user, callBack) => {
     } else {
         return (
             <div onClick={() => {
-                if (callBack instanceof Function) {
+                if (zkJsUtils.assertObjType(callBack, Function)) {
                     callBack('user')
                 }
             }}>
@@ -67,7 +67,7 @@ const f_getUserMsg = (intl, user, callBack) => {
     if (!zkJsUtils.isEmpty(user.newMsg)) {
         return (
             <div onClick={() => {
-                if (callBack instanceof Function) {
+                if (zkJsUtils.assertObjType(callBack, Function)) {
                     callBack('newMsg')
                 }
             }} >
@@ -79,14 +79,14 @@ const f_getUserMsg = (intl, user, callBack) => {
     }
 }
 const f_getOptMenu = (intl, keys, callBack) => {
-    if (keys instanceof Array && keys.length > 0) {
+    if (zkJsUtils.assertObjType(keys, Array) && keys.length > 0) {
         /*** 生成菜单1, <4.20.0 可用，>=4.20.0 时不推荐 ***/
         // let menuItem = []
         // for (let key of keys) {
         //     menuItem.push((<Menu.Item key={key}>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)}</Menu.Item>))
         // }
         // let menu = (<Menu onClick={({ item, key, keyPath }) => {
-        //     if (callBack instanceof Function) {
+        //     if (callBack, Function)) {
         //         callBack(key, keyPath, item)
         //     }
         // }}>{menuItem}</Menu>)
@@ -95,22 +95,23 @@ const f_getOptMenu = (intl, keys, callBack) => {
         for (let key of keys) {
             menuItem.push({
                 'key': key,
-                // 'icon': zkJsUtils.isEmpty(item.icon) ? '' : <ZKIcon.Antd4Icon icon = {item.icon} />,
                 'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)}</span>,
                 'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)
             })
         }
-        let menu = (
-            <Menu items = {menuItem} onClick={({ item, key, keyPath }) => {
-                if (callBack instanceof Function) {
-                    callBack(key, keyPath, item)
-                }
-            }} />
-        );
 
         return (
             <div>
-                <Dropdown trigger={['click']} overlay={menu}>
+                <Dropdown trigger={['click']} 
+                    menu={{
+                        'items': menuItem,
+                        'onClick': ({ item, key, keyPath, domEvent }) => {
+                            if (zkJsUtils.assertObjType(callBack, Function)) {
+                                callBack(key, keyPath, item);
+                            }
+                        }
+                    }}
+                >
                     <span>
                         <SettingOutlined />{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_settings", null)}
                     </span>
@@ -133,21 +134,21 @@ const FInitUserDropDown = ({ intl, user, optKeys, callBack, onNewMsg, onLogin, o
 
     const userCallClick = (key) => {
         if (key === 'newMsg') {
-            if (onNewMsg instanceof Function) {
+            if (zkJsUtils.assertObjType(onNewMsg, Function)) {
                 onNewMsg.call(this, user)
             }
         } else if (key === 'login') {
-            if (onLogin instanceof Function) {
+            if (zkJsUtils.assertObjType(onLogin, Function)) {
                 onLogin.call(this)
             }
         } else if (key === 'user') {
-            if (onUser instanceof Function) {
+            if (zkJsUtils.assertObjType(onUser, Function)) {
                 onUser.call(this, user)
             }
         }
     }
     const optCallBack = (key, keyPath, item) => {
-        if (callBack instanceof Function) {
+        if (zkJsUtils.assertObjType(callBack, Function)) {
             callBack(key, item)
         }
     }
@@ -157,7 +158,7 @@ const FInitUserDropDown = ({ intl, user, optKeys, callBack, onNewMsg, onLogin, o
     const optMenu = f_getOptMenu(intl, optKeys, optCallBack)
 
     return (
-        <div className={styles.dropdown} >
+        <div className={styles.zk_dropdown} >
             {userBtn}
             {newMsgBtn ? newMsgBtn : ""}
             {optMenu ? optMenu : ""}

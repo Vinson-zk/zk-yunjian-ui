@@ -81,6 +81,7 @@ class CInitSysOrgRankEdit extends Component {
                 	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgRank.code')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
                         <ZKInput disabled = {optEntity.pkId?true:false} />

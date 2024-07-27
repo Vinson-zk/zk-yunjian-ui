@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 12:30:13
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-03 15:05:10
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-09 23:27:12
  */
 
 
@@ -14,7 +14,8 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { docco } from '../helper';
 import styles from "../styles.less";
-import { zkTools, ZKOriginalComponents } from "zkFramework";
+import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { ZKAnchor } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
 
@@ -29,30 +30,60 @@ class CInitZKToolsMsgDemo extends React.Component {
 
 	render() {
 		let { intl, match, location } = this.props;
-
-		console.log("----- ", match, location);
-
 		return (
-			<div className={styles.sample_detail_panel}>
+			<ZKContentFormat className={styles.sample_detail_panel} >
 				<div className={styles.sample_detail_top_affix} >
-					<ZKAnchor>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#getLocale`} title="getLocale" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#setLocale`} title="getLocale" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#getInternationInfo`} title="getInternationInfo" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#msgFormatByLocales`} title="msgFormatByLocales" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#msgFormatByIntl`} title="msgFormatByIntl" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#msgFormat`} title="msgFormat" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#alertMsg`} title="alertMsg" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#alertModalMsg`} title="alertModalMsg" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#alertMsgByType`} title="alertMsgByType" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#mergeLocalMsgs`} title="mergeLocalMsgs" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#makeFormFieldsErrorsByMapaData`} title="makeFormFieldsErrorsByMapaData" ></ZKAnchor.Link>
-					</ZKAnchor>
+					<ZKAnchor items={[
+	                    {
+	                        'key': `${globalAppConfig.basename}${match.path}/#getLocale`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#getLocale`,
+	                        'title': 'getLocale'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#setLocale`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#setLocale`,
+	                        'title': 'setLocale'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#getInternationInfo`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#getInternationInfo`,
+	                        'title': 'getInternationInfo'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#msgFormatByLocales`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#msgFormatByLocales`,
+	                        'title': 'msgFormatByLocales'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#msgFormatByIntl`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#msgFormatByIntl`,
+	                        'title': 'msgFormatByIntl'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#msgFormat`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#msgFormat`,
+	                        'title': 'msgFormat'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#alertMsg`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#alertMsg`,
+	                        'title': 'alertMsg'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#alertModalMsg`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#alertModalMsg`,
+	                        'title': 'alertModalMsg'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#alertMsgByType`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#alertMsgByType`,
+	                        'title': 'alertMsgByType'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#mergeLocalMsgs`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#mergeLocalMsgs`,
+	                        'title': 'mergeLocalMsgs'
+	                    },{
+	                        'key': `${globalAppConfig.basename}${match.path}/#makeFormFieldsErrorsByMapaData`,
+	                        'href': `${globalAppConfig.basename}${match.path}/#makeFormFieldsErrorsByMapaData`,
+	                        'title': 'makeFormFieldsErrorsByMapaData'
+	                    }
+	                ]} />
 				</div>
-				<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsMsg {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h1>
-				<div className={styles.sample_detail_section}>
+				<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsMsg ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
 					<font style={{ color: 'red' }}>目的，为了统一提示内容、操作方式、按钮名称；消息的类型可根据需求继续添加实现；</font><br /><br />
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"getLocale             // 取当前国际化语言环境标识 ",
 							"setLocale             // 设置当前国际化语言环境标识 ",
@@ -67,11 +98,10 @@ class CInitZKToolsMsgDemo extends React.Component {
 							"makeFormFieldsErrorsByMapaData // 制作 antd form 对象的字段错误信息；根据响应的字段验证错误信息的 map 制作；",
 						].join('\n')}
 					</SyntaxHighlighter>
-				</div>
-				<div className={styles.sample_detail_section}>
-					<h2>方法&nbsp;&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
+				</ZKContentFormat>
+				<ZKContentFormat title = {`方法  ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
 					<div id="getLocale">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 取当前国际化语言环境标识",
@@ -82,7 +112,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="setLocale">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 设置当前国际化语言环境标识",
@@ -94,7 +124,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="getInternationInfo">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 从指定对象中取国际化信息；",
@@ -107,7 +137,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="msgFormatByLocales">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 消息国际化；",
@@ -162,7 +192,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						<br /><br />
 					</div>
 					<div id="msgFormatByIntl">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 消息国际化；",
@@ -216,7 +246,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						<br /><br />
 					</div>
 					<div id="msgFormat">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 消息国际化；优先从 intl 对象国际化；",
@@ -279,7 +309,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						<br /><br />
 					</div>
 					<div id="alertMsg">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 弹出提示消息; 目的，为了统一提示的一些操作方式",
@@ -333,9 +363,9 @@ class CInitZKToolsMsgDemo extends React.Component {
 								<tr>
 									<td>opt.msg</td>
 									<td>false</td>
-									<td>提示消息内容</td>
+									<td>提示消息内容；</td>
 									<td>String</td>
-									<td>key "global.app.msg.{'${opt.type}'}" 配置的国际化值</td>
+									<td>为 key "global.app.msg.{'${opt.type}'}" 配置的国际化值</td>
 								</tr>
 								<tr>
 									<td>opt.duration</td>
@@ -368,7 +398,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						<br /><br />
 					</div>
 					<div id="alertModalMsg">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 弹出提示框提示消息; 目的，为了统一提示的一些操作方式，及标题、按钮内容",
@@ -457,7 +487,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						<br /><br />
 					</div>
 					<div id="alertMsgByType">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 按类型提示消息; 目标是为了统一提示内容，如果是 modalMsg 会返回 modal 对象",
@@ -545,7 +575,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						<br />
 					</div>
 					<div id="mergeLocalMsgs">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 合并国际化信息; 主要合并国际化对象中的 messages 属性信息；其他属性存时不处理；不存在时，会赋值记录下来；",
@@ -558,7 +588,7 @@ class CInitZKToolsMsgDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="makeFormFieldsErrorsByMapaData">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** ",
 								" * 制作 antd form 对象的字段错误信息；根据响应的字段验证错误信息的 map 制作；",
@@ -569,9 +599,9 @@ class CInitZKToolsMsgDemo extends React.Component {
 							].join('\n')}
 						</SyntaxHighlighter>
 					</div>
-				</div>
+				</ZKContentFormat>
 				<br />
-			</div>
+			</ZKContentFormat>
 		)
 	}
 }

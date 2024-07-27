@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 00:04:35
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 08:59:04
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-26 16:54:06
  */
 
 import React, { Component } from 'react';
@@ -14,7 +14,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import { zkTools, ZKCustomComponents } from "zkFramework";
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 const { Content } = Layout;
 const { ZKRouter, ZKSider, ZKBreadcrumb, ZKAutoMenu } = ZKCustomComponents;
@@ -31,7 +31,7 @@ class CInitSampleNavIndex extends Component {
       routerMappingObj: {}
     };
 
-    // console.log("[^_^:20200813-1941-001] CInitSampleNavIndex.constructor.props", props);
+    // console.log("[^_^:20200813-1941-004] CInitSampleNavIndex.constructor.props", props);
 
     // 未请求过菜单，请求菜单
     props.dispatch({ type: 'mSample/setState', payload: { menus: undefined } })
@@ -40,7 +40,7 @@ class CInitSampleNavIndex extends Component {
     // if(props.mSample.menus == undefined){
     //     // 未请求过菜单，请求菜单
     //     props.dispatch({type: 'mSample/setState', payload:{menus:[]}})
-    //     props.dispatch({type: 'mSample/getMenus', payload:{navCode:props.navCode}})
+    //     props.dispatch({type: 'mSample/getMenus', payload:{parentId: props.navId}})
     // }
   }
 
@@ -68,8 +68,8 @@ class CInitSampleNavIndex extends Component {
 
     // console.log("[^_^:20190131-1044-001] render ");
     /*
-            <Scrollbars id="right-content" className = {zkStyles.zk_scrollbars} >
-                <Content className={zkStyles.zk_wrapper}>
+            <Scrollbars id="right-content" className = {zkStyles.zk_f_scrollbars} >
+                <Content className={zkStyles.zk_f_wrapper}>
                   <Switch>
                     {this.state.indexMenuRouter ?
                       (<Route exact path={`${match.path}`} render={(props) => { return <Redirect to={`${this.state.indexMenuRouter.path}`} /> }} />)
@@ -80,7 +80,7 @@ class CInitSampleNavIndex extends Component {
             </Scrollbars>
 
 
-            <Content id="right-content" className={zkStyles.zk_wrapper} style = {{overflow: 'scroll'}} >
+            <Content id="right-content" className={zkStyles.zk_f_wrapper} style = {{overflow: 'scroll'}} >
               <Switch>
                 {this.state.indexMenuRouter ?
                   (<Route exact path={`${match.path}`} render={(props) => { return <Redirect to={`${this.state.indexMenuRouter.path}`} /> }} />)
@@ -91,24 +91,24 @@ class CInitSampleNavIndex extends Component {
     */
 
     return (
-      <Layout className={zkStyles.zk_content}>
-        <ZKSider className={`${zkStyles.zk_left_sider} ${zkStyles.flex_1_auto}`}>
+      <Layout className={zkStyles.zk_f_content}>
+        <ZKSider className={`${zkStyles.zk_f_left_sider} ${zkStyles.zk_f_flex_auto_1}`}>
           <ZKAutoMenu menus={menus} path={`${match.path}`} routerMappingObj={this.state.routerMappingObj} />
         </ZKSider>
-        <Layout>
+        <Layout className={zkStyles.zk_f_display_flex_col}>
           <ZKBreadcrumb routerMappingObj={this.state.routerMappingObj} />
-            <Scrollbars className = {zkStyles.zk_scrollbars} >
-                <Content id="right-content" className={zkStyles.zk_wrapper}>
-                  <div className={ `${zkStyles.zk_main_panel} ${zkStyles.display_flex_col}` }>
-                    <Switch>
-                      {this.state.indexMenuRouter ?
-                        (<Route exact path={`${match.path}`} render={(props) => { return <Redirect to={`${this.state.indexMenuRouter.path}`} /> }} />)
-                        : ""}
-                      {this.state.menuRoutes}
-                    </Switch>
-                  </div>
-                </Content>
-            </Scrollbars>
+          <Scrollbars className = {zkStyles.zk_f_scrollbars} >
+              <Content id="right-content" className={zkStyles.zk_f_wrapper}>
+                <div className={ `${zkStyles.zk_f_main_panel} ${zkStyles.zk_f_display_flex_col}` }>
+                  <Switch>
+                    {this.state.indexMenuRouter ?
+                      (<Route exact path={`${match.path}`} render={(props) => { return <Redirect to={`${this.state.indexMenuRouter.path}`} /> }} />)
+                      : ""}
+                    {this.state.menuRoutes}
+                  </Switch>
+                </div>
+              </Content>
+          </Scrollbars>
         </Layout>
       </Layout>
     )
@@ -119,3 +119,6 @@ class CInitSampleNavIndex extends Component {
 // export default injectIntl(CInitSampleNavIndex);
 // export default connect(({ mSample }) => ({ mSample }))(CInitSampleNavIndex);
 export default injectIntl(connect(({ mSample }) => ({ mSample }))(CInitSampleNavIndex));
+
+
+

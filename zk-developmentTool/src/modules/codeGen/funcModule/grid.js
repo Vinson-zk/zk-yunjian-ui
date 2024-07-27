@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 11:54:38
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-19 19:59:29
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 18:55:19
 * 
 * 
 * 
@@ -18,7 +18,7 @@ const { ZKPopconfirm, ZKButton } = ZKOriginalComponents;
 const { ZKOptRow, ZKScrollTable } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 /**
  * 取 table 列表
@@ -77,24 +77,24 @@ const f_getTableColumns = (editFunc, detailFunc, deleteFunc, genCodeFunc, intl, 
         <ZKOptRow key={`grid-${record.id}`} >
           <ZKOptRow.OptGroup isAutoPurseUp={true} >
             <ZKOptRow.OptGroup.OptItem onClick={() => { // 编辑
-            editFunc(record);
+              editFunc(record);
             }}>
             {zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_edit')}
             </ZKOptRow.OptGroup.OptItem>
             <ZKOptRow.OptGroup.OptItem onClick={() => { // 明细/详情
-            detailFunc(record);
+              detailFunc(record);
             }}>
             {zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_detail')}
             </ZKOptRow.OptGroup.OptItem>
             <ZKOptRow.OptGroup.OptItem onClick={() => { // 明细/详情
-            genCodeFunc(record);
+              genCodeFunc(record);
             }}>
             {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.opt._key_genCode')}
             </ZKOptRow.OptGroup.OptItem>
           </ZKOptRow.OptGroup>
           <ZKPopconfirm type="delete" placement="top"
             onConfirm={() => { // 删除
-            deleteFunc([record.pkId])
+              deleteFunc([record.pkId])
             }}>
             <ZKButton>{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_del')}</ZKButton>
           </ZKPopconfirm>
@@ -108,7 +108,7 @@ const f_getTableColumns = (editFunc, detailFunc, deleteFunc, genCodeFunc, intl, 
 class CInitSysNavGrid extends React.Component {
 
   constructor(props) {
-  super(props);
+    super(props);
     this.state = {
       sh: 360
     }
@@ -119,8 +119,8 @@ class CInitSysNavGrid extends React.Component {
 
   let executeDelete = (keys) => {
     // 执行删除
-    if (this.props.onDelete instanceof Function) {
-    this.props.onDelete.call(this, keys);
+    if (zkJsUtils.assertObjType(this.props.onDelete, Function)) {
+      this.props.onDelete.call(this, keys);
     }
   };
   
@@ -128,17 +128,17 @@ class CInitSysNavGrid extends React.Component {
     zkToolsMsg.alertMsgByType(this.props.intl, null, 'selectData')
   } else {
     if (isConfirm) {
-    zkToolsMsg.alertMsgByType(this.props.intl, null, 'delConfirm', () => {
-      // ok
-      executeDelete(keys);
-    }, () => {
-      // cancel
-    })
-    } else {
-    // 执行删除
-    executeDelete(keys);
+      zkToolsMsg.alertMsgByType(this.props.intl, null, 'delConfirm', () => {
+        // ok
+        executeDelete(keys);
+      }, () => {
+        // cancel
+      })
+      } else {
+        // 执行删除
+        executeDelete(keys);
+      }
     }
-  }
   }
 
   render() {
@@ -147,15 +147,15 @@ class CInitSysNavGrid extends React.Component {
 
   // 改变选择行
   const changeSelKeysFunc = (selRowKeys, selRows) => {
-    if (onChangeSelKeys instanceof Function) {
-    onChangeSelKeys.call(this, selRowKeys);
+    if (zkJsUtils.assertObjType(onChangeSelKeys, Function)) {
+      onChangeSelKeys.call(this, selRowKeys);
     }
   };
 
   // 明细
   const detailFunc = (entity) => {
-    if (onDetail instanceof Function) {
-    onDetail.call(this, entity);
+    if (zkJsUtils.assertObjType(onDetail, Function)) {
+      onDetail.call(this, entity);
     }
   };
 
@@ -166,15 +166,15 @@ class CInitSysNavGrid extends React.Component {
 
   // 新增/编辑
   const editFunc = entity => {
-    if (onEdit instanceof Function) {
-    onEdit.call(this, entity)
+    if (zkJsUtils.assertObjType(onEdit, Function)) {
+      onEdit.call(this, entity)
     }
   };
 
   // 新增/编辑
   const genCodeFunc = entity => {
-    if (onGenCode instanceof Function) {
-    onGenCode.call(this, entity)
+    if (zkJsUtils.assertObjType(onGenCode, Function)) {
+      onGenCode.call(this, entity)
     }
   };
 
@@ -182,21 +182,21 @@ class CInitSysNavGrid extends React.Component {
 
   return (
     <ZKScrollTable loading = { loading }
-    autoHeight = {true}
-    rowSelection = {{
-      onChange: (selRowKeys, selRows) => { changeSelKeysFunc(selRowKeys, selRows) },
-      selectedRowKeys: gridSelKeys, columnWidth: '32px'
-    }}
-    rowKey = "pkId"
-    rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
-    columns = {tableColumns}
-    scroll = {{ x:1440, y: this.state.sh }}
-    pagination = {pagination}
-    // pagination = {{position: ['topRight'], ...pagination}}
-        dataSource = {gridData}
-        // (pagination, filters, sorter, extra: { currentDataSource: [] })
-        onChange = {onChange}
-    className = {zkStyles.flex_1_auto}
+      autoHeight = {true}
+      rowSelection = {{
+        onChange: (selRowKeys, selRows) => { changeSelKeysFunc(selRowKeys, selRows) },
+        selectedRowKeys: gridSelKeys, columnWidth: '32px'
+      }}
+      rowKey = "pkId"
+      rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
+      columns = {tableColumns}
+      scroll = {{ x:1440, y: this.state.sh }}
+      pagination = {pagination}
+      // pagination = {{position: ['topRight'], ...pagination}}
+      dataSource = {gridData}
+      // (pagination, filters, sorter, extra: { currentDataSource: [] })
+      onChange = {onChange}
+      className = {zkStyles.zk_f_flex_auto_1}
     >
     <ZKOptRow>
       <ZKOptRow.OptGroup>

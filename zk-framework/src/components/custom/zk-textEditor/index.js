@@ -3,8 +3,8 @@
  * 使用时，再完善上传下载 api 传入；上传下载前置处理；
  * @Author: Vinson
  * @Date: 2020-08-12 12:35:00
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-06 20:03:57
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-26 17:59:26
  */
 
 import React from "react";
@@ -27,7 +27,9 @@ const mimeTypes = {
     'mp3': 'audio/mp3'
 }
 
-class CInitEditor extends React.Component {
+// console.log("[^_^: 20240726-2209-009]: BraftEditor: ", BraftEditor);
+
+class CInitTextEditor extends React.Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if ("value" in nextProps && nextProps.value !== prevState.value) {
@@ -41,16 +43,14 @@ class CInitEditor extends React.Component {
     constructor(props) {
         super(props);
 
-        const value =
-            typeof props.value === "undefined"
-                ? props.defaultValue
-                : props.value;
+        // typeof props.value === "undefined"
+        const value = zkJsUtils.isEmpty(props.value, false)?props.defaultValue:props.value;
+            
+
         const localItems = this.getLocalMedias();
         const { defaultMediaItems = [] } = props
-        const mediaItems =
-            typeof props.mediaItems === "undefined"
-                ? [...defaultMediaItems, ...localItems]
-                : props.mediaItems
+        const mediaItems = zkJsUtils.isEmpty(props.mediaItems, false)?[...defaultMediaItems, ...localItems]:props.mediaItems;
+
         this.state = {
             value,
             mediaItems
@@ -98,31 +98,32 @@ class CInitEditor extends React.Component {
         }
     };
 
-    triggerChange = (value)=>{
+    triggerChange = editorState=>{
+        // console.log("[^_^: 20240726-2311-001]: triggerChange editorState: ", editorState);
         const { onChange } = this.props;
         if (onChange) {
-            onChange(value);
+            onChange(editorState);
         }
     };
 
-    handleChange = ()=>{
-        lodash.throttle(editorState => {
-            const html = editorState.toHTML()
+    // 输入防抖
+    handleChange = lodash.debounce(editorState => {
+        // console.log("[^_^: 20240726-2209-001]: handleChange editorState: ", editorState);
+        const html = editorState.toHTML()
+        // console.log("[^_^: 20240726-2209-002]: handleChange editorState: ", html);
 
-            if (html === '<p></p>' && this.state.value === undefined) {
-                return false
-            }
-            if (html === '<p></p>') {
-                // this.setState({value:editorState})
-                this.triggerChange(editorState);
-                return false
-            }
-            // console.log('in3',html,this.state.value.toHTML?this.state.value.toHTML():this.state.value,this.props.value.toHTML?this.props.value.toHTML():this.props.value)
+        if (html === '<p></p>' && this.state.value === undefined) {
+            return false
+        }
+        if (html === '<p></p>') {
             // this.setState({value:editorState})
             this.triggerChange(editorState);
-
-        }, this.props.debounce || 1000);
-    }
+            return false
+        }
+        // console.log('in3',html,this.state.value.toHTML?this.state.value.toHTML():this.state.value,this.props.value.toHTML?this.props.value.toHTML():this.props.value)
+        // this.setState({value:editorState})
+        this.triggerChange(editorState);
+    }, this.props.debounce || 500);
 
     handleMediaChange = (items = [])=>{
         if (items.length === 0 || (items[items.length - 1] && items[items.length - 1].url)) {
@@ -179,15 +180,13 @@ class CInitEditor extends React.Component {
         const { value, mediaItems } = this.state;
         // defaultValue&&defaultValue.toHTML?console.log('props editor',defaultValue.toHTML()):console.log('props',defaultValue)
         // value&&value.toHTML?console.log('state editor',value.toHTML()):console.log('state',value)
+        // console.log("[^_^:20231008-2126-001] EditorState: ", value, zkJsUtils.assertObjType(value, EditorState));
         return (
-
             <BraftEditor
-                className={styles.editor}
+                className={styles.zk_text_editor}
                 {...otherProps}
                 value={
-                    value instanceof EditorState
-                        ? value
-                        : BraftEditor.createEditorState(value)
+                    zkJsUtils.assertObjType(value, EditorState)?value:BraftEditor.createEditorState(value)
                 }
                 onChange={this.handleChange}
                 media={{
@@ -201,14 +200,11 @@ class CInitEditor extends React.Component {
 }
 
 // // 定义属性
-// CInitEditor.propTypes = {
-//     ...Anchor.propTypes,     // 在封装有指定
+// CInitTextEditor.propTypes = {
 // }
 // // 定义属性默认值
-// CInitEditor.defaultProps = {
-// 	...Anchor.defaultProps, // 在封装有指定  
-// 	getContainer: ()=>document.getElementById("right-content"),
+// CInitTextEditor.defaultProps = { 
 // }
 
-export default CInitEditor;
+export default CInitTextEditor;
 

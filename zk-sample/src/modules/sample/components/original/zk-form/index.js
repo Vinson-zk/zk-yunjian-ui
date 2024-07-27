@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:30:54
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-02 16:08:17
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 22:08:17
  */
 
 import React from 'react';
@@ -11,12 +11,13 @@ import { injectIntl } from 'react-intl';
 import { Select, Input, Button, Form } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
 import zkJsUtils from 'zkJsUtils';
-import { zkTools, ZKOriginalComponents } from "zkFramework";
+import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { ZKButton, ZKDatePicker, ZKForm, ZKInput, ZKInputNumber, ZKModal, ZKPopconfirm, ZKSelect, ZKTable, } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
 
@@ -41,7 +42,7 @@ class CInitZKFormDemo extends React.Component {
 		this.state = {
 			initialValues: {
 				'ZKInput-value': '联动选择后，不变',
-				'ZKDatePicker': moment(new Date(), "YYYY/MM/DD"),
+				'ZKDatePicker': dayjs(new Date()),
 				'ZKInput': 'initValue',
 				'ZKInputNumber': 1,
 				'test3-prefix': '86',
@@ -172,9 +173,8 @@ class CInitZKFormDemo extends React.Component {
 	// let wrapperCol = {xs: { span: 24 }, sm: { span: 14 }};
 
 	return (
-		<div className={styles.sample_detail_panel}>
-			<div className={styles.sample_detail_section}>
-				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.original.form')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
+		<ZKContentFormat className={styles.sample_detail_panel} >
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.original.form')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
 				<ClassDemo /><br /><br />
 		        <FuncDemo /><br /><br />
 				<ZKForm ref = {this.formRef} initialValues = {this.state.initialValues}
@@ -267,22 +267,6 @@ class CInitZKFormDemo extends React.Component {
 					</ZKForm.Item>
 					<ZKForm.Item label="ZKModal" >
 						<Button onClick={this.showModal}>Test ZKModal</Button>
-						<ZKModal
-							title="ZKModal"
-							visible={this.state.visible}
-							onOk={this.handleOk}
-							onCancel={this.handleCancel}>
-							<SyntaxHighlighter language="jsx" style={docco}>
-								{
-									"{\n" + this.state.values.join(",\n") + "\n}"
-								}
-							</SyntaxHighlighter>
-							<SyntaxHighlighter language="jsx" style={docco}>
-								{
-									"{\n" + this.state.valuesRemove.join(",\n") + "\n}"
-								}
-							</SyntaxHighlighter>
-						</ZKModal>
 					</ZKForm.Item>
 					<ZKForm.Item label="test rules" name = "test1-rules" rules = {[{ 'required': true, 'message': "Please input your note!" }]} >
 						<Input />
@@ -292,30 +276,40 @@ class CInitZKFormDemo extends React.Component {
 						<ZKButton type="primary" htmlType="submit">{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_submit")}</ZKButton>
 						<ZKButton type="primary" onClick = {this.onResetFields} >{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_reset")}</ZKButton>
 					</ZKForm.Item>
+					<ZKModal
+						title="ZKModal"
+						open={this.state.visible}
+						onOk={this.handleOk}
+						onCancel={this.handleCancel}>
+						<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+							{
+								"{\n" + this.state.values.join(",\n") + "\n}"
+							}
+						</SyntaxHighlighter>
+						<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+							{
+								"{\n" + this.state.valuesRemove.join(",\n") + "\n}"
+							}
+						</SyntaxHighlighter>
+					</ZKModal>
 				</ZKForm><br /><br />
-			</div>
-			<div className={styles.sample_detail_section}>
-				<h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
-				<div>
-					ZKForm 组件：<br />
-					原生态封装，接受原生属性<br />
-					ZKForm.Item 组件：<br />
-					原生态封装，接受原生属性<br />
-				</div>
-			</div>
-			<div className={styles.sample_detail_section}>
-				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
-						{[
-							"参考样例代码:",
-							"参考组件样例代码"
-						].join('\n')}
-					</SyntaxHighlighter>
-				</div>
-			</div>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+				ZKForm 组件：<br />
+				原生态封装，接受原生属性<br />
+				ZKForm.Item 组件：<br />
+				原生态封装，接受原生属性<br />
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+					{[
+						"参考样例代码:",
+						"参考组件样例代码"
+					].join('\n')}
+				</SyntaxHighlighter>
+			</ZKContentFormat>
 			<br />
-		</div>
+		</ZKContentFormat>
 	)}
 }
 

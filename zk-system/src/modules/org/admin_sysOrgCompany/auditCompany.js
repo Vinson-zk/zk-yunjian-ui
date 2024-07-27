@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-04-15 14:32:51
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-07 17:22:19
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-04 16:28:30
 * 
 * 审核公司
 * 
@@ -62,7 +62,7 @@ class CInitSysOrgCompanyAudit extends Component {
 		let spinning = !optEntity || loading.effects['mSysOrgCompanyAdmin/auditCompany'];
 
 		return (
-			<ZKModal title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.audit')} visible={isShow}
+			<ZKModal title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.audit')} open={isShow}
 			  onOk={this.handleOk}
 			  onCancel={this.handleCancel}
 			  okButtonProps = {{loading: spinning}}

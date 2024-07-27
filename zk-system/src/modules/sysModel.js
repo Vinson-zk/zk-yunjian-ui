@@ -2,13 +2,13 @@
  *
  * @Author: Vinson
  * @Date: 2021-02-14 12:23:04
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-03 19:17:46
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 18:21:09
  */
 
 import { getNavMenus } from "./sysService.js";
 
-// import zkJsUtils from 'zkJsUtils';
+import zkJsUtils from 'zkJsUtils';
 import { zkTools } from 'zkFramework';
 
 let { zkToolsMsg } = zkTools;
@@ -27,10 +27,11 @@ const model = {
         // 取菜单
         *getMenus({ navCode, payload }, { call, put }) {
             let res = yield call(getNavMenus, navCode, payload);
-            if (res.code == "zk.0") {
+            if (res.ok) {
                 let menus = res.data;
                 menus = zkJsUtils.makeTree(menus, null);
                 menus = zkJsUtils.sort(menus);
+                // console.log("[^_^:20230904-2303-001] sys.menus: ", menus);
                 yield put({ type: 'setState', payload: { "menus": menus||[], "menusIsUpdate":true } });
             } else {
                 throw new Error("getMenus req fail，error message: " + res.msg)

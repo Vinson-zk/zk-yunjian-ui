@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-10 00:25:25
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-10 00:28:07
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:15:54
 * 
 * 
 * 
@@ -59,7 +59,7 @@ class CInitSetCollectionSelect extends Component {
         	this.setState({spinning: true});
 	        params = { ...params, ...zkToolsUtils.convertPageParam({'current':1, 'pageSize':999}) };
 	        f_doingSearch(url, params).done(res=>{
-                if (res.code == 'zk.0') {
+                if (res.ok) {
                     this.setState({listDatas: res.data.result, spinning: false});
                 }else{
                     throw new Error("[>_<:20220510-0027-003] request url:[" + url + "] exception, " + res.code);

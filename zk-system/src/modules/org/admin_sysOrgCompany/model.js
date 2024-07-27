@@ -2,12 +2,12 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 15:30:15
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 19:46:08
  */
 
 import { editSysOrgCompany, delSysOrgCompany, getSysOrgCompany, findSysOrgCompanysTree, 
-    auditCompany, setAuthRelation } from './service';
+    auditCompany, grantAuths } from './service';
 
 import { zkTools } from 'zkFramework';
 const { zkToolsUtils, zkToolsMsg } = zkTools;
@@ -50,34 +50,33 @@ const model = {
             
             let res = yield call(editSysOrgCompany, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delSysOrgCompany({ payload, callback }, { call }) {
             let res = yield call(delSysOrgCompany, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getSysOrgCompany({ payload, isParent = false }, { call, put }) {
             let res = yield call(getSysOrgCompany, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 if(isParent){
                 	let optEntity = {};
                     optEntity.parentId = res.data.pkId;
@@ -101,7 +100,7 @@ const model = {
             }
             let res = yield call(findSysOrgCompanysTree, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -114,7 +113,7 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
@@ -122,17 +121,17 @@ const model = {
         // 审核公司
         *auditCompany({companyId, status, callback}, {call, put, select}){
             let res = yield call(auditCompany, companyId, status);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, res.data);
                 }
             }
         },
         // 给公司分配权限
-        *grantAuth({ companyId, auths, callback }, { call, put, select }){
-            let res = yield call(setAuthRelation, companyId, auths);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+        *grantAuths({ companyId, allotAuths, callback }, { call, put, select }){
+            let res = yield call(grantAuths, companyId, allotAuths);
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }

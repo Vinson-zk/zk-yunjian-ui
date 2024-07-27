@@ -1,12 +1,13 @@
 /*
 * @Author: Vinson
 * @Date:   2021-07-01 16:31:37
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 20:16:46
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-09 11:43:22
 * 
 * 
 * 
 */
+@import "zkFramework/style/theme/zk.theme.variables.less";
 
 /*.login_panel_zh_CN {
 	width: 360px;
@@ -20,7 +21,7 @@
 	max-width: 480px;
 	/* width: 360px; */
     display: table;
-    background: #fff;
+    // background: #fff;
     box-shadow: 0 2px 6px #999;
     border-radius: 5px;
 
@@ -32,8 +33,10 @@
     top: 50%;
     left: 68%;
 
-	:global(.ant-checkbox-wrapper.ant-checkbox-wrapper-checked) {
-		color: @primary-color;
+	:global {
+		.ant-checkbox-wrapper.ant-checkbox-wrapper-checked {
+			color: @colorPrimaryActive;
+		}
 	}
 }
 
@@ -42,7 +45,8 @@
 }
 
 .login_item_icon {
-	color: rgba(0, 0, 0, 0.45);
+	// color: rgba(0, 0, 0, 0.45);
+	color: @colorPrimary;
 }
 
 .login_item_checkbox {
@@ -50,7 +54,7 @@
 }
 .login_item_checkbox:hover {
 	/*color: #1890ff;*/
-	color: @primary-color;
+	color: @colorPrimaryHover;
 }
 
 .login_item_btn {
@@ -67,6 +71,8 @@
 	flex: 1 1 auto;
 	margin-left: 0px;
     margin-right: 0px;
+    margin-bottom: 9px;
+    width: 260px;
 }
 
 .login_no_account_register {
@@ -78,11 +84,11 @@
 	flex        : 0 0 100px;
 	float: right;
 	text-align: right;
-	color  : @primary-color;
+	// color  : @colorPrimary;
 }
 
 .login_languageDropdown:hover {
-	color  : @primary-color;
+	// color  : @colorPrimaryBgHover;
 	cursor:pointer;
 }
 
@@ -92,45 +98,53 @@
 }
 .login_span_btn:hover {
 	cursor: pointer;
+	color : @colorPrimaryTextHover;
 }
 .login_span_btn_userType {
 	font-size: 13px;
-	color : @primary-color;
+	color : @colorPrimaryText;
 }
 
 /* tabs 页样式 */
 .login_tabs {
 	/* 选 tab 页时，tab title 的字段颜色*/
-	:global(.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active) {
-		border-top: 1px solid #F0F0F0;
-		border-left: 1px solid #F0F0F0;
-		border-right: 1px solid #F0F0F0;
-	}
-
-	:global(.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn) {
-		/*color: inherit;*/
-		color: #555;
-	}
-
-	/* 没选中的 tab 页的 tab title 的样式 */
-	:global(.ant-tabs-nav-list .ant-tabs-tab) {
-		border-top: 1px solid #FFFFFF;
-		border-left: 1px solid #FFFFFF;
-		border-right: 1px solid #FFFFFF;
-	    background: inherit;
-		color  : @primary-color;
-		user-select: none;
-	}
-
-	:global(.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active:hover){
-		background: #FFFFFF;
-		border-bottom: 1px solid #FFFFFF;
-		cursor: default;
-	}
-	:global(.ant-tabs-nav-list .ant-tabs-tab:hover) {
-		background: #FAFAFA;
-    	border: 1px solid #F0F0F0;
-		cursor: pointer;
+	:global {
+		.ant-tabs-nav::before {
+			border-bottom: 1px solid @colorPrimaryBorder;
+		}
+		.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active {
+			border-top: 1px solid @colorPrimaryBorderHover;
+			border-left: 1px solid @colorPrimaryBorderHover;
+			border-right: 1px solid @colorPrimaryBorderHover;
+			border-bottom: 1px solid @colorPrimaryBorder;
+			// background: @colorPrimaryActive;
+		}
+		/* 没选中的 tab 页的 tab title 的样式 */
+		.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+			/*color: inherit;*/
+			// color: @colorPrimaryActive;
+		}
+		.ant-tabs-nav-list .ant-tabs-tab {
+			border-top: 1px solid @colorPrimaryBorder;
+			border-left: 1px solid @colorPrimaryBorder;
+			border-right: 1px solid @colorPrimaryBorder;
+			border-bottom: 1px solid @colorPrimaryBorder;
+		    background: inherit;
+			// color  : @colorPrimary;
+			user-select: none;
+		}
+		.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active:hover {
+			background: @colorPrimaryHover;
+			// border-bottom: 1px solid @colorPrimaryBorder;
+			cursor: default;
+			// color: @colorPrimaryBg;
+		}
+		.ant-tabs-nav-list .ant-tabs-tab:hover {
+			background: @colorPrimaryHover;
+	    	border: 1px solid @colorPrimaryBorderHover;
+			cursor: pointer;
+			color: @colorPrimaryBg;
+		}
 	}
 }
 
@@ -153,7 +167,7 @@
 }
 .login_by_third_Divider_text>span {
 	font-weight: bold;
-    color: #555555;
+    color: @colorPrimaryText;
     user-select: none;
 }
 .login_by_third_account_row {

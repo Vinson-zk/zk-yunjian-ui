@@ -13,7 +13,7 @@ const { ZKPopconfirm, ZKButton } = ZKOriginalComponents;
 const { ZKOptRow, ZKScrollTable } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 /**
  * 取 table 列表
@@ -174,7 +174,7 @@ class CInitMailTypeGrid extends React.Component {
                 dataSource = {mMailType.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex}
+				className = {zkStyles.zk_f_display_flex}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

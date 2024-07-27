@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-06-30 19:02:31
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 11:46:39
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-25 22:14:42
 * 
 * 
 * 
@@ -24,17 +24,29 @@ const FInitLanguageDropdown = ({ locales, changeFunc, lang, className, ...props 
 	};
 
 	if(locales){
-		const menus = (<ZKMenu selectedKeys = { lang } onClick = { ({item, key})=>{ handleLanguageChange(key) }}>
-			{
-				Object.keys(locales).map((language) => {
-					return <ZKMenu.Item className = { `${styles.languageDropdown_item}` } key={language} >{ locales[language].name }</ZKMenu.Item>
-				})
+		// const menus = (<ZKMenu selectedKeys = { lang } onClick = { ({item, key})=>{ handleLanguageChange(key) }}>
+		// 	{
+		// 		Object.keys(locales).map((language) => {
+		// 			return <ZKMenu.Item className = { `${styles.zk_languageDropdown_item}` } key={language} >{ locales[language].name }</ZKMenu.Item>
+		// 		})
+		// 	}
+		// </ZKMenu>)
+		const menuItems = Object.keys(locales).map((language) => {
+			return {
+				'className': `${styles.zk_languageDropdown_item}`,
+				'key': language,
+				'label': locales[language].name,
 			}
-		</ZKMenu>)
+		})
 
 		return (
-			<ZKDropdown { ...props } className = { `${styles.languageDropdown_default} ${className}` } overlay={menus} >
-				<div><ZKIcon.Antd4Icon icon = "GlobalOutlined" />&nbsp;{ locales[lang].name }</div>
+			<ZKDropdown { ...props } className = { `${styles.zk_languageDropdown_default} ${className}` } 
+				menu={{
+					items: menuItems,
+					onClick: ({item, key})=>{ handleLanguageChange(key) }
+				}} 
+			>
+				<div><ZKIcon.AntdIcon icon = "GlobalOutlined" />&nbsp;{ locales[lang].name }</div>
       		</ZKDropdown>
 		);
 	}else{
@@ -52,7 +64,13 @@ FInitLanguageDropdown.propTypes = {
 FInitLanguageDropdown.defaultProps = {
 	lang: 'en-US',
 	placement: 'bottomRight',
-	className: styles.languageDropdown
+	className: styles.zk_languageDropdown
 }
 
 export default FInitLanguageDropdown;
+
+
+
+
+
+

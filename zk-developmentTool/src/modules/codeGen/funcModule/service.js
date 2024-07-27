@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 11:55:26
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-06-24 17:01:58
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 18:02:43
 * 
 * 
 * 
@@ -13,19 +13,12 @@ import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixDevTool;
-// const api = "apiMock";
 
 // 编辑 
 export async function editFuncModule(params) {
     return zkToolsAjax.reqPretreatment(`/${api}/cg/fm/module`, {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
-        );
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
+    );
 }
 
 // 删除

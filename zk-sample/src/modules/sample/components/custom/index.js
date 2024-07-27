@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:36:01
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-12-08 00:00:12
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-25 21:50:32
  */
 
 import React from 'react';
@@ -12,27 +12,26 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { docco } from '../../helper';
 import styles from "../../styles.less";
-import { zkTools } from "zkFramework";
+import { zkTools, ZKCustomComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 
 function FInitCustomComponentsDemo({ intl }) {
-
 	return (
-		<div className={styles.sample_detail_panel}>
-			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.framework.components.custom')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-			<div className={styles.sample_detail_section} >
-				<SyntaxHighlighter language='jsx' style={docco}>
+		<ZKContentFormat className={styles.sample_detail_panel} >
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.framework.components.custom')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
-						"封装一些业务组件；\n",
+						"一些自定义组件；\n",
 						"封装的原因：\n",
 						"  1、统计默认风格\n",
 						"  2、强制风格\n",
 						"  3、简化代码书写\n",
 					].join('')}
 				</SyntaxHighlighter>
-			</div>
-			<div className={styles.sample_detail_section} >
-				<SyntaxHighlighter language='jsx' style={docco}>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
 						"自定义组件；",
 						"    ZKAutoMenu",
@@ -49,18 +48,25 @@ function FInitCustomComponentsDemo({ intl }) {
 						"    ZKOptRow",
 						"    ZKPageSelect",
 						"    ZKPermission",
+						"    ZKPopoverPanel",
 						"    ZKRouter",
 						"    ZKScrollTable",
 						"    ZKSearchRow",
 						"    ZKSider",
 						"    ZKTextEditor",
+						"    ZKTheme",
+						"    ZKTouchControl",
 						"    ZKUpload",
 						"    ZKUserDropDown",
 						"    ZKVersiionInfo",
 					].join('\n')}
 				</SyntaxHighlighter>
-			</div>
-		</div>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+				
+			</ZKContentFormat>
+			<br />
+		</ZKContentFormat>
 	)
 }
 

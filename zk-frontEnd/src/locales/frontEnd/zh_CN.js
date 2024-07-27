@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-29 16:03:03
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-06-29 17:38:50
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-25 00:40:25
 * 
 * 
 * 
@@ -15,6 +15,7 @@ export default {
     name: "简体中文",
     locale: "zh-CN",
     messages: {
+    	'zk.front.end.theme': '主题',
         ...login_zh_CN_msg
     }
 }

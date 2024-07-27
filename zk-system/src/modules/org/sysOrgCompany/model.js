@@ -1,0 +1,161 @@
+/*
+* @Author: Vinson
+* @Email: binary_space@126.com
+* @QQ: 1035862795
+* @Wechat: 1035862795
+* @Date: 2024-07-07 11:06:07
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-07 19:46:09
+*/
+
+/**
+ *
+ * @Author: 
+ * @Date: 
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 17:40:43
+ */
+
+import { editSysOrgCompany, findSysOrgChildCompanysTree, auditCompany, grantAuths } from './service';
+
+import { zkTools } from 'zkFramework';
+const { zkToolsUtils, zkToolsMsg } = zkTools;
+
+const model = {
+    namespace: 'mSysOrgCompany',
+    state: {
+        gridData: undefined,    // 列表数据
+        gridSelKeys: [],        // 列表选中的 KEY
+        initFilter: {           // 初始过滤条件
+            groupCode: '',    
+            code: '',    
+            name: {},     
+            legalPerson: '',    
+            status: '',  
+            foundDate: undefined,
+            registerNum: '',    
+        }, 
+        filter: {},             // 过滤条件     
+        pathname: null,         // 当前访问的地址路径
+        optEntity: undefined,   // 当前操作实体
+        pagination:{
+            current:1,    // 当前行
+            pageSize: zkToolsUtils.getPageSize(),  // 当前行数量
+            total:0,      // 总行数
+			showQuickJumper:true, // 是否可以快速跳转至某页
+        },                // 分页器对象
+    },
+    subscriptions: { // 启动
+        setup({ dispatch, history }) {  // eslint-disable-line
+            // dispatch({type:'findList', payload:initFilter, callback:()=>{}});
+        },
+    },
+    effects: { // action
+        // 编辑 
+        *editSysOrgCompany({ payload, callback }, { call }) {	
+        	if(zkJsUtils.isEmpty(payload.parentId)){
+                delete payload.parentId;
+            }
+            
+            let res = yield call(editSysOrgCompany, payload);
+            let f = errors=>{
+                if (zkJsUtils.assertObjType(callback, Function)) {
+                    callback.call(this, errors);
+                }
+            }
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
+                    f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
+                }
+            }
+        },
+        // // 删除
+        // *delSysOrgCompany({ payload, callback }, { call }) {
+        //     let res = yield call(delSysOrgCompany, payload);
+        //     if(res.ok){
+        //         zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+        //     }
+        //     if (zkJsUtils.assertObjType(callback, Function)) {
+        //         callback.call(this, res);
+        //     }
+        // },
+        // // 查询 详情
+        // *getSysOrgCompany({ payload, isParent = false }, { call, put }) {
+        //     let res = yield call(getSysOrgCompany, payload);
+        //     if (res.ok) {
+        //         if(isParent){
+        //         	let optEntity = {};
+        //             optEntity.parentId = res.data.pkId;
+        //             optEntity.parent = res.data;
+        //             yield put({ type: 'setState', payload: { optEntity: optEntity } });
+        //         }else{
+        //             yield put({ type: 'setState', payload: { optEntity: res.data } });
+        //         }
+        //     }
+        // },
+        /*** 查询 子公司分页列表
+         * @param {object} filter 过滤条件; {}
+         * @param {object} pagination 分页; {pageNo: 0, pageSize:10}
+         * @param {object} sorter 数组; {field:'xxx', order: ['ascend', 'descend']}
+         * @param {callback} 回调整函数; ()=>{}
+         */
+        *findSysOrgChildCompanysTree({ filter, pagination, sorter, callback }, { call, put, select }) {
+            let params = zkToolsUtils.convertSortParam(filter, sorter); 
+            if(pagination){
+                params = { ...params, ...zkToolsUtils.convertPageParam(pagination) };
+            }
+            let res = yield call(findSysOrgChildCompanysTree, params);
+            let restState = {}
+            if (res.ok) {
+                restState = {
+                    "filter": params,
+                    "gridData": res.data.result,
+                    "pagination": {
+                        "current": res.data.pageNo + 1,
+                        "pageSize": res.data.pageSize,
+                        // "pageSize": zkToolsUtils.getPageSize(),
+                        "total": res.data.totalCount,
+                        "showQuickJumper": true
+                    }
+                }
+                yield put({ type: 'setState', payload: restState });
+                if (zkJsUtils.assertObjType(callback, Function)) {
+                    callback.call(this);
+                }
+            }
+        },
+        // 审核公司
+        *auditCompany({companyId, status, callback}, {call, put, select}){
+            let res = yield call(auditCompany, companyId, status);
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
+                    callback.call(this, res.data);
+                }
+            }
+        },
+        // 给公司分配权限
+        *grantAuths({ companyId, allotAuths, callback }, { call, put, select }){
+            let res = yield call(grantAuths, companyId, allotAuths);
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
+                  zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                  callback.call(this, res);
+                }
+            }
+        },
+    },
+    reducers: { // 结果
+        setState(state, action) {
+            return { ...state, ...action.payload }
+        }
+    }
+};
+
+export default model;
+
+
+
+

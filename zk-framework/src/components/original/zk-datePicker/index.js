@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 09:34:14
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-02 08:09:56
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-19 11:10:27
  */
 
 import React from 'react';
@@ -11,11 +11,11 @@ import { DatePicker } from 'antd';
 
 const FWrapRangePicker = ({ defaultValue, ...res } )=>{
 	// 防止日期范围只初始化了 结束日期，如果只初始化了结束日期，默认将结束日期也设置为开始日期
-	if(defaultValue && defaultValue.length > 1){
-		if(defaultValue[0]  === undefined){
-			defaultValue[0] = defaultValue[1];
-		}
-	}
+	// if(defaultValue && defaultValue.length > 1){
+	// 	if(defaultValue[0]  === undefined){
+	// 		defaultValue[0] = defaultValue[1];
+	// 	}
+	// }
 	return <DatePicker.RangePicker {...res} defaultValue = {defaultValue} />
 }
 

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-17 14:21:00
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-06 20:06:58
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 20:48:21
  */
 
 
@@ -87,7 +87,7 @@ const f_getTableColumns = (editFunc, detailFunc, deleteFunc, areaTree, intl) => 
 			render: (text, record, index) => {
 				for (let item of areaTree) {
 					if (item.key == record.areaOne) {
-						if (item.childs instanceof Array) {
+						if (zkJsUtils.assertObjType(item.childs, Array)) {
 							for (let cItem of item.childs) {
 								if (cItem.key == record.areaTwo) {
 									return zkToolsMsg.getInternationInfo(cItem.name);
@@ -151,7 +151,7 @@ class CInitE1_Grid extends React.Component {
 
 		let executeDelete = (keys) => {
 			// 执行删除
-			if (this.props.onDelete instanceof Function) {
+			if (zkJsUtils.assertObjType(this.props.onDelete, Function)) {
 				this.props.onDelete.call(this, keys);
 			}
 		};
@@ -179,14 +179,14 @@ class CInitE1_Grid extends React.Component {
 
 		// 改变选择行
 		const changeSelKeysFunc = (selRowKeys, selRows) => {
-			if (onChangeSelKeys instanceof Function) {
+			if (zkJsUtils.assertObjType(onChangeSelKeys, Function)) {
 				onChangeSelKeys.call(this, selRowKeys);
 			}
 		};
 
 		// 明细
 		const detailFunc = (entity, flag = 1) => {
-			if (onDetail instanceof Function) {
+			if (zkJsUtils.assertObjType(onDetail, Function)) {
 				onDetail.call(this, entity, flag);
 			}
 		};
@@ -198,7 +198,7 @@ class CInitE1_Grid extends React.Component {
 
 		// 新增/编辑
 		const editFunc = entity => {
-			if (onEdit instanceof Function) {
+			if (zkJsUtils.assertObjType(onEdit, Function)) {
 				onEdit.call(this, entity)
 			}
 		};

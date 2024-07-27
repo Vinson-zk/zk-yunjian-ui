@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-06 17:14:43
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-09 17:26:28
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-04 16:28:29
 * 
 * 
 * 
@@ -24,7 +24,7 @@ const { ZKApplicationSystemSelect, ZKDeptSelect } = ZKBusinessComponents;
 const { zkToolsMsg, zkToolsAjax, zkToolsUtils } = zkTools;
 // const ZKSearchItem = ZKSearchRow.Item;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 /**
  * 执行查询 非树形/分页
  */
@@ -56,7 +56,7 @@ class CInitGrantMenu extends Component {
         	params = zkToolsUtils.convertSortParam(params, sorter); 
 	        params = { ...params, ...zkToolsUtils.convertPageParam(pagination)};
 	        f_doingSearch(this.props.url, params).done(res=>{
-		    	if (res.code == 'zk.0') {
+		    	if (res.ok) {
 	            	this.setState({treeData: res.data.result||[], spinningtreeData: false});
 	            }else{
 	            	throw new Error("[>_<:20220504-1535-002] request url:[" + this.props.url + "] exception: " + res.code);
@@ -76,7 +76,7 @@ class CInitGrantMenu extends Component {
 	        	this.setState({spinningOwnerIds: true});
 	        	let params = {'authId': authId}; 
 		        f_doingSearch(this.props.urlOwnerIds, params).done(res=>{
-			    	if (res.code == 'zk.0') {
+			    	if (res.ok) {
 		            	this.setState({ checkedKeys: res.data||[], expandedKeys: res.data||[], spinningOwnerIds: false });	
 		            }else{
 		            	throw new Error("[>_<:20220504-1535-003] request url:[" + this.props.urlOwnerIds + "] exception: " + res.code);
@@ -172,7 +172,7 @@ class CInitGrantMenu extends Component {
     /**  关闭 */
     f_close = ()=>{
     	this.setState({ isInit:false, filter:{}, checkedKeys:[], checkedNodes: undefined, treeData:[] });
-    	if(this.props.onShowModal instanceof Function){
+    	if(zkJsUtils.assertObjType(this.props.onShowModal, Function)){
     		this.props.onShowModal.call(this, "grantMenuModal", false, {});
     	}
     };
@@ -184,7 +184,7 @@ class CInitGrantMenu extends Component {
 		let spinning = loading.effects['mSysAuthDefined/grantMenus'] || this.state.spinningtreeData || this.state.spinningOwnerIds;
 
 	    return (
-			<ZKModal title={`${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.opt.grantMenu')}[${descName}]`} visible={isShow}
+			<ZKModal title={`${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.opt.grantMenu')}[${descName}]`} open={isShow}
 			  onOk={this.f_handleOk}
 			  onCancel={this.f_handleCancel}
 			  okButtonProps = {{loading: spinning}}
@@ -192,8 +192,8 @@ class CInitGrantMenu extends Component {
 			  width = {430}
 			>
 				<ZKSpin spinning={spinning === true} >
-					<Scrollbars className={zkStyles.zk_scroll_border} style={{ height: 560 }} >
-						<ZKTree {...otherProps} className={zkStyles.zk_tree_padding}
+					<Scrollbars className={zkStyles.zk_f_scroll_border} style={{ height: 560 }} >
+						<ZKTree {...otherProps} className={zkStyles.zk_f_tree_padding}
 							// autoExpandParent = { true }
 							checkable = {true}
 							checkStrictly = {true}

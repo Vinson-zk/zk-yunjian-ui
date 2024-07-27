@@ -18,7 +18,7 @@ import SearchItem from "./search.js";
 import GridItem from "./grid.js";
 import ResetPwdModal from "./resetPwd.js";
 import CGrantRole from "./grantRole.js";
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 import CGrantAuth from "../grantAuth.js";
 
 import locales from "../../../locales/index";
@@ -32,7 +32,7 @@ class CInitSysOrgUserIndex extends Component {
             resetPwdUser:{},
             grantRoleModal: false,
             grantRoleUser: {},
-            optCompanyEntity:{},
+            optUserEntity:{},
             grantAuthModal:false,
         };
     };
@@ -47,7 +47,7 @@ class CInitSysOrgUserIndex extends Component {
 
     // 分配权限
     f_onShowGrantAuthModal = (flag, record)=>{
-        this.setState({grantAuthModal:flag, optCompanyEntity:record});
+        this.setState({grantAuthModal:flag, optUserEntity:record});
     };
 
     render() {
@@ -55,7 +55,7 @@ class CInitSysOrgUserIndex extends Component {
         let { intl, loading, mApp, dispatch } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
+            <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} 
                     onShowResetPwdModal={this.f_onShowResetPwdModal} 
@@ -66,19 +66,21 @@ class CInitSysOrgUserIndex extends Component {
                 <CGrantRole isShow = {this.state.grantRoleModal} optUser = {this.state.grantRoleUser} 
                     onShowModal={this.f_onShowGrantRoleModal} />
                 <CGrantAuth isShow = {this.state.grantAuthModal} 
-                    url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthUser/sysAuthDefinedsPage`}
-                    urlOwnerIds = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthUser/findAuthIdsByUserId`}
-                    urlOwnerTargetParamName="userId"
+                    url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthUser/findAllotAuthPage`}
+                    formatParamsFunc = {(toTargetId, params={})=>{
+                        params['userId'] = toTargetId;
+                        return params;
+                    }}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.user')}
-                    descName={zkToolsMsg.getInternationInfo(this.state.optCompanyEntity.name?this.state.optCompanyEntity.name:{}, lang)}
-                    targetId={this.state.optCompanyEntity.pkId} 
+                    descName={zkToolsMsg.getInternationInfo(this.state.optUserEntity.name?this.state.optUserEntity.name:{}, lang)}
+                    toTargetId={this.state.optUserEntity.pkId} 
                     onShowModal={this.f_onShowGrantAuthModal}
                     saveSpinning={loading.effects["mSysOrgUser/grantAuth"]||false}
-                    saveFunc={(userId, auths, callback)=>{
+                    saveFunc={(userId, allotAuths, callback)=>{
                         dispatch({ 
                             type: 'mSysOrgUser/grantAuth', 
                             userId: userId,
-                            auths: auths,
+                            allotAuths: allotAuths,
                             callback: callback
                         });
                     }}

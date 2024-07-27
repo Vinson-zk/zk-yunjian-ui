@@ -2,13 +2,13 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 22:26:57
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-27 16:12:55
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 17:54:38
  */
 
 import React from 'react';
 import { DatePicker } from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { ZKDatePicker } from '../../original/index';
 
@@ -29,7 +29,7 @@ class CInitDateFormatRangePicker extends React.Component {
 
 	// f_onChange = (e)=>{
 	// 	let { format, onChange } = this.props;
-	// 	if (e&&(onChange instanceof Function)) {
+	// 	if (e&&(zkJsUtils.assertObjType(onChange, Function))) {
 	// 		// console.log("[^_^:20200817-1737-001] ", e);
 	// 		onChange([e[0]?e[0].format(format):undefined, e[1]?e[1].format(format):undefined]);
 	// 		// onChange([e[0].format(format), e[1].format(format)]);
@@ -38,7 +38,7 @@ class CInitDateFormatRangePicker extends React.Component {
 
 	f_onChange = (vMs, vStrs)=>{
 		let { onChange } = this.props;
-		if (onChange instanceof Function) {
+		if (zkJsUtils.assertObjType(onChange, Function)) {
 			// console.log("[^_^:20210307-0550-001] ", e);
 			onChange([vStrs[0]?vStrs[0]:undefined, vStrs[1]?vStrs[1]:undefined]);
 		}
@@ -55,12 +55,11 @@ class CInitDateFormatRangePicker extends React.Component {
 			makeProps.value = [];
 			if (value) {
 				if (value[0]) {
-					makeProps.value[0] = moment(value[0], format);
+					makeProps.value[0] = dayjs(value[0], format);
 				}
 				if (value[1]) {
-					makeProps.value[1] = moment(value[1], format);
+					makeProps.value[1] = dayjs(value[1], format);
 				}
-				// makeProps.value = [value[0]?moment(value[0], format):null, value[1]?moment(value[1], format):null]
 			}
 		}
 
@@ -68,16 +67,10 @@ class CInitDateFormatRangePicker extends React.Component {
 			makeProps.defaultValue = [];
 			if (defaultValue) {
 				if (defaultValue[0]) {
-					makeProps.defaultValue[0] = moment(defaultValue[0], format);
+					makeProps.defaultValue[0] = dayjs(defaultValue[0], format);
 				}
 				if (defaultValue[1]) {
-					makeProps.defaultValue[1] = moment(defaultValue[1], format);
-					// 防止日期范围只初始化了 结束日期，如果只初始化了结束日期，默认将结束日期也设置为开始日期
-					if(!defaultValue[0]){
-						makeProps.defaultValue[0] = makeProps.defaultValue[1];
-					}
-				}
-				// makeProps.defaultValue = [defaultValue[0]?moment(defaultValue[0], format):null, defaultValue[1]?moment(defaultValue[1], format):null]
+					makeProps.defaultValue[1] = dayjs(defaultValue[1], format);				}
 			}
 		}
 
@@ -114,12 +107,12 @@ class CInitDateFormatPicker extends React.Component {
 	f_onChange = (vM, vStr)=>{
 
 		// let { format, onChange } = this.props;
-		// if (e&&(onChange instanceof Function)) {
+		// if (e&&(zkJsUtils.assertObjType(onChange, Function))) {
 		// 	onChange(e.format(format));
 		// }
 
 		let { onChange } = this.props;
-		if (onChange instanceof Function) {
+		if (zkJsUtils.assertObjType(onChange, Function)) {
 			onChange(vStr);
 		}
 	}
@@ -132,7 +125,7 @@ class CInitDateFormatPicker extends React.Component {
 
 		if ('value' in this.props) {
 			if (value) {
-				makeProps.value = moment(value, format)
+				makeProps.value = dayjs(value, format)
 			} else {
 				makeProps.value = undefined
 			}
@@ -140,7 +133,7 @@ class CInitDateFormatPicker extends React.Component {
 
 		if ('defaultValue' in this.props) {
 			if (defaultValue) {
-				makeProps.defaultValue = moment(defaultValue, format)
+				makeProps.defaultValue = dayjs(defaultValue, format)
 			} else {
 				makeProps.defaultValue = undefined
 			}

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-29 21:52:35
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 09:01:02
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 15:49:02
  */
 
 
@@ -11,7 +11,8 @@ import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
 import { Layout } from 'antd';
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
+import zkJsUtils from "zkJsUtils";
 
 import { ZKCustomComponents, ZKOriginalComponents, zkTools } from 'zkFramework';
 
@@ -44,7 +45,8 @@ const funcModuleMppingObj = {
 const dynamicImportHelper = zkToolsNavAndMenu.getDynamicImportHelper(funcModuleMppingObj);
 
 /*** 添加导航栏目 */
-import { navItems } from '../mock/data.system.nav.js';
+import mockDataSysNavs from '../mock/mock.data.system.nav.js';
+const navItems = mockDataSysNavs.navItems;
 
 let navRoutes = null;
 let indexNavRoute = null;
@@ -66,14 +68,14 @@ const FInitNavHome = ({dvaApp, match, mApp, dispatch, locales, lang, intl}) => {
     };
 
     return (
-        <Layout className={zkStyles.zk_layout}>
-            <Header className={zkStyles.zk_header}>
+        <Layout className={zkStyles.zk_f_layout}>
+            <Header className={zkStyles.zk_f_header}>
                 <ZKLogo logoImgUrl="assets/img/logo-zk.png" />
                 <ZKNavigation prefixPath={`${match.path}`} navItems={navItems} />
-                <div className={zkStyles.flex_1_auto}></div>
+                <div className={zkStyles.zk_f_flex_auto_1}></div>
                 <ZKLanguageSelect {...languageSwitchProps} />
             </Header>
-            <Content className={zkStyles.zk_content}>
+            <Content className={zkStyles.zk_f_content}>
                 <Switch>
                     {indexNavRoute ?
                         (

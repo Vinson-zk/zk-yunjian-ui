@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-04-01 09:47:49
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-19 20:02:15
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-21 00:06:50
 * 
 * 
 * 
@@ -519,7 +519,7 @@ class CInitColInfo extends Component {
         >
           <div className = {styles.title_row} >
             <div className = {styles.title}>
-              <ZKIcon.Antd4Icon icon = "DatabaseOutlined" /> &nbsp; { tableInfo.tableName } &nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.col.info')} 
+              <ZKIcon.AntdIcon icon = "DatabaseOutlined" /> &nbsp; { tableInfo.tableName } &nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.col.info')} 
             </div>
             {mColInfo.tableInfo.pkId?(
               <div className = {styles.title_opt_left}>

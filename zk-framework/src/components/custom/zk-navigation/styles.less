@@ -1,11 +1,21 @@
-.nav {
+/**
+ *
+ * @Author: Vinson
+ * @Date: 2020-08-11 22:31:06
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-26 09:24:17
+ */
+
+@import "../../../../style/theme/zk.theme.variables.less";
+
+.zk_nav {
 
 	display: flex;
 
-	.nav_item_div {
-		flex   : 1 1 auto;
-		cursor : pointer;
-		margin : 0px;
+	.zk_nav_item_div {
+		flex: 1 1 auto;
+		cursor: pointer;
+		margin: 0px;
 		padding: 0px 9px 0px 9px;
 
 		font-size: 16px;
@@ -17,25 +27,32 @@
 	    text-align: center;
 	    overflow: hidden;
 	    white-space: nowrap;
+		background-color: @colorBgBase;
 	}
 
-	.nav_item_div>a {
+	.zk_nav_item_div>a {
 		text-decoration: none;
-		display        : block;
-		color          : rgba(0, 0, 0, 0.65);
+		display: block;
+		color: @colorText;
 	}
 
-	.nav_item_div>a :hover {
-		color: @primary-color;
+	.zk_nav_item_div:hover {
+		background-color: @colorPrimaryHover;
+	}
+	.zk_nav_item_div:hover>a {
+		color: @colorWhite;
 	}
 
-	.nav_item_selected {
-		background-color: hsl(@primary-color, 0.18, 0.9);
+	/*.zk_nav_item_div>a:hover {
+		color: @p-font-color-hover;
+	}*/
+
+	.zk_nav_item_selected {
+		background-color: @colorPrimaryBgHover;
 	}
-	.nav_item_selected>a {
-		color: @primary-color;
+	.zk_nav_item_selected>a {
+		color: @colorText;
 	}
-
-
-
 }
+
+

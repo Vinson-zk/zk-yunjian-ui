@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-06-24 18:48:40
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 14:42:57
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-27 23:25:09
 * 
 * 公共的视图，登录，注册等未进入框架布局前的视图
 * 
@@ -14,7 +14,7 @@ import { Layout } from "antd";
 import { injectIntl } from "react-intl";
 
 import { ZKCustomComponents, ZKOriginalComponents, ZKException, zkTools } from 'zkFramework';
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 import publicStyles from './layoutPublic.styles.less';
 
 // import zkJsUtils from "zkJsUtils";
@@ -42,14 +42,17 @@ let publicIndexRouter = null;
  */
 const FInitLayoutPublic = ({ dvaApp, match, dispatch, locales, mApp, lang }) => {
 
+    // console.log("[^_^:20240627-2315-001] match: ", match);
+    // console.log("[^_^:20240627-2315-001] globalAppConfig.basename: ", globalAppConfig);
     if (publicRouters == null) {
         // 生成路由 
-		publicRouters = zkToolsNavAndMenu.getRoutesByMenus(dvaApp, match.path, publicRouteItems, dynamicImportHelper);
+		publicRouters = zkToolsNavAndMenu.getRoutesByMenus(dvaApp, `${match.path}`, publicRouteItems, dynamicImportHelper);
       	// 制作默认菜单的路由路径对象
       	publicIndexRouter = zkToolsNavAndMenu.getIndexMenu(publicRouteItems, match.path);
 
         publicRouters.push(<Route key="_key_not_found_route_public_layout" component = {()=><ZKException /> } />);
     }
+    // console.log("[^_^:20240627-2315-002] publicRouters: ", publicRouters);
 
     // let languageSwitchProps = { 
     // 	locales, 
@@ -67,7 +70,7 @@ const FInitLayoutPublic = ({ dvaApp, match, dispatch, locales, mApp, lang }) => 
     // }
 
     return (
-        <Layout className={zkStyles.zk_layout}>
+        <Layout className={zkStyles.zk_f_layout}>
 	        {/*<div className={publicStyles.public_head} >
 	        	<div>
                 	<ZKLanguageSelect {...languageSwitchProps} />
@@ -89,6 +92,7 @@ const FInitLayoutPublicAuth = ({ location, ...props }) => {
         return <Redirect to={ fromLocation } />;
     }
 
+    // console.log("[^_^:20210628-2313-002] location.state: ", location.state, props);
     return <FInitLayoutPublic {...props} key = "_layoutPublic" />
 }
 

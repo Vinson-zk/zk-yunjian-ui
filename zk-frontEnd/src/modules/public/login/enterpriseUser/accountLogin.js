@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-04-21 14:34:54
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-07-14 14:40:35
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-25 21:42:20
 * 
 * 
 * 
@@ -12,7 +12,7 @@
 import React from "react";
 import { injectIntl } from 'react-intl';
 import { connect } from 'dva';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, AccountBookOutlined } from '@ant-design/icons';
 
 // import { Form, Input, Button } from "antd";
 
@@ -58,7 +58,7 @@ class CInitAccountLogin extends React.PureComponent {
 						<ZKForm.Item labelCol = "" wrapperCol = "" name = "companyCode"  
 							rules = {[ { required: true, message: zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.vMsg.companyCode') } ]} >
 							<ZKInput className="" 
-								prefix = { <UserOutlined className = { loginStyles.login_item_icon } /> } 
+								prefix = { <AccountBookOutlined className = { loginStyles.login_item_icon } /> } 
 								placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.companyCode')}
 							/>
 						</ZKForm.Item>

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 09:12:24
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-02 08:10:45
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-19 13:45:50
  */
 
 import React from 'react';
@@ -15,7 +15,7 @@ import styles from "./styles.less";
 // console.log("[^_^:20210227-2024-001] Button.prototype: ", Button.propertyIsEnumerable());
 
 const FWrapButton = (props)=>{
-	return <Button className={styles.button} {...props} />
+	return <Button className={styles.zk_button} {...props} />
 }
 // FWrapButton = {...Button, ...FWrapButton};
 // console.log("[^_^:20210227-2024-001] FWrapButton: ", FWrapButton);

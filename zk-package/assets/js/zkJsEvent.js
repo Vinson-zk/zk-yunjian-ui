@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 13:41:29 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-11 19:51:28
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-08-28 16:29:05
  */
 (function (global) {
 
@@ -142,14 +142,14 @@
 	 */
     const f_eventCancelPropagation = (event) => {
         //这里是因为除了IE有event其他浏览器没有所以要做兼容
-        event = window.event || event
+        event = event || window.event;
         // if (document.all) {
         if (event.stopPropagation instanceof Function) {
             //阻止冒泡事件
-            event.stopPropagation()
+            event.stopPropagation();
         } else {
             //阻止冒泡事件
-            event.cancelBubble = true
+            event.cancelBubble = true;
         }
     }
     //  if(window.event){这是IE浏览器}       
@@ -159,7 +159,7 @@
 	 * @return [void]
 	 */
     const f_eventCancelDefault = (event) => {
-        event = window.event || event
+        event = event || window.event;
         if (event.preventDefault instanceof Function) {
             //阻止默认事件
             event.preventDefault();
@@ -178,7 +178,7 @@
     }
 
     global.zkJsEvent = _event;
-
+    return _event;
 })(typeof window !== "undefined" ? window : this);
 
 

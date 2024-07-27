@@ -1,0 +1,101 @@
+/*
+* @Author: Vinson
+* @Date:   2022-11-28 17:51:53
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-22 15:17:54
+*/
+
+@import "../../../../style/theme/zk.theme.variables.less";
+
+.zk_touch {
+	position: fixed;
+	/*top: 40px;*/
+	/*left: 0px;*/
+	/*bottom: 0px;*/
+
+	text-align: center;
+	/*transform: rotate(90deg);*/
+	/*transform-origin: left bottom 0;*/
+
+	background-color: @colorBgBase;
+	/*background-color:red;*/
+	color: #fff;
+	cursor: pointer;
+	z-index: 99999;
+
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.zk_touch_default {
+    width: 56px;
+    height: 56px;
+    line-height: 56px;
+    border-radius: 28px;
+    background-image: radial-gradient(circle, @colorPrimaryHover 37%, @colorPrimaryBorderHover 45%);
+}
+
+.zk_touch_nav {
+
+}
+
+.zk_touch_nav_left {
+
+	/*text-align: center;
+	transform: rotate(90deg);
+	transform-origin: left bottom 0;*/
+	writing-mode: tb-rl;
+
+	/*margin: 0px;*/
+	padding: 0px 0px 9px 0px;
+
+	/*display: flex;*/
+	width: 28px;
+	height: 88px;
+	line-height: 28px;
+	border-radius: 0px 9px 9px 0px;
+}
+.zk_touch_nav_right {
+
+	/*writing-mode: vertical-rl;*/
+	writing-mode: tb-rl;
+
+	/*margin: 0px;*/
+	padding: 0px 0px 9px 0px;
+
+	/*display: flex;*/
+	width: 28px;
+    height: 88px;
+    line-height: 25px;
+    border-radius: 9px 0px 0px 9px;
+}
+.zk_touch_nav_top {
+	/*margin: 0px;*/
+	padding: 0px 0px 9px 0px;
+
+	/*display: flex;*/
+	width: 88px;
+	height: 28px;
+	line-height: 28px;
+	border-radius: 0px 0px 9px 9px;
+}
+.zk_touch_nav_bottom {
+	/*margin: 0px;*/
+	padding: 0px 0px 6px 0px;
+
+	/*display: flex;*/
+	width: 88px;
+	height: 28px;
+	line-height: 25px;
+	border-radius: 9px 9px 0px 0px;
+}
+
+.zk_touch_nav_move_transition {
+	transition: top,right,bottom,left 0.45s,0.45s,0.45s,0.45s;
+}
+

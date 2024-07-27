@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 12:38:35
- * @Last Modified by:   Vinson
- * @Last Modified time: 2020-08-17 10:22:42
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 17:57:24
  */
 
 import React from 'react'
@@ -43,11 +43,11 @@ const FInitPermission = ({ roles = [], permissions = [], children }) => {
 	// 断言一个 节点的是否显示，不显示返回 空，显示，返回节点；
 	const f_assertionChildNode = (itemNode, key = "_permission_key_") => {
 		// 如果结果为空，直接返回 节点 
-		if (itemNode == null || itemNode == undefined) {
+		if (zkJsUtils.isEmpty(itemNode, false)) {
 			return itemNode;
 		}
 
-		if (itemNode instanceof Array) {
+		if (zkJsUtils.assertObjType(itemNode, Array)) {
 			return itemNode.filter(i => i).map((item, index) => {
 				return f_assertionChildNode(item, key + index);
 			});
@@ -62,10 +62,11 @@ const FInitPermission = ({ roles = [], permissions = [], children }) => {
 				// }else{
 				// 	return item;
 				// }
-				return <itemNode.type {...nodeProps}
-					key={itemNode.key ? itemNode.key : key}
-					children={f_assertionChildNode(children)}
-				/>
+				if(children){
+					return <itemNode.type {...nodeProps} key={itemNode.key ? itemNode.key : key} children={f_assertionChildNode(children)}/>
+				}else{
+					return <itemNode.type {...nodeProps} key={itemNode.key ? itemNode.key : key}/>
+				}
 			} else {
 				return;
 			}
@@ -92,5 +93,6 @@ FInitPermission.defaultProps = {
 	permissions: []
 };
 
-
 export default FInitPermission;
+
+

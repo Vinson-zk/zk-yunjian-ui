@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-02 16:59:17
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-07 17:42:25
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:15:52
 * 
 * 
 * 
@@ -17,7 +17,7 @@ import { DownOutlined } from '@ant-design/icons';
 import { ZKTree, ZKSpin } from '../../original';
 import { zkToolsUtils, zkToolsAjax, zkToolsMsg } from '../../../tools';
 
-import zkStyles from '../../../../css/styles.less';
+import zkStyles from '../../../../style/zk.styles.less';
 import styles from './styles.less';
 
 /**
@@ -57,7 +57,7 @@ class CInitCompanyTree extends Component {
 	            // let params = zkToolsUtils.convertSortParam({}, {}); 
 	            params = { ...params, ...zkToolsUtils.convertPageParam({'current':1, 'pageSize':9999}) };
 	            f_findSysOrgCompanys(url, params).done(res=>{
-    	            if (res.code == 'zk.0') {
+    	            if (res.ok) {
     	            	let expandedKeys = [];
     	                if(optCompany){
     	                    // 当前操作公司存，找出需要展开的 节点
@@ -68,7 +68,7 @@ class CInitCompanyTree extends Component {
     	                }
     	                this.setState({companyTrees:res.data.result, expandedKeys:expandedKeys, spinning: false});
     	                if(optCompany){
-    	                    if(this.props.onSelect instanceof Function){
+    	                    if(zkJsUtils.assertObjType(this.props.onSelect, Function)){
     				    		this.props.onSelect.call(this, optCompany);
     				    	}
     				    }
@@ -89,7 +89,7 @@ class CInitCompanyTree extends Component {
     };
     // 选择节点
     f_onSelect = (selectedKeys, info) => {
-    	if(this.props.onSelect instanceof Function){
+    	if(zkJsUtils.assertObjType(this.props.onSelect, Function)){
     		this.props.onSelect.call(this, info.node);
     	}
     };
@@ -136,7 +136,7 @@ CInitCompanyTree.defaultProps = {
 	...ZKTree.defaultProps,
 	fieldNames: { title: 'pkId', key: 'pkId', children: 'children' },
 	// showLine: true, 
-	className: `${styles.company_tree}`,
+	className: `${styles.zk_bsnes_company_tree}`,
 	switcherIcon: <DownOutlined />,
     showLine: {"showLeafIcon":false},
 	autoExpandParent: true,

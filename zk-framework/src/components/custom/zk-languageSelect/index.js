@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 22:29:13
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 20:20:22
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-21 22:18:52
  */
 
 import React from 'react';
@@ -21,10 +21,10 @@ const FInitLanguageSelect = ({ locales, changeFunc, lang }) => {
 	};
 	if(locales){
 		return (
-			<Select defaultValue={lang} className={styles.languageSelect} onChange={handleLanguageChange}>
+			<Select defaultValue={lang} className={styles.zk_language_select} onChange={handleLanguageChange}>
 				{
 					Object.keys(locales).map((language) => {
-						return <Option className={styles.languageSelect_option} key={language} value={language}>{locales[language].name}</Option>
+						return <Option className={styles.zk_language_select_option} key={language} value={language}>{locales[language].name}</Option>
 					})
 				}
 			</Select>
@@ -45,4 +45,7 @@ FInitLanguageSelect.defaultProps = {
 	lang: 'en-US',
 }
 
-export default FInitLanguageSelect
+export default FInitLanguageSelect;
+
+
+

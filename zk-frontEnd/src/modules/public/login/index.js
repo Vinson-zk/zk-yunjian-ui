@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-06-24 23:10:32
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-21 14:44:16
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-25 22:53:11
 * 
 * 
 * 
@@ -54,7 +54,7 @@ class CInitLoginPanel extends React.PureComponent {
 			return <CEnterpriseUserLogin { ...this.props } className="" onChangeUserType={this.onChangeUserType} locales = {locales} />;
 		}
 
-		let spinning = loading.effects['mApp/accountLogin'] || loading.effects['mApp/phoneNumberLogin'];
+		let spinning = loading.effects['mApp/accountLogin'] || loading.effects['mApp/phoneNumberLogin'] || loading.effects['mApp/loginUserInfo'];
 		return (
 			<ZKSpin spinning={ spinning === true } >
 				{ f_getLoginNode(this.state.userType) }

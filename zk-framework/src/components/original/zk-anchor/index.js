@@ -3,12 +3,14 @@
  * @Author: Vinson
  * @Date: 2020-08-13 23:49:08
  * @Last Modified by:   Vinson
- * @Last Modified time: 2021-04-02 15:14:02
+ * @Last Modified time: 2022-12-05 10:10:26
  */
 
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { Anchor } from 'antd';
+
+import zkStyles from "./styles.less";
 
 // console.log("[^_^:20210227-2023-001] Anchor: ", Anchor);
 // console.log("[^_^:20210227-2023-001] Anchor.prototype: ", Anchor.prototype);
@@ -30,6 +32,7 @@ FWrapAnchor.defaultProps = {
 	affix: true,
 	showInkInFixed: true,
 	offsetTop: 7,
+	className: zkStyles.zk_anchor,
 }
 
 

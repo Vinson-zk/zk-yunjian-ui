@@ -1,17 +1,18 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-25 18:44:03
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-25 18:47:46
+* @Last Modified by: vinson
+* @Last Modified time: 2023-09-06 10:33:50
 */
 
 import { locales as zkFrameworkLocales, zkTools } from 'zkFramework'; 
 import mailLocales from './mail/index.js';
 
 import enLocaleData from "react-intl/locale-data/en";
-import enAntd from "antd/lib/locale-provider/en_US";
 import zhLocaleData from "react-intl/locale-data/zh";
-import zhAntd from "antd/lib/locale-provider/zh_CN";
+
+import enAntd from "antd/locale/en_US";
+import zhAntd from "antd/locale/zh_CN";
 
 // console.log("[^_^: 20200807-1505-001] zkFrameworkLocales: ", zkFrameworkLocales);
 

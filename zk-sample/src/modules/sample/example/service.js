@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-17 13:55:47
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-21 17:19:26
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 21:30:36
  */
 
 import { zkTools } from "zkFramework";
@@ -21,7 +21,7 @@ export async function get(params) {
 
 // 查找接口
 export async function findList(params) {
-	return zkToolsAjax.req('/apiMock/sample/example/findList', {method:'GET', data:params})
+	return zkToolsAjax.req('/apiMock/sample/example/findList?_p=params', {method:'GET', data:params})
 }
 
 // 删除接口
@@ -122,7 +122,7 @@ export async function save(params) {
 //         tData.areaOne = areaOne.key
 
 //         let areaChilds = areaOne.childs;
-//         if(areaChilds instanceof Array && areaChilds.length > 0){
+//         if(zkJsUtils.assertObjType(areaChilds, Array) && areaChilds.length > 0){
 //             let areaTwo = areaChilds[Math.round(Math.random() * 1000) % areaChilds.length]
 //             tData.areaTwo = areaTwo.key
 //         }
@@ -208,7 +208,7 @@ export async function save(params) {
 //             }
 //         }
 
-//         if (filter.birthday instanceof Array) {
+//         if (zkJsUtils.assertObjType(filter.birthday, Array)) {
 //             if (filter.birthday[0] && bData.birthday < filter.birthday[0]) {
 //                 continue;
 //             }

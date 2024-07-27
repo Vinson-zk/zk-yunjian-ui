@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 12:01:03
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-03 17:33:19
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 21:25:19
  */
 
 
@@ -24,7 +24,7 @@ const f_getTag = (tag) => {
    if(tag.type != undefined && tag.props != undefined){
 	   let tagProps={}
 	   for(let key in tag.props){
-		   if(typeof tag.props[key] == 'function'){
+		   if(zkJsUtils.assertObjType(tag.props[key], Function)){
 			   tagProps[key] = (...args)=>tag.props[key](...args, form)
 		   }else{
 			   tagProps[key] = tag.props[key]
@@ -44,7 +44,7 @@ const f_makeElementNode = (elementNode, id, options)=>{
    if(elementNode.type != undefined){
 	   if(f_isField(elementNode)){
 		   return (
-			   <FormItem className = { styles.searchItem } label={label} >
+			   <FormItem className = { styles.zk_search_item } label={label} >
 				   {form.getFieldDecorator(id, options)(f_getTag(elementNode))}
 			   </FormItem>		
 		   )
@@ -83,7 +83,7 @@ SearchItem：三个属性：接收 Form.Item 的所有原生属性；
 // };
 
 const FInitSearchItem = ({ className, ...props }) => {
-	return <Form.Item className={`${styles.searchItem} ${className}`} {...props} />
+	return <Form.Item className={`${styles.zk_search_item} ${className}`} {...props} />
 }
 
 FInitSearchItem.propTypes = {
@@ -99,7 +99,7 @@ FInitSearchItem.defaultProps = {
 class CInitSearchRow extends React.Component {
 
 	// formRef = null;
-	formRef = React.createRef();
+	formRef = null;
 
 	constructor(props) {
 		super(props);
@@ -107,6 +107,7 @@ class CInitSearchRow extends React.Component {
             isResetForm: false, // 是否需要重置 form 
             defaultValues: props.filter || props.initialValues,
         }
+        this.formRef = props.forwardedRef?props.forwardedRef : React.createRef();
 	}
 
 	render() {
@@ -114,14 +115,14 @@ class CInitSearchRow extends React.Component {
 
 		// 查询函数 
 		const f_search = (values) => {
-			if (searchFunc instanceof Function) {
+			if (zkJsUtils.assertObjType(searchFunc, Function)) {
 				searchFunc.call(this, values);
 			}
 		}
 
 		const f_clearFilter = () => {
 			this.formRef.current.resetFields();
-			if (resetFunc instanceof Function) {
+			if (zkJsUtils.assertObjType(resetFunc, Function)) {
 				const values = this.formRef.current.getFieldsValue();
 				resetFunc.call(this, values, this.formRef.current);
 			}
@@ -130,16 +131,13 @@ class CInitSearchRow extends React.Component {
 			}
 		}
 
-		this.formRef =  forwardedRef?forwardedRef : React.createRef();
-
-		// undo minus-square-o
 		return (
-			<Form {...props} layout="inline" className={`${styles.searchRow} ${className}`}  
+			<Form {...props} layout="inline" className={`${styles.zk_search_row} ${className}`}  
 				initialValues={this.state.defaultValues} onFinish = {f_search} ref = {this.formRef} >
 				{children}
 				<Form.Item >
-					<Button htmlType="submit" icon = {<SearchOutlined />} className={styles.optBtn} >{showBtnName ? zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_search') : ""}</Button>
-					{(resetFunc instanceof Function) ? (<Button icon = { <UndoOutlined /> } className={styles.optBtn} onClick={f_clearFilter} >{showBtnName ? zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_reset') : ""}</Button>) : ""}
+					<Button htmlType="submit" icon = {<SearchOutlined />} className={styles.zk_search_opt_btn} >{showBtnName ? zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_search') : ""}</Button>
+					{(zkJsUtils.assertObjType(resetFunc, Function)) ? (<Button icon = { <UndoOutlined /> } className={styles.zk_search_opt_btn} onClick={f_clearFilter} >{showBtnName ? zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_reset') : ""}</Button>) : ""}
 				</Form.Item>
 			</Form>
 		)
@@ -164,9 +162,8 @@ CInitSearchRow.propTypes = {
 	initialValues: PropTypes.object, 
 	filter: PropTypes.object, 
 	children: function (props, propName, componentName) {
-		if (props.children instanceof Array) {
+		if (zkJsUtils.assertObjType(props.children, Array)) {
 			for (let c of props.children) {
-				console.log("======= 111 ", props.children.type)
 				if (c.type.name != 'FInitSearchItem') {
 					return new Error(
 						'Invalid prop `' + propName + '`:`' + c.type.name + '` supplied to' +
@@ -176,7 +173,6 @@ CInitSearchRow.propTypes = {
 			}
 		} else {
 			if (props.children.type.name != 'FInitSearchItem') {
-				console.log("======= 222 ", props.children.type)
 				return new Error(
 					'Invalid prop `' + propName + '`:`' + props.children.type.name + '` supplied to' +
 					' `' + componentName + '`. Validation failed.'

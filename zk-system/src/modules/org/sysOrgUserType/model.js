@@ -2,11 +2,11 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 19:08:10
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 11:01:15
  */
 
-import { editSysOrgUserType, delSysOrgUserType, getSysOrgUserType, findSysOrgUserTypes, setAuthRelation } from './service';
+import { editSysOrgUserType, delSysOrgUserType, getSysOrgUserType, findSysOrgUserTypes, grantAuths } from './service';
 
 import { zkTools } from 'zkFramework';
 const { zkToolsUtils, zkToolsMsg } = zkTools;
@@ -43,34 +43,33 @@ const model = {
         *editSysOrgUserType({ payload, callback }, { call }) {
             let res = yield call(editSysOrgUserType, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delSysOrgUserType({ payload, callback }, { call }) {
             let res = yield call(delSysOrgUserType, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getSysOrgUserType({ payload }, { call, put }) {
             let res = yield call(getSysOrgUserType, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { optEntity: res.data } });
             }
         },
@@ -87,7 +86,7 @@ const model = {
             }
             let res = yield call(findSysOrgUserTypes, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -100,16 +99,16 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
         },
         // 给用户类型分配权限
-        *grantAuth({ userTypeId, auths, callback }, { call, put, select }){
-            let res = yield call(setAuthRelation, userTypeId, auths);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+        *grantAuth({ userTypeId, allotAuths, callback }, { call, put, select }){
+            let res = yield call(grantAuths, userTypeId, allotAuths);
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }
@@ -124,3 +123,5 @@ const model = {
 };
 
 export default model;
+
+

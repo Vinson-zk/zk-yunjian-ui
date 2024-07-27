@@ -17,9 +17,7 @@ const { zkToolsUtils, zkToolsMsg } = zkTools;
 import SearchItem from "./search.js";
 import GridItem from "./grid.js";
 import ChannelEdit from "./channelEdit.js";
-
-import zkStyles from 'zkFramework/css/styles.less';
-
+import zkStyles from 'zkFramework/style/zk.styles.less';
 import locales from "../../../locales/index";
 
 class CInitSysResFuncApiIndex extends Component {
@@ -44,7 +42,7 @@ class CInitSysResFuncApiIndex extends Component {
         };
 
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
+            <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem onShowChannelEdit={this.onShowChannelEdit} {...this.props} />
                 <ChannelEdit {...channelEditProps} />

@@ -2,20 +2,24 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 16:58:59
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-02-21 23:57:32
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-26 14:28:52
  */
 
-import { getNavItemSync } from './service';
+import { getNavItems } from './service';
 
 import zkJsUtils from 'zkJsUtils';
 import { zkTools } from 'zkFramework';
 
-let { zkToolsMsg } = zkTools;
+let { zkToolsMsg, zkToolsUtils } = zkTools;
+
+let themeFlagKey = '_themeFlagKey';
 
 const model = {
     namespace: 'mApp',
     state: {
+        // 主题标识
+        themeFlag: sessionStorage.getItem(themeFlagKey)||'default', // zkToolsUtils.getTheme(),
         // 提示的消息
         msg: [],
         // 国际化语言
@@ -23,8 +27,7 @@ const model = {
         // 登录用户
         user: undefined,
         // 导航栏
-        navItems:[],
-        navItemIsUpdate:false,
+        navItems: undefined,
     },
     subscriptions: {
         setup({ dispatch }) {
@@ -47,14 +50,18 @@ const model = {
             }
         },
         *getNavItems({ payload }, { call, put }) {
-            let res = yield call(getNavItemSync, payload);
-            if (res.code == "zk.0") {
+            let res = yield call(getNavItems, {});
+            if (res.ok) {
                 let navItems = res.data;
                 navItems = zkJsUtils.sort(navItems, 1);
-                yield put({ type: 'setState', payload: { "navItems": navItems||[], "navItemIsUpdate":true } });
+                yield put({ type: 'setState', payload: { "navItems": navItems||[]} });
             } else {
                 throw new Error("getNavItems req fail，error message: " + res.msg)
             }
+        },
+        *changeTheme({ themeFlag }, { call, put }) {
+            sessionStorage.setItem(themeFlagKey, themeFlag)
+            yield put({ type: 'setState', payload: { "themeFlag": themeFlag} });
         },
     },
 

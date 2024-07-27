@@ -1,6 +1,6 @@
 {
   "name": "wechat",
-  "version": "1.0.0",
+  "version": "3.0.1",
   "description": "zk Wechat",
   "main": "index.js",
   "module": "es/index.js",

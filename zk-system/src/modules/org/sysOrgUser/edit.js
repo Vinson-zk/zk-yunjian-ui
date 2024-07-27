@@ -234,6 +234,7 @@ class CInitSysOrgUserEdit extends Component {
                 	<ZKEditForm.Item name = "sourceCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.sourceCode')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 0, 11), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
                         <ZKInput disabled = {optEntity.pkId?true:false} />

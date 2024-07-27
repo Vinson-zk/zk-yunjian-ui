@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 11:15:36
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-03 18:00:10
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-27 23:57:03
  */
 
 import React from 'react';
@@ -12,7 +12,8 @@ import PropTypes from 'prop-types';
 // import { Form, Spin } from 'antd';
 import { FormOutlined } from '@ant-design/icons';
 // import { connect } from 'dva';
-import { withRouter } from 'dva/router';
+import { router } from 'dva';
+const { withRouter } = router;
 import { injectIntl } from 'react-intl';
 // import Promise from 'Promise';
 
@@ -36,7 +37,7 @@ const f_getViewDefaultFormItem = (children) => {
 
 	let span = 8;
 	let offset = 2;
-	if (children instanceof Array) {
+	if (zkJsUtils.assertObjType(children, Array)) {
 		let cs = [];
 		let firstItem = null;
 		children.forEach((item, index)=>{
@@ -77,7 +78,7 @@ FInitEditItem.defaultProps = {
 class CInitEditForm extends React.Component {
 
 	// formRef = null;
-	formRef = React.createRef();
+	formRef = null;
 
 	constructor(props) {
 		super(props)
@@ -86,6 +87,7 @@ class CInitEditForm extends React.Component {
 			data: props.data
 		};
 		// console.log("[^_^:20210308-1312-001] CInitEditForm.constructor: ", props.data);
+		this.formRef = props.forwardedRef?props.forwardedRef:React.createRef(); // 这一行，是否应该放在构造函数中，待测试验证
 	}
 
 	static getDerivedStateFromProps(props, state) {
@@ -123,8 +125,16 @@ class CInitEditForm extends React.Component {
 		// 	() => { console.log('cancel') }       // 取消回调
 		// )
 
-		if(this.props.goBackFunc instanceof Function){
-			this.props.goBackFunc.call(this);
+		if(zkJsUtils.assertObjType(this.props.goBackFunc, Function)){
+			// this.props.goBackFunc.call(this);
+			zkToolsMsg.alertMsgByType(this.props.intl, null, "editReset",       // 类型
+				() => { // 确定回调
+					this.props.goBackFunc.call(this);
+				},
+				() => { // 取消回调
+					
+				}
+			)
 		}else{
 			this.props.history.go(-1);
 		}
@@ -132,7 +142,7 @@ class CInitEditForm extends React.Component {
 
 	/*** 重置 ***/
 	resetForm = (resetFunc)=>{
-		if(this.props.resetFunc instanceof Function){
+		if(zkJsUtils.assertObjType(this.props.resetFunc, Function)){
 			if(this.props.resetFunc.call(this, this.formRef.current)){
 				// 返回 true 时，才重置
 				zkToolsMsg.alertMsgByType(this.props.intl, null, "editReset",       // 类型
@@ -154,14 +164,14 @@ class CInitEditForm extends React.Component {
 
 	/*** 保存 ***/
 	onFinish = (values)=>{
-		if (this.props.saveFunc instanceof Function) {
+		if (zkJsUtils.assertObjType(this.props.saveFunc, Function)) {
 			// if (values.funType) {
 			// 	values.funType = Number(values.funType)
 			// }
 			let saveData = { ...this.state.data, ...values };
 			// data = zkJsUtils.removeObjUnAttr(data)
 			// console.log("[^_^:20210308-1031-001] onFinish.saveData: ", saveData);
-			this.props.saveFunc.call(this, saveData, this.formRef.current, (errs) => {
+			this.props.saveFunc.call(this, saveData, this.formRef.current, (errs, goBack=true) => {
 				// errs: [{'name': 'fName', 'errors': 'error msg'}]
 				// console.log("[^_^:20210308-1031-001] onFinish.errs: ", errs);
 				if(errs){
@@ -169,7 +179,9 @@ class CInitEditForm extends React.Component {
 					this.formRef.current.setFields(errs);
 					this.formRef.current.scrollToField(errs[0].name);
 				}else{
-					this.onConfirmLeave(null);
+					if(goBack){
+						this.onConfirmLeave(null);
+					}
 				}
 			});
 		}
@@ -225,16 +237,15 @@ class CInitEditForm extends React.Component {
 
 	render() {
 		// console.log("[^_^:20210308-1312-001] CInitEditForm.render: ", this.props.data, this.state.data);
-		let { viewLayout, icon, title, forwardedRef, saveFunc, resetFunc, nextFunc, goBackFunc, location, children, intl, leaveConfirm, reloadConfirm, staticContext, ...props } = this.props;
-
+		let { viewLayout, icon, title, forwardedRef, saveFunc, resetFunc, nextFunc, goBackFunc, 
+			location, children, intl, leaveConfirm, reloadConfirm, staticContext, ...props } = this.props;
 		// console.log("[^_^:20210305-1424-001] forwardedRef: ", forwardedRef, staticContext);
-		
-		this.formRef = forwardedRef?forwardedRef:React.createRef();
-		// this.formRef = React.createRef();
+
+		// this.formRef = forwardedRef?forwardedRef:React.createRef(); // 这一行，是否应该放在构造函数中，待测试验证
 		// console.log("[^_^:20210305-1424-001] initialValues: ", this.state.data);
 
 		return (
-			<ZKForm ref = { this.formRef } initialValues = { this.state.data } onFinish = { this.onFinish } className={styles.edit} {...props}>
+			<ZKForm ref = { this.formRef } initialValues = { this.state.data } onFinish = { this.onFinish } className={styles.zk_edit_form} {...props}>
 				{ leaveConfirm ? (
 					<Prompt when={this.state.isBlock} message = { nextLocation=>{
 						if(location.pathname != nextLocation.pathname){
@@ -248,21 +259,21 @@ class CInitEditForm extends React.Component {
 					}} />) : "" 
 				}
 
-				<div className = { `${styles.header}` } >
-					<div className = { `${styles.title}` } >{icon?<ZKIcon.Antd4Icon icon = {icon} /> : ""} &nbsp; {title}</div>
-					<div className={`${styles.opt_row} ${styles.right} ` }>
-						{ (nextFunc instanceof Function) ? 
+				<div className = { `${styles.zk_edit_form_header}` } >
+					<div className = { `${styles.zk_edit_form_title}` } >{icon?<ZKIcon.AntdIcon icon = {icon} /> : ""} &nbsp; {title}</div>
+					<div className={`${styles.zk_edit_form_opt_row} ${styles.zk_edit_form_right} ` }>
+						{ (zkJsUtils.assertObjType(nextFunc, Function)) ? 
 							(<ZKButton onClick = {e => { this.saveAndNext() }} >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_next')}</ZKButton>) 
 							: "" }
 						<ZKButton htmlType="submit" >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_save')}</ZKButton>
-						{ (resetFunc instanceof Function) ? 
+						{ (zkJsUtils.assertObjType(resetFunc, Function)) ? 
 							(<ZKButton onClick={e => { this.resetForm({}, resetFunc) }}>{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_reset')}</ZKButton>) 
 							: "" }
 						<ZKButton onClick={this.goBack} >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_back')}</ZKButton>
 					</div>
  				</div>
 				
-				<div className={styles.content}>
+				<div className={styles.zk_edit_form_content}>
 					{
 						// f_getFormItem(children)
 						(viewLayout == 'default') ? f_getViewDefaultFormItem(children):children
@@ -304,7 +315,7 @@ CInitEditForm.propTypes = {
 	icon: PropTypes.string,                 // 显示在左上角的图标，默认为：FormOutlined
 	title: PropTypes.string,                // 编辑框标题；默认为空；
 	// children: function (props, propName, componentName) { // 只接受 'FInitEditItem' 子元素
-	// 	if (props.children instanceof Array) {
+	// 	if (zkJsUtils.assertObjType(props.children, Array)) {
 	// 		for (let c of props.children) {
 	// 			if(c != undefined && c.type != undefined){
 	// 				if (c.type.name != 'FInitEditItem'){

@@ -138,6 +138,7 @@ class CInitSysSetItemEdit extends Component {
                  <ZKEditForm.Item name = "groupCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.groupCode')}
                    rules = {[
                      zkToolsValidates.string(intl, 1, 64), 
+                     zkToolsValidates.code(intl)
                    ]} 
                  >
                    <ZKInput />
@@ -149,6 +150,7 @@ class CInitSysSetItemEdit extends Component {
                  <ZKEditForm.Item name = "compamyCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.compamyCode')}
                    rules = {[
                      zkToolsValidates.string(intl, 1, 64), 
+                     zkToolsValidates.code(intl)
                    ]} 
                  >
                    <ZKInput />
@@ -176,6 +178,7 @@ class CInitSysSetItemEdit extends Component {
           <ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.code')} 
             rules = {[
               zkToolsValidates.string(intl, 1, 64, true), 
+              zkToolsValidates.code(intl)
             ]} 
           >
             <ZKInput disabled = {optEntity.pkId?true:false} />

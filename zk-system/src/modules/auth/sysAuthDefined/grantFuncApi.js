@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-06 17:14:32
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-09 17:26:11
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-04 16:28:29
 * 
 * 
 * 
@@ -23,7 +23,7 @@ const { ZKApplicationSystemSelect, ZKDeptSelect } = ZKBusinessComponents;
 const { zkToolsMsg, zkToolsAjax, zkToolsUtils } = zkTools;
 const ZKSearchItem = ZKSearchRow.Item;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 /**
  * 执行查询 非树形/分页
  */
@@ -54,7 +54,7 @@ class CInitGrantFuncApi extends Component {
         	params = zkToolsUtils.convertSortParam(params, sorter); 
 	        params = { ...params, ...zkToolsUtils.convertPageParam(pagination)};
 	        f_doingSearch(this.props.url, params).done(res=>{
-		    	if (res.code == 'zk.0') {
+		    	if (res.ok) {
 	            	this.setState({listDatas: res.data.result||[], spinningListDatas: false});
 	            }else{
 	            	throw new Error("[>_<:20220504-1532-002] request url:[" + this.props.url + "] exception: " + res.code);
@@ -74,7 +74,7 @@ class CInitGrantFuncApi extends Component {
 	        	this.setState({spinningOwnerIds: true});
 	        	let params = {'authId': authId}; 
 		        f_doingSearch(this.props.urlOwnerIds, params).done(res=>{
-			    	if (res.code == 'zk.0') {
+			    	if (res.ok) {
 		            	this.setState({ selectedKeys: res.data||[], spinningOwnerIds: false });	
 		            }else{
 		            	throw new Error("[>_<:20220504-1532-003] request url:[" + this.props.urlOwnerIds + "] exception: " + res.code);
@@ -126,7 +126,7 @@ class CInitGrantFuncApi extends Component {
     /**  关闭 */
     f_close = ()=>{
     	this.setState({ isInit:false, filter:{}, selectedKeys:[], selectedObjs: undefined, listDatas:[] });
-    	if(this.props.onShowModal instanceof Function){
+    	if(zkJsUtils.assertObjType(this.props.onShowModal, Function)){
     		this.props.onShowModal.call(this, "grantFuncApiModal", false, {});
     	}
     };
@@ -167,7 +167,7 @@ class CInitGrantFuncApi extends Component {
 		let gridSpinning = this.state.spinningListDatas || this.state.spinningOwnerIds;
 
 	    return (
-			<ZKModal title={`${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.opt.grantFuncApi')}[${descName}]`} visible={isShow}
+			<ZKModal title={`${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.opt.grantFuncApi')}[${descName}]`} open={isShow}
 			  onOk={this.f_handleOk}
 			  onCancel={this.f_handleCancel}
 			  okButtonProps = {{loading: spinning}}
@@ -217,7 +217,7 @@ class CInitGrantFuncApi extends Component {
 						// pagination = {{position: ['topRight'], ...page}}
 		                dataSource = {this.state.listDatas||[]}
 		                onChange = {this.f_changeGrid}
-						className = {zkStyles.flex_1_auto}
+						className = {zkStyles.zk_f_flex_auto_1}
 					></ZKScrollTable>
 				</ZKSpin>
 			</ZKModal>

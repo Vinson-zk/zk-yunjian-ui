@@ -10,7 +10,6 @@ import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
 import { connect } from 'dva';
 import { Icon } from "antd";
-import moment from 'moment';
 
 import locales from "../../../locales/index";
 import { zkTools, ZKCustomComponents, ZKBusinessComponents, ZKOriginalComponents } from "zkFramework";        
@@ -18,9 +17,6 @@ const { ZKSpin, ZKModal, ZKInput, ZKInputNumber, ZKRow, ZKCol, ZKSelect } = ZKOr
 const { ZKEditForm, ZKInputJson, ZKDateFormatPicker, } = ZKCustomComponents;
 const { ZKDictSelect } = ZKBusinessComponents;
 const { zkToolsMsg, zkToolsValidates, zkToolsNavAndMenu } = zkTools;
-
-// 日期 国际化
-moment.locale(zkToolsMsg.getLocale());
 
 class CInitSysOrgCompanyEdit extends Component {
 
@@ -111,6 +107,7 @@ class CInitSysOrgCompanyEdit extends Component {
                 	<ZKEditForm.Item name = "groupCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.groupCode')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
                         <ZKInput disabled = {optEntity.parentId?true:false} />
@@ -118,6 +115,7 @@ class CInitSysOrgCompanyEdit extends Component {
                 	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.code')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
                         <ZKInput disabled = {optEntity.pkId?true:false} />
@@ -249,6 +247,7 @@ class CInitSysOrgCompanyEdit extends Component {
                 	<ZKEditForm.Item name = "sourceCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.sourceCode')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 0, 64), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
             			<ZKInput disabled = {optEntity.pkId?true:false} />

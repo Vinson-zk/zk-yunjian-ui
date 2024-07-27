@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:34:12
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-03-22 11:20:42
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 22:18:05
  */
 
 import React, { Component } from 'react';
@@ -12,9 +12,10 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
-import { zkTools, ZKOriginalComponents } from "zkFramework";
-const { zkToolsMsg } = zkTools;
+import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { ZKTransfer } = ZKOriginalComponents;
+const { zkToolsMsg } = zkTools;
 
 class CInitZKTransferDemo extends Component {
 
@@ -76,78 +77,68 @@ class CInitZKTransferDemo extends Component {
     };
 
     return (
-      <div className={styles.sample_detail_panel}>
-        <div className={styles.sample_detail_section}>
-          <h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.original.transfer')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
-          <div>
-            <ZKTransfer
-              name="www"
-              dataSource={this.state.datas}
-              showSearch
-              listStyle={{
-                width: 400,
-                height: 450,
-                textAlign: "left"
-              }}
-              // searchPlaceholder={ zkToolsMsg.msgFormatByIntl(intl, "ad.tag.search" )}  早期版本使用
-              titles={['Source', 'Target']}
-              targetKeys={this.state.selectedKeys}
-              render={item => item && item.title}
-              onChange={handleChange}
-              locale={locale}
-            // notFoundContent={intl.formatMessage({
-            //     id: "transfer.notFoundContent"
-            // })}  早期版本使用
-            >
-            </ZKTransfer>
-            <br /><br />
-            <ZKTransfer
-              name="www"
-              dataSource={this.state.idDatas}
-              showSearch
-              listStyle={{
-                width: 400,
-                height: 450,
-                textAlign: "left"
-              }}
-              // searchPlaceholder={ zkToolsMsg.msgFormatByIntl(intl, "ad.tag.search" )}  早期版本使用
-              titles={['Source', 'Target']}
-              targetKeys={this.state.selectedKeys}
-              render={item => item && item.title}
-              onChange={handleChange}
-              locale={locale}
-            // notFoundContent={intl.formatMessage({
-            //     id: "transfer.notFoundContent"
-            // })}  早期版本使用
-            >
-            </ZKTransfer>
-          </div>
-        </div>
-        <div className={styles.sample_detail_section}>
-          <h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
-          <div>
-            <SyntaxHighlighter language='jsx' style={docco}>
-              {[
-                "ZKTransfer 原生态封装组件：暂不做处理；",
-                "接受原生属性。",
-                "使用建议: 穿框不需要分页，如果数据量大，需要分页的话，使用列表勾选，比较直观; "
-              ].join('\n')}
-            </SyntaxHighlighter>
-          </div>
-        </div>
-        <div className={styles.sample_detail_section}>
-          <h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-          <div>
-            <SyntaxHighlighter language='jsx' style={docco}>
+      <ZKContentFormat className={styles.sample_detail_panel} >
+        <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.original.transfer')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+          <ZKTransfer
+            name="www"
+            dataSource={this.state.datas}
+            showSearch
+            listStyle={{
+              width: 400,
+              height: 450,
+              textAlign: "left"
+            }}
+            // searchPlaceholder={ zkToolsMsg.msgFormatByIntl(intl, "ad.tag.search" )}  早期版本使用
+            titles={['Source', 'Target']}
+            targetKeys={this.state.selectedKeys}
+            render={item => item && item.title}
+            onChange={handleChange}
+            locale={locale}
+          // notFoundContent={intl.formatMessage({
+          //     id: "transfer.notFoundContent"
+          // })}  早期版本使用
+          >
+          </ZKTransfer>
+          <br /><br />
+          <ZKTransfer
+            name="www"
+            dataSource={this.state.idDatas}
+            showSearch
+            listStyle={{
+              width: 400,
+              height: 450,
+              textAlign: "left"
+            }}
+            // searchPlaceholder={ zkToolsMsg.msgFormatByIntl(intl, "ad.tag.search" )}  早期版本使用
+            titles={['Source', 'Target']}
+            targetKeys={this.state.selectedKeys}
+            render={item => item && item.title}
+            onChange={handleChange}
+            locale={locale}
+          // notFoundContent={intl.formatMessage({
+          //     id: "transfer.notFoundContent"
+          // })}  早期版本使用
+          >
+          </ZKTransfer>
+        </ZKContentFormat>
+        <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+          <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+            {[
+              "ZKTransfer 原生态封装组件：暂不做处理；",
+              "接受原生属性。",
+              "使用建议: 穿框不需要分页，如果数据量大，需要分页的话，使用列表勾选，比较直观; "
+            ].join('\n')}
+          </SyntaxHighlighter>
+        </ZKContentFormat>
+        <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+          <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
               {[
                 "参考框架样例代码",
               ].join('\n')}
             </SyntaxHighlighter>
-          </div>
-        </div>
-
+        </ZKContentFormat>
         <br />
-      </div>
+      </ZKContentFormat>
     );
   }
 

@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-03 22:36:25
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-28 11:44:00
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-19 11:14:10
 * 
 * 
 * 
@@ -11,7 +11,7 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import { Input, Checkbox, Radio, Form } from 'antd';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
@@ -44,7 +44,7 @@ const initData = {
 	'f-ZKInputJson-expanding-noButn': { 'zh_CN': '朱颜辞镜花辞树', "en_US": "最是人间留不住" },
 	'f-ZKSelect': "",
 	'f-ZKSelectChild': "",
-	'f-ZKDatePicker': [moment('2015/06/06', "YYYY/MM/DD"), moment(new Date(), "YYYY-MM-DD")]
+	'f-ZKDatePicker': [dayjs('2015/06/06', "YYYY/MM/DD"), dayjs(new Date())]
 }
 
 const FInitEditFormDemo = ()=>{

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 10:09:47
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-12 17:17:39
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-19 13:48:36
  */
 
 import React from 'react';
@@ -38,7 +38,7 @@ FWrapSelect.propTypes = {
 FWrapSelect.defaultProps = {
 	...Select.defaultProps, // 在封装有指定  
 	fillValue: undefined,
-	className: styles.default_class
+	className: styles.zk_select_default_class
 }
 
 

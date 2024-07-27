@@ -2,21 +2,21 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:28:24
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-02 23:01:44
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 21:39:40
  */
 
 import React from 'react';
 import { Form } from 'antd';
 import { injectIntl } from 'react-intl';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
+const { ZKContentFormat, ZKSearchRow, ZKDateFormatPicker } = ZKCustomComponents;
 const { ZKInput, ZKDatePicker, ZKSelect } = ZKOriginalComponents;
-const { ZKSearchRow, ZKDateFormatPicker } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 const ZKSearchItem = ZKSearchRow.Item;
 const { Option } = ZKSelect
@@ -33,7 +33,7 @@ const FInitSearchRow1 = (props) => {
 
 	return (
 		<ZKSearchRow searchFunc={searchCallback} initialValues = {{
-			'date': 1 == 1 ? undefined : moment(),
+			'date': 1 == 1 ? undefined : dayjs(),
 			'isShow': '0'
 		}} >
 			<ZKSearchItem name = "date" label = '测试' >
@@ -165,127 +165,118 @@ const CutOffRule = (props) => {
 function FInitZKSearchRowDemo({ intl }) {
 
 	return (
-		<div className={styles.sample_detail_panel} >
-			<div className={styles.sample_detail_section}>
-				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.searchRow')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
-				<div>
-					<CutOffRule >查询 1:</CutOffRule>
-					<FInitSearchRow1 />
-					<CutOffRule >查询 2:</CutOffRule>
-					<FInitSearchRow2 />
-					<CutOffRule >查询 3:</CutOffRule>
-					<FInitSearchRow3 />
-					<CutOffRule >查询 联动:</CutOffRule>
-					<SearchRowLinkage />
+		<ZKContentFormat className={styles.sample_detail_panel} >
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.searchRow')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+				<CutOffRule >查询 1:</CutOffRule>
+				<FInitSearchRow1 />
+				<CutOffRule >查询 2:</CutOffRule>
+				<FInitSearchRow2 />
+				<CutOffRule >查询 3:</CutOffRule>
+				<FInitSearchRow3 />
+				<CutOffRule >查询 联动:</CutOffRule>
+				<SearchRowLinkage />
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+				ZKSearchRow, 引入查询行; 接收 Form 的所有原生属性；
+				<table className={styles.sample_detail_section_table}>
+					<thead>
+						<tr>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.param')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>formObj</td>
+							<td>true</td>
+							<td>Form.create({})(Node) 创建对象后的 form 属性；</td>
+							<td>PropTypes.object</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>showBtnName</td>
+							<td>否</td>
+							<td>按钮名称是否显示，默认为 true-显示；false-不显示；</td>
+							<td>PropTypes.bool</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td>resetFunc</td>
+							<td>否</td>
+							<td>查询条件重置函数；有此函数时，会显示查询条件重置按钮，不传不显示重置按钮；resetFunc.call(this, values);注：回调前会先调用 form 的 resetFields() 函数；</td>
+							<td>PropTypes.func</td>
+							<td>undefined</td>
+						</tr>
+						<tr>
+							<td>searchFunc</td>
+							<td>否</td>
+							<td>查询按钮点击回调函数 searchFunc.call(this, values);</td>
+							<td>PropTypes.func</td>
+							<td>undefined</td>
+						</tr>
+						<tr>
+							<td>initialValues</td>
+							<td>否</td>
+							<td>查询行默认值；重置时优先级高于 filter</td>
+							<td>PropTypes.object</td>
+							<td>undefined</td>
+						</tr>
+						<tr>
+							<td>filter</td>
+							<td>否</td>
+							<td>查询行当前值；非重置时，filter 优先级高于 initialValues</td>
+							<td>PropTypes.object</td>
+							<td>undefined</td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				ZKSearchRow.Item 从查询行中引入查询item; 接收 Form.Item 的所有原生属性；
+				<table className={styles.sample_detail_section_table}>
+					<thead>
+						<tr><th>参数</th><th>必传</th><th>说明</th><th>类型</th><th>默认值</th></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>id</td>
+							<td>true</td>
+							<td>getFieldDecorator 中的 id</td>
+							<td>PropTypes.string</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>fieldOptions</td>
+							<td>false</td>
+							<td>getFieldDecorator 中的 options 对象</td>
+							<td>PropTypes.object</td>
+							<td>{'{}'}</td>
+						</tr>
+						<tr>
+							<td>label</td>
+							<td>false</td>
+							<td>说明标签，不传不显示</td>
+							<td>PropTypes.string</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div style={{ color: 'red' }}>
+					注：ZKSearchItem 下放原生 antd 的原生子标签
+						<br />
 				</div>
-			</div>
-			<div className={styles.sample_detail_section}>
-				<h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
-				<div>
-					ZKSearchRow, 引入查询行; 接收 Form 的所有原生属性；
-					<table className={styles.sample_detail_section_table}>
-						<thead>
-							<tr>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.param')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>formObj</td>
-								<td>true</td>
-								<td>Form.create({})(Node) 创建对象后的 form 属性；</td>
-								<td>PropTypes.object</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>showBtnName</td>
-								<td>否</td>
-								<td>按钮名称是否显示，默认为 true-显示；false-不显示；</td>
-								<td>PropTypes.bool</td>
-								<td>true</td>
-							</tr>
-							<tr>
-								<td>resetFunc</td>
-								<td>否</td>
-								<td>查询条件重置函数；有此函数时，会显示查询条件重置按钮，不传不显示重置按钮；resetFunc.call(this, values);注：回调前会先调用 form 的 resetFields() 函数；</td>
-								<td>PropTypes.func</td>
-								<td>undefined</td>
-							</tr>
-							<tr>
-								<td>searchFunc</td>
-								<td>否</td>
-								<td>查询按钮点击回调函数 searchFunc.call(this, values);</td>
-								<td>PropTypes.func</td>
-								<td>undefined</td>
-							</tr>
-							<tr>
-								<td>initialValues</td>
-								<td>否</td>
-								<td>查询行默认值；重置时优先级高于 filter</td>
-								<td>PropTypes.object</td>
-								<td>undefined</td>
-							</tr>
-							<tr>
-								<td>filter</td>
-								<td>否</td>
-								<td>查询行当前值；非重置时，filter 优先级高于 initialValues</td>
-								<td>PropTypes.object</td>
-								<td>undefined</td>
-							</tr>
-						</tbody>
-					</table>
-					<br />
-					ZKSearchRow.Item 从查询行中引入查询item; 接收 Form.Item 的所有原生属性；
-					<table className={styles.sample_detail_section_table}>
-						<thead>
-							<tr><th>参数</th><th>必传</th><th>说明</th><th>类型</th><th>默认值</th></tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>id</td>
-								<td>true</td>
-								<td>getFieldDecorator 中的 id</td>
-								<td>PropTypes.string</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>fieldOptions</td>
-								<td>false</td>
-								<td>getFieldDecorator 中的 options 对象</td>
-								<td>PropTypes.object</td>
-								<td>{'{}'}</td>
-							</tr>
-							<tr>
-								<td>label</td>
-								<td>false</td>
-								<td>说明标签，不传不显示</td>
-								<td>PropTypes.string</td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-					<div style={{ color: 'red' }}>
-						注：ZKSearchItem 下放原生 antd 的原生子标签
-							<br />
-					</div>
-				</div>
-			</div>
-			<div className={styles.sample_detail_section}>
-				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
-						{[
-							"参考框架代码！",
-						].join('\n')}
-					</SyntaxHighlighter>
-				</div>
-			</div>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+					{[
+						"参考框架代码！",
+					].join('\n')}
+				</SyntaxHighlighter>
+			</ZKContentFormat>
 			<br />
-		</div>
+		</ZKContentFormat>
 	)
 }
 

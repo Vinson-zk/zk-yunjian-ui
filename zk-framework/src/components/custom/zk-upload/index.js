@@ -2,8 +2,8 @@
  * 上传文件；还存在 BUG 需要多测试与修改；
  * @Author: Vinson
  * @Date: 2020-08-12 12:42:07
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-06 20:05:32
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-04 16:28:29
  */
 
 import React from 'react';
@@ -222,7 +222,7 @@ class CInitUpload extends React.Component {
           {amount && hidden ? amount > fileList.length ? children : null : children}
         </Upload>
         {
-          this.state.imgSrc && <Modal visible={true} bodyStyle={{ padding: 0, display: 'flex', justifyContent: 'center' }} onOk={this.handleCrop} onCancel={this.onCancel} closable={false}>
+          this.state.imgSrc && <Modal open={true} bodyStyle={{ padding: 0, display: 'flex', justifyContent: 'center' }} onOk={this.handleCrop} onCancel={this.onCancel} closable={false}>
             <ReactCrop
               src={this.state.imgSrc}
               width={100}
@@ -236,7 +236,7 @@ class CInitUpload extends React.Component {
             />
           </Modal>
         }{
-          <Modal visible={previewVisible} footer={null} onCancel={this.previewCancel}>
+          <Modal open={previewVisible} footer={null} onCancel={this.previewCancel}>
             <img alt="preview" style={{ width: '100%' }} src={previewImage} />
           </Modal>
         }
@@ -246,3 +246,5 @@ class CInitUpload extends React.Component {
 }
 
 export default CInitUpload
+
+

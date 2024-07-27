@@ -2,8 +2,8 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 14:07:14
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 19:51:02
  */
 
 import { editSysAuthDefined, delSysAuthDefined, getSysAuthDefined, findSysAuthDefineds, 
@@ -42,34 +42,33 @@ const model = {
         *editSysAuthDefined({ payload, callback }, { call }) {
             let res = yield call(editSysAuthDefined, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delSysAuthDefined({ payload, callback }, { call }) {
             let res = yield call(delSysAuthDefined, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getSysAuthDefined({ payload }, { call, put }) {
             let res = yield call(getSysAuthDefined, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { optEntity: res.data } });
             }
         },
@@ -86,7 +85,7 @@ const model = {
             }
             let res = yield call(findSysAuthDefineds, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -99,7 +98,7 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
@@ -108,8 +107,8 @@ const model = {
         *grantNavs({ authId, navs, callback }, { call, put, select }){
             console.log("------ ", navs)
             let res = yield call(setNavRelationByAuth, authId, navs);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }
@@ -118,8 +117,8 @@ const model = {
         // 给权限分配 菜单
         *grantMenus({ authId, menus, callback }, { call, put, select }){
             let res = yield call(setMenuRelationByAuth, authId, menus);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }
@@ -128,8 +127,8 @@ const model = {
         // 给权限分配 API 接口
         *grantFuncApis({ authId, funcApis, callback }, { call, put, select }){
             let res = yield call(setFuncApiRelationByAuth, authId, funcApis);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }
@@ -144,3 +143,4 @@ const model = {
 };
 
 export default model;
+

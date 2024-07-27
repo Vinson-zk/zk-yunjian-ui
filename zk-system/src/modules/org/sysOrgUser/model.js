@@ -2,11 +2,11 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 19:08:08
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 11:01:10
  */
 
-import { editSysOrgUser, delSysOrgUser, getSysOrgUser, findSysOrgUsers, resetPwd, setRelationByUser, setAuthRelation } from './service';
+import { editSysOrgUser, delSysOrgUser, getSysOrgUser, findSysOrgUsers, resetPwd, setRelationByUser, grantAuths } from './service';
 
 import { zkTools } from 'zkFramework';
 const { zkToolsUtils, zkToolsMsg } = zkTools;
@@ -51,34 +51,33 @@ const model = {
         *editSysOrgUser({ payload, callback }, { call }) {
             let res = yield call(editSysOrgUser, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delSysOrgUser({ payload, callback }, { call }) {
             let res = yield call(delSysOrgUser, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getSysOrgUser({ payload }, { call, put }) {
             let res = yield call(getSysOrgUser, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { optEntity: res.data } });
             }
         },
@@ -95,7 +94,7 @@ const model = {
             }
             let res = yield call(findSysOrgUsers, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -108,7 +107,7 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
@@ -116,9 +115,9 @@ const model = {
         // 管理员重置密码
         *resetPwd({ userId, pwd, callback }, { call, put, select }) {
             let res = yield call(resetPwd, {'userId':userId, 'pwd':pwd });
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, res);
                 }
             }
@@ -126,18 +125,18 @@ const model = {
         // 给用户分配角色
         *grantRoles({ userId, roles, callback }, { call, put, select }) {
             let res = yield call(setRelationByUser, userId, roles);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }
             }
         },
         // 给用户分配权限
-        *grantAuth({ userId, auths, callback }, { call, put, select }){
-            let res = yield call(setAuthRelation, userId, auths);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+        *grantAuth({ userId, allotAuths, callback }, { call, put, select }){
+            let res = yield call(grantAuths, userId, allotAuths);
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }
@@ -152,3 +151,5 @@ const model = {
 };
 
 export default model;
+
+

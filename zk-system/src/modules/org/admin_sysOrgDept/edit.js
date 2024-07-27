@@ -93,6 +93,7 @@ class CInitSysOrgDeptEdit extends Component {
                 	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.code')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
             			<ZKInput disabled = {optEntity.pkId?true:false} />
@@ -166,6 +167,7 @@ class CInitSysOrgDeptEdit extends Component {
                 	<ZKEditForm.Item name = "sourceCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.sourceCode')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 0, 64), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
             			<ZKInput disabled = {optEntity.pkId?true:false} />

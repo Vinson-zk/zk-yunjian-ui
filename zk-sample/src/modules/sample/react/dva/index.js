@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 00:12:59
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-03-28 15:50:47
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 00:34:44
  */
 
 
@@ -14,10 +14,10 @@ import { connect } from 'dva';
 // import { Modal } from 'antd';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
-import { zkTools, ZKOriginalComponents } from "zkFramework";
 import { docco } from '../../helper';
 import styles from "../../styles.less";
-
+import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { ZKButton } = ZKOriginalComponents;
 const { zkToolsNavAndMenu, zkToolsMsg } = zkTools;
 
@@ -77,58 +77,54 @@ class CInitReactDva extends React.Component {
         }
 
         return (
-            <div className={styles.sample_detail_panel}>
-                <h1> react 集成中 dva 组件生命周期学习 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-                <div className={styles.sample_detail_section}>
+            <ZKContentFormat className={styles.sample_detail_panel} >
+                <ZKContentFormat title = {`react 集成中 dva 组件生命周期学习 ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`}>
                     {"mReactDva.lable: " + mReactDva.lable} <br /><br />
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "react dva 组件学习测试代码；",
                             "点击下面按钮，查看输出",
                         ].join('\n')}
                     </SyntaxHighlighter>
-                </div>
-                <div className={styles.sample_detail_section}>
-                    <h2>组件状态-componentState</h2>
-                    <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "组件状态-componentState:",
-                                "组件状态发生了变化，请查看 console 日志中的生命周期打印结果：",
-                                this.state.componentState
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <ZKButton onClick={e => { changeCompoentState() }}>changeCompoentState</ZKButton>
-                    </div>
-                </div>
-                <div className={styles.sample_detail_section}>
-                    <h2>model状态-changeModelStateByEffects</h2>
-                    <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "model状态-changeModelStateByEffects:",
-                                "dva model 状态发生了变化，请查看 console 日志中的生命周期打印结果：",
-                                mReactDva.modelState
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <ZKButton onClick={e => { changeModelStateByEffects() }}>changeModelStateByEffects</ZKButton>
-                    </div>
-                </div>
-                <div className={styles.sample_detail_section}>
-                    <h2>model状态-changeModelStateByReducers</h2>
-                    <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "model状态-changeModelStateByReducers:",
-                                "dva model 状态发生了变化，请查看 console 日志中的生命周期打印结果：",
-                                mReactDva.modelState
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <ZKButton onClick={e => { changeModelStateByReducers() }}>changeModelStateByReducers</ZKButton>
-                    </div>
-                </div>
-            </div>
-        )
+                </ZKContentFormat>
+                <ZKContentFormat title = {`组件状态-componentState ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "组件状态-componentState:",
+                            "组件状态发生了变化，请查看 console 日志中的生命周期打印结果：",
+                            this.state.componentState
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <ZKButton onClick={e => { changeCompoentState() }}>changeCompoentState</ZKButton>
+                </ZKContentFormat>
+                <ZKContentFormat title = {`model状态-changeModelStateByEffects ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "model状态-changeModelStateByEffects:",
+                            "dva model 状态发生了变化，请查看 console 日志中的生命周期打印结果：",
+                            mReactDva.modelState
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <ZKButton onClick={e => { changeModelStateByEffects() }}>changeModelStateByEffects</ZKButton>
+                </ZKContentFormat>
+                <ZKContentFormat title = {`model状态-changeModelStateByReducers ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "model状态-changeModelStateByReducers:",
+                            "dva model 状态发生了变化，请查看 console 日志中的生命周期打印结果：",
+                            mReactDva.modelState
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <ZKButton onClick={e => { changeModelStateByReducers() }}>changeModelStateByReducers</ZKButton>
+                </ZKContentFormat>
+                <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+                    
+                </ZKContentFormat>
+                <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+                    
+                </ZKContentFormat>
+                <br />
+            </ZKContentFormat>        )
     }
 
     // 5、在最近呈现的输出被提交; 例如DOM之前调用。

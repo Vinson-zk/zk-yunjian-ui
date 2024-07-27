@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:48
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-03 00:10:44
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-10 10:13:41
  */
 
 
@@ -94,7 +94,7 @@ class CInitSysNavEdit extends Component {
         return (optEntity != null && mSysNav.pathname == location.pathname) && (
             <ZKSpin spinning={spinning === true} >
                 <ZKModal
-                    visible = {this.state.selIconAttrName != ""}
+                    open = {this.state.selIconAttrName != ""}
                     onCancel  = {()=>{this.setState({selIconAttrName: ""})}}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_icon.select')}
                     // footer = {<font color="red">* {zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_icon.select.opt")}</font>}
@@ -115,11 +115,11 @@ class CInitSysNavEdit extends Component {
                         <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.code')} 
-                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
+                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64), zkToolsValidates.code(intl)]} >
                         <ZKInput />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "funcModuleCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.funcModuleCode')} 
-                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
+                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64), zkToolsValidates.code(intl)]} >
                         <ZKInput />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "funcName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.funcName')} 
@@ -150,7 +150,7 @@ class CInitSysNavEdit extends Component {
                         </ZKRadio.Group>
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "icon" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.icon')} >
-                        <ZKInput.Search enterButton addonBefore={ <ZKIcon.Antd4Icon icon={this.state.icon.icon?this.state.icon.icon:(optEntity.icon?optEntity.icon:"")} /> }
+                        <ZKInput.Search enterButton addonBefore={ <ZKIcon.AntdIcon icon={this.state.icon.icon?this.state.icon.icon:(optEntity.icon?optEntity.icon:"")} /> }
                             onSearch={value=>f_showSelIconModal("icon")} />
                     </ZKEditForm.Item>
                 </ZKEditForm>

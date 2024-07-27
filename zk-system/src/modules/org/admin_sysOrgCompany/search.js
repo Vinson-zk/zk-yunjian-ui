@@ -72,7 +72,7 @@ class CInitSysOrgCompanySearch extends React.Component {
                     <ZKInput style = {{width:"180px"}}  />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "status" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.status')} >
-                    <ZKSelect fillValue = {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.all')} >
+                    <ZKSelect style = {{width:"90px"}} fillValue = {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.all')} >
                         <ZKSelect.Option value={0}>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.status.0')}</ZKSelect.Option>
                         <ZKSelect.Option value={1}>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.status.1')}</ZKSelect.Option>
                         <ZKSelect.Option value={2}>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.status.2')}</ZKSelect.Option>
@@ -88,3 +88,4 @@ class CInitSysOrgCompanySearch extends React.Component {
 }
 
 export default CInitSysOrgCompanySearch;
+

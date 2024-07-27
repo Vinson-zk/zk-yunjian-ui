@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 15:15:39 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-08 19:43:06
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-27 09:15:40
  */
 
 // import React from 'react';
@@ -46,7 +46,8 @@ import createLoading from 'dva-loading';
 import createBrowserHistory from 'history/createBrowserHistory';
 // import createHashHistory from 'history/createHashHistory';
 
-import router from './router.js';
+// import router from './router.js';
+import CIndex from '../src/modules/sample/testDemo/demo/resizeableTableDemo.js';
 
 // // import {locales} from './assets/locales';
 // // import appConfig from './assets/appConfig';
@@ -62,7 +63,7 @@ const dvaApp = dva({
 	// initialState:{}, // 指定 指定初始数据，优先级高于 model 中的 state；默认为 {}
 	history: createBrowserHistory(), // 默认为： hashHistory 即 createHashHistory(); 其他示例：createBrowserHistory({basename:"/zk" })
 	onError(err) {
-		console.log('[20190114-1706-001]  - dvaApp --- ', err, typeof (err))
+		console.log('[20190114-1706-001]  - dvaApp --- ', err, typeof(err));
 		// let lang = localStorage.getItem(appConfig.lang) || 'zh-CN'
 		// // 错误信息提示，未发现错误信息时提示全局的默认错误信息
 		// err.msg = err.message || err.msg || locales[lang].messages['global.app.msg.error']
@@ -79,7 +80,8 @@ const dvaApp = dva({
 // dvaApp.model(mApp);
 
 // 4.添加路由 add router
-dvaApp.router(router);
+// dvaApp.router(router);
+dvaApp.router(()=><CIndex />);
 
 
 // 5.挂载 start
@@ -92,3 +94,14 @@ dvaApp.start('#root');
 // console.log("[^_^:20181106-1950-002] webpack 配置的启动参数 =====================================");
 
 export default dvaApp;
+
+
+
+
+
+
+
+
+
+
+

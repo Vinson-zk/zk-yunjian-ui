@@ -1,10 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-29 16:26:49
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-26 17:47:08
-* 
-* 
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-27 23:31:23
 * 
 */
 
@@ -12,18 +10,7 @@
 import { zkTools } from 'zkFramework';
 const { zkToolsAjax } = zkTools;
 
-const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
-
-import navItems from "../mock/data.front.end.nav.js";
-
-// export async function getNavItems(){
-//     return {
-//         code: "zk.0",
-//         msg: "",
-//         data: navItems.navItems
-//     }
-// }
+const apiSys = globalAppConfig.apiPrefixSys;
 
 // 取 nav item
 export async function getNavItems(params) {
@@ -31,8 +18,8 @@ export async function getNavItems(params) {
 }
 
 export async function loginUserInfo(){
-    return zkToolsAjax.reqPretreatment(`/${api}/sec/loginUserInfo`, {method:'GET'});
- //    let resJsonData = { code: 'zk.0', msg: 'getUser ok' }
+    return zkToolsAjax.reqPretreatment(`/${apiSys}/sec/loginUserInfo`, {method:'GET'});
+ //    let resJsonData = { code: 'zk.0', ok: true, msg: 'getUser ok' }
  //    resJsonData.data = { 
 	// 	user: { pkId:"test_user_pkId", "loginName": "test", "nickname": "游客", "newMsg": 6 }, 
 	// 	platformCode:'_default_platform_code_' 
@@ -41,11 +28,15 @@ export async function loginUserInfo(){
 }
 
 export async function accountLogin(params){
-    return zkToolsAjax.reqPretreatment(`/${api}/sec/login`, {method:'POST', data: params}); // , dataType:'text'
+    return zkToolsAjax.reqPretreatment(`/${apiSys}/sec/login`, {method:'POST', data: params}); // , dataType:'text'
 }
 
 export async function phoneNumberLogin(params){
-    return zkToolsAjax.reqPretreatment(`/${api}/sec/phoneNumberLogin`, {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'});
+    return zkToolsAjax.reqPretreatment(`/${apiSys}/sec/phoneNumberLogin`, {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'});
 }
+
+
+
+
 
 

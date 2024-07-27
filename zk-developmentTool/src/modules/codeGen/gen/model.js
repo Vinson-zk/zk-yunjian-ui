@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 15:52:51
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-04-19 13:10:40
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:15:52
 * 
 * 
 * 
@@ -28,7 +28,7 @@ const model = {
         // 生成代码
         *genCode({ moduleId, params }, { call, put }) {
             let res = yield call(genCode, moduleId, params);
-            // if (res.code == 'zk.0') {
+            // if (res.ok) {
             //     zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             // }
         }, 

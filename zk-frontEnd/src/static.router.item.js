@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-06-24 19:11:59
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-11 15:45:14
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-11 16:25:04
 * 
 * 前端的静态路由；分为两类：一类是可以开放的公有路由；一类是需要登录后才能看到的私有路由；
 * 
@@ -16,7 +16,6 @@ let privateRouteCode = "_sPrivateRoute";
 const publicRouteItems = [];
 // 私有的的路由 Items；
 const privateRouteItems = [];
-
 
 let tempRouteItem = {};
 

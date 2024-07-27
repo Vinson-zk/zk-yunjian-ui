@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-28 15:22:47
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-03 16:47:55
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-27 23:51:16
  */
 
 // import zkJsUtils from 'zkJsUtils';
@@ -11,11 +11,12 @@ import { zkTools } from 'zkFramework';
 
 import { getNavItems, loginUserInfo, accountLogin, phoneNumberLogin } from './service.js';
 
-let { zkToolsMsg, zkToolsAuth } = zkTools;
+let { zkToolsMsg, zkToolsAuth, zkToolsUtils } = zkTools;
 
 const loginResDispose = (res)=>{
     // console.log("[^_^:20210702-0004-001] loginResDispose.res: ", res);
-    if(res.code == "zk.0"){
+    // console.log("[^_^:20210702-0004-001] loginResDispose.res: ", res.data[globalAppConfig.transferKey.ticket]);
+    if(res.ok){
         // 登录成功
         zkToolsAuth.setTicket(res.data[globalAppConfig.transferKey.ticket]);
         return true;
@@ -28,6 +29,8 @@ const loginResDispose = (res)=>{
 const model = {
     namespace: 'mApp',
     state: {
+        // 主题标识
+        themeFlag: zkToolsUtils.getTheme(),
         // 国际化语言
         lang: zkToolsMsg.getLocale(),
         // 登录用户
@@ -70,19 +73,16 @@ const model = {
         // 取民航栏目
         *getNavItems({ params }, { call, put }){
             let res = yield call(getNavItems, params);
-            switch(res.code){
-                case "zk.0": 
-                    yield put({ type: 'setState', payload: { navItems: res.data } });
-                    break;
-                default: 
-                    // zkToolsMsg.alertMsg(null, null, {type:"error", msg:res.msg});
-                    throw new Error("getNavItems req fail，error message: " + res.msg);
-                    break;
+            if(res.ok){
+                yield put({ type: 'setState', payload: { navItems: res.data } });
+            }else{
+                // zkToolsMsg.alertMsg(null, null, {type:"error", msg:res.msg});
+                throw new Error("getNavItems req fail，error message: " + res.msg);
             }
         },
         *loginUserInfo({ }, { call, put }){
             let res = yield call(loginUserInfo);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 // console.log("[^_^:20220426-1726-001] 当前登录用户信息: ", res.data);
                 yield put({ type: 'setState', payload: res.data });
             }else{

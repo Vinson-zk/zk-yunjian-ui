@@ -2,28 +2,22 @@
  *
  * @Author: Vinson
  * @Date: 2020-10-23 15:26:04
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-07 10:45:18
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 18:05:10
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
+
 
 // 编辑 
 export async function editSysMenu(params) {
     // return zkToolsAjax.req(`/${api}/menu/sysMenu`, {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'});
     return zkToolsAjax.reqPretreatment(`/${api}/res/menu/sysMenu`, 
         {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
     );
 }
 

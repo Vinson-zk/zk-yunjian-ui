@@ -81,17 +81,18 @@ class CInitSysAuthDefinedEdit extends Component {
                 	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.code')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
                         <ZKInput disabled = {optEntity.pkId?true:false} />
                 	</ZKEditForm.Item>
-                	<ZKEditForm.Item name = "systemCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode')} 
+                	{/*<ZKEditForm.Item name = "systemCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 1, 64, true), 
                         ]} 
 					>
                         <ZKApplicationSystemSelect disabled = {optEntity.pkId?true:false} valueKey="code" />
-                	</ZKEditForm.Item>
+                	</ZKEditForm.Item>*/}
                     <ZKEditForm.Item name = "status" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.status')} 
                         rules = {[
                             zkToolsValidates.integer(intl, 0, 9, true), 

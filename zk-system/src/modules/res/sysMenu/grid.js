@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:45
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-19 19:43:21
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 15:42:30
  */
 
 
@@ -15,7 +15,7 @@ const { ZKTable, ZKPopconfirm, ZKButton } = ZKOriginalComponents;
 const { ZKOptRow, ZKScrollTable } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 // import $ from 'zkJquery'; // 可以这样引入，或直接使用 jQuery
 
@@ -213,7 +213,7 @@ class CInitSysMenuGrid extends React.Component {
                 dataSource = {mSysMenu.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_change}
-				className = { zkStyles.flex_1_auto }
+				className = { zkStyles.zk_f_flex_auto_1 }
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

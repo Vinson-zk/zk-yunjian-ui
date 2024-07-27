@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-17 14:18:25
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 14:51:16
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 20:43:15
  */
 
 import React from 'react';
@@ -77,7 +77,7 @@ class CInitE1_Detail extends React.Component {
 			}
 		}
 		let areaTwo = undefined;
-		if (optEntity.areaTwo && areaOne && (areaOne.childs instanceof Array)) {
+		if (optEntity.areaTwo && areaOne && zkJsUtils.assertObjType(areaOne.childs, Array)) {
 			for (let item of areaOne.childs) {
 				if (item.key == optEntity.areaTwo) {
 					areaTwo = item;

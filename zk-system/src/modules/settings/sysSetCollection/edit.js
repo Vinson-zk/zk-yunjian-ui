@@ -71,6 +71,7 @@ class CInitSysSetCollectionEdit extends Component {
                     <ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetCollection.code')} 
                         rules = {[
                             zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
                     >
                         <ZKInput disabled = {optEntity.pkId?true:false} />
@@ -96,6 +97,7 @@ class CInitSysSetCollectionEdit extends Component {
                 	<ZKEditForm.Item name = "groupCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetCollection.groupCode')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 0, 64), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
                         <ZKInput />
@@ -103,6 +105,7 @@ class CInitSysSetCollectionEdit extends Component {
                 	<ZKEditForm.Item name = "compamyCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetCollection.compamyCode')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 0, 64), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
                         <ZKInput />

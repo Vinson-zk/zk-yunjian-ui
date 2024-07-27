@@ -18,7 +18,7 @@ import SearchItem from "./search.js";
 import GridItem from "./grid.js";
 import CGrantAuth from "../grantAuth.js";
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 import locales from "../../../locales/index";
 
@@ -27,14 +27,14 @@ class CInitSysOrgRoleIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            optCompanyEntity:{},
+            optRoleEntity:{},
             grantAuthModal:false,
         };
     }
 
     // 分配权限
     f_onShowGrantAuthModal = (flag, record)=>{
-        this.setState({grantAuthModal:flag, optCompanyEntity:record});
+        this.setState({grantAuthModal:flag, optRoleEntity:record});
     };
 
     render() {
@@ -42,23 +42,25 @@ class CInitSysOrgRoleIndex extends Component {
         let { intl, loading, mApp, dispatch } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
+            <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} onShowGrantAuthModal={this.f_onShowGrantAuthModal} />
                 <CGrantAuth isShow = {this.state.grantAuthModal} 
-                    url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthRole/sysAuthDefinedsPage`}
-                    urlOwnerIds = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthRole/findAuthIdsByRoleId`}
-                    urlOwnerTargetParamName="roleId"
+                    url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthRole/findAllotAuthPage`}
+                    formatParamsFunc = {(toTargetId, params={})=>{
+                        params['roleId'] = toTargetId;
+                        return params;
+                    }}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.role')}
-                    descName={zkToolsMsg.getInternationInfo(this.state.optCompanyEntity.name?this.state.optCompanyEntity.name:{}, lang)}
-                    targetId={this.state.optCompanyEntity.pkId} 
+                    descName={zkToolsMsg.getInternationInfo(this.state.optRoleEntity.name?this.state.optRoleEntity.name:{}, lang)}
+                    toTargetId={this.state.optRoleEntity.pkId} 
                     onShowModal={this.f_onShowGrantAuthModal}
                     saveSpinning={loading.effects["mSysOrgRole/grantAuth"]||false}
-                    saveFunc={(roleId, auths, callback)=>{
+                    saveFunc={(roleId, allotAuths, callback)=>{
                         dispatch({ 
                             type: 'mSysOrgRole/grantAuth', 
                             roleId: roleId,
-                            auths: auths,
+                            allotAuths: allotAuths,
                             callback: callback
                         });
                     }}

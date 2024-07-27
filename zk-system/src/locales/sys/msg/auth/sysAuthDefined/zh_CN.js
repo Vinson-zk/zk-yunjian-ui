@@ -25,9 +25,13 @@ module.exports = {
 
 	// 
 	"zk.sys.auth.SysAuthCompany.opt.auth":"公司分配权限", 
+	"zk.sys.auth.SysAuthCompany.ownerType":"分配方式",
 	"zk.sys.auth.SysAuthCompany.ownerType.isAll":"完全拥有",
 	"zk.sys.auth.SysAuthCompany.ownerType.0":"使用权",  
 	"zk.sys.auth.SysAuthCompany.ownerType.1":"所有权", 
+	"zk.sys.auth.SysAuthCompany.defaultToChild":"是否默认传递",
+	"zk.sys.auth.SysAuthCompany.defaultToChild.0":"不传递",
+	"zk.sys.auth.SysAuthCompany.defaultToChild.1":"传递",
 
 	//
 	"zk.sys.auth.grant.modal.title.company": "公司分配权限", 

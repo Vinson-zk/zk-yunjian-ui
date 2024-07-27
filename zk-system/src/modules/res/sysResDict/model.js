@@ -2,8 +2,8 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-03 10:17:55
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 17:42:38
  */
 
 import { editSysResDict, delSysResDict, getSysResDict, findSysResDictsTree, findSysResDicts } from './service';
@@ -45,34 +45,33 @@ const model = {
 
             let res = yield call(editSysResDict, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delSysResDict({ payload, callback }, { call }) {
             let res = yield call(delSysResDict, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getSysResDict({ payload, isParent=false }, { call, put }) {
             let res = yield call(getSysResDict, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 if(isParent){
                     let optEntity = {};
                     optEntity.parentId = res.data.pkId;
@@ -98,7 +97,7 @@ const model = {
             }
             let res = yield call(findSysResDictsTree, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -111,7 +110,7 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
@@ -123,8 +122,8 @@ const model = {
             params = { ...params, ...zkToolsUtils.convertPageParam(pagination) };
 
             let res = yield call(findSysResDictTypes, params);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, res.data.result||[]);
                 }
             }
@@ -139,3 +138,6 @@ const model = {
 };
 
 export default model;
+
+
+

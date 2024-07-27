@@ -19,9 +19,7 @@ import GridItem from "./grid.js";
 import CGrantFuncApi from "./grantFuncApi.js";
 import CGrantMenu from "./grantMenu.js";
 import CGrantNav from "./grantNav.js";
-
-import zkStyles from 'zkFramework/css/styles.less';
-
+import zkStyles from 'zkFramework/style/zk.styles.less';
 import locales from "../../../locales/index";
 
 class CInitSysAuthDefinedIndex extends Component {
@@ -51,7 +49,7 @@ class CInitSysAuthDefinedIndex extends Component {
         let { intl, mApp } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
+            <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} onShowGrantModal = {this.f_onShowModal} />
                 <CGrantFuncApi isShow={this.state.grantFuncApiModal} 

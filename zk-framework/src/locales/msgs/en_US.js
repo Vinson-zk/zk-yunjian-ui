@@ -14,6 +14,7 @@ const messages = {
 	"global.app.msg.beforeunload": "离开当前页后，所编辑的数据将不可恢复",
 	"global.app.msg.leave":"确认离开此页面？",
 	"global.app.msg.leave.save":"您确定要放弃编辑的内容，离开此页面？",
+	"global.app.msg.opt.unknown":"en-不支持的操作",
 
 	// 全局标签
 	"global.app.lable.platform": "Platform",
@@ -73,14 +74,16 @@ const messages = {
 	"global.opt.name._key_copy": "Copy",
 	"global.opt.name._key_icon.select": "Select Icon",
 	"global.opt.name._key_icon.select.opt": "Click Icon select",
+	"global.opt.name._key_upload": "Upload",
+	"global.opt.name._key_download": "Download",
 
 	// 全局提示名称
 	"global.alert.name._key_newMsg": "New({num})",
 
 	// 全局提示消息
 	"global.message.select.data": "Please select data!",
-	"global.message.edit.exit": "您确定要放弃编辑，离开页面？",
-	"global.message.edit.reset": "您确定要重置编辑内容？",
+	"global.message.edit.exit": "en:您确定要放弃编辑，离开页面？",
+	"global.message.edit.reset": "en:您确定要重置编辑内容？",
 	"global.message.no.data": "No Data",
 	"global.message.no.select.data": "Not select data",
 
@@ -95,27 +98,28 @@ const messages = {
 	"global.popconfirm.content.delete": "Are you sure delete this task?",
 
 	// 全局输入校验
-	"global.data.validate.not.null":"不能为空",
-	"global.data.validate.url":"请输入正确的 URL",
-	"global.data.validate.string":"请输入字符类型",
-	"global.data.validate.boolean":"请输入布尔类型",
-	"global.data.validate.string.min":"输入字符串长度不能超过 {min}",
-	"global.data.validate.string.max":"输入字符串长度不能超过 {max}",
-	"global.data.validate.string.rang":"输入字符串长度须介于 {min} 到 {max} 之间",
-	"global.data.validate.number":"请输入数字",
-	"global.data.validate.number.min":"输入的数字不能小于 {min}",
-	"global.data.validate.number.max":"输入的数字不能大于  {max}",
-	"global.data.validate.number.rang":"输入的数字须介于 {min} 到 {max} 之间",
-	"global.data.validate.integer":"请输入整数",
-	"global.data.validate.integer.min":"请输入不小: {min} 的整数",
-	"global.data.validate.integer.max":"请输入不大于: {max} 的整字",
-	"global.data.validate.integer.rang":"请输入 {min} 到 {max} 之间的整数",
-	"global.data.validate.object":"非法输入",
-	"global.data.validate.enum":"请输入以下：{value} 选项之一",
-	"global.data.validate.email":"请输入有效的邮箱地址",
-	"global.data.validate.pattern":"非法输入",
-	"global.data.validate.username":"e-请输入有效用户名[用户名只能是字母、下划线、数字；且必须以字母或下划开头]",
-	"global.data.validate.phone":"请输入有效电话号码",
+	"global.data.validate.not.null":"en:不能为空",
+	"global.data.validate.url":"en:请输入正确的 URL",
+	"global.data.validate.string":"en:请输入字符类型",
+	"global.data.validate.boolean":"en:请输入布尔类型",
+	"global.data.validate.string.min":"en:输入字符串长度不能超过 {min}",
+	"global.data.validate.string.max":"en:输入字符串长度不能超过 {max}",
+	"global.data.validate.string.rang":"en:输入字符串长度须介于 {min} 到 {max} 之间",
+	"global.data.validate.number":"en:请输入数字",
+	"global.data.validate.number.min":"en:输入的数字不能小于 {min}",
+	"global.data.validate.number.max":"en:输入的数字不能大于  {max}",
+	"global.data.validate.number.rang":"en:输入的数字须介于 {min} 到 {max} 之间",
+	"global.data.validate.integer":"en:请输入整数",
+	"global.data.validate.integer.min":"en:请输入不小: {min} 的整数",
+	"global.data.validate.integer.max":"en:请输入不大于: {max} 的整字",
+	"global.data.validate.integer.rang":"en:请输入 {min} 到 {max} 之间的整数",
+	"global.data.validate.object":"en:非法输入",
+	"global.data.validate.enum":"en:请输入以下：{value} 选项之一",
+	"global.data.validate.email":"en:请输入有效的邮箱地址",
+	"global.data.validate.pattern":"en:非法输入",
+	"global.data.validate.username":"en:请输入有效用户名[用户名只能是字母、下划线、数字；且必须以字母或下划开头]",
+	"global.data.validate.phone":"en:请输入有效电话号码",
+	"global.data.validate.code":"en:输入字符只能是大小写字母,数字,中杠,下划线和点",
 }
 
 /** import 引入时；以下写法都可以 */

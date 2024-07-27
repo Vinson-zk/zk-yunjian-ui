@@ -2,86 +2,68 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 12:02:56
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-12 15:06:01
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-22 14:27:38
  */
 
+@import "../../../../style/theme/zk.theme.variables.less";
 
-.slider {
+.zk_slider {
 
 	/*position: fixed;*/
 	/*top: 45px;*/
 	/*bottom: 0px;*/
 	/*left: 0;*/
 	/*display: none;*/
-	flex        : 0 0 auto;
-	background  : #fff;
-	border-right: 1px solid #e5e5e5;
-	padding     : 0px 0px 30px 0px;
-	overflow    : hidden;
-	z-index     : 99;
+	flex: 0 0 auto;
+	background-color: @colorBgBase !important;
+	border-right: 1px solid @colorBorder;
+	padding: 0px 0px 30px 0px;
+	overflow: hidden;
+	z-index: 99;
+	transition: width 0.45s;
 
-	// .slider_open{
-
-	// }
-
-	.trigger {
-		font-size    : 17px;
-		/*line-height: 64px;*/
-		padding      : 0px 12px 0px 0px;
-		cursor       : pointer;
-		/*transition : color .3s;*/
-		margin       : 8px auto auto auto;
+	.zk_slider_head {
+		border-bottom: 1px solid @colorBorder;
+		height: 40px;
+	    line-height: 40px;
+    	margin: 0px 6px;
+	    padding: 3px 0px 0px 0px;
+		text-align: right;
 	}
 
-	.trigger_open {
-		width       : 100%;
-		text-align  : right;
+	.zk_slider_trigger {
+		font-size: 20px;
+		/*line-height: 64px;*/
+		padding: 0px 12px 0px 0px;
+		cursor: pointer;
+		/*transition: color .3s;*/
+		/*margin: 8px auto auto auto;*/
+		color: @colorText;
+	}
+
+	.zk_slider_trigger_open {
+		/*width: 100%;*/
 		/*transition: color .3s;*/
 	}
-
-	.trigger_open:hover:before {
-		color: @primary-color;
+	.zk_slider_trigger_open:hover {
+		color: @colorPrimaryTextHover;
 	}
+	.zk_slider_trigger_open:hover:before {
+		color: @colorPrimaryTextHover;
+	}
+
 }
 
-.sliderClose {
-	position: fixed;
-	/*top   : 40px;*/
-	/*left  : 0px;*/
-	/*bottom: 0px;*/
-
-	/*margin: 0px;*/
-	padding: 0px 0px 9px 0px;
-
-	/*display: flex;*/
-	width      : 88px;
-	height     : 28px;
-	line-height: 25px;
-	/*border   : 1.5px solid hsl(@primary-color, 65%,75%);*/
-
-	text-align      : center;
-	transform       : rotate(90deg);
-	transform-origin: left bottom 0;
-
-	/*background-color: @primary-color;*/
-	background-color  : hsl(@primary-color, 0.78, 0.3);
-	/*background-color:red;*/
-	color             : #fff;
-	border-radius     : 9px 9px 0px 0px;
-	cursor            : pointer;
-	z-index           : 99999;
-
-	moz-user-select    : -moz-none;
-	-moz-user-select   : none;
-	-o-user-select     : none;
-	-khtml-user-select : none;
-	-webkit-user-select: none;
-	-ms-user-select    : none;
-	user-select        : none;
+.zk_slider_mask {
+	border: 3px solid;
 }
 
-.sliderCloseTransition {
-	transition  : left 0.45s;
-	/*transition: top 0.8s;*/
-}
+
+
+
+
+
+
+
+

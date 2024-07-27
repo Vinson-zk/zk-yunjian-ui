@@ -17,7 +17,7 @@ import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
 // ZKOriginalComponents
 const {ZKSpin, ZKModal, ZKInput, ZKSelect, ZKRow, ZKCol} = ZKOriginalComponents;
 // ZKCustomComponents
-const {ZKEditForm, } = ZKCustomComponents;
+const { ZKEditForm, ZKTextEditor } = ZKCustomComponents;
 // zkTools
 const {zkToolsMsg, zkToolsValidates, zkToolsNavAndMenu } = zkTools;
 
@@ -86,6 +86,7 @@ class CInitMailTemplateEdit extends Component {
                     <ZKEditForm.Item name = "companyCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailTemplate.companyCode')} 
                         rules = {[
                             zkToolsValidates.string(intl, 0, 64, false), 
+                            zkToolsValidates.code(intl)
                         ]} 
                     >
                         <ZKInput disabled = {optEntity.pkId?true:false} style={{width: '100%'}} placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailTemplate.companyCode.placeholder')} />
@@ -143,6 +144,7 @@ class CInitMailTemplateEdit extends Component {
                             ]} 
     					>
                             <ZKInput.TextArea rows={9} style={{width: '100%'}}  placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailTemplate.content.placeholder')} />
+                            {/*<ZKTextEditor  placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailTemplate.content.placeholder')} />*/}
                     	</ZKEditForm.Item>
                 	</ZKCol></ZKRow>
             	</ZKEditForm>

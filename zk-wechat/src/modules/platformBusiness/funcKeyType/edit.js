@@ -80,6 +80,7 @@ class CInitFuncKeyTypeEdit extends Component {
                     <ZKEditForm.Item name = "funcTypeCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.platformBusiness.funcKeyType.funcTypeCode')} 
                         rules = {[
                             zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
                     >
                         <ZKInput disabled = {optEntity.pkId?true:false} />

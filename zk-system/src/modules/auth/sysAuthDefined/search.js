@@ -52,12 +52,14 @@ class CInitSysAuthDefinedSearch extends React.Component {
                 <ZKSearchItem name = "searchValue" label = {`${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.name')}/${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.code')}`} >
                     <ZKInput style = {{width:"180px"}}  />
                 </ZKSearchItem>       
-                <ZKSearchItem name = "systemCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode')} >
+                {/*<ZKSearchItem name = "systemCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode')} >
                     <ZKApplicationSystemSelect valueKey="code" />
-                </ZKSearchItem>       
+                </ZKSearchItem>   */}    
             </ZKSearchRow>
         );
     }
 }
 
 export default CInitSysAuthDefinedSearch;
+
+

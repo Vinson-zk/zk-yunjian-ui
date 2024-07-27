@@ -2,8 +2,8 @@
  * ajax 请求处理
  * @Author: Vinson
  * @Date: 2020-08-11 09:05:30
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-27 10:24:49
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 16:51:03
  */
 
 // jquery ajax 暂未使用 
@@ -20,6 +20,7 @@ import locales from '../locales';
 
 // console.log("----------------- jQuery.parseJSON: ", jQuery.parseJSON)
 
+// 请求体制作相关函数 --------------------------------------------------
 /**
  * 根据请求制作一个请求体
  * @param {string} url 请求地址 
@@ -61,9 +62,42 @@ const f_makeRequstBody = (url, options, async) => {
             xhr.setRequestHeader("locale", zkToolsMsg.getLocale());
             // xhr.setRequestHeader("Accept", 'application/json');
             let tId = zkToolsAuth.getTicket();
-            xhr.setRequestHeader(globalAppConfig.transferKey.ticket, tId);           
-        }
+            // console.log("[^_^:20230925-2240-001] globalAppConfig.transferKey.ticket: ", globalAppConfig.transferKey.ticket);
+            // console.log("[^_^:20230925-2240-001] ticket id: ", tId);
+            xhr.setRequestHeader(globalAppConfig.transferKey.ticket, tId);
+            if(options.headers){
+                for(let index in options.headers){
+                    xhr.setRequestHeader(index, options.headers[index]);
+                }
+            }  
+        },
+        // xhr: function() {
+        //     var xhr = $.ajaxSettings.xhr();
+        //     // console.log("[^_^:20240114-2000-001] xhr.xhr: ", xhr);
+        //     if(options.upload){
+        //         for(let index in options.upload){
+        //             xhr.upload[index] = options.upload[index];
+        //         }
+        //     }   
+        //     return xhr;
+        // }
     };
+
+    // 如果，是上传文件，则使用自定义 xhr 
+    if(options.upload){
+        reqBody['xhr'] = function() {
+            var xhr = $.ajaxSettings.xhr();
+            console.log("[^_^:20240114-2000-002] xhr.xhr: ", xhr);
+            for(let index in options.upload){
+                xhr.upload[index] = options.upload[index];
+            }
+            return xhr;
+        }
+    }
+
+
+
+
     // blob 类型返回数据，做处理
     if(options.dataType == 'blob' || options.dataType == 'binary'){
         // 响应内容转换器，blob 和 binary 内容不转换
@@ -131,101 +165,9 @@ const f_makeRequstBody = (url, options, async) => {
     return reqBody;
 };
 
+// 请求相关函数 --------------------------------------------------
 /**
- * 请求消息返回预处理；也是默认处理函数；
- * @param {object} res 请求响应的数据对象；
- * @return {object} 请求响应的数据对象
- */
-const f_pretreatment = (res) => {
-    if (res && !zkJsUtils.isEmpty(res.code)) {
-        if (res.code === 'zk.0') {
-            return res;
-        } else {
-            let msgOpt = { type: "error", msg: res.msg }
-            if (!msgOpt.msg) {
-                // 在这里无 intl 无法用 zkToolsMsg 取国际化消息；使用本地国际化消息对象，国际化消息
-                // let lang = zkToolsMsg.getLocale();
-                // 默认提示信息
-                msgOpt.msg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
-            }
-            zkToolsMsg.alertMsg(null, null, msgOpt);
-        }
-        // 以后这里返回 null，请求遇到 null 时，就不用再处理了。
-        return res;
-    }
-    return res;
-};
-
-/**
- * 请求身份认证处理；也是默认处理函数；
- * @param {object} res 请求响应的数据对象；
- * @return {boolean} false-权限异常; true-权限正常；
- */
-const f_auth = (res) => {
-    // 是否开启身份认证，默认不开启，开启进行登录跳转等操作
-    if (globalAppConfig.isAuth) {
-        if (res && !zkJsUtils.isEmpty(res.code)) {
-            if (res.code === 'zk.sec.000004') {
-                // 用户未登录
-                zkToolsAuth.logout();
-                zkToolsMsg.alertMsg(null, null, { type: "error", msg: res.msg });
-                return false;
-            }
-            if (res.code === 'zk.sec.000012') {
-                // 用户已在其他地方登录，请重新登录
-                zkToolsAuth.logout();
-                zkToolsMsg.alertMsg(null, null, { type: "error", msg: res.msg });
-                return false;
-            }
-        }
-    }
-    return true;
-};
-
-/**
- * 服务器响应错误处理
- * @param {object} err 请求响应的数据对象；
- * @return {object} 请求响应的数据对象
- */
-const f_responseError = (xhr, status, err) => {
-    /***
-    // console.log("[20181022-0849-003]-------", err)
-    // console.log('[20181022-0849-004]-------', err.readyState);
-    // console.log('[20181022-0849-005]-------', err.status);
-    // console.log('[20181022-0849-006]-------', err.responseText);
-    let data = {"code":"-2","msg":"请求错误","data":err.readyState}
-
-    err.msg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error'); // 提示信息
-    // zkToolsMsg.alertMsg(null, null, {type:'error', msg:err.msg})
-    resultData = data;
-    ***/
-
-    if(console)console.error('[>_<:20190507-1538-002]  - ajax.request err :', xhr, status, err);
-
-    // 默认提示信息
-    let errMsg = null
-    if(err){
-        if(err.status = 404){
-            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.404');
-        }else if(err.status = 403){
-            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.403');
-        }else if(err.status = 500){
-            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.500');
-        }else{
-            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
-        }
-        
-        // zkToolsMsg.alertMsg(null, null, {type:'error', msg:`${errMsg}:${err.readyState}`}, null, null)
-        return { "code": "-2", "msg": errMsg, "data": err.readyState };
-    }else{
-        errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.connect.failed');
-        return { "code": "-3", "msg": errMsg };
-    }
-    
-};
-
-/**
- * 定制 ajax 请求方式 1；建议使用
+ * 请求方式 1：定制 ajax 请求，返回 Promise 对象；建议使用；
  * 可同步异步；
  * @param {string} url 请求地址
  * @param {object} options 同 ajax 请求属性
@@ -255,44 +197,45 @@ const f_req = (url, options, fCallback) => {
     })
 };
 
+// /**
+//  * 请求方式 2: 定制 ajax 请求，返回数据对象；不建议使用；
+//  * 这里，注意，异步时，返回的数据不一定是响应的数据，可能还未响应，返回了空数据；
+//  * @param {string} url 
+//  * @param {object} options 同 ajax 请求属性
+//  * @param {function} fCallback 返回前回调处理函数，可进行消息预处理与身份验证判断；
+//  * @return {object} 请求结果数据; 
+//  */
+// const f_reqData = (url, options, fCallback) => {
+
+//     let requstBody = f_makeRequstBody(url, options);
+//     let resultData = undefined;
+
+//     // console.log("[^_^:20190123-1453-001] requstBody:", requstBody);
+
+//     Ajax.ajax(requstBody).done(function(data){
+//         // console.log("[^_^:20190123-1453-002] data:", data);
+//         if(!f_auth(data)){
+//             return;
+//         }
+//         resultData = data;
+//         // if(isResponsePretreatment == true){
+//         //     // 如需要预处理；默认为 true
+//         //     resultData = f_pretreatment(data);
+//         // }else{
+//         //     resultData = data;
+//         // }
+//         // 如果有返回前回调处理函数，先回调，再返回
+//         if (fCallback) {
+//             fCallback.call(this, data, status, error);
+//         }
+//     }).fail((xhr, status, error) => {
+//         resultData = f_responseError.call(this, xhr, status, error);
+//     });
+//     return resultData;
+// };
+
 /**
- * 定制 ajax 请求方式 2；不建议使用；建议使用 定制 ajax 请求方式 1
- * 这里，注意，异步时，返回的数据不一定是响应的数据，可能还未响应，返回了空数据；
- * @param {string} url 
- * @param {object} options 同 ajax 请求属性
- * @param {function} fCallback 返回前回调处理函数，可进行消息预处理与身份验证判断；
- * @return {object} 请求结果数据; 
- */
-const f_reqData = (url, options, fCallback) => {
-
-    let requstBody = f_makeRequstBody(url, options);
-    let resultData = undefined;
-
-    // console.log("[^_^:20190123-1452-002] requstBody:", requstBody)
-
-    Ajax.ajax(requstBody).done(function(data){
-        if(!f_auth(data)){
-            return;
-        }
-        resultData = data;
-        // if(isResponsePretreatment == true){
-        //     // 如需要预处理；默认为 true
-        //     resultData = f_pretreatment(data);
-        // }else{
-        //     resultData = data;
-        // }
-        // 如果有返回前回调处理函数，先回调，再返回
-        if (fCallback) {
-            fCallback.call(this, data, status, error);
-        }
-    }).fail((xhr, status, error) => {
-        resultData = f_responseError.call(this, xhr, status, error);
-    });
-    return resultData;
-};
-
-/**
- * 请求会调用默认预处理；建议使用
+ * 请求方式 3: 请求会调用默认预处理；建议使用
  * @param {string} url 请求地址
  * @param {object} options 同 ajax 请求属性
  * @param {function} fFilter 过滤哪些情况不用预处理; 不存在时，默认都进行预处理; 返回: true-不进行预处理；
@@ -331,6 +274,104 @@ const f_reqPretreatment = (url, options, fFilter, fCallback) => {
     })
 };
 
+// 请求结果处理相关函数 --------------------------------------------------------------
+/**
+ * 请求消息返回预处理；也是默认处理函数；
+ * @param {object} res 请求响应的数据对象；
+ * @return {object} 请求响应的数据对象
+ */
+const f_pretreatment = (res) => {
+    if (res && !zkJsUtils.isEmpty(res.code)) {
+        if (res.ok) {
+            return res;
+        } else {
+            let msgOpt = { type: "error", msg: res.msg }
+            if (!msgOpt.msg) {
+                // 在这里无 intl 无法用 zkToolsMsg 取国际化消息；使用本地国际化消息对象，国际化消息
+                // let lang = zkToolsMsg.getLocale();
+                // 默认提示信息
+                msgOpt.msg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
+            }
+            zkToolsMsg.alertMsg(null, null, msgOpt);
+        }
+        // 以后这里返回 null，请求遇到 null 时，就不用再处理了。
+        return res;
+    }
+    return res;
+};
+
+/**
+ * 请求身份认证处理；也是默认处理函数；
+ * @param {object} res 请求响应的数据对象；
+ * @return {boolean} false-权限异常; true-权限正常；
+ */
+const f_auth = (res) => {
+    // 是否开启身份认证，默认不开启，开启进行登录跳转等操作
+    if (globalAppConfig.isAuth) {
+        if (res && !zkJsUtils.isEmpty(res.code)) {
+            if (['zk.sec.000004', 'zk.sec.000012', 'zk.sec.000020'].indexOf(res.code) != -1){
+                /*
+                zk.sec.000004=用户未登录
+                zk.sec.000012=用户已在其他地方登录，请重新登录
+                zk.sec.000020=登录已过期，请重新登录
+                */
+                // 用户未登录
+                zkToolsAuth.logout();
+                zkToolsMsg.alertMsg(null, null, { type: "error", msg: res.msg });
+                return false;
+            }
+        }
+    }
+    return true;
+};
+
+/**
+ * 服务器响应错误处理
+ * @param {object} err 请求响应的数据对象；
+ * @return {object} 请求响应的数据对象
+ */
+const f_responseError = (xhr, status, err) => {
+    /***
+    // console.log("[20181022-0849-003]-------", err)
+    // console.log('[20181022-0849-004]-------', err.readyState);
+    // console.log('[20181022-0849-005]-------', err.status);
+    // console.log('[20181022-0849-006]-------', err.responseText);
+    let data = {"code":"-2","msg":"请求错误","data":err.readyState}
+
+    err.msg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error'); // 提示信息
+    // zkToolsMsg.alertMsg(null, null, {type:'error', msg:err.msg})
+    resultData = data;
+    ***/
+
+    if(console){
+        console.error('[>_<:20190507-1539-001]  - ajax.request xhr: ', xhr);
+        console.error('[>_<:20190507-1539-002]  - ajax.request status: ', status);
+        console.error('[>_<:20190507-1539-003]  - ajax.request err: ', err);
+    }
+
+    // 默认提示信息
+    let errMsg = null
+    if(err){
+        if(err.status == 404){
+            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.404');
+        }else if(err.status == 403){
+            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.403');
+        }else if(err.status == 500){
+            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.500');
+        }else{
+            errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
+        }
+        
+        // zkToolsMsg.alertMsg(null, null, {type:'error', msg:`${errMsg}:${err.readyState}`}, null, null)
+        return { "code": "-2", "msg": errMsg, "data": err.readyState };
+    }else{
+        errMsg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error.connect.failed');
+        return { "code": "-3", "msg": errMsg };
+    }
+    
+};
+
+// 文件下载相关函数 --------------------------------------------------------------
 // ajax 下载文件
 const f_downloadByAjax = (url, options, timeout)=>{
     options.dataType = "binary"; // binary";
@@ -360,7 +401,6 @@ const f_downloadByAjax = (url, options, timeout)=>{
     })
 }
 
-
 /*** 下载方式一 */
 const f_downloadFileByLocation = (url, timeout)=>{
   window.location.href = u
@@ -387,7 +427,7 @@ const f_downloadFile = (url, timeout, fileName, callBack)=>{
   let removeDownloadDom = ()=>{
     setTimeout(function() {
         downloadDom.remove();
-        if(typeof(callBack) === 'function'){
+        if(zkJsUtils.assertObjType(callBack, Function)){
             callBack.call(this);
         }
     }, timeout);
@@ -407,9 +447,9 @@ const f_downloadFile = (url, timeout, fileName, callBack)=>{
 
 const defaultModule = {
     ...Ajax,            // ajax 原生方法
-    req: f_req,          // 定制 ajax 请求方式 1；建议使用
-    reqData: f_reqData,  // 定制 ajax 请求方式 2；不建议使用；建议使用 定制 ajax 请求方式 1
-    reqPretreatment: f_reqPretreatment,  // 请求会调用默认预处理；
+    req: f_req,                          // 请求方式 1：定制 ajax 请求，返回 Promise 对象；建议使用；
+    // reqData: f_reqData,               // 请求方式 2: 定制 ajax 请求，返回数据对象；不建议使用；
+    reqPretreatment: f_reqPretreatment,  // 请求方式 3: 请求会调用默认预处理；建议使用
     pretreatment: f_pretreatment,  // 请求消息返回预处理；
     auth: f_auth,                  // 请求身份认证处理
     downloadByAjax: f_downloadByAjax,
@@ -441,7 +481,7 @@ export default defaultModule;
 //         newOptions.method === 'DELETE'
 //     ) {
 //         newOptions.body = newOptions.data;
-//         if (!(newOptions.body instanceof FormData)) {
+//         if (!zkJsUtils.assertObjType(newOptions.body, FormData)) {
 //             newOptions.headers = {
 //                 Accept: 'application/json',
 //                 'Content-Type': 'application/json; charset=utf-8',

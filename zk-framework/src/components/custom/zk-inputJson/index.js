@@ -2,14 +2,15 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 11:33:59
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-03 16:52:33
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-21 21:33:29
  */
 
 import React from 'react';
 import { Input, Select, Popover } from 'antd';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import zkJsUtils from 'zkJsUtils';
 import { zkToolsMsg } from '../../../tools';
@@ -111,7 +112,7 @@ class CInitInputJson extends React.Component {
 				return (<Option title={item.name} key={item.key} value={item.key} >{item.name}</Option>)
 			})
 			// 属性选择框，属性选择框前缀
-			return (<Select style = {{'width': '100px'}} className={`${this.props.beforeSelectClassName} ${styles.attr_before_color}`}
+			return (<Select style = {{'width': '100px'}} className={`${this.props.beforeSelectClassName} ${styles.zk_edit_json_attr_before_color}`}
 				onChange={(e) => {
 					this.changePrimaryAttr(e);
 				}}
@@ -142,7 +143,7 @@ class CInitInputJson extends React.Component {
 		/*** 展开与收起触发开关 后缀元素 ***/
 		const f_switchNodeElement = (styleType, label) => {
 			return (
-				<div className={`${this.props.afterClassName} ${styles.attr_after_color}`}
+				<div className={`${this.props.afterClassName} ${styles.zk_edit_json_attr_after_color}`}
 					onClick={() => {
 						this.setState({ styleType: styleType })
 					}}>
@@ -159,7 +160,7 @@ class CInitInputJson extends React.Component {
 				if (this.props.attrs[index]) {
 					attrName = this.props.attrs[index].name ? this.props.attrs[index].name : index;
 				}
-				c.push(<div className={styles.attr_popover_panel} key={"p-" + index}>
+				c.push(<div className={styles.zk_edit_json_attr_popover_panel} key={"p-" + index}>
 					<span title={attrName} >{attrName}:</span><pre>{this.getValue()[index]}</pre>
 				</div>);
 			}
@@ -176,15 +177,15 @@ class CInitInputJson extends React.Component {
 					</div>
 				)
 			}
-
+			// Scrollbars
 			const content = (
-				<div className={styles.attr_popver_div} >
-					{c}
-				</div>
+			  <div className={styles.zk_edit_json_attr_popver_div} >
+				{c}
+			  </div>
 			);
 
 			return (<Popover className={this.props.afterClassName} placement="bottomRight" content={content} trigger="click">
-				<div className={styles.attr_after_color}>{label}</div>
+				<div className={styles.zk_edit_json_attr_after_color}>{label}</div>
 			</Popover>
 			)
 		}
@@ -307,13 +308,13 @@ class CInitInputJson extends React.Component {
 
 		switch (this.state.styleType) {
 			case "smart":
-				return (<div {...itemProps} style={style} className={`${className} ${styles.edit_json}`}>{this.getSmartEditNode()}</div>)
+				return (<div {...itemProps} style={style} className={`${className} ${styles.zk_edit_json}`}>{this.getSmartEditNode()}</div>)
 				break;
 			case "compact":
-				return (<div {...itemProps} style={style} className={`${className} ${styles.edit_json}`}>{this.getCompactEditNode()}</div>)
+				return (<div {...itemProps} style={style} className={`${className} ${styles.zk_edit_json}`}>{this.getCompactEditNode()}</div>)
 				break;
 			default:
-				return (<div {...itemProps} style={style} className={`${className} ${styles.edit_json}`}>{this.getExpandingEditNode()}</div>)
+				return (<div {...itemProps} style={style} className={`${className} ${styles.zk_edit_json}`}>{this.getExpandingEditNode()}</div>)
 				break;
 		}
 	}
@@ -341,11 +342,11 @@ CInitInputJson.defaultProps = {
 	primaryAttr: undefined,
 	styleType: "smart",
 	isShowExpBtn: true,
-	className: styles.edit_json_default_class,
-	beforeClassName: styles.attr_before,
-	beforeSelectClassName: styles.attr_before_select,
-	inputClassName: styles.input_json,
-	afterClassName: styles.attr_after,
+	className: styles.zk_edit_json_default_class,
+	beforeClassName: styles.zk_edit_json_attr_before,
+	beforeSelectClassName: styles.zk_edit_json_attr_before_select,
+	inputClassName: styles.zk_edit_json_input_json,
+	afterClassName: styles.zk_edit_json_attr_after,
 	readOnly: false,
 	initAttrrEmpty: false,
 	disabled: false,

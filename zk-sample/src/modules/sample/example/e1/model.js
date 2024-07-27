@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-17 14:21:25
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-08 23:57:25
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 20:53:20
  */
 
 import { findList, del, save, get, getArea } from '../service';
@@ -67,7 +67,7 @@ const model = {
             }
             yield put({ type: 'setState', payload: { data: data, gridSelKeys: [], filter: payload } })
 
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this);
             }
         },
@@ -92,7 +92,7 @@ const model = {
             if (res.code == '0') {
                 restState.entity = res.data;
                 yield put({ type: 'setState', payload: restState });
-                if (callBack instanceof Function) {
+                if (zkJsUtils.assertObjType(callBack, Function)) {
                     callBack.call(this);
                 }
             }

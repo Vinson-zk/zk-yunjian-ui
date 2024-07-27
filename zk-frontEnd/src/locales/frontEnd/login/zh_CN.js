@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-06-29 17:36:39
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-21 14:40:05
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-09 11:52:49
 * 
 * 
 * 
@@ -20,13 +20,15 @@ module.exports = {
 	"zk.front.end.login.lable.companyCode":"公司代码",
 	"zk.front.end.login.lable.password":"密码",
 	"zk.front.end.login.lable.loginBtn":"登录",
-	"zk.front.end.login.lable.rememberAccount":"记住账号",
+	"zk.front.end.login.lable.rememberAccount":"记住我",
 	"zk.front.end.login.lable.rememberMe":"自动登录",
 	"zk.front.end.login.lable.forgotPassword":"找回密码",
 	"zk.front.end.login.lable.phoneNumber":"手机号码",
 	"zk.front.end.login.lable.validCode":"手机验证码",
 	"zk.front.end.login.lable.register":"立即注册",
 	"zk.front.end.login.lable.register.guide":"没有账号？",
+	"zk.front.end.login.lable.register.company":"公司注册",
+	"zk.front.end.login.lable.register.user":"用户注册",
 	"zk.front.end.login.lable.captcha":"验证码",
 
 	// 验证消息

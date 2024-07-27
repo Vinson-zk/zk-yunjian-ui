@@ -13,7 +13,7 @@ const { ZKPopconfirm, ZKButton } = ZKOriginalComponents;
 const { ZKOptRow, ZKScrollTable } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 /**
  * 取 table 列表
@@ -235,7 +235,7 @@ class CInitAccountsGrid extends React.Component {
                 dataSource = {mOfficialAccounts.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex_1_auto}
+				className = {zkStyles.zk_f_flex_auto_1}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:40
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 14:55:12
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-21 00:06:50
  */
 
 import React, { Component } from 'react';
@@ -122,7 +122,7 @@ class CInitSysMenuDetail extends Component {
 						</ZKDetailGrid.ColValue>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.icon')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							{optEntity.icon}&nbsp;&nbsp;&nbsp;&nbsp;{optEntity.icon?<ZKIcon.Antd4Icon icon = {optEntity.icon} />:""} 
+							{optEntity.icon}&nbsp;&nbsp;&nbsp;&nbsp;{optEntity.icon?<ZKIcon.AntdIcon icon = {optEntity.icon} />:""} 
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>
 				</ZKDetailGrid>

@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-04-28 09:31:28
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-28 10:29:02
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-27 08:35:17
 * 
 * 
 * 
@@ -20,15 +20,15 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 
-import CFormDemo from './demo/formDemo.js';
-
 import stylesSample from "../styles.less";
 import styles from "./styles.less";
-import { zkTools, ZKCustomComponents } from 'zkFramework';
-
-const { ZKRouter } = ZKCustomComponents;
+import { zkTools, ZKCustomComponents } from "zkFramework";
+const { ZKContentFormat, ZKRouter } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 const { Switch, Link, Route } = ZKRouter;
+
+import CFormDemo from './demo/formDemo.js';
+import CResizeableTableDemo from './demo/resizeableTableDemo.js';
 
 /*
 静态路由样例
@@ -36,9 +36,8 @@ const { Switch, Link, Route } = ZKRouter;
 function FInitDemoRouter({ intl, match }) {
 
 	return (
-		<div className={stylesSample.sample_detail_panel}>
-			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.router.static')} {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-			<div className={stylesSample.sample_detail_section} >
+		<ZKContentFormat className={styles.sample_detail_panel} >
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.router.static')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
 				{zkToolsMsg.msgFormatByIntl(intl, 'sample.router.level2', {})}: {match.path}
 				<div style={{ height: '100%', flex: '1 1 auto' }} className={styles.statc_router}>
 					<div className={styles.header}>
@@ -46,19 +45,28 @@ function FInitDemoRouter({ intl, match }) {
 							<li>
 								<Link to={`${match.path}/formDemo`}>formDemo</Link>
 							</li>
+							<li>
+								<Link to={`${match.path}/resizeableTableDemo`}>resizeableTableDemo</Link>
+							</li>
 						</ul>
 					</div>
 					<div className={styles.content}>
 						<Switch>
 							<Route exact path={`${match.path}/formDemo`} component={CFormDemo} />
+							<Route exact path={`${match.path}/resizeableTableDemo`} component={CResizeableTableDemo} />
 						</Switch>
 					</div>
 				</div>
-			</div>
-		</div>
+			</ZKContentFormat>
+			<br />
+		</ZKContentFormat>
 	)
 }
 
 export default injectIntl(FInitDemoRouter);
+
+
+
+
 
 

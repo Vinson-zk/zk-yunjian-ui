@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-25 15:36:02
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-18 11:00:36
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-10 09:51:28
  */
 
 import AsyncValidator from 'async-validator';
@@ -334,6 +334,10 @@ const f_phone = (intl, required=false, transform, msg)=>{
     return f_pattern(intl, /^([\+]\d{2,3}-)(\d{6,11})$/, required, transform, msg?msg:zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.phone"));
 }
 
+const f_code = (intl, required=false, transform, msg)=>{
+    return f_pattern(intl, /^[a-z0-9A-Z_.-]*$/, required, transform, msg?msg:zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.code"));
+}
+
 export default {
     notNull: f_notNull,      // 不能为空
     boolean: f_boolean,      // 布尔类型
@@ -347,7 +351,8 @@ export default {
     pattern: f_pattern,      // 正则匹配
     validator: f_validator,  // 自定义校验
     /*** */
-    username: f_username,  // 用户名/登录名
+    username: f_username,    // 用户名/登录名
     phone: f_phone,          // 手机号
+    code: f_code,            // 编码内容检验
 };
 

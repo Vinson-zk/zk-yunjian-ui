@@ -2,8 +2,8 @@
 * 一些常规应用的集合；就是多个应用系统打包到一个前端中；
 * @Author: Vinson
 * @Date:   2021-11-11 09:28:31
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-18 08:58:45
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-25 22:59:47
 * 
 * 
 * 
@@ -17,7 +17,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import { ZKCustomComponents, ZKOriginalComponents, zkTools } from 'zkFramework';
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 // import zkJsUtils from "zkJsUtils";
 
@@ -37,7 +37,7 @@ class CInitHome extends Component {
             routerMappingObj: {},
         };
 
-        // console.log("[^_^:20200813-1941-001] CInitHome.constructor.props", props);
+        // console.log("[^_^:20200813-1941-002] CInitHome.constructor.props", props);
 
         props.dispatch({ type: 'mGeneralApplication/getMenus', navCode:'generalApplication', payload: {} });
     }
@@ -61,15 +61,15 @@ class CInitHome extends Component {
     render() {
         let { match } = this.props;
         return (
-            <Layout className={zkStyles.zk_content}>
-                <ZKSider className={`${zkStyles.zk_left_sider} ${zkStyles.flex_1_auto}`}>
+            <Layout className={zkStyles.zk_f_content}>
+                <ZKSider className={`${zkStyles.zk_f_left_sider} ${zkStyles.zk_f_flex_auto_1}`}>
                     <ZKAutoMenu menus={ this.props.mGeneralApplication.menus } path={`${match.path}`} routerMappingObj={this.state.routerMappingObj} />
                 </ZKSider>
                 <Layout>
-                    <Scrollbars style={{ height: '100%', background: '#fff' }} >
-                        <Content id="right-content" className={zkStyles.zk_wrapper}>
-                            <div className={ `${zkStyles.zk_main_panel} ${zkStyles.display_flex_col}` }>
-                                <ZKBreadcrumb routerMappingObj={this.state.routerMappingObj} />
+                    <ZKBreadcrumb routerMappingObj={this.state.routerMappingObj} />
+                    <Scrollbars className = {zkStyles.zk_f_scrollbars} >
+                        <Content id="right-content" className={zkStyles.zk_f_wrapper}>
+                            <div className={ `${zkStyles.zk_f_main_panel} ${zkStyles.zk_f_display_flex_col}` }>
                                 <Switch>
                                     {this.state.indexMenuRouter?
                                         (<Route exact path={`${match.path}`} render={(props) => {return <Redirect to={`${this.state.indexMenuRouter.path}`} /> }} />)

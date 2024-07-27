@@ -2,13 +2,13 @@
  *
  * @Author: Vinson
  * @Date: 2021-02-14 12:23:04
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-09 23:38:45
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 18:55:20
  */
 
 import { getNavMenus } from "./developmentToolService.js";
 
-// import zkJsUtils from 'zkJsUtils';
+import zkJsUtils from 'zkJsUtils';
 import { zkTools } from 'zkFramework';
 
 let { zkToolsMsg } = zkTools;
@@ -24,9 +24,9 @@ const model = {
 
     effects: {
         // 取菜单
-        *getNavMenus({ navCode="developmentTool", payload }, { call, put }) {
-            let res = yield call(getNavMenus, navCode, payload);
-            if (res.code == "zk.0") {
+        *getNavMenus({ navId="developmentTool", payload }, { call, put }) {
+            let res = yield call(getNavMenus, navId, payload);
+            if (res.ok) {
                 let menus = res.data;
                 menus = zkJsUtils.makeTree(menus, null);
                 menus = zkJsUtils.sort(menus);

@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-11-11 09:37:28
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-09 23:39:24
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:17:06
 * 
 * 
 * 
@@ -29,7 +29,7 @@ const model = {
         // 取菜单
         *getMenus({ navCode="generalApplication", payload }, { call, put }) {
             let res = yield call(getNavMenus, navCode, payload);
-            if (res.code == "zk.0") {
+            if (res.ok) {
                 let menus = res.data;
                 menus = zkJsUtils.makeTree(menus, null);
                 menus = zkJsUtils.sort(menus);

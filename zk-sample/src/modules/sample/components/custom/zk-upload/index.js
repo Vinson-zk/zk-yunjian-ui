@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-16 08:59:26
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-09 10:30:23
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 21:48:39
  */
 
 import React from 'react';
@@ -14,8 +14,8 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
 import { zkTools, ZKCustomComponents } from "zkFramework";
+const { ZKContentFormat, ZKUpload } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
-const { ZKUpload } = ZKCustomComponents;
 
 const FInitZKUploadDemo = ({ intl }) => {
 
@@ -55,20 +55,16 @@ const FInitZKUploadDemo = ({ intl }) => {
   };
 
   return (
-    <div className={styles.sample_detail_panel}>
-      <div className={styles.sample_detail_section}>
-        <h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.upload')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
-        <div>
-          <ZKUpload {...props1}>
-            <div>
-              <PlusOutlined />
-              <div className="ant-upload-text">Upload</div>
-            </div>
-          </ZKUpload>
-        </div>
-      </div>
-      <div className={styles.sample_detail_section}>
-        <h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
+    <ZKContentFormat className={styles.sample_detail_panel} >
+      <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.upload')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+        <ZKUpload {...props1}>
+          <div>
+            <PlusOutlined />
+            <div className="ant-upload-text">Upload</div>
+          </div>
+        </ZKUpload>
+      </ZKContentFormat>
+      <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
         <div>
           ZKUpload 参数：
           <br />
@@ -186,19 +182,16 @@ const FInitZKUploadDemo = ({ intl }) => {
             </tbody>
           </table>
         </div>
-      </div>
-      <div className={styles.sample_detail_section}>
-        <h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-        <div>
-          <SyntaxHighlighter language='jsx' style={docco}>
-            {[
-              "参考框架样例代码",
-            ].join('\n')}
-          </SyntaxHighlighter>
-        </div>
-      </div>
+      </ZKContentFormat>
+      <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+        <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+          {[
+            "参考框架样例代码",
+          ].join('\n')}
+        </SyntaxHighlighter>
+      </ZKContentFormat>
       <br />
-    </div>
+    </ZKContentFormat>
   )
 }
 

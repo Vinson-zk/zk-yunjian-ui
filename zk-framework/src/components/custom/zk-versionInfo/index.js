@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 12:44:33
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-24 10:59:32
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-22 17:41:00
  */
 
 import React from "react";
@@ -30,7 +30,7 @@ const f_makeDependenceInfoLine = (packageJson = {}, detailPanel, index) => {
 	}
 
 	return (
-		<div key={`_key_dependenceInfoLine_${index}`} className={styles.dependence_info_line}>
+		<div key={`_key_dependenceInfoLine_${index}`} className={styles.zk_version_info_dependences_line}>
 			<p>
 				<span>{packageJson.name}&nbsp;&nbsp;(v{packageJson.version})</span>
 				{detailPanel ? <span><Tooltip placement="right" title={detailPanel} ><InfoCircleOutlined /></Tooltip></span> : ""}
@@ -69,7 +69,7 @@ const f_makeVersionInfoCard = (packageJson = {}, detailPanel) => {
 
 	}
 	return (
-		<Card key="version_info_panel" className={styles.dependences_info_card}>
+		<Card key="version_info_panel" className={styles.zk_version_info_card}>
 			<Meta title={`${packageJson.name} (V${packageJson.version});`}
 				description={detailPanel}
 			/>
@@ -89,14 +89,16 @@ const FInitVersionInfo = ({ versionInfo, dependenceInfos, intl }) => {
 	let dependencePanel = f_makeDependenceInfos(dependenceInfos, intl);
 
 	return (
-		<Scrollbars className={styles.version_info} style={{ 'minHeight':'33vh', height: 'auto' }} >
+		<Scrollbars className={styles.zk_version_info} style={{ 'minHeight':'33vh', height: 'auto' }} >
 			{versionInfoCard}
-			<Collapse accordion={true} className={styles.dependences_info} >
-				<Collapse.Panel key={`_key_Collapse.Panel_`} className={styles.dependences_info_panel}
-					header={zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_dependenceInfos_info")} >
-					{dependencePanel}
-				</Collapse.Panel>
-			</Collapse>
+			<Collapse accordion={true} className={styles.zk_version_info_dependences} items = {[
+				{
+					'key': `_key_Collapse.Panel_`,
+					'className': styles.zk_version_info_dependences_panel,
+					'label': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_dependenceInfos_info"),
+					'children': dependencePanel
+				}
+			]} />
 		</Scrollbars>
 	)
 }
@@ -118,3 +120,5 @@ FInitVersionInfo.defaultProps = {
 }
 
 export default FInitVersionInfo;
+
+

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:50
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-19 19:43:21
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 15:42:15
  */
 
 
@@ -17,7 +17,7 @@ const { ZKPopconfirm, ZKButton } = ZKOriginalComponents;
 const { ZKOptRow, ZKScrollTable } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 /**
  * 取 table 列表
@@ -213,7 +213,7 @@ class CInitSysNavGrid extends React.Component {
                 dataSource = {gridData}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = { this.f_changeGrid }
-				className = { zkStyles.flex_1_auto }
+				className = { zkStyles.zk_f_flex_auto_1 }
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 11:08:52
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 14:48:55
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-21 00:06:51
  */
 
 import React from 'react';
@@ -18,13 +18,13 @@ import styles from "./styles.less";
 // title
 /////////////////////////////////////////////////////
 const FInitTitle = props=>{
-	return <div className = {styles.detail_title} {...props} />
+	return <div className = {styles.zk_detail_grid_title} {...props} />
 }
 const FInitOpt = props=>{
-	return <div className = {styles.detail_title_opt} {...props} />
+	return <div className = {styles.zk_detail_grid_title_opt} {...props} />
 }
 const FInitTitleRow = props=>{
-	return <div className = {styles.detail_title_row} {...props} />
+	return <div className = {styles.zk_detail_grid_title_row} {...props} />
 }
 FInitTitleRow.Title = FInitTitle;
 FInitTitleRow.Opt = FInitOpt;
@@ -39,7 +39,7 @@ const FInitDetailRow = props => {
 FInitDetailRow.defaultProps = {
 	gutter: 24,
 	align: "bottom",
-	className: styles.detail_row
+	className: styles.zk_detail_grid_row
 }
 
 const FInitDetailLabel = props => {
@@ -48,7 +48,7 @@ const FInitDetailLabel = props => {
 FInitDetailLabel.defaultProps = {
 	span: 3,
 	offset: 2,
-	className: styles.detail_col_lable
+	className: styles.zk_detail_grid_col_lable
 }
 
 const FInitDetailValue = props => {
@@ -57,7 +57,7 @@ const FInitDetailValue = props => {
 FInitDetailValue.defaultProps = {
 	span: 5,
 	offset: 0,
-	className: styles.detail_col_content
+	className: styles.zk_detail_grid_col_content
 }
 
 /////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ class CInitDetailGrid extends React.Component {
 			<div {...props} >
 				{title? (
 					<FInitTitleRow>
-						<FInitTitle><ZKIcon.Antd4Icon icon = "BarsOutlined" /> &nbsp; {title}</FInitTitle>
+						<FInitTitle><ZKIcon.AntdIcon icon = "BarsOutlined" /> &nbsp; {title}</FInitTitle>
 					</FInitTitleRow>
 				):""}
 				{children}
@@ -87,7 +87,7 @@ class CInitDetailGrid extends React.Component {
 
 CInitDetailGrid.defaultProps = {
 	title: "",
-	className: styles.detail_panel,
+	className: styles.zk_detail_grid_panel,
 }
 
 CInitDetailGrid.TitleRow = FInitTitleRow;

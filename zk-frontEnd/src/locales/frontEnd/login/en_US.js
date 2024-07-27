@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-06-29 17:20:57
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-21 14:39:57
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-25 22:21:33
 * 
 * 
 * 
@@ -20,7 +20,7 @@ module.exports = {
 	"zk.front.end.login.lable.companyCode":"Company Code",
 	"zk.front.end.login.lable.password":"Password",
 	"zk.front.end.login.lable.loginBtn":"Login",
-	"zk.front.end.login.lable.rememberAccount":"Remember account",
+	"zk.front.end.login.lable.rememberAccount":"Remember me",
 	"zk.front.end.login.lable.rememberMe":"Remember password",
 	"zk.front.end.login.lable.forgotPassword":"Forgot password",
 	"zk.front.end.login.lable.phoneNumber":"Phone Number",

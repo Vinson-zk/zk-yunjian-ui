@@ -2,11 +2,11 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 17:29:17
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 09:23:00
  */
 
-import { editSysOrgDept, delSysOrgDept, getSysOrgDept, findSysOrgDeptsTree, setAuthRelation } from './service';
+import { editSysOrgDept, delSysOrgDept, getSysOrgDept, findSysOrgDeptsTree, grantAuths } from './service';
 import { getSysOrgCompany } from '../admin_sysOrgCompany/service';
 
 import { zkTools } from 'zkFramework';
@@ -50,27 +50,26 @@ const model = {
             
             let res = yield call(editSysOrgDept, companyId, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delSysOrgDept({ payload, callback }, { call }) {
             let res = yield call(delSysOrgDept, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
@@ -79,12 +78,12 @@ const model = {
             if(flag == 2){
                 // 查询操作的目标公司
                 let res = yield call(getSysOrgCompany, {pkId: payload.companyId});
-                if (res.code == 'zk.0') {
+                if (res.ok) {
                     yield put({ type: 'setState', payload: { optEntity: {}, targetCompany: res.data } });
                 }
             }else {
                 let res = yield call(getSysOrgDept, payload);
-                if (res.code == 'zk.0') {
+                if (res.ok) {
                     if(flag == 1){
                         // 查询操作的上级部门
                         let optEntity = {};
@@ -110,7 +109,7 @@ const model = {
             }
             let res = yield call(findSysOrgDeptsTree, companyId, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -123,16 +122,16 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
         },
         // 给部门分配权限
-        *grantAuth({ deptId, auths, callback }, { call, put, select }){
-            let res = yield call(setAuthRelation, deptId, auths);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+        *grantAuth({ deptId, allotAuths, callback }, { call, put, select }){
+            let res = yield call(grantAuths, deptId, allotAuths);
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }

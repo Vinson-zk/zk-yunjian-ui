@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-29 18:33:25
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-19 20:00:42
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 18:55:21
 * 
 * 
 * 
@@ -18,7 +18,7 @@ const { zkToolsUtils, zkToolsMsg } = zkTools;
 import SearchItem from "./search.js";
 import GridItem from "./grid.js";
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 class CInitCodeGenFuncModuleIndex extends Component {
 
@@ -38,7 +38,7 @@ class CInitCodeGenFuncModuleIndex extends Component {
         let searchItemProps = {
             filter: mFuncModule.filter,
             lang: lang,
-      onSearch: filter=>{
+            onSearch: filter=>{
                 if(!filter){
                     filter = mFuncModule.initFilter;
                 }
@@ -99,7 +99,7 @@ class CInitCodeGenFuncModuleIndex extends Component {
         }
 
         return (
-            <div className={`${zkStyles.zk_main_panel} ${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
+            <div className={`${zkStyles.zk_f_main_panel} ${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...searchItemProps} />
                 <GridItem {...gridProps} />
             </div>
@@ -115,10 +115,10 @@ class CInitCodeGenFuncModuleIndex extends Component {
     // 6、创建时；安装组件（插入树中）后立即调用；此方法是设置任何订阅的好地方。如果您这样做，请不要忘记取消订阅componentWillUnmount()。
     componentDidMount() {
         let { location, dispatch, mFuncModule } = this.props;
-    if (location.pathname != mFuncModule.pathname) {
-      dispatch({ type: 'mFuncModule/setState', payload: { pathname: location.pathname } });
-      dispatch({ type: "mFuncModule/findFuncModules", payload: mFuncModule.filter, pagination:mFuncModule.pagination, callback: e => { } })
-    }
+        if (location.pathname != mFuncModule.pathname) {
+          dispatch({ type: 'mFuncModule/setState', payload: { pathname: location.pathname } });
+          dispatch({ type: "mFuncModule/findFuncModules", payload: mFuncModule.filter, pagination:mFuncModule.pagination, callback: e => { } })
+        }
     }
 
     // 6、修改时；更新发生后立即调用。初始渲染不会调用此方法。

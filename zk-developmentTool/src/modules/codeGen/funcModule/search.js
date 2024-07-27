@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 11:55:16
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-25 19:27:47
+* @Last Modified by: runoob
+* @Last Modified time: 2023-10-08 17:44:54
 * 
 * 
 * 
@@ -22,15 +22,12 @@ const FInitFuncModuleSearch = ({ intl, filter = {}, onSearch, lang, onSetFilter 
 
     return (
         <ZKSearchRow resetFunc={values => {
-                if (onSetFilter instanceof Function) {
+                if (zkJsUtils.assertObjType(onSetFilter, Function)) {
                     onSetFilter.call(this, values);
                 }
-                // if(onSearch instanceof Function){
-                //   onSearch.call(this, null)
-                // }
             }}
             searchFunc={values => {
-                if (onSearch instanceof Function) {
+                if (zkJsUtils.assertObjType(onSearch, Function)) {
                     onSearch.call(this, values)
                 }
             }}

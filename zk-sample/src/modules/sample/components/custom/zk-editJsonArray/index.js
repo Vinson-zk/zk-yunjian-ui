@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-12-07 23:54:07
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-03 15:34:22
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-23 22:11:06
 * 
 * 
 * 
@@ -17,12 +17,11 @@ import { Button, Form, Input } from 'antd';
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
-const { ZKIcon, ZKEditJsonArray } = ZKCustomComponents;
+const { ZKContentFormat, ZKIcon, ZKEditJsonArray } = ZKCustomComponents;
 const { ZKForm, ZKModal, ZKButton, ZKInput } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
 
 // console.log("[^_^:20200816-1853-001] : FInitZKIconDemo", ZKIcon);
-
 
 class CInitFormNode extends React.Component {
 
@@ -31,16 +30,16 @@ class CInitFormNode extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			visible: false,
+			open: false,
 			values: []
 		}
 	}
 
 	handleOk = (e)=>{
-		this.setState({ visible: false, values: [] });
+		this.setState({ open: false, values: [] });
 	}
 	handleCancel = (e)=>{
-		this.setState({ visible: false });
+		this.setState({ open: false });
 	}
 
 	render() {
@@ -68,7 +67,7 @@ class CInitFormNode extends React.Component {
 						for (let index in values) {
 							vs.push(zkJsUtils.objToStr(index) + ":" + zkJsUtils.objToStr(values[index]))
 						}
-						this.setState({ visible: true, values: vs });
+						this.setState({ open: true, values: vs });
 					}}
 					initialValues = {{
 						"input": 'input-000',
@@ -95,10 +94,10 @@ class CInitFormNode extends React.Component {
 				</Form>
 				<ZKModal
 					title="ZKModal"
-					visible={this.state.visible}
+					open={this.state.open}
 					onOk={this.handleOk}
 					onCancel={this.handleCancel}>
-					<SyntaxHighlighter language="jsx" style={docco}>
+					<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{
 							"{\n" + this.state.values.join(",\n") + "\n}"
 						}
@@ -138,85 +137,76 @@ class CInitZKEditJsonArrayDemo extends React.Component {
 		]
 
 		return (
-			<div className={styles.sample_detail_panel}>
-				<div className={styles.sample_detail_section}>
-					<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.editJsonArray')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
-					<div>
-						<br />
-						<font color = "red">ZKEditJsonArray</font>
-						<br /><br />
-						<ZKEditJsonArray columns={columns} value = {dataSource} ></ZKEditJsonArray>
-					    <br /><br />
-					    <TestFormNode />
-					    <br /><br />
-					</div>
-				</div>
-				<div className={styles.sample_detail_section}>
-					<h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
-					<div>
-						ZKEditJsonArray 组件，其他属性同表格属性：<br />
-						<table className={styles.sample_detail_section_table}>
-							<thead>
-								<tr>
-									<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.param')}</th>
-									<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
-									<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
-									<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
-									<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>value</td>
-									<td>false</td>
-									<td>数组数据值。</td>
-									<td>PropTypes.func</td>
-									<td>[]</td>
-								</tr>
-								<tr>
-									<td>maxRow</td>
-									<td>false</td>
-									<td>最大可添加的行</td>
-									<td>PropTypes.number</td>
-									<td>999</td>
-								</tr>
-								<tr>
-									<td>columns</td>
-									<td>true</td>
-									<td>数据表格表头 title 名称自行国际化</td>
-									<td>PropTypes.array</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>rowKey</td>
-									<td>false</td>
-									<td>行key, 同表格属性</td>
-									<td>默认自动生成的 UUID</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>onChange</td>
-									<td>false</td>
-									<td>值改变事件</td>
-									<td>PropTypes.func</td>
-									<td>无</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div className={styles.sample_detail_section}>
-					<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-					<div>
-						<SyntaxHighlighter language='jsx' style={docco}>
-							{[
-								"参考框架代码",
-							].join('\n')}
-						</SyntaxHighlighter>
-					</div>
-				</div>
+			<ZKContentFormat className={styles.sample_detail_panel} >
+				<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.editJsonArray')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+					<br />
+					<font color = "red">ZKEditJsonArray</font>
+					<br /><br />
+					<ZKEditJsonArray columns={columns} value = {dataSource} ></ZKEditJsonArray>
+				    <br /><br />
+				    <TestFormNode />
+				    <br /><br />
+				</ZKContentFormat>
+				<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+					ZKEditJsonArray 组件，其他属性同表格属性：<br />
+					<table className={styles.sample_detail_section_table}>
+						<thead>
+							<tr>
+								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.param')}</th>
+								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
+								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
+								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
+								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>value</td>
+								<td>false</td>
+								<td>数组数据值。</td>
+								<td>PropTypes.func</td>
+								<td>[]</td>
+							</tr>
+							<tr>
+								<td>maxRow</td>
+								<td>false</td>
+								<td>最大可添加的行</td>
+								<td>PropTypes.number</td>
+								<td>999</td>
+							</tr>
+							<tr>
+								<td>columns</td>
+								<td>true</td>
+								<td>数据表格表头 title 名称自行国际化</td>
+								<td>PropTypes.array</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>rowKey</td>
+								<td>false</td>
+								<td>行key, 同表格属性</td>
+								<td>默认自动生成的 UUID</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>onChange</td>
+								<td>false</td>
+								<td>值改变事件</td>
+								<td>PropTypes.func</td>
+								<td>无</td>
+							</tr>
+						</tbody>
+					</table>
+				</ZKContentFormat>
+				<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+						{[
+							"参考框架代码",
+						].join('\n')}
+					</SyntaxHighlighter>
+				</ZKContentFormat>
 				<br />
-			</div>
+			</ZKContentFormat>
 		)
 	}
 }

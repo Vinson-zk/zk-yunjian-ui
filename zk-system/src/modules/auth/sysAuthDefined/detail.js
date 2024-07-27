@@ -60,10 +60,10 @@ class CInitSysAuthDefinedDetail extends Component {
             </ZKDetailGrid.ColValue>
           </ZKDetailGrid.Row>
           <ZKDetailGrid.Row>
-            <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode')}:</ZKDetailGrid.ColLabel>
+            {/*<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
               <ZKInputJson disabled styleType="compact" value={optEntity.systemCode?optEntity.systemCode:{}} primaryAttr={lang} attrs={locales} />
-            </ZKDetailGrid.ColValue> 
+            </ZKDetailGrid.ColValue> */}
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.shortDesc')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
               <ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={lang} attrs={locales} />

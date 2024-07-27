@@ -3,7 +3,7 @@ const messages = {
 	// 全局未知错误信息
 	"global.app.msg.success": "成功!",
 	"global.app.msg.warning": "未知警告!",
-	"global.app.msg.error": "未知错误!",
+	"global.app.msg.error": "未知错误! 请联系系统管理员",
 	"global.app.msg.error.connect.failed": "连接服务器失败!",
 	"global.app.msg.error.500": "启禀主公！您要找的文臣武将睡着了！",
 	"global.app.msg.error.404": "启禀主公！您要找的文臣武将不知道跑哪去了！",
@@ -14,6 +14,7 @@ const messages = {
 	"global.app.msg.beforeunload": "离开当前页后，所编辑的数据将不可恢复",
 	"global.app.msg.leave":"确认离开此页面？",
 	"global.app.msg.leave.save":"您确定要放弃编辑的内容，离开此页面？",
+	"global.app.msg.opt.unknown":"不支持的操作",
 
 	// 全局标签
 	"global.app.lable.platform": "平台",
@@ -73,6 +74,8 @@ const messages = {
 	"global.opt.name._key_copy": "复制",
 	"global.opt.name._key_icon.select": "选择图标",
 	"global.opt.name._key_icon.select.opt": "单击图标选择",
+	"global.opt.name._key_upload": "上传",
+	"global.opt.name._key_download": "下载",
 
 	// 全局提示名称
 	"global.alert.name._key_newMsg": "未读({num})",
@@ -117,6 +120,7 @@ const messages = {
 	"global.data.validate.pattern":"非法输入",
 	"global.data.validate.username":"请输入有效用户名[用户名只能是字母、下划线、数字；且必须以字母或下划开头]",
 	"global.data.validate.phone":"请输入有效电话号码",
+	"global.data.validate.code":"输入字符只能是大小写字母、数字、中杠、下划线和点",
 
 }
 

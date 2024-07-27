@@ -13,7 +13,7 @@ const { ZKPopconfirm, ZKButton } = ZKOriginalComponents;
 const { ZKOptRow, ZKScrollTable } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 /**
  * 取 table 列表
@@ -37,10 +37,10 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang, onShowGrantM
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.code'),
 			textAlign: 'center', dataIndex: 'code', key: 'code', width: 100, 
 		},
-		{
-			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode'),
-			textAlign: 'center', dataIndex: 'systemCode', key: 'systemCode', width: 100,
-		},
+		// {
+		// 	title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode'),
+		// 	textAlign: 'center', dataIndex: 'systemCode', key: 'systemCode', width: 100,
+		// },
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.status'),
 			textAlign: 'status', dataIndex: 'status', key: 'systemCode', width: 100,
@@ -193,7 +193,7 @@ class CInitSysAuthDefinedGrid extends React.Component {
                 dataSource = {mSysAuthDefined.gridData||[]}
                 // (pagination, filters, sorter, extra: { currentDataSource: [] })
                 onChange = {this.f_changeGrid}
-				className = {zkStyles.flex_1_auto}
+				className = {zkStyles.zk_f_flex_auto_1}
 			>
 				<ZKOptRow>
 					<ZKOptRow.OptGroup>

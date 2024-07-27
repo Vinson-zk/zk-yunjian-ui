@@ -1,10 +1,14 @@
-/**
- *
- * @Author: 
- * @Date: 
- * @Last 
- * @Last 
- */
+/*
+* @Author: Vinson
+* @Email: binary_space@126.com
+* @QQ: 1035862795
+* @Wechat: 1035862795
+* @Date: 2024-07-07 11:06:15
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-07 17:26:29
+*/
+
+
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
 import { connect } from 'dva';
@@ -156,3 +160,4 @@ class CInitSysOrgDeptDetail extends Component {
 }
 
 export default injectIntl(connect(({ mApp, mSysOrgDeptAdmin, loading }) => ({ mApp, mSysOrgDeptAdmin, loading }))(CInitSysOrgDeptDetail));
+

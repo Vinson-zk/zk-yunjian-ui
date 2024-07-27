@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-29 17:39:59
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-19 19:31:37
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 15:42:26
  */
 
 
@@ -16,8 +16,7 @@ const { zkToolsUtils, zkToolsMsg } = zkTools;
 
 import SearchItem from "./search.js";
 import GridItem from "./grid.js";
-
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 // const FInitSysNacIndex = (params) => {
 //     return (<div>FInitSysNacIndex</div>);
@@ -36,7 +35,7 @@ class CInitSysMenuIndex extends Component {
 
     render() {
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`}>
+            <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`}>
                 <SearchItem {...this.props} />
                 <GridItem {...this.props} />
             </div>

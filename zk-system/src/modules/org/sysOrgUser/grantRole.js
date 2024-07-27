@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-03 19:57:44
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-07 17:13:49
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-04 16:28:29
 * 
 * 
 * 
@@ -21,7 +21,7 @@ const { ZKScrollTable, ZKSearchRow } = ZKCustomComponents;
 const { ZKDeptSelect } = ZKBusinessComponents;
 const { zkToolsMsg, zkToolsAjax, zkToolsUtils } = zkTools;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 /**
  * 执行查询 非树形/分页
  */
@@ -55,7 +55,7 @@ class CInitGrantRole extends Component {
         	params = zkToolsUtils.convertSortParam(params, sorter); 
 	        params = { ...params, ...zkToolsUtils.convertPageParam(pagination)};
 	        f_doingSearch(this.props.url, params).done(res=>{
-		    	if (res.code == 'zk.0') {
+		    	if (res.ok) {
 	            	this.setState({listDatas: res.data.result||[], spinningListDatas: false});
 	            }else{
 	            	// if(console)console.error("[>_<:20220504-1531-002] request url:[" + this.props.urlRoleIds + "] exception: " + res.code);
@@ -78,7 +78,7 @@ class CInitGrantRole extends Component {
 		        // params = { ...params, ...zkToolsUtils.convertPageParam(pagination)};
 		        // console.log("[>_<:20220504-1708-001] f_findUserRoleIds ", params);
 		        f_doingSearch(this.props.urlRoleIds, params).done(res=>{
-			    	if (res.code == 'zk.0') {
+			    	if (res.ok) {
 		            	this.setState({ selectedKeys: res.data||[], spinningUserRoleIds: false });	
 		            }else{
 		            	// if(console)console.error("[>_<:20220504-1531-002] request url:[" + this.props.urlRoleIds + "] exception: " + res.code);
@@ -131,7 +131,7 @@ class CInitGrantRole extends Component {
     /**  关闭 */
     f_close = ()=>{
     	this.setState({ isInit:false, filter:{}, selectedKeys:[], selectedObjs: undefined, listDatas:[] });
-    	if(this.props.onShowModal instanceof Function){
+    	if(zkJsUtils.assertObjType(this.props.onShowModal, Function)){
     		this.props.onShowModal.call(this, false, {});
     	}
     	// console.log("[^_^:20220504-1739-003] f_close:", this.state);
@@ -177,7 +177,7 @@ class CInitGrantRole extends Component {
 		let gridSpinning = this.state.spinningListDatas || this.state.spinningUserRoleIds;
 
 	    return (
-			<ZKModal title={`${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.modal.title.grantRole')}[${optUser.account}]`} visible={isShow}
+			<ZKModal title={`${zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.modal.title.grantRole')}[${optUser.account}]`} open={isShow}
 			  onOk={this.f_handleOk}
 			  onCancel={this.f_handleCancel}
 			  okButtonProps = {{loading: spinning}}
@@ -233,7 +233,7 @@ class CInitGrantRole extends Component {
 						// pagination = {{position: ['topRight'], ...page}}
 		                dataSource = {this.state.listDatas||[]}
 		                onChange = {this.f_changeGrid}
-						className = {zkStyles.flex_1_auto}
+						className = {zkStyles.zk_f_flex_auto_1}
 					></ZKScrollTable>
 				</ZKSpin>
 			</ZKModal>

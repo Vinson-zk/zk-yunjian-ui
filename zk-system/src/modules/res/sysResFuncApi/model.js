@@ -2,8 +2,8 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-03 18:25:15
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 17:43:06
  */
 
 import { editSysResFuncApi, delSysResFuncApi, getSysResFuncApi, findSysResFuncApis, findRelationByFuncApi, setRelationByFuncApi } from './service';
@@ -45,7 +45,7 @@ const model = {
     *editSysResFuncApi({ payload, callback }, { call }) {
 
       if(payload && payload.reqMethods){
-        if(payload.reqMethods instanceof Array){
+        if(zkJsUtils.assertObjType(payload.reqMethods, Array)){
           let reqMethods = 0;
           for(let intV of payload.reqMethods){
             reqMethods = reqMethods | intV;
@@ -56,34 +56,33 @@ const model = {
 
       let res = yield call(editSysResFuncApi, payload);
       let f = errors=>{
-        if (callback instanceof Function) {
+        if (zkJsUtils.assertObjType(callback, Function)) {
           callback.call(this, errors);
         }
       }
-      switch(res.code){
-        case "zk.0": 
+      if(res.ok){
           zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
           f();
-          break;
-        case "zk.000002": 
-          f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-          break;
+      }else{
+          if(res.type == globalAppConfig.resCodeType.dataValidator){
+              f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
+          }
       }
     },
     // 删除
     *delSysResFuncApi({ payload, callback }, { call }) {
       let res = yield call(delSysResFuncApi, payload);
-      if(res.code == "zk.0"){
+      if(res.ok){
         zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
       }
-      if (callback instanceof Function) {
+      if (zkJsUtils.assertObjType(callback, Function)) {
         callback.call(this, res);
       }
     },
     // 查询 详情
     *getSysResFuncApi({ payload }, { call, put }) {
       let res = yield call(getSysResFuncApi, payload);
-      if (res.code == 'zk.0') {
+      if (res.ok) {
         yield put({ type: 'setState', payload: { optEntity: res.data } });
       }
     },
@@ -100,7 +99,7 @@ const model = {
       }
       let res = yield call(findSysResFuncApis, params);
       let restState = {}
-      if (res.code == 'zk.0') {
+      if (res.ok) {
         restState = {
           "filter": params,
           "gridData": res.data.result,
@@ -113,7 +112,7 @@ const model = {
           }
         }
         yield put({ type: 'setState', payload: restState });
-        if (callback instanceof Function) {
+        if (zkJsUtils.assertObjType(callback, Function)) {
           callback.call(this);
         }
       }
@@ -126,8 +125,8 @@ const model = {
       params = { ...params, ...zkToolsUtils.convertPageParam(pagination) };
 
       let res = yield call(findSysResApplicationSystems, params);
-      if (res.code == 'zk.0') {
-        if (callback instanceof Function) {
+      if (res.ok) {
+        if (zkJsUtils.assertObjType(callback, Function)) {
           callback.call(this, res.data.result);
         }
       }
@@ -142,7 +141,7 @@ const model = {
       params = { ...params, "page.no": 0, "page.size": 999 }; // 穿梭框，数字不宜太多，默认只查 999 条，超过各个数量时，改由列表查询勾选吧
       let res = yield call(findSysResRequestChannels, params);
       let resData = {}
-      if (res.code == 'zk.0') {
+      if (res.ok) {
         resData = {
           "filter": params,
           "resultList": res.data.result,
@@ -155,7 +154,7 @@ const model = {
           }
         }
         // console.log("[^_^:20220318-1941-001] 取可分配的请求渠道：", callback);
-        if (callback instanceof Function) {
+        if (zkJsUtils.assertObjType(callback, Function)) {
           callback.call(this, resData);
         }
       }
@@ -166,11 +165,11 @@ const model = {
       params = { ...params, "page.no": 0, "page.size": 9999 }; // 穿梭框，数字不宜太多，默认只查 999 条，超过各个数量时，改由列表查询勾选吧
       let res = yield call(findRelationByFuncApi, params);
       let resData = {}
-      if (res.code == 'zk.0') {
+      if (res.ok) {
         resData = {
           "resultList": res.data.result,
         }
-        if (callback instanceof Function) {
+        if (zkJsUtils.assertObjType(callback, Function)) {
           callback.call(this, resData);
         }
       }
@@ -178,8 +177,8 @@ const model = {
     // 给功能API接口分配渠道
     *setRelationByFuncApi({ funcApi, reqChannels, callback }, { call, put, select }) {
       let res = yield call(setRelationByFuncApi, funcApi.pkId, reqChannels);
-      if (res.code == 'zk.0') {
-        if (callback instanceof Function) {
+      if (res.ok) {
+        if (zkJsUtils.assertObjType(callback, Function)) {
           zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
           callback.call(this, res);
         }
@@ -191,7 +190,7 @@ const model = {
       let payload = action.payload;
       // 针对 操作实体的 ‘reqMethods’ 做特殊处理
       if(payload && payload.optEntity && payload.optEntity.reqMethods){
-        if(typeof(payload.optEntity.reqMethods) == 'number'){
+        if(zkJsUtils.assertObjType(payload.optEntity.reqMethods, Number)){
           let reqMethods = payload.optEntity.reqMethods;
           payload.optEntity.reqMethods = [];
           let v = 1

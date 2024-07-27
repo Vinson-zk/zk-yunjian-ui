@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 22:49:46
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-01 23:25:18
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-26 14:28:52
  */
 
 import React, { Component } from 'react';
@@ -11,15 +11,14 @@ import { injectIntl } from 'react-intl';
 import { Layout } from 'antd';
 
 import { ZKCustomComponents, ZKOriginalComponents, zkTools } from 'zkFramework';
-import zkJsUtils from "zkJsUtils";
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 const { Header, Content } = Layout;
-const { ZKRouter, ZKLogo, ZKUserDropDown, ZKLanguageSelect, ZKNavigation, ZKVersionInfo } = ZKCustomComponents;
+const { ZKRouter, ZKLogo, ZKUserDropDown, ZKLanguageSelect, ZKNavigation, ZKVersionInfo, ZKTheme } = ZKCustomComponents;
 const { ZKModal } = ZKOriginalComponents;
 const { Switch, Redirect } = ZKRouter;
-const { zkToolsNavAndMenu, zkToolsMsg } = zkTools;
+const { zkToolsNavAndMenu, zkToolsMsg, zkToolsUtils } = zkTools;
 
 /*** 版本信息 ***/
 import zkFrameworkInfo from 'zkFramework/package.json';
@@ -36,6 +35,8 @@ import versionInfo from '../package.json';
 import sampleFuncModule from './modules/sample/func.js';
 import blendFuncModule from './modules/blend/func.js';
 // console.log("[^_^:20201218-0058-001] funcModule:", funcModule, blendFuncModule);
+
+import logImg from './assets/picture/favicon_128x128.ico';
 
 const funcModuleMppingObj = {
     "sample": sampleFuncModule,
@@ -54,7 +55,7 @@ class CInitHome extends Component {
             indexNavRoute: null  // 默认导航栏
         };
 
-        // console.log("[^_^:20200813-1941-001] CInitHome.constructor.props", props);
+        // console.log("[^_^:20200813-1941-003] CInitHome.constructor.props", props);
 
         props.dispatch({type: 'mApp/getNavItems', payload:{}});
     }
@@ -63,13 +64,12 @@ class CInitHome extends Component {
 
         // console.log("[^_^:20200811-1445-001] FInitSampleIndex。getDerivedStateFromProps navItems:", props.mApp.navItems);
         // if (state.navRoutes == null) {
-        if(props.mApp.navItemIsUpdate){
+        if(state.navRoutes == null && props.mApp.navItems != undefined){
             // 生成导航栏目路由
             state.navRoutes = zkToolsNavAndMenu.getRoutesByNavs(props.dvaApp, props.match.path, props.mApp.navItems, dynamicImportHelper);
             // 查找默认导航栏目
             state.indexNavRoute = zkToolsNavAndMenu.getIndexNav(props.mApp.navItems);
-            // console.log("[^_^:20200811-1044-001] getDerivedStateFromProps ");
-            props.dispatch({type: 'mApp/setState', payload:{"navItemIsUpdate":false}});
+            // console.log("[^_^:20200811-1044-001] getDerivedStateFromProps：", props, state);
         }
         return true;
     }
@@ -100,7 +100,6 @@ class CInitHome extends Component {
                     ZKModal.info({
                         title: zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_version_info'),
                         content: <ZKVersionInfo intl={intl} versionInfo={versionInfo} dependenceInfos={dependenceInfos} />,
-                        className: zkStyles.zk_versionInfo_modal
                     })
                     break;
                 default:
@@ -116,16 +115,20 @@ class CInitHome extends Component {
             optKeys = [];
         }
 
-        // <div className = {zkStyles.zk_footer} >opyright © Vinson 2</div>
+        // <div className = {zkStyles.zk_f_footer} >opyright © Vinson 2</div>
         return (
-            <Layout className={zkStyles.zk_layout}>
-                <Header className={zkStyles.zk_header}>
-                    <ZKLogo logoImgUrl="assets/picture/favicon_128x128.ico" />
-                    <ZKNavigation prefixPath={`${match.path}`} navItems={mApp.navItems} />
+            <Layout className={zkStyles.zk_f_layout}>
+                <Header className={zkStyles.zk_f_header}>
+                    <ZKLogo logoImgUrl = {logImg} />
+                    <ZKNavigation prefixPath={`${match.path}`} navItems={mApp.navItems?mApp.navItems:[]} />
                     <ZKUserDropDown user={mApp.user} onLogin={f_onLogin} optKeys={optKeys} callBack={f_onUserDropDownCallBack} />
+                    <ZKTheme themeFlag={mApp.themeFlag} setThemeFunc={key=>{
+                        // zkToolsUtils.setTheme(key);
+                        dispatch({ type: 'mApp/changeTheme', themeFlag: key });
+                    }} />&nbsp;&nbsp;
                     <ZKLanguageSelect {...languageSwitchProps} />
                 </Header>
-                <Content className={zkStyles.zk_content}>
+                <Content className={zkStyles.zk_f_content}>
                     <Switch>
                         {this.state.indexNavRoute ?
                             (
@@ -134,7 +137,7 @@ class CInitHome extends Component {
                         {this.state.navRoutes}
                     </Switch>
                 </Content>
-                <div className = {zkStyles.zk_footer} ><p>opyright © Vinson zk-sample</p></div>
+                <div className = {zkStyles.zk_f_footer} ><span>opyright © Vinson zk-sample</span></div>
             </Layout>
         )
     }

@@ -98,6 +98,7 @@ class CInitPayGroupEdit extends Component {
                 	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.pay.PayGroup.code')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
 					>
                         <ZKInput disabled = {optEntity.pkId?true:false}  />

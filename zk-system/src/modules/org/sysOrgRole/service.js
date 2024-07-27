@@ -2,15 +2,15 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 19:04:00
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 10:59:16
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
+
 /*
 JSON.stringify(params)
 contentType:'application/json; charset=utf-8'}
@@ -20,14 +20,8 @@ export async function editSysOrgRole(params) {
     return zkToolsAjax.reqPretreatment(
         `/${api}/org/sysOrgRole/sysOrgRole`, 
         {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
-        );
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
+    );
 }
 
 // 删除
@@ -46,8 +40,8 @@ export async function findSysOrgRoles(params) {
 }
 
 // 给角色分配权限
-export async function setAuthRelation(roleId, auths) {
-    return zkToolsAjax.reqPretreatment(`/${api}/auth/sysAuthRole/setRelationByRole/${roleId}`, 
+export async function grantAuths(roleId, auths) {
+    return zkToolsAjax.reqPretreatment(`/${api}/auth/sysAuthRole/grantAuths/${roleId}`, 
         {method:'POST', data:JSON.stringify(auths), contentType:'application/json; charset=utf-8'});
 }
 

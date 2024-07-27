@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-03 15:56:17
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-04 16:48:07
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-04 16:28:29
 * 
 * 管理修改密码；
 * 
@@ -36,7 +36,7 @@ class CInitSysOrgUserRestPwd extends Component {
 	// 关闭渠道编辑对话框
 	close = ()=>{
 		this.setState({value:""});
-		if(this.props.onShowModal instanceof Function){
+		if(zkJsUtils.assertObjType(this.props.onShowModal, Function)){
 			this.props.onShowModal.call(this, false, {});
 		}
 	};
@@ -66,7 +66,7 @@ class CInitSysOrgUserRestPwd extends Component {
 		let { isShow, user, intl, loading } = this.props;
 		let spinning = loading.effects['mSysOrgUser/resetPwd'];
 		return (
-			<ZKModal title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.modal.title.resetPwd')} visible={isShow}
+			<ZKModal title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.modal.title.resetPwd')} open={isShow}
 			  onOk={this.handleOk}
 			  onCancel={this.handleCancel}
 			  okButtonProps = {{loading: spinning}}

@@ -2,14 +2,15 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:35:44
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-12-07 23:59:17
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-25 22:36:05
  */
 
 import cIndex from './index.js';
 import cAutoMenu from './zk-autoMenu/index.js';
 import cAutoTable from './zk-autoTable/index.js';
 import cBreadcrumb from './zk-breadcrumb/index.js';
+import cContentFormat from './zk-contentFormat/index.js';
 import cDateFormatPicker from './zk-dateFormatPicker/index.js';
 import cDetailGrid from './zk-detailGrid/index.js';
 import cEditForm from './zk-editForm/index.js';
@@ -26,7 +27,10 @@ import cRouter from './zk-router/index.js';
 import cScrollTable from './zk-scrollTable/index.js';
 import cSearchRow from './zk-searchRow/index.js';
 import cSider from './zk-sider/index.js';
+import cPopoverPanel from './zk-popoverPanel/index.js';
 import cTextEditor from './zk-textEditor/index.js';
+import cTheme from './zk-theme/index.js';
+import cTouchControl from './zk-touchControl/index.js';
 import cUpload from './zk-upload/index.js';
 import cUserDropDown from './zk-userDropDown/index.js';
 import cVersionInfo from './zk-versionInfo/index.js';
@@ -35,6 +39,7 @@ const customIndex = { component:cIndex, models:[]};
 const customMenu = { component:cAutoMenu, models:[]};
 const customAutoTable = { component:cAutoTable, models:[]};
 const customBreadcrumb = { component:cBreadcrumb, models:[]};
+const customContentFormat = { component:cContentFormat, models:[]};
 const customDateFormatPicker = { component:cDateFormatPicker, models:[]};
 const customDetailGrid = { component:cDetailGrid, models:[]};
 const customEditForm = { component:cEditForm, models:[]};
@@ -51,7 +56,10 @@ const customRouter = { component:cRouter, models:[]};
 const customScrollTable = { component:cScrollTable, models:[]};
 const customSearchRow = { component:cSearchRow, models:[]};
 const customSider = { component:cSider, models:[]};
+const customPopoverPanel = { component:cPopoverPanel, models:[]};
 const customTextEditor = { component:cTextEditor, models:[]};
+const customTheme = { component:cTheme, models:[]};
+const customTouchControl = { component:cTouchControl, models:[]};
 const customUpload = { component:cUpload, models:[]};
 const customUserDropDown = { component:cUserDropDown, models:[]};
 const customVersionInfo = { component:cVersionInfo, models:[]};
@@ -60,6 +68,7 @@ export default {
 	customIndex,
 	customAutoTable,
 	customBreadcrumb,
+	customContentFormat,
 	customDateFormatPicker,
 	customDetailGrid,
 	customEditForm,
@@ -77,8 +86,13 @@ export default {
 	customScrollTable,
 	customSearchRow,
 	customSider,
+	customPopoverPanel,
 	customTextEditor,
+	customTheme,
+	customTouchControl,
 	customUpload,
 	customUserDropDown,
 	customVersionInfo,
 }
+
+

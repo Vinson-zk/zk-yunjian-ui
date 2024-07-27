@@ -1,14 +1,14 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 16:39:49 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-08 19:42:51
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-27 09:14:50
  */
 
 import React from 'react';
-import dynamic from 'dva/dynamic';
+import { dynamic } from 'dva';
 
-// import * as dvaRouter from 'dva/router'; // hashHistory, browserHistory 没有了
+// import { router as dvaRouter } from 'dva'; // hashHistory, browserHistory 没有了
 
 import { ZKCustomComponents } from 'zkFramework';
 

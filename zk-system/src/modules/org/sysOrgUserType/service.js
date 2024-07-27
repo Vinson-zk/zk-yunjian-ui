@@ -2,15 +2,15 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 19:05:58
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 10:59:46
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
+
 /*
 JSON.stringify(params)
 contentType:'application/json; charset=utf-8'}
@@ -20,14 +20,8 @@ export async function editSysOrgUserType(params) {
     return zkToolsAjax.reqPretreatment(
         `/${api}/org/sysOrgUserType/sysOrgUserType`, 
         {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
-        );
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
+    );
 }
 
 // 删除
@@ -46,8 +40,8 @@ export async function findSysOrgUserTypes(params) {
 }
 
 // 给用户类型分配权限
-export async function setAuthRelation(userTypeId, auths) {
-    return zkToolsAjax.reqPretreatment(`/${api}/auth/sysAuthUserType/setRelationByUserType/${userTypeId}`, 
+export async function grantAuths(userTypeId, auths) {
+    return zkToolsAjax.reqPretreatment(`/${api}/auth/sysAuthUserType/grantAuths/${userTypeId}`, 
         {method:'POST', data:JSON.stringify(auths), contentType:'application/json; charset=utf-8'});
 }
 

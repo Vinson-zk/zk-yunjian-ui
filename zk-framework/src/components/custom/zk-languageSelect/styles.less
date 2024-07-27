@@ -2,34 +2,41 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 22:31:06
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-06-30 20:20:04
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-22 08:58:23
  */
 
-.languageSelect {
-	flex        : 0 0 100px;
-	/*text-align: right;*/
+@import "../../../../style/theme/zk.theme.variables.less";
+
+.zk_language_select {
+  flex: 0 0 100px;
+  :global {
+    .ant-select-selection-item {
+    	display: flex;  
+    	align-items: center;
+    }
+  }
 }
 
-.languageSelect:hover {
-	color  : @primary-color;
-	/*color: inherit;*/
+.zk_language_select:hover {
+  color  : @colorPrimaryTextHover;
 }
 
-.languageSelect>div {
-	display   : inline-block;
-	box-shadow: none !important;
+.zk_language_select>div {
+  display   : inline-block;
+  box-shadow: none !important;
+  background-color: @colorBgBase !important;
 }
 
-.languageSelect:hover span {
-	color  : @primary-color;
-	/*color: inherit;*/
+.zk_language_select:hover span {
+  color  : @colorPrimaryTextHover;
 }
 
-.languageSelect_option {
-	/*z-index: 9999999;*/
+.zk_language_select_option {
+  background-color: @colorBgBase;
 }
 
-.languageSelect_option:hover {
-	color: @primary-color;
+.zk_language_select_option:hover {
+  color: @colorPrimaryTextHover;
+  /*background-color: @colorBgTextHover;*/
 }

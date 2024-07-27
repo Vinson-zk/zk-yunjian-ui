@@ -2,14 +2,15 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:35:22
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 15:23:26
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 14:49:21
  */
 
 import cIndex from './index.js';
 import cAnchor from './zk-anchor/index.js';
 import cButton from './zk-button/index.js';
 import cCol from './zk-col/index.js';
+import cConfigProvider from './zk-configProvider/index.js';
 import cDatePicker from './zk-datePicker/index.js';
 import cForm from './zk-form/index.js';
 import cInput from './zk-input/index.js';
@@ -30,6 +31,7 @@ const originalIndex = { component:cIndex, models:[]}
 const originalAnchor = { component:cAnchor, models:[]}
 const originalButton = {component:cButton, models:[]};
 const originalCol = {component:cCol, models:[]};
+const originalConfigProvider = {component:cConfigProvider, models:[]};
 const originalDatePicker = {component:cDatePicker, models:[]};
 const originalForm = {component:cForm, models:[]};
 const originalInput = {component:cInput, models:[]};
@@ -51,6 +53,7 @@ export default {
 	originalAnchor,
 	originalButton,
 	originalCol,
+	originalConfigProvider,
 	originalDatePicker,
 	originalForm,
 	originalInput,
@@ -67,3 +70,5 @@ export default {
 	originalTree,
 	originalTreeSelect
 }
+
+

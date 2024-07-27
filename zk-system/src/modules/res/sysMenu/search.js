@@ -2,10 +2,9 @@
  *
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:53
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-11 11:21:13
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-28 00:12:29
  */
-
 
 import React, { Component } from 'react';
 
@@ -37,7 +36,9 @@ class CInitSysMenuSearch extends React.Component {
         if(!filter){
             filter = mSysMenu.initFilter;
         }
-        dispatch({ type: "mSysMenu/findSysMenusTree", filter: {...mSysMenu.filter, ...filter}, callback: e => { } });
+        // dispatch({ type: "mSysMenu/findSysMenusTree", filter: {...mSysMenu.filter, ...filter}, callback: e => { } });
+        dispatch({ type: "mSysMenu/findSysMenusTree", filter: {...mSysMenu.filter, ...filter} });
+        // dispatch({ type: "mSysMenu/setState", payload: {} });
     }
 
     render(){

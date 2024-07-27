@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-13 15:22:52
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-04-02 13:15:41
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-25 00:11:09
 * 
 * 
 * 
@@ -10,18 +10,17 @@
 
 
 import React from 'react';
-import { Form } from 'antd';
+import { Form, Button } from 'antd';
 import { injectIntl } from 'react-intl';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import moment from 'moment';
 
 import { docco } from '../../../helper';
+import zkJsUtils from 'zkJsUtils';
 import styles from "../../../styles.less";
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
-const { ZKInput, ZKDatePicker, ZKSelect } = ZKOriginalComponents;
-const { ZKScrollTable, ZKOptRow } = ZKCustomComponents;
+const { ZKContentFormat, ZKScrollTable, ZKOptRow } = ZKCustomComponents;
+const { ZKInput, ZKDatePicker, ZKSelect, ZKTable } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
-
 
 function FInitZKScrollTableDemo({ intl }) {
 
@@ -41,7 +40,7 @@ function FInitZKScrollTableDemo({ intl }) {
 		{ title: zkToolsMsg.msgFormatByIntl(intl, 'sample.table.col3'), dataIndex: 'permission', key: 'permission', width: 150 },
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_name'),
-			dataIndex: 'opt', key: 'opt', width: 150, fixed: 'right', 
+			dataIndex: 'opt', key: 'opt', width: 100, fixed: 'right', 
 			render: (text, record, index) => {
 				return (
 					<ZKOptRow key={`grid-${record.pkId}`} >
@@ -85,12 +84,12 @@ function FInitZKScrollTableDemo({ intl }) {
 		columns: columns,
 		dataSource: dataSource,
 		pagination: {},
-		scroll: { x: 1440, y: 300 },
+		scroll: { x: 840, y: 200 },
 		rowNum: { 'textAlign': 'center', 'fixed': 'left', width: 30 },
 		onChange: (pagination, filters, sorter)=>{
-			console.log("====== pagination: ", pagination);
-			console.log("====== filters: ", filters);
-			console.log("====== sorter: ", sorter);
+			console.log("[^_^:20230918-2304-001] pagination: ", pagination);
+			console.log("[^_^:20230918-2304-001] filters: ", filters);
+			console.log("[^_^:20230918-2304-001] sorter: ", sorter);
 			/*
 			{
 				column:{
@@ -111,129 +110,131 @@ function FInitZKScrollTableDemo({ intl }) {
 	}
 
 	return (
-		<div className={styles.sample_detail_panel}>
-			<div className={styles.sample_detail_section}>
-				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.scrollTable')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
-				<div>
-					<ZKScrollTable {...tableProps}></ZKScrollTable>
-					<br />
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable
-							// rowSelection={{onChange: (selectedRowKeys, selectedRows) => {}}} 
-							columns={columns}
-							// dataSource={[{id:91, title: '测试29', age:28, url: 'url', permission: 'permission'}]}
-							pagination={{}}
-							scroll={{ x: 1440, y: 300 }}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
-					<br /> 高度不自动填满
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable
-							rowKey = "id"
-							autoHeight = {false}
-							// rowSelection={{onChange: (selectedRowKeys, selectedRows) => {}}} 
-							columns={columns}
-							// dataSource={[{id:91, title: '测试29', age:28, url: 'url', permission: 'permission'}]}
-							pagination={{}}
-							scroll={{ x: true, y: 300 }}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
-					<br /> 不高度自动填满
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable rowSelection={{ onChange: (selectedRowKeys, selectedRows) => { } }}
-							rowKey = "id"
-							columns = {columns}
-							dataSource = {dataSource}
-							pagination={{position: ['topRight', 'bottomRight']}}
-							// scroll={{x:true, y: 300}}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
-					<br /> 高度自动填满
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable
-							rowKey = "id"
-							autoHeight = {true}
-							// rowSelection={{onChange: (selectedRowKeys, selectedRows) => {}}} 
-							columns={columns}
-							// dataSource={[{id:91, title: '测试29', age:28, url: 'url', permission: 'permission'}]}
-							pagination={{}}
-							scroll={{ x: true, y: 300 }}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
-					<br /> 高度自动填满
-					<div style = {{height: '800px', display: 'flex', border: '1px solid', padding: '30px'}}>
-						<ZKScrollTable 
-							rowKey = "id"
-							rowSelection={{ onChange: (selectedRowKeys, selectedRows) => { } }}
-							autoHeight = {true}
-							columns = {columns}
-							dataSource = {dataSource}
-							pagination={{position: ['topRight', 'bottomRight']}}
-							scroll={{x:true, y: 300}}
-							rowNum={{}}
-						>
-							<ZKOptRow />
-						</ZKScrollTable>
-					</div>
+		<ZKContentFormat className={styles.sample_detail_panel} >
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.scrollTable')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+				<ZKTable {...tableProps}></ZKTable>
+				<br />
+				<ZKScrollTable {...tableProps} scroll = {false} />
+				<br />
+				<ZKScrollTable {...tableProps}></ZKScrollTable>
+				<br />
+				<br />=========================================================================================
+				<br /><font color = "red">高度自动填满 --- 分页: 上/下、滚动条: 上下/左右、固定例: 左/右</font>
+				<div style = {{height: '650px', display: 'flex', border: '1px solid', padding: '30px'}}>
+					<ZKScrollTable 
+						rowKey = "id"
+						rowSelection = {{ onChange: (selectedRowKeys, selectedRows) => { } }}
+						autoHeight = {true}
+						columns = {columns.map(item=>{
+							let itemClone = zkJsUtils.clone(item);
+							if(itemClone.key == 'title'){
+								itemClone['fixed'] = 'left';
+							}
+							return itemClone;
+						})}
+						rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 30 }}
+						dataSource = {dataSource}
+						pagination = {{position: ['topRight', 'bottomRight']}}
+						scroll = {{x:1440, y: 300}}
+					>
+						<ZKOptRow>
+							<ZKOptRow.OptGroup>
+								<ZKOptRow.OptGroup.OptItem>
+									{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_save')}
+								</ZKOptRow.OptGroup.OptItem>
+								<ZKOptRow.OptGroup.OptItem>
+									{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_cancel')}
+								</ZKOptRow.OptGroup.OptItem>
+							</ZKOptRow.OptGroup>
+						</ZKOptRow>
+					</ZKScrollTable>
 				</div>
-			</div>
-			<div className={styles.sample_detail_section}>
-				<h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
-				<div>
-					ZKScrollTable 组件：<br />
-				    ZKTable 再次封装，接受 ZKTable 所有属性。<br /><br />
-					<table className={styles.sample_detail_section_table}>
-						<thead>
-							<tr>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.param')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>autoHeight</td>
-								<td>否</td>
-								<td>高度自动填满; 此属性生效，必须要在传入 scroll 的情况下才会生效。</td>
-								<td>PropTypes.boolean</td>
-								<td>false</td>
-							</tr>
-						</tbody>
-					</table>
-					<div style={{ color: 'red' }}>
-						主要作用：<br />
-						&nbsp;&nbsp;1：统一设置了默认样式，样式使用方面与 antd 原生标签，Table 使用一样，<br />
-						&nbsp;&nbsp;2: table 下包含的子组件将在表格头中显示，示例中包含了一个操作行的子组件。<br />
-						&nbsp;&nbsp;3: 修改 table 默认属性 rowKey，默认以 行记录的 id 做为 key <br />
-					</div>
+				<br />
+				<br /><font color = "red">高度自动填满 --- 分页: 下、滚动条: 上下/左右、固定例: 左/右</font>
+				<div style = {{height: '650px', display: 'flex', border: '1px solid', padding: '30px'}}>
+					<ZKScrollTable 
+						rowKey = "id"
+						rowSelection = {{ onChange: (selectedRowKeys, selectedRows) => { } }}
+						autoHeight = {true}
+						columns = {columns.map(item=>{
+							let itemClone = zkJsUtils.clone(item);
+							if(itemClone.key == 'title'){
+								itemClone['fixed'] = 'left';
+							}
+							return itemClone;
+						})}
+						rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 30 }}
+						dataSource = {dataSource}
+						pagination = {{position: ['bottomRight']}}
+						scroll = {{x:1440, y: 300}}
+					>
+						<ZKOptRow>
+							<ZKOptRow.OptGroup>
+								<ZKOptRow.OptGroup.OptItem>
+									{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_save')}
+								</ZKOptRow.OptGroup.OptItem>
+								<ZKOptRow.OptGroup.OptItem>
+									{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_cancel')}
+								</ZKOptRow.OptGroup.OptItem>
+							</ZKOptRow.OptGroup>
+						</ZKOptRow>
+					</ZKScrollTable>
 				</div>
-			</div>
-			<div className={styles.sample_detail_section}>
-				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
-						{[
-							"// 参考框架样例代码",
-						].join('\n')}
-					</SyntaxHighlighter>
+				<br />
+				<br /><font color = "red">高度自动填满 --- 分页: 下、滚动条: 上下/左右、固定例: 右</font>
+				
+				<br />
+				<br /><font color = "red">高度自动填满 --- 分页: 下、滚动条: 上下/左右、固定例: 左</font>
+				
+				<br />
+				<br /><font color = "red">高度自动填满 --- 分页: 下、滚动条: 上下、固定例: 左/右</font>
+				
+				<br />
+				
+				<br /><br /><br />
+
+				<br />=========================================================================================
+				<br /><font color = "red">高度不自动填满 --- 上下分页、上下滚动条、左右滚动条、左固定例、右固定例</font>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+				ZKScrollTable 组件：<br />
+			    ZKTable 再次封装，接受 ZKTable 所有属性。<br /><br />
+				<table className={styles.sample_detail_section_table}>
+					<thead>
+						<tr>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.param')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>autoHeight</td>
+							<td>否</td>
+							<td>高度自动填满; 此属性生效，必须要在传入 scroll 的情况下才会生效。</td>
+							<td>PropTypes.boolean</td>
+							<td>false</td>
+						</tr>
+					</tbody>
+				</table>
+				<div style={{ color: 'red' }}>
+					主要作用：<br />
+					&nbsp;&nbsp;1：统一设置了默认样式，样式使用方面与 antd 原生标签，Table 使用一样，<br />
+					&nbsp;&nbsp;2: table 下包含的子组件将在表格头中显示，示例中包含了一个操作行的子组件。<br />
+					&nbsp;&nbsp;3: 修改 table 默认属性 rowKey，默认以 行记录的 id 做为 key <br />
 				</div>
-			</div>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+					{[
+						"// 参考框架样例代码",
+					].join('\n')}
+				</SyntaxHighlighter>
+			</ZKContentFormat>
 			<br />
-		</div>
+		</ZKContentFormat>
 	)
 }
 

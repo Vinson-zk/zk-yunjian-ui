@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-13 13:48:14
- * @Last Modified by:   Vinson
- * @Last Modified time: 2020-08-23 23:41:27
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 00:43:02
  */
 
 
@@ -11,8 +11,8 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import styles from "../styles.less";
 
-import { ZKCustomComponents, zkTools } from "zkFramework";
-const { ZKRouter } = ZKCustomComponents;
+import { zkTools, ZKCustomComponents } from "zkFramework";
+const { ZKContentFormat, ZKRouter } = ZKCustomComponents;
 const { zkToolsMsg, zkToolsNavAndMenu } = zkTools;
 const { Switch, Link, Route } = ZKRouter;
 
@@ -38,14 +38,14 @@ const FInitJsHome = ({ match, dvaApp, menus = [], dynamicImportHelper, intl }) =
 		<Switch>
 			<Route exact path={`${match.path}`} render={() => {
 				return (
-					<div className={styles.sample_detail_panel}>
-						<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-						<div className={styles.sample_detail_section} >
+					<ZKContentFormat className={styles.sample_detail_panel} >
+						<ZKContentFormat className = {styles.sample_detail_section} title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
 							<ul >
 								{liLinks}
 							</ul>
-						</div>
-					</div>
+						</ZKContentFormat>
+						<br />
+					</ZKContentFormat>
 				)
 			}} />
 			{routers || []}

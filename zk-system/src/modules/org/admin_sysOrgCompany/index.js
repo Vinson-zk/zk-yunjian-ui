@@ -17,9 +17,9 @@ const { zkToolsUtils, zkToolsMsg } = zkTools;
 import SearchItem from "./search.js";
 import GridItem from "./grid.js";
 import AuditCompany from "./auditCompany.js";
-import CGrantAuth from "./grantAuth.js";
+import CGrantAuthToCompany from "../grantAuthToCompany.js";
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 import locales from "../../../locales/index";
 
@@ -44,11 +44,11 @@ class CInitSysOrgCompanyIndex extends Component {
     };
 
     render() {
-        let { mApp } = this.props;
+        let { mApp, dispatch } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
+            <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} 
                     onShowAuditModal={this.onShowAuditModal}
@@ -56,10 +56,19 @@ class CInitSysOrgCompanyIndex extends Component {
                 <AuditCompany isShow = {this.state.auditCompanyModal} 
                     optEntity = {this.state.optCompanyEntity} 
                     onShowAuditModal={this.onShowAuditModal} />
-                <CGrantAuth isShow = {this.state.grantAuthModal} 
+                <CGrantAuthToCompany isShow = {this.state.grantAuthModal} 
                     descName={zkToolsMsg.getInternationInfo(this.state.optCompanyEntity.name?this.state.optCompanyEntity.name:{}, lang)}
-                    targetId={this.state.optCompanyEntity.pkId} 
-                    onShowModal={this.f_onShowGrantModalModal} />
+                    toTargetId={this.state.optCompanyEntity.pkId} 
+                    onShowModal={this.f_onShowGrantModalModal} 
+                    saveFunc={(companyId, allotAuths, callback)=>{
+                        dispatch({ 
+                          type: 'mSysOrgCompanyAdmin/grantAuths', 
+                          companyId: companyId,
+                          allotAuths: allotAuths, 
+                          callback: callback
+                        });
+                    }}
+                />
             </div>
         );
     }
@@ -69,9 +78,15 @@ class CInitSysOrgCompanyIndex extends Component {
         let { location, dispatch, mSysOrgCompanyAdmin } = this.props;
 		if (location.pathname != mSysOrgCompanyAdmin.pathname) {
 			dispatch({ type: 'mSysOrgCompanyAdmin/setState', payload: { pathname: location.pathname } });
-			dispatch({ type: "mSysOrgCompanyAdmin/findSysOrgCompanysTree", filter: mSysOrgCompanyAdmin.filter, pagination: mSysOrgCompanyAdmin.pagination, callback: e => { } })
+			dispatch({ 
+                type: "mSysOrgCompanyAdmin/findSysOrgCompanysTree", 
+                filter: {...mSysOrgCompanyAdmin.initFilter, ...mSysOrgCompanyAdmin.filter}, 
+                pagination: mSysOrgCompanyAdmin.pagination, 
+                callback: e => { } 
+            })
 		}
     }
 }
 
 export default injectIntl(connect(({ mApp, mSysOrgCompanyAdmin, loading }) => ({ mApp, mSysOrgCompanyAdmin, loading }))(CInitSysOrgCompanyIndex));
+

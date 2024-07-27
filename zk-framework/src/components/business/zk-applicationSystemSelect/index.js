@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-03 18:27:12
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-07 17:42:42
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-27 17:19:26
 * 
 * 
 * 
@@ -22,8 +22,8 @@ import { zkToolsUtils, zkToolsMsg, zkToolsAjax } from '../../../tools';
  * 执行查询 非树形/分页
  */
 function f_doingSearch(url, params) {
-    // return zkToolsAjax.reqPretreatment(url, {method:'GET', async:false, data:params});
-	return zkToolsAjax.req(url, {method:'GET', async:true, data:params});
+    return zkToolsAjax.reqPretreatment(url, {method:'GET', async:false, data:params});
+	// return zkToolsAjax.req(url, {method:'GET', async:true, data:params});
 }
 
 class CInitApplicationSystemSelect extends Component {
@@ -56,7 +56,7 @@ class CInitApplicationSystemSelect extends Component {
         	this.setState({spinning: true});
 	        params = { ...params, ...zkToolsUtils.convertPageParam({'current':1, 'pageSize':999}) };
 	        f_doingSearch(url, params).done(res=>{
-                if (res.code == 'zk.0') {
+                if (res.ok) {
                     this.setState({listDatas: res.data.result, spinning: false});
                 }else{
                     this.setState({spinning: false});

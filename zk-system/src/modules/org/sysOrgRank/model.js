@@ -2,11 +2,11 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 19:08:04
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 11:01:01
  */
 
-import { editSysOrgRank, delSysOrgRank, getSysOrgRank, findSysOrgRanks, setAuthRelation } from './service';
+import { editSysOrgRank, delSysOrgRank, getSysOrgRank, findSysOrgRanks, grantAuths } from './service';
 
 import { zkTools } from 'zkFramework';
 const { zkToolsUtils, zkToolsMsg } = zkTools;
@@ -43,34 +43,33 @@ const model = {
         *editSysOrgRank({ payload, callback }, { call }) {
             let res = yield call(editSysOrgRank, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delSysOrgRank({ payload, callback }, { call }) {
             let res = yield call(delSysOrgRank, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getSysOrgRank({ payload }, { call, put }) {
             let res = yield call(getSysOrgRank, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { optEntity: res.data } });
             }
         },
@@ -87,7 +86,7 @@ const model = {
             }
             let res = yield call(findSysOrgRanks, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -100,16 +99,16 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
         },
         // 给职级分配权限
-        *grantAuth({ rankId, auths, callback }, { call, put, select }){
-            let res = yield call(setAuthRelation, rankId, auths);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+        *grantAuth({ rankId, allotAuths, callback }, { call, put, select }){
+            let res = yield call(grantAuths, rankId, allotAuths);
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }

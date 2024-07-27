@@ -2,14 +2,13 @@
  * 用户权限判断与处理的一些方法函数
  * @Author: Vinson
  * @Date: 2020-08-11 11:23:00
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-11 20:11:34
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-27 23:46:10
  */
 
-// import zkToolsNavAndMenu from './zkToolsNavAndMenu.js';
-// import { withRouter } from 'dva/router';
-// import createBrowserHistory from 'history/createBrowserHistory';
+import locales from '../locales';
 
+import zkToolsMsg from './zkToolsMsg.js';
 import zkJsEvent from 'zkJsEvent';
 // import zkJsUtils from 'zkJsUtils';
 
@@ -18,7 +17,13 @@ import zkJsEvent from 'zkJsEvent';
  * @return {string} 用户令牌ID
  */
 const f_getTicket = () => {
-  return localStorage.getItem(globalAppConfig.localKey.ticket);
+  let tkId = localStorage.getItem(globalAppConfig.localKey.ticket);
+  if(tkId){
+    // console.log("[^_^:20240627-2339-001] tkId: ", tkId);
+    return tkId;
+  }else{
+    f_removeTicket();
+  }
   // return sessionStorage.getItem(globalAppConfig.localKey.ticket); 
 }
 
@@ -28,7 +33,14 @@ const f_getTicket = () => {
  * @return void
  */
 const f_setTicket = (tkId) => {
-  localStorage.setItem(globalAppConfig.localKey.ticket, tkId);
+  if(tkId){
+    localStorage.setItem(globalAppConfig.localKey.ticket, tkId);
+  }else{
+    if(console)console.error("[>_<:20240627-2339-002] 错误 tkId: ", tkId);
+    let msgOpt = { type: "error", msg: zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error') }
+    zkToolsMsg.alertMsg(null, null, msgOpt);
+  }
+  
   // sessionStorage.setItem(globalAppConfig.localKey.ticket, tkId);
   // localStorage.setItem("tkDate", new Date());
 }

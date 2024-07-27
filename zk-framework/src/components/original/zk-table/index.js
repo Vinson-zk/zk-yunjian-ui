@@ -2,22 +2,24 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 10:13:11
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-12-17 16:26:19
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-27 00:31:22
  */
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import { Resizable } from 'react-resizable';
 
 import { zkToolsMsg, zkToolsUtils } from '../../../tools';
 
 import styles from "./styles.less";
+import "./styles.resizableTable.less";
 
 /** 计算表格填满时的高度 tDom 为 表格 document 节点 */
-const f_calcTableHeight = (tDom, paginationCount=1)=>{
+const f_calcTableHeight = (tDom, defaultCut=0)=>{
 
 	// getBoundingClientRect
 	/*** 取 document 节点上下的 边框，边距，填充 和; */
@@ -61,7 +63,8 @@ const f_calcTableHeight = (tDom, paginationCount=1)=>{
 
 
 	// 父节点高度减去 tabl 的 边距，边框，填充
-	let h = tPDom.clientHeight - f_getDomHeight(tDom);
+	let h = tPDom.clientHeight;
+	// let h = tPDom.clientHeight - f_getDomHeight(tDom);
 	// console.log("[^_^:20210311-1407-003] table: ", h);
 
 	let childs = [];
@@ -95,8 +98,8 @@ const f_calcTableHeight = (tDom, paginationCount=1)=>{
 	// console.log("[^_^:20210311-1407-003-0] table.ant-table-container: ", h);
 
 	/*** 减去 分页器的 高度；*/
-	// 分页高度 默认减 40
-	h -= 40 * paginationCount;
+	// 分页高度 默认减 40，改由外部传入
+	// h -= 40 * paginationCount;
 	// h -= 16;	
 	/*** 分页器，在数据加载出来前，是没有的，这样就在数据还没加载进来前，取不到分页器，所以不能通过下面的方法去取分页器高度， */
 	// childs = tPDom.getElementsByClassName("ant-pagination");
@@ -108,15 +111,47 @@ const f_calcTableHeight = (tDom, paginationCount=1)=>{
 	// }
 	// console.log("[^_^:20210311-1407-003-0] table.ant-pagination: ", h);
 
+	/*** 外部传入默认扣减  */
+	h -= defaultCut;
 	/*** 扣除一点点高度, 以免引发外部滚动条  */
-	h -= 3;
+	// h -= 3;
 	return h;
 }
+
+// 可伸缩的列
+const FInitResizeableTitle = props => {
+  const { onResize, width, ...restProps } = props;
+
+	  if (!width) {
+	  	console.log("----- width: ", width, props)
+	    return <th {...restProps} />;
+	  }
+
+  return (
+    <Resizable
+      width={width}
+      height={0}
+      onResize={onResize}
+      draggableOpts={{ enableUserSelectHack: false }}
+    >
+      <th {...restProps} />
+    </Resizable>
+  );
+};
+
+const f_handleResize = (index, cols, setColumns) => (e, { size }) => {
+	const nextColumns = [...cols];
+	nextColumns[index] = {
+		...nextColumns[index],
+		width: size.width,
+	};
+	setColumns(nextColumns);
+};
 
 /* 组件主要是作用：
 	1：统一设置了默认样式，样式使用方面与 Table 使用一样，
 */
-const FInitTable = ({ rowNum, pagination, dataSource, columns, children, intl, className, ...props }) => {
+const FInitTable = ({ isStretch=false, rowNum, pagination, dataSource, columns, children, intl, className, ...props }) => {
 
 	const defaultPagination = {
 		position: ['bottomRight'],
@@ -162,13 +197,13 @@ const FInitTable = ({ rowNum, pagination, dataSource, columns, children, intl, c
 	columns.map((item, index) => {
 		switch (item.textAlign) {
 			case 'left':
-				item.className = styles.column_text_align_left;
+				item.className = styles.zk_table_column_text_align_left;
 				break;
 			case 'right':
-				item.className = styles.column_text_align_right;
+				item.className = styles.zk_table_column_text_align_right;
 				break;
 			default:
-				item.className = styles.column_text_align_center;
+				item.className = styles.zk_table_column_text_align_center;
 		}
 	})
 
@@ -195,9 +230,10 @@ const FInitTable = ({ rowNum, pagination, dataSource, columns, children, intl, c
 		columns = [{
 			title: sn,
 			key: '_zk_rowNum',
-			className: styles.row_num_column + ' ' + styles['row_num_column_' + lang] + ' ' + styles['column_text_align_' + (rowNum.textAlign ? rowNum.textAlign : 'center')],
+			className: styles.zk_table_row_num_column + ' ' + styles['zk_table_row_num_column_' + lang] + ' ' + styles['zk_table_column_text_align_' + (rowNum.textAlign ? rowNum.textAlign : 'center')],
 			dataIndex: '_zk_rowNum',
-			width: 50,
+			width: rowNum.width?rowNum.width:50,
+			fixed: 'left',
 			...rowNum
 		}, ...columns]
 	}
@@ -210,32 +246,75 @@ const FInitTable = ({ rowNum, pagination, dataSource, columns, children, intl, c
 		}
 	}
 
+	if(isStretch){
+		let { components, ...otherProps } = props;
+		if(!components){
+			components = {};
+		}
+		if(!components.header){
+			components.header = {}
+		}
+		if(!components.header.cell){
+			components.header.cell = FInitResizeableTitle;
+		}
+
+		const [mCols, setColumns] = useState(columns);
+		let cols = mCols;
+		console.log("----- cols: ", cols);
+		if (cols) {
+			cols = cols.map((col, index) => ({
+				...col,
+				onHeaderCell: column => ({
+					width: column.width,
+					onResize: f_handleResize(index, cols, setColumns),
+				}),
+			}));
+
+			console.log("===== ", cols);
+		}
+
+		return (
+			<Table className = {`${styles.zk_table} ${className}`} {...otherProps}
+				components = {components}
+				title = {title} 
+				columns = {cols} 
+				dataSource = {dataSource}
+				pagination = {pagination}
+			/>
+		)
+	}else{
+		return (
+			<Table className = {`${styles.zk_table} ${className}`} {...props}
+				title = {title} 
+				columns = {columns} 
+				dataSource = {dataSource}
+				pagination = {pagination}
+			/>
+		)
+	}
+
 	// console.log("[^_^:20211202-1641-001] table.pagination: ", pagination);
-	return (
-		<Table className = {`${styles.table} ${className}`} {...props}
-			title = {title} 
-			columns = {columns} 
-			dataSource = {dataSource}
-			pagination = {pagination}
-		/>
-	)
+	// console.log("[^_^:20230919-2326-001] table.props: ", props);
+	
 }
 
 // 定义属性
 FInitTable.propTypes = {
+	isStretch: PropTypes.bool,
 	rowNum: PropTypes.shape({
 		textAlign: PropTypes.oneOf(['left', 'center', 'right']), // 内容显示方式, 默认居中 【'left', 'center', 'right'】
 	})
 }
 // 定义属性默认值
 FInitTable.defaultProps = {
+	isStretch: true,
 	bordered: true,
 	className: '',
 	rowNum: undefined,
 	loading: false,
 	title: undefined,   // 表格头
 	// footer:() => 'Here is footer', // 表格底部
-	size: 'default',
+	size: 'small', // large | middle | small
 	rowSelection: undefined,
 	scroll: undefined,
 	dataSource: [],

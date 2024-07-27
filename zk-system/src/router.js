@@ -2,13 +2,13 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-29 22:07:58
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-03 19:10:08
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-19 10:21:17
  */
 
 
 import React from 'react';
-import dynamic from 'dva/dynamic';
+import { dynamic } from 'dva';
 
 import { ZKCustomComponents } from 'zkFramework';
 const { BrowserRouter, ZKPrivateRoute, Switch } = ZKCustomComponents.ZKRouter;

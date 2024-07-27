@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:24:23
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 08:38:20
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 22:12:50
  */
 
 import React, {useState} from 'react';
@@ -17,7 +17,7 @@ import stylesSample from "../../../styles.less";
 import styles from "./styles.less";
 import zkJsUtils from 'zkJsUtils';
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
-const { ZKInputJson } = ZKCustomComponents;
+const { ZKContentFormat, ZKInputJson } = ZKCustomComponents;
 const { ZKForm, ZKModal, ZKButton, ZKInput } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
 
@@ -95,16 +95,16 @@ class CInitFormNode extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			visible: false,
+			open: false,
 			values: []
 		}
 	}
 
 	handleOk = (e)=>{
-		this.setState({ visible: false, values: [] });
+		this.setState({ open: false, values: [] });
 	}
 	handleCancel = (e)=>{
-		this.setState({ visible: false });
+		this.setState({ open: false });
 	}
 
 	render() {
@@ -123,7 +123,7 @@ class CInitFormNode extends React.Component {
 						for (let index in values) {
 							vs.push(zkJsUtils.objToStr(index) + ":" + zkJsUtils.objToStr(values[index]))
 						}
-						this.setState({ visible: true, values: vs });
+						this.setState({ open: true, values: vs });
 					}}
 					initialValues = {{
 						"input1": "测试必输，滚动条滚动。",
@@ -174,10 +174,10 @@ class CInitFormNode extends React.Component {
 				</Form>
 				<ZKModal
 					title="ZKModal"
-					visible={this.state.visible}
+					open={this.state.open}
 					onOk={this.handleOk}
 					onCancel={this.handleCancel}>
-					<SyntaxHighlighter language="jsx" style={docco}>
+					<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{
 							"{\n" + this.state.values.join(",\n") + "\n}"
 						}
@@ -195,16 +195,16 @@ class CInitZKFormNode extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			visible: false,
+			open: false,
 			values: []
 		}
 	}
 
 	handleOk = (e)=>{
-		this.setState({ visible: false, values: [] });
+		this.setState({ open: false, values: [] });
 	}
 	handleCancel = (e)=>{
-		this.setState({ visible: false });
+		this.setState({ open: false });
 	}
 
 	submit = (values)=>{
@@ -213,7 +213,7 @@ class CInitZKFormNode extends React.Component {
 			vs.push(zkJsUtils.objToStr(index) + ":" + zkJsUtils.objToStr(values[index]))
 		}
 
-		this.setState({ visible: true, values: vs });
+		this.setState({ open: true, values: vs });
 	}
 
 	render() {
@@ -228,10 +228,10 @@ class CInitZKFormNode extends React.Component {
 			}}>
 				<ZKModal
 					title="ZKModal"
-					visible={this.state.visible}
+					open={this.state.open}
 					onOk={this.handleOk}
 					onCancel={this.handleCancel}>
-					<SyntaxHighlighter language="jsx" style={docco}>
+					<SyntaxHighlighter language="jsx" style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{
 							"{\n" + this.state.values.join(",\n") + "\n}"
 						}
@@ -290,205 +290,196 @@ const TestZKFormNode = injectIntl(connect()(CInitZKFormNode));
 function FInitZKInputJsonDemo({ dispatch, intl }) {
 
 	return (
-		<div className={stylesSample.sample_detail_panel}>
-			<div className={stylesSample.sample_detail_section}>
-				<h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.inputJson')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
-				<div>
-					<br />--- 展开、收起、smart <br />
-					<ZKInputJson styleType="expanding" style={{ width: 450 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
-					/><br /><br />
-					<ZKInputJson styleType="compact" style={{ width: 430 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
-					/><br /><br />
-					<ZKInputJson styleType="smart" style={{ width: 410 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
-					/><br /><br />
-					<ZKInputJson styleType="expanding" style={{ width: 450 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs} value={initData}
-					/><br /><br />
-					<ZKInputJson styleType="compact" style={{ width: 430 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs}
-						value={initData}
-					/><br /><br />
-					<ZKInputJson styleType="smart" style={{ width: 410 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs}
-						value={initData}
-					/><br />
-					<br /><br />--- isShowExpBtn=false 展开、收起、smart <br />
-					<ZKInputJson styleType="expanding" isShowExpBtn={false} style={{ width: 450 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs}
-						value={{ 'zh_CN': 'v_zh_CN' }}
-					/><br /><br />
-					<ZKInputJson styleType="compact" isShowExpBtn={false} style={{ width: 430 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs}
-						value={{ 'zh_CN': 'v_zh_CN' }}
-					/><br /><br />
-					<ZKInputJson styleType="smart" isShowExpBtn={false} style={{ width: 410 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs}
-						value={{ 'zh_CN': 'v_zh_CN' }}
-					/><br /><br />
-					<ZKInputJson styleType="expanding" isShowExpBtn={false} style={{ width: 450 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs}
-						value={initData}
-					/><br /><br />
-					<ZKInputJson styleType="compact" isShowExpBtn={false} style={{ width: 430 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs}
-						value={initData}
-					/><br /><br />
-					<ZKInputJson styleType="smart" isShowExpBtn={false} style={{ width: 410 }}
-						onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
-						attrs={attrs}
-						value={initData}
-					/><br />
-					<br /><br />
-					<div className={stylesSample.sample_detail_section_row} >
-						--- Form ---------------------------------------------- <br />
-						<TestFormNode />
-					</div><br /><br />
-					<div className={stylesSample.sample_detail_section_row} >
-						--- ZKForm ---------------------------------------------- <br />
-						<TestZKFormNode />
-					</div>
+		<ZKContentFormat className={styles.sample_detail_panel} >
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.inputJson')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+				<br />--- 展开、收起、smart <br />
+				<ZKInputJson styleType="expanding" style={{ width: 450 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
+				/><br /><br />
+				<ZKInputJson styleType="compact" style={{ width: 430 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
+				/><br /><br />
+				<ZKInputJson styleType="smart" style={{ width: 410 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs} value={{ 'zh_CN': 'v_zh_CN' }}
+				/><br /><br />
+				<ZKInputJson styleType="expanding" style={{ width: 450 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs} value={initData}
+				/><br /><br />
+				<ZKInputJson styleType="compact" style={{ width: 430 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs}
+					value={initData}
+				/><br /><br />
+				<ZKInputJson styleType="smart" style={{ width: 410 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs}
+					value={initData}
+				/><br />
+				<br /><br />--- isShowExpBtn=false 展开、收起、smart <br />
+				<ZKInputJson styleType="expanding" isShowExpBtn={false} style={{ width: 450 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs}
+					value={{ 'zh_CN': 'v_zh_CN' }}
+				/><br /><br />
+				<ZKInputJson styleType="compact" isShowExpBtn={false} style={{ width: 430 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs}
+					value={{ 'zh_CN': 'v_zh_CN' }}
+				/><br /><br />
+				<ZKInputJson styleType="smart" isShowExpBtn={false} style={{ width: 410 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs}
+					value={{ 'zh_CN': 'v_zh_CN' }}
+				/><br /><br />
+				<ZKInputJson styleType="expanding" isShowExpBtn={false} style={{ width: 450 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs}
+					value={initData}
+				/><br /><br />
+				<ZKInputJson styleType="compact" isShowExpBtn={false} style={{ width: 430 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs}
+					value={initData}
+				/><br /><br />
+				<ZKInputJson styleType="smart" isShowExpBtn={false} style={{ width: 410 }}
+					onChange={(e) => { console.log('ZKInputJson 1-1 ', e) }}
+					attrs={attrs}
+					value={initData}
+				/><br />
+				<br /><br />
+				<div className={stylesSample.sample_detail_section_row} >
+					--- Form ---------------------------------------------- <br />
+					<TestFormNode />
+				</div><br /><br />
+				<div className={stylesSample.sample_detail_section_row} >
+					--- ZKForm ---------------------------------------------- <br />
+					<TestZKFormNode />
 				</div>
-			</div>
-			<div className={stylesSample.sample_detail_section}>
-				<h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
-				<div>
-					ZKInputJson 组件：<br />
-					<table className={stylesSample.sample_detail_section_table}>
-						<thead>
-							<tr>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.param')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
-								<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>attrs</td>
-								<td>true</td>
-								<td>需要编辑的属性说明对象 {'{attrName:{name:显示名}}'}</td>
-								<td>PropTypes.object</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>primaryAttr</td>
-								<td>false</td>
-								<td>主要属性，收起时默认选择中的属性。</td>
-								<td>PropTypes.string</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>isShowExpBtn</td>
-								<td>false</td>
-								<td>是否显示收起或展开按钮; true-显示；false-不显示</td>
-								<td>PropTypes.bool</td>
-								<td>true</td>
-							</tr>
-							<tr>
-								<td>styleType</td>
-								<td>false</td>
-								<td>编辑风格</td>
-								<td>【"expanding", "smart", "compact"】</td>
-								<td>smart</td>
-							</tr>
-							<tr>
-								<td>className</td>
-								<td>false</td>
-								<td>样式类名，与框架样式类共存，所以，当存在样式属性冲突时，需要设置 css 权重 !important 来解决；</td>
-								<td>PropTypes.string</td>
-								<td>无</td>
-							</tr>
-							<tr>
-								<td>beforeClassName</td>
-								<td>false</td>
-								<td>编译框前缀结点元素，样式类名，覆盖框架样式类</td>
-								<td>PropTypes.string</td>
-								<td>无</td>
-							</tr>
-							<tr>
-								<td>beforeSelectClassName</td>
-								<td>false</td>
-								<td>编译框前缀属性选择结点元素，样式类名，覆盖框架样式类</td>
-								<td>PropTypes.string</td>
-								<td>无</td>
-							</tr>
-							<tr>
-								<td>inputClassName</td>
-								<td>false</td>
-								<td>编译框结点元素，样式类名，覆盖框架样式类</td>
-								<td>PropTypes.string</td>
-								<td>无</td>
-							</tr>
-							<tr>
-								<td>afterClassName</td>
-								<td>false</td>
-								<td>编译框后缀结点元素，样式类名，覆盖框架样式类</td>
-								<td>PropTypes.string</td>
-								<td>无</td>
-							</tr>
-							<tr>
-								<td>readOnly</td>
-								<td>false</td>
-								<td>只读</td>
-								<td>PropTypes.bool</td>
-								<td>false</td>
-							</tr>
-							<tr>
-								<td>initAttrrEmpty</td>
-								<td>false</td>
-								<td>初始化所有属性值为空字符串</td>
-								<td>PropTypes.bool</td>
-								<td>false</td>
-							</tr>
-							<tr>
-								<td>disabled</td>
-								<td>false</td>
-								<td>失效</td>
-								<td>PropTypes.bool</td>
-								<td>false</td>
-							</tr>
-							<tr>
-								<td>value</td>
-								<td>false</td>
-								<td>值，key-value</td>
-								<td>PropTypes.object</td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-					<div style={{ color: 'red' }}>
-						注：&nbsp;&nbsp;<br />
-					</div>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+				ZKInputJson 组件：<br />
+				<table className={stylesSample.sample_detail_section_table}>
+					<thead>
+						<tr>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.param')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.required')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.type')}</th>
+							<th>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.default')}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>attrs</td>
+							<td>true</td>
+							<td>需要编辑的属性说明对象 {'{attrName:{name:显示名}}'}</td>
+							<td>PropTypes.object</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>primaryAttr</td>
+							<td>false</td>
+							<td>主要属性，收起时默认选择中的属性。</td>
+							<td>PropTypes.string</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>isShowExpBtn</td>
+							<td>false</td>
+							<td>是否显示收起或展开按钮; true-显示；false-不显示</td>
+							<td>PropTypes.bool</td>
+							<td>true</td>
+						</tr>
+						<tr>
+							<td>styleType</td>
+							<td>false</td>
+							<td>编辑风格</td>
+							<td>【"expanding", "smart", "compact"】</td>
+							<td>smart</td>
+						</tr>
+						<tr>
+							<td>className</td>
+							<td>false</td>
+							<td>样式类名，与框架样式类共存，所以，当存在样式属性冲突时，需要设置 css 权重 !important 来解决；</td>
+							<td>PropTypes.string</td>
+							<td>无</td>
+						</tr>
+						<tr>
+							<td>beforeClassName</td>
+							<td>false</td>
+							<td>编译框前缀结点元素，样式类名，覆盖框架样式类</td>
+							<td>PropTypes.string</td>
+							<td>无</td>
+						</tr>
+						<tr>
+							<td>beforeSelectClassName</td>
+							<td>false</td>
+							<td>编译框前缀属性选择结点元素，样式类名，覆盖框架样式类</td>
+							<td>PropTypes.string</td>
+							<td>无</td>
+						</tr>
+						<tr>
+							<td>inputClassName</td>
+							<td>false</td>
+							<td>编译框结点元素，样式类名，覆盖框架样式类</td>
+							<td>PropTypes.string</td>
+							<td>无</td>
+						</tr>
+						<tr>
+							<td>afterClassName</td>
+							<td>false</td>
+							<td>编译框后缀结点元素，样式类名，覆盖框架样式类</td>
+							<td>PropTypes.string</td>
+							<td>无</td>
+						</tr>
+						<tr>
+							<td>readOnly</td>
+							<td>false</td>
+							<td>只读</td>
+							<td>PropTypes.bool</td>
+							<td>false</td>
+						</tr>
+						<tr>
+							<td>initAttrrEmpty</td>
+							<td>false</td>
+							<td>初始化所有属性值为空字符串</td>
+							<td>PropTypes.bool</td>
+							<td>false</td>
+						</tr>
+						<tr>
+							<td>disabled</td>
+							<td>false</td>
+							<td>失效</td>
+							<td>PropTypes.bool</td>
+							<td>false</td>
+						</tr>
+						<tr>
+							<td>value</td>
+							<td>false</td>
+							<td>值，key-value</td>
+							<td>PropTypes.object</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div style={{ color: 'red' }}>
+					注：&nbsp;&nbsp;<br />
 				</div>
-			</div>
-			<div className={stylesSample.sample_detail_section}>
-				<h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
-						{[
-							"参考框架代码",
-							"<ZKInputJson />"
-						].join('\n')}
-					</SyntaxHighlighter>
-				</div>
-			</div>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+					{[
+						"参考框架代码",
+						"<ZKInputJson />"
+					].join('\n')}
+				</SyntaxHighlighter>
+			</ZKContentFormat>
 			<br />
-		</div>
+		</ZKContentFormat>
 	)
 }
 

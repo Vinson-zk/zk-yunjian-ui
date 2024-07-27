@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 16:58:09
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-26 14:49:43
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-21 00:06:50
 * 
 * 
 * 
@@ -76,7 +76,7 @@ const FInitFuncModuleDetail = ({intl, loading, optEntity, onOpt})=>{
       <ZKDetailGrid title = "">    
         <ZKDetailGrid.TitleRow>
           <ZKDetailGrid.TitleRow.Title>
-            <ZKIcon.Antd4Icon icon = "BarsOutlined" /> &nbsp; {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.gen.funcModuleInfo')} 
+            <ZKIcon.AntdIcon icon = "BarsOutlined" /> &nbsp; {zkToolsMsg.msgFormatByIntl(intl, 'zk.codeGen.gen.funcModuleInfo')} 
           </ZKDetailGrid.TitleRow.Title>
           <ZKDetailGrid.TitleRow.Opt>
             <ZKButton onClick={onOpt} >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_edit')}</ZKButton>

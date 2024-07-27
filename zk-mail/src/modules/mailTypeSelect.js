@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-26 17:38:52
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-26 18:48:09
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:15:53
 */
 
 
@@ -51,7 +51,7 @@ class CInitMailTypeSelect extends Component {
 	        params = { ...params, ...zkToolsUtils.convertPageParam({'current':1, 'pageSize':999}) };
 	        params['status'] = 0;
 	        findMailTypes(params).then(res=>{
-	        	if (res.code == 'zk.0') {
+	        	if (res.ok) {
                     this.setState({listDatas: res.data.result, spinning: false});
                 }else{
                 	this.setState({spinning: false});

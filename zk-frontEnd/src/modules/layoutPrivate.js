@@ -1,58 +1,68 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-29 16:21:08
-* @Last Modified by:   Vinson-zk
-* @Last Modified time: 2022-05-25 15:02:02
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-11 16:06:31
 * 
 * 
 * 
 */
 
+window.ResizeObserver = class _NewResizeObserver extends ResizeObserver {
+	constructor(callback) {
+		super(() => window.requestAnimationFrame(() => callback.apply(this, arguments)));
+	}
+}
 
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
-import { Layout } from 'antd';
+import { Layout, Space } from 'antd';
 // import { connect } from 'dva';
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 import { ZKCustomComponents, ZKOriginalComponents, zkTools } from 'zkFramework';
 
 // import zkJsUtils from "zkJsUtils";
 
 const { Header, Content } = Layout;
-const { ZKRouter, ZKLogo, ZKUserDropDown, ZKLanguageSelect, ZKVersionInfo, ZKNavigation } = ZKCustomComponents;
-const { ZKModal, ZKSpin } = ZKOriginalComponents;
+const { ZKRouter, ZKLogo, ZKIcon, ZKUserDropDown, ZKLanguageSelect, ZKVersionInfo, ZKNavigation, ZKTheme } = ZKCustomComponents;
+const { ZKModal, ZKSpin, ZKSelect } = ZKOriginalComponents;
 const { Switch, Redirect } = ZKRouter;
-const { zkToolsNavAndMenu, zkToolsMsg, zkToolsAuth } = zkTools;
+const { Option } = ZKSelect
+const { zkToolsNavAndMenu, zkToolsMsg, zkToolsAuth, zkToolsUtils } = zkTools;
 
 /*** 版本信息 ***/
 import zkPackagePackageInfo from 'zkPackage/package.json';
 import zkFrameworkPackageInfo from 'zkFramework/package.json';
-import zkSamplePackageInfo from 'zkSample/package.json';
+// import zkSamplePackageInfo from 'zkSample/package.json';
 import zkSystemPackageInfo from 'zkSystem/package.json';
 import zkDevelopmentToolPackageInfo from 'zkDevelopmentTool/package.json';
 import zkWechatPackageInfo from 'zkWechat/package.json';
+import zkFilePackageInfo from 'zkFile/package.json';
 import zkMailPackageInfo from 'zkMail/package.json';
 
-const dependenceInfos = [zkPackagePackageInfo, zkFrameworkPackageInfo, zkSamplePackageInfo, zkSystemPackageInfo, 
-	zkDevelopmentToolPackageInfo, zkWechatPackageInfo, zkMailPackageInfo];
+const dependenceInfos = [
+	// zkSamplePackageInfo, 
+	zkPackagePackageInfo, zkFrameworkPackageInfo, zkSystemPackageInfo, zkDevelopmentToolPackageInfo, zkWechatPackageInfo, zkFilePackageInfo, zkMailPackageInfo];
 import versionInfo from '../../package.json';
 
 /*** 引入依赖功能模块 ***/
-import {funcModule as sampleFuncModule} from 'zkSample';
+// import {funcModule as sampleFuncModule} from 'zkSample';
 import {funcModule as systemFuncModule} from 'zkSystem';
 import {funcModule as developmentToolFuncModule} from 'zkDevelopmentTool';
 import {funcModule as wechatFuncModule} from 'zkWechat';
+import {funcModule as fileFuncModule} from 'zkFile';
 import {funcModule as mailFuncModule} from 'zkMail';
 import generalApplicationFuncModule from './generalApplication/func.js';
 
 const funcModuleMppingObj = { 
+    // "sample": sampleFuncModule,
     "sys": systemFuncModule,
-    "sample": sampleFuncModule,
     "developmentTool": developmentToolFuncModule,
     "wechat": wechatFuncModule,
     "generalApplication": generalApplicationFuncModule,
+    "file": fileFuncModule,
     "mail": mailFuncModule,
 }
 
@@ -64,7 +74,8 @@ class CInitLayoutPrivate extends React.PureComponent {
         super(props);
         this.state={
         	navRoutes: null,      // 导航栏路由
-            indexNavRoute: null  // 默认导航栏
+            indexNavRoute: null,  // 默认导航栏
+            themeFlag: 'default'
         };
         props.dispatch({type: 'mApp/getNavItems', payload:{}});
     }
@@ -86,9 +97,9 @@ class CInitLayoutPrivate extends React.PureComponent {
             let { mApp, dvaApp, dispatch, match } = props;
             // console.log("[^_^:20200811-1044-001] getDerivedStateFromProps ", mApp, state);
             // 生成导航栏目路由
-            state.navRoutes = zkToolsNavAndMenu.getRoutesByNavs(props.dvaApp, props.match.path, props.mApp.navItems, dynamicImportHelper);
+            state.navRoutes = zkToolsNavAndMenu.getRoutesByNavs(dvaApp, match.path, mApp.navItems, dynamicImportHelper);
             // 查找默认导航栏目
-            state.indexNavRoute = zkToolsNavAndMenu.getIndexNav(props.mApp.navItems);
+            state.indexNavRoute = zkToolsNavAndMenu.getIndexNav(mApp.navItems);
         }
         return true;
     }
@@ -118,8 +129,7 @@ class CInitLayoutPrivate extends React.PureComponent {
 	            case '_key_version_info': // 版本信息
 	                ZKModal.info({
 	                    title: zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_version_info'),
-	                    content: <ZKVersionInfo intl={intl} versionInfo={versionInfo} dependenceInfos={dependenceInfos} />,
-	                    className: zkStyles.zk_versionInfo_modal
+	                    content: <ZKVersionInfo intl={intl} versionInfo={versionInfo} dependenceInfos={dependenceInfos} />
 	                })
 	                break;
 	            default:
@@ -136,14 +146,18 @@ class CInitLayoutPrivate extends React.PureComponent {
 	    }
 
 	    return (
-	        <Layout className={zkStyles.zk_layout}>
-	            <Header className={zkStyles.zk_header}>
+	        <Layout className={zkStyles.zk_f_layout}>
+	            <Header className={zkStyles.zk_f_header}>
 	                <ZKLogo logoImgUrl="assets/img/logo-zk.png" />
 	                <ZKNavigation prefixPath={`${match.path}`} navItems={mApp.navItems?mApp.navItems:[]} />
 	                <ZKUserDropDown user={{username:mApp.user.account, ...mApp.user}} optKeys={optKeys} callBack={f_onUserDropDownCallBack} />
+	                <ZKTheme themeFlag={mApp.themeFlag} setThemeFunc={key=>{
+	                	zkToolsUtils.setTheme(key);
+	                	dispatch({ type: 'mApp/setState', payload: { themeFlag: key }});
+	                }} />&nbsp;&nbsp;
 	                <ZKLanguageSelect {...languageSwitchProps} />
 	            </Header>
-	            <Content className={zkStyles.zk_content}>
+	            <Content className={zkStyles.zk_f_content}>
 	                <Switch>
 	                    {this.state.indexNavRoute ?
 	                        (
@@ -153,7 +167,7 @@ class CInitLayoutPrivate extends React.PureComponent {
 	                    {this.state.navRoutes}
 	                </Switch>
 	            </Content>
-                <div className = {zkStyles.zk_footer} ><p>opyright © Vinson zk-frontEnd</p></div>
+                <div className = {zkStyles.zk_f_footer} ><span>opyright © Vinson zk-frontEnd</span></div>
 	        </Layout>
 	    )
     }
@@ -177,7 +191,7 @@ const FInitLayoutPrivateAuth = ({ redirectPath, ...props }) => {
 				} 
 			});	
 		}	
-		console.log("[^_^:20210823-1201-001] ", globalAppConfig.isAuth, zkToolsAuth.isLogin(), props.mApp.user);
+		// console.log("[^_^:20210823-1201-001] ", globalAppConfig.isAuth, zkToolsAuth.isLogin(), props.mApp.user);
 	}
 	// console.log("[^_^:20210702-0846-001] ", globalAppConfig.isAuth, zkToolsAuth.isLogin(), props.mApp.user);
 	
@@ -199,13 +213,5 @@ const FInitLayoutPrivateAuth = ({ redirectPath, ...props }) => {
 
 export default FInitLayoutPrivateAuth;
 // export default connect(({ mApp }) => ({ mApp }))(FInitIndex)
-
-
-
-
-
-
-
-
 
 

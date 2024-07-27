@@ -2,8 +2,8 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   
- * @Last Modified time: 
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 17:40:11
  */
 
 import { editMailType, delMailType, getMailType, findMailTypes } from './service';
@@ -41,34 +41,33 @@ const model = {
         *editMailType({ payload, callback }, { call }) {
             let res = yield call(editMailType, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delMailType({ payload, callback }, { call }) {
             let res = yield call(delMailType, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getMailType({ payload }, { call, put }) {
             let res = yield call(getMailType, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { optEntity: res.data } });
             }
         },
@@ -85,7 +84,7 @@ const model = {
             }
             let res = yield call(findMailTypes, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -98,7 +97,7 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }

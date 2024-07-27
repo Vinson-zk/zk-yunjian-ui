@@ -2,15 +2,15 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-07 10:53:36
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 18:03:57
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
+
 /*
 JSON.stringify(params)
 contentType:'application/json; charset=utf-8'}
@@ -20,14 +20,8 @@ export async function editSysAuthDefined(params) {
     return zkToolsAjax.reqPretreatment(
         `/${api}/auth/sysAuthDefined/sysAuthDefined`, 
         {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
-        );
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
+    );
 }
 // 删除
 export async function delSysAuthDefined(params) {

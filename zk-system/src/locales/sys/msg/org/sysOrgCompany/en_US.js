@@ -8,7 +8,7 @@
  
  
 module.exports = {
-
+	"zk.sys.org.SysOrgCompany.info":"Company Info",
 	"zk.sys.org.SysOrgCompany._top":"Group Company",
 	"zk.sys.org.SysOrgCompany.parentName":"Parent Company",
 	"zk.sys.org.SysOrgCompany.child":"Child Company",
@@ -40,6 +40,7 @@ module.exports = {
 	"zk.sys.org.SysOrgCompany.status.0":"正常",     
 	"zk.sys.org.SysOrgCompany.status.1":"禁用", 
 	"zk.sys.org.SysOrgCompany.status.2":"审核中", 
+	"zk.sys.org.SysOrgCompany.status.3":"平台审核中", 
 
 
 	"zk.sys.org.SysOrgCompany.audit":"公司审核",

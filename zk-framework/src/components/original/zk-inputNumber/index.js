@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 09:47:01
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-15 23:01:17
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 18:01:41
  */
 
 import React from 'react';
@@ -72,7 +72,7 @@ class CWrapInputNumber extends React.Component {
 	onChange = (value)=>{
 		if (!isNaN(value)) {
 			this.setState({ value: value * 1.0 })
-			if (this.props.onChange instanceof Function) {
+			if (zkJsUtils.assertObjType(this.props.onChange, Function)) {
 				this.props.onChange.call(this, value)
 			}
 		}
@@ -93,7 +93,7 @@ class CWrapInputNumber extends React.Component {
 		return (
 			<div>
 				<InputNumber {...itemProps} onChange={this.onChange}/>
-				{(formatValueFunc instanceof Function) ? f_formatInput(this.state.value) : ""}
+				{(zkJsUtils.assertObjType(formatValueFunc, Function)) ? f_formatInput(this.state.value) : ""}
 			</div>
 		)
 	}
@@ -109,7 +109,7 @@ CWrapInputNumber.defaultProps = {
 	...InputNumber.defaultProps,
 	formatValueFunc: undefined,
 	onChange: undefined,
-	className: styles.default_class,
+	className: styles.zk_input_num_default_class,
 }
 
 // 组件提供的数值格式化函数

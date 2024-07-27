@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-10-26 16:36:59
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-03 10:16:49
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-29 23:17:28
  */
 
 import { editSysMenu, deleteSysMenu, getSysMenu, findSysMenusTree, findSysNavs } from './service';
@@ -47,34 +47,33 @@ const model = {
 
             let res = yield call(editSysMenu, payload);
             let f = (errors)=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *deleteSysMenu({ payload, callback }, { call }) {
             let res = yield call(deleteSysMenu, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getSysMenu({ payload, isParent }, { call, put }) {
             let res = yield call(getSysMenu, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 if(isParent){
                     let optEntity = {};
                     optEntity.parentId = res.data.pkId;
@@ -94,10 +93,9 @@ const model = {
             if(pagination){
                 params = { ...params, ...zkToolsUtils.convertPageParam(pagination) };
             }
-
             let res = yield call(findSysMenusTree, params);
             let nextState = {};
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 nextState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -110,7 +108,7 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: nextState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
@@ -122,8 +120,8 @@ const model = {
             params = { ...params, ...zkToolsUtils.convertPageParam(pagination) };
 
             let res = yield call(findSysNavs, params);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, res.data.result);
                 }
             }
@@ -137,3 +135,5 @@ const model = {
 };
 
 export default model;
+
+

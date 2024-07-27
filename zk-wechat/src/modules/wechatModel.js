@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2021-02-14 12:23:04
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-08 16:32:17
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 17:17:08
  */
 
 import { getNavMenus } from "./wechatService.js";
@@ -25,9 +25,9 @@ const model = {
 
     effects: {
         // 取菜单
-        *getMenus({ navCode, payload }, { call, put }) {
-            let res = yield call(getNavMenus, navCode, payload);
-            if (res.code == "zk.0") {
+        *getMenus({ navId, payload }, { call, put }) {
+            let res = yield call(getNavMenus, navId, payload);
+            if (res.ok) {
                 let menus = res.data;
                 menus = zkJsUtils.makeTree(menus, null);
                 menus = zkJsUtils.sort(menus);

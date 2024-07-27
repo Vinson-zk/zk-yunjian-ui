@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-04-01 09:30:32
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-08-21 14:33:14
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:04:27
 * 
 * 
 * 
@@ -28,7 +28,7 @@ const model = {
         // 查询 
         *findColInfos({ tableId }, { call, put }) {
             let res = yield call(findColInfos, tableId);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { colInfos: res.data||[] } });
             }
         }, 
@@ -36,31 +36,30 @@ const model = {
         *editColInfo({ payload, callback }, { call }) {
             let res = yield call(editColInfo, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if (res.type == globalAppConfig.resCodeType.dataValidator ) {
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 增量更新表字段信息
         *updateAddCols({ tableId }, { call, put }) {
             let res = yield call(updateAddCols, tableId);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { colInfos: res.data||[] } });
             }
         },    
         // 增量更新表字段信息
         *updateAllCols({ tableId }, { call, put }) {
             let res = yield call(updateAllCols, tableId);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { colInfos: res.data||[] } });
             }
         },  

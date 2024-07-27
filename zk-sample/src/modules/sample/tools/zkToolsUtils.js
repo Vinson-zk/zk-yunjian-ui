@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 12:30:33
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 13:40:26
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 00:04:52
  */
 
 import React from 'react';
@@ -13,23 +13,24 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { docco } from '../helper';
 import styles from "../styles.less";
-import { zkTools } from "zkFramework";
+import { zkTools, ZKCustomComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 
 const FInitToolsUtilsDemo = ({ intl }) => {
 
     return (
-        <div className={styles.sample_detail_panel}>
-            <h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsUtils {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-            <div className={styles.sample_detail_section}>
-                <SyntaxHighlighter language='jsx' style={docco}>
+        <ZKContentFormat className={styles.sample_detail_panel} >
+            <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsUtils ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+                <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                     {[
-                        "一些项目公共方法，暂未使用",
+                        "一些项目公共方法",
                         "待补充",
                     ].join('\n')}
                 </SyntaxHighlighter>
-            </div>
-        </div>
+            </ZKContentFormat>
+            <br />
+        </ZKContentFormat>
     )
 }
 

@@ -18,7 +18,7 @@ import SearchItem from "./search.js";
 import GridItem from "./grid.js";
 import CGrantAuth from "../grantAuth.js";
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 import locales from "../../../locales/index";
 
@@ -27,14 +27,14 @@ class CInitSysOrgRankIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            optCompanyEntity:{},
+            optRankEntity:{},
             grantAuthModal:false,
         };
     }
 
     // 分配权限
     f_onShowGrantAuthModal = (flag, record)=>{
-        this.setState({grantAuthModal:flag, optCompanyEntity:record});
+        this.setState({grantAuthModal:flag, optRankEntity:record});
     };
 
     render() {
@@ -42,23 +42,25 @@ class CInitSysOrgRankIndex extends Component {
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
+            <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} onShowGrantAuthModal={this.f_onShowGrantAuthModal} />
                 <CGrantAuth isShow = {this.state.grantAuthModal} 
-                    url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthRank/sysAuthDefinedsPage`}
-                    urlOwnerIds = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthRank/findAuthIdsByRankId`}
-                    urlOwnerTargetParamName="rankId"
+                    url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthRank/findAllotAuthPage`}
+                    formatParamsFunc = {(toTargetId, params={})=>{
+                        params['rankId'] = toTargetId;
+                        return params;
+                    }}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.rank')}
-                    descName={zkToolsMsg.getInternationInfo(this.state.optCompanyEntity.name?this.state.optCompanyEntity.name:{}, lang)}
-                    targetId={this.state.optCompanyEntity.pkId} 
+                    descName={zkToolsMsg.getInternationInfo(this.state.optRankEntity.name?this.state.optRankEntity.name:{}, lang)}
+                    toTargetId={this.state.optRankEntity.pkId} 
                     onShowModal={this.f_onShowGrantAuthModal}
                     saveSpinning={loading.effects["mSysOrgRank/grantAuth"]||false}
-                    saveFunc={(rankId, auths, callback)=>{
+                    saveFunc={(rankId, allotAuths, callback)=>{
                         dispatch({ 
                             type: 'mSysOrgRank/grantAuth', 
                             rankId: rankId,
-                            auths: auths,
+                            allotAuths: allotAuths,
                             callback: callback
                         });
                     }}

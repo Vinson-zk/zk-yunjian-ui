@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:42
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-26 10:08:30
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-10 10:10:58
  */
 
 import React, { Component } from 'react';
@@ -122,7 +122,7 @@ class CInitSysMenuEdit extends Component {
         return (optEntity != undefined && mSysMenu.pathname == location.pathname) && (
             <ZKSpin spinning={spinning === true} >
                 <ZKModal
-                    visible = {this.state.selectIcon}
+                    open = {this.state.selectIcon}
                     onCancel  = {()=>{this.setState({selectIcon: !this.state.selectIcon})}}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_icon.select')}
                     // footer = {<font color="red">* {zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_icon.select.opt")}</font>}
@@ -159,11 +159,11 @@ class CInitSysMenuEdit extends Component {
                         <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.code')} 
-                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
+                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64), zkToolsValidates.code(intl)]} >
                         <ZKInput />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "navCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.navCode')} 
-                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
+                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)], zkToolsValidates.code(intl)} >
                         <ZKSelect showSearch = {true} loading = { navCodeSelLoading }
                             onDropdownVisibleChange = { open=>{if(open){this.f_searchNavCodes('');}}}
                             onSearch = { this.f_searchNavCodes }
@@ -174,7 +174,7 @@ class CInitSysMenuEdit extends Component {
                         </ZKSelect>
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "funcModuleCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.funcModuleCode')} 
-                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)]} >
+                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64), zkToolsValidates.code(intl), zkToolsValidates.code(intl)]} >
                         <ZKInput />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "funcName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.funcName')} 
@@ -221,7 +221,7 @@ class CInitSysMenuEdit extends Component {
                         </ZKRadio.Group>
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "icon" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.icon')} >
-                        <ZKInput.Search enterButton addonBefore={ <ZKIcon.Antd4Icon icon={this.state.icon?this.state.icon:(optEntity.icon?optEntity.icon:"")} /> }
+                        <ZKInput.Search enterButton addonBefore={ <ZKIcon.AntdIcon icon={this.state.icon?this.state.icon:(optEntity.icon?optEntity.icon:"")} /> }
                             onSearch={value=>f_showSelIconModal()} />
                     </ZKEditForm.Item>
                 </ZKEditForm>

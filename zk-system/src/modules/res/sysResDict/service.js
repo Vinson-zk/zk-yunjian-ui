@@ -2,15 +2,15 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-02 19:13:53
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 18:05:37
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
+
 /*
 JSON.stringify(params)
 contentType:'application/json; charset=utf-8'}
@@ -20,14 +20,8 @@ export async function editSysResDict(params) {
     return zkToolsAjax.reqPretreatment(
         `/${api}/res/sysResDict/sysResDict`, 
         {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
-        );
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
+    );
 }
 
 // 删除

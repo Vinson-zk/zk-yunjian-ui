@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-25 12:01:45
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-08-21 15:17:46
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 00:04:52
  */
 
 import React from 'react';
@@ -16,8 +16,8 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from '../helper';
 import styles from "../styles.less";
 import { zkTools, ZKOriginalComponents, ZKCustomComponents } from "zkFramework";
+const { ZKContentFormat, ZKInputJson } = ZKCustomComponents;
 const { ZKAnchor } = ZKOriginalComponents;
-const { ZKInputJson } = ZKCustomComponents;
 const { zkToolsMsg, zkToolsValidates } = zkTools;
 
 const formItemLayout = {
@@ -151,25 +151,58 @@ const FInitForm = ({ intl }) => {
 const FInitToolsValidatesDemo = ({ intl, match }) => {
 
     return (
-        <div className={styles.sample_detail_panel}>
+        <ZKContentFormat className={styles.sample_detail_panel} >
             <div className={styles.sample_detail_top_affix} >
-                <ZKAnchor>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#notNull`} title="notNull" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#string`} title="string" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#number`} title="number" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#integer`} title="integer" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#enum`} title="enum" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#email`} title="email" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#url`} title="url" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#pattern`} title="pattern" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#validator`} title="validator" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#username`} title="username" ></ZKAnchor.Link>
-                    <ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#phone`} title="phone" ></ZKAnchor.Link>
-                </ZKAnchor>
+                <ZKAnchor items={[
+                    {
+                        'key': `${globalAppConfig.basename}${match.path}/#notNull`,
+                        'href': `${globalAppConfig.basename}${match.path}/#notNull`,
+                        'title': 'notNull'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#string`,
+                        'href': `${globalAppConfig.basename}${match.path}/#string`,
+                        'title': 'string'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#number`,
+                        'href': `${globalAppConfig.basename}${match.path}/#number`,
+                        'title': 'number'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#integer`,
+                        'href': `${globalAppConfig.basename}${match.path}/#integer`,
+                        'title': 'integer'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#enum`,
+                        'href': `${globalAppConfig.basename}${match.path}/#enum`,
+                        'title': 'enum'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#email`,
+                        'href': `${globalAppConfig.basename}${match.path}/#email`,
+                        'title': 'email'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#url`,
+                        'href': `${globalAppConfig.basename}${match.path}/#url`,
+                        'title': 'url'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#pattern`,
+                        'href': `${globalAppConfig.basename}${match.path}/#pattern`,
+                        'title': 'pattern'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#validator`,
+                        'href': `${globalAppConfig.basename}${match.path}/#validator`,
+                        'title': 'validator'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#username`,
+                        'href': `${globalAppConfig.basename}${match.path}/#username`,
+                        'title': 'username'
+                    },{
+                        'key': `${globalAppConfig.basename}${match.path}/#phone`,
+                        'href': `${globalAppConfig.basename}${match.path}/#phone`,
+                        'title': 'phone'
+                    }
+                ]} />
             </div>
-            <h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsValidates {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-            <div className={styles.sample_detail_section}>
-                <SyntaxHighlighter language='jsx' style={docco}>
+            <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsValidates ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+                <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                     {[
                         "notNull      // 不能为空",
                         "string       // 字符串",
@@ -185,11 +218,10 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                         "phone        // 手机号",
                     ].join('\n')}
                 </SyntaxHighlighter>
-            </div>
-            <div className={styles.sample_detail_section}>
-                <h2>方法&nbsp;&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
+            </ZKContentFormat>
+            <ZKContentFormat title = {`方法 ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
                 <div id="notNull">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/** ",
                             " * 不能为空",
@@ -204,7 +236,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="string">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 字符串  ",
@@ -221,7 +253,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="number">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 数字  ",
@@ -238,7 +270,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="integer">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 整数  ",
@@ -255,7 +287,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="enum">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 枚举 enum  ",
@@ -271,7 +303,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="email">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 邮箱  ",
@@ -286,7 +318,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="url">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * URL  ",
@@ -301,7 +333,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="pattern">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 正则匹配  ",
@@ -317,7 +349,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="validator">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 自定义校验  ",
@@ -329,7 +361,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="username">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 用户名/登录名  ",
@@ -344,7 +376,7 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                     </SyntaxHighlighter>
                 </div>
                 <div id="phone">
-                    <SyntaxHighlighter language='jsx' style={docco}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "/**  ",
                             " * 手机/电话  ",
@@ -358,20 +390,19 @@ const FInitToolsValidatesDemo = ({ intl, match }) => {
                         ].join('\n')}
                     </SyntaxHighlighter>
                 </div>
-            </div>
-            <div className={styles.sample_detail_section}>
-                <h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-				<div>
-					<SyntaxHighlighter language='jsx' style={docco}>
-						{[
-							"查看《antd Form 校验示例》源码",
-						].join('\n')}
-					</SyntaxHighlighter>
-				</div>
+            </ZKContentFormat>
+            <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+                <div>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "查看《antd Form 校验示例》源码",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                </div>
                 <h2><font color="red">*</font> antd Form 校验示例</h2>
-                <FInitForm intl={intl} />
-            </div>
-        </div>
+            </ZKContentFormat>
+            <br />
+        </ZKContentFormat>
     )
 }
 

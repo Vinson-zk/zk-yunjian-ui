@@ -80,7 +80,8 @@ class CInitSysResRequestChannelEdit extends Component {
                 	</ZKEditForm.Item>
                 	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResRequestChannel.code')} 
                 		rules = {[
-							zkToolsValidates.string(intl, 1, 64, true), 
+							zkToolsValidates.string(intl, 1, 64, true),
+                            zkToolsValidates.code(intl) 
                         ]} 
 					>
                         <ZKInput />

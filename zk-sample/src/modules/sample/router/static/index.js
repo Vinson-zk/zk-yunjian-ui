@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 10:27:08
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 11:36:33
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 23:10:25
  */
 
 
@@ -19,9 +19,8 @@ import CChildRouterL2c4 from './level-2/child-router-l2c4.js';
 
 import stylesSample from "../../styles.less";
 import styles from "./styles.less";
-import { zkTools, ZKCustomComponents } from 'zkFramework';
-
-const { ZKRouter } = ZKCustomComponents;
+import { zkTools, ZKCustomComponents } from "zkFramework";
+const { ZKContentFormat, ZKRouter } = ZKCustomComponents;
 const { zkToolsMsg } = zkTools;
 const { Switch, Link, Route } = ZKRouter;
 
@@ -31,9 +30,8 @@ const { Switch, Link, Route } = ZKRouter;
 function FInitStaticRouterDemo({ intl, match }) {
 
 	return (
-		<div className={stylesSample.sample_detail_panel}>
-			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.router.static')} {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-			<div className={stylesSample.sample_detail_section} >
+		<ZKContentFormat className={styles.sample_detail_panel} >
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.router.static')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
 				{zkToolsMsg.msgFormatByIntl(intl, 'sample.router.level2', {})}: {match.path}
 				<div style={{ height: '100%', flex: '1 1 auto' }} className={styles.statc_router}>
 					<div className={styles.header}>
@@ -70,8 +68,9 @@ function FInitStaticRouterDemo({ intl, match }) {
 						</Switch>
 					</div>
 				</div>
-			</div>
-		</div>
+			</ZKContentFormat>
+			<br />
+		</ZKContentFormat>
 	)
 }
 

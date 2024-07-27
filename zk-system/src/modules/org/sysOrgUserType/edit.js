@@ -80,7 +80,8 @@ class CInitSysOrgUserTypeEdit extends Component {
                     <ZKDivider className = {orgStyles.org_divider}  />
                 	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUserType.code')} 
                 		rules = {[
-							zkToolsValidates.string(intl, 1, 64, true), 
+							zkToolsValidates.string(intl, 1, 64, true),
+                            zkToolsValidates.code(intl) 
                         ]} 
 					>
                         <ZKInput disabled = {optEntity.pkId?true:false} />

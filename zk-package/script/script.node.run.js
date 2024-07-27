@@ -1,48 +1,37 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-10 15:32:40 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-03 00:34:54
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-27 22:36:08
  */
 
 const path = require('path');
 
-// // 当前进程的目录：/Users/bs/ws_web/zk-frontEnd/package
-// console.log("[^_^:20200806-1650-001-0] ", process.cwd());
-// // 当前项目根目录 /Users/bs/ws_web/zk-frontEnd/package
-// console.log("[^_^:20200806-1650-001-1] ", path.resolve(""));
-// // 根目录 /
-// console.log("[^_^:20200806-1650-001-2] ", path.resolve("/"));
-// // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
-// console.log("[^_^:20200806-1650-001-3] ", path.resolve(__dirname));
-
-// // 当前项目根目录 /Users/bs/ws_web/zk-frontEnd/package
-// console.log("[^_^:20200806-1650-002-1] ", path.resolve("", "."));
-// // 根目录 /
-// console.log("[^_^:20200806-1650-002-2] ", path.resolve("", "/"));
-// // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
-// console.log("[^_^:20200806-1650-002-3] ", path.resolve("", __dirname));
-
-// // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
-// console.log("[^_^:20200806-1650-003-1] ", path.resolve(__dirname, "."));
-// // 根目录 /
-// console.log("[^_^:20200806-1650-003-2] ", path.resolve(__dirname, "/"));
-// // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
-// console.log("[^_^:20200806-1650-003-3] ", path.resolve(__dirname, __dirname));
-
 // ===============================================================================
-// [^_^:20200806-1650-001-0]  /Users/bs/ws_web/zk-frontEnd/package
-// [^_^:20200806-1650-001-1]  /Users/bs/ws_web/zk-frontEnd/package
-// [^_^:20200806-1650-001-2]  /
-// [^_^:20200806-1650-001-3]  /Users/bs/ws_web/zk-frontEnd/package/script
+// console.log("[^_^:20200806-1650-001-01] ", __dirname);               // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
+// console.log("[^_^:20200806-1650-001-02] ", process.cwd());           // 当前进程的目录：/Users/bs/ws_web/zk-frontEnd/package
+// console.log("[^_^:20200806-1650-001-03] ", path.resolve(""));        // 当前项目根目录 /Users/bs/ws_web/zk-frontEnd/package
+// console.log("[^_^:20200806-1650-001-04] ", path.resolve("/"));       // 根目录 /
+// console.log("[^_^:20200806-1650-001-05] ", path.resolve(__dirname)); // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
+// console.log("[^_^:20200806-1650-001-06] ", path.resolve("", "."));   // 当前项目根目录 /Users/bs/ws_web/zk-frontEnd/package
+// console.log("[^_^:20200806-1650-001-07] ", path.resolve("", "/"));   // 根目录 /
+// console.log("[^_^:20200806-1650-001-08] ", path.resolve("", __dirname));        // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
+// console.log("[^_^:20200806-1650-001-09] ", path.resolve(__dirname, "."));       // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
+// console.log("[^_^:20200806-1650-001-10] ", path.resolve(__dirname, "/"));       // 根目录 /
+// console.log("[^_^:20200806-1650-001-11] ", path.resolve(__dirname, __dirname)); // 当前文件所在目录  /Users/bs/ws_web/zk-frontEnd/package/script
 
-// [^_^:20200806-1650-002-1]  /Users/bs/ws_web/zk-frontEnd/package
-// [^_^:20200806-1650-002-2]  /
-// [^_^:20200806-1650-002-3]  /Users/bs/ws_web/zk-frontEnd/package/script
-
-// [^_^:20200806-1650-003-1]  /Users/bs/ws_web/zk-frontEnd/package/script
-// [^_^:20200806-1650-003-2]  /
-// [^_^:20200806-1650-003-3]  /Users/bs/ws_web/zk-frontEnd/package/script
+// [^_^:20200806-1650-001-01]  /Users/vinson/ws/ws_web/zk/zk-yunjian-ui/zk-package/script
+// [^_^:20200806-1650-001-02]  /Users/vinson/ws/ws_web/zk/zk-yunjian-ui/zk-package
+// [^_^:20200806-1650-001-03]  /Users/vinson/ws/ws_web/zk/zk-yunjian-ui/zk-package
+// [^_^:20200806-1650-001-04]  /
+// [^_^:20200806-1650-001-05]  /Users/vinson/ws/ws_web/zk/zk-yunjian-ui/zk-package/script
+// [^_^:20200806-1650-001-06]  /Users/vinson/ws/ws_web/zk/zk-yunjian-ui/zk-package
+// [^_^:20200806-1650-001-07]  /
+// [^_^:20200806-1650-001-08]  /Users/vinson/ws/ws_web/zk/zk-yunjian-ui/zk-package/script
+// [^_^:20200806-1650-001-09]  /Users/vinson/ws/ws_web/zk/zk-yunjian-ui/zk-package/script
+// [^_^:20200806-1650-001-10]  /
+// [^_^:20200806-1650-001-11]  /Users/vinson/ws/ws_web/zk/zk-yunjian-ui/zk-package/script
+// ===============================================================================
 
 /*** 取命令行参数 ***/
 // console.log("-----------------------------------------------------");
@@ -78,6 +67,8 @@ if (projectName == '') {
 
 /*** webpack ***/
 const webpack = require('webpack');
+// let startT = new Date();
+// console.log("[^_^:20230618-2259-001] run time begin: " + startT.getTime());
 
 /*** 根据不同命令处理 ***/
 if ("start" == command) {
@@ -95,35 +86,48 @@ if ("start" == command) {
     // console.log("[^_^:20200810-1649-001] ------------------------------");
     // console.log(`启动了项目:${projectName}; webpackConfig:\n`, webpackConfig)
 
-    let webpackServerConfig = webpackConfig.devServer;
+    let devServerOptions = webpackConfig.devServer;
     // 设置默认配置或统一设置一些配置
-    webpackServerConfig = Object.assign(
+    devServerOptions = Object.assign(
         {
             host: 'localhost', 
             port: 8000, 
             open: process.env.open && (process.env.open != 'false') || false
             // ,openPage:'/'
         }, 
-        webpackServerConfig, 
-        {
-            stats: {
-                colors: true,
-            },
-        }
+        devServerOptions
     );
+
+    // 加监听，输出启动后的访问地址
+    // let onListening = devServerOptions.onListening;
+    // devServerOptions.onListening = (devServer)=>{
+    //     if(onListening instanceof Function){
+    //         onListening.call(this, devServer);
+    //     }
+    //     console.log(`[^_^:20190322-1804-003] Starting project [${projectName}] server on http://${devServerOptions.host}:${devServerOptions.port}`);
+    // }
 
     /*** 启动项目 ***/
     // console.log("[^_^:20200810-1410-001] ------------------------------");
-    // console.log(`启动了项目:${projectName}; webpackServerConfig:\n`, webpackServerConfig);
+    // console.log(`启动了项目:${projectName}; devServerOptions:\n`, devServerOptions);
     const compiler = webpack(webpackConfig);
-    const server = new webpackDevServer(compiler, webpackServerConfig);
+    const server = new webpackDevServer(devServerOptions, compiler);
 
-    server.listen(webpackServerConfig.port, webpackServerConfig.host, (err) => {
-        if (err) {
-            throw err;
-        }
-        console.log(`[^_^:20190322-1804-003] Starting project [${projectName}] server on http://${webpackServerConfig.host}:${webpackServerConfig.port}`);
-    });
+    // console.log("[^_^:20240627-2236-001] server: ", server);
+
+    // server.listen(devServerOptions.port, devServerOptions.host, (err) => {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     console.log(`[^_^:20190322-1804-003] Starting project [${projectName}] server on http://${devServerOptions.host}:${devServerOptions.port}`);
+    // });
+
+    const runServer = async () => {
+        console.log(`[^_^:20240627-2231-001] Starting project [${projectName}] server...`);
+        console.log(`[^_^:20240627-2231-001] http://${devServerOptions.host}:${devServerOptions.port}`);
+        await server.start();
+    };
+    runServer();
 } else if ("build" == command) {
     // 编译 webpack server 命令
     /*** 取指定项目的 webpack 配置 ***/
@@ -149,6 +153,9 @@ if ("start" == command) {
 } else {
     throw new Error("[>_<:20190322-1804-002] 示知处理命令：" + command);
 }
+
+// let endT = new Date();
+// console.log("[^_^:20230618-2259-001] run time end: " + endT.getTime(), (endT.getTime() - startT.getTime())/(1000));
 
 // node -v
 // webpack-dev-server --hot --open --port 11111 --config sample/conf/webpack.dev.config.js

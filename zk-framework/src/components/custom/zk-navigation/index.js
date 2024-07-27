@@ -2,14 +2,15 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 22:38:35
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-29 18:43:09
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-21 22:38:20
  */
 
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'dva/router';
+import { router } from 'dva';
+const { Link, withRouter } = router;
 
 import ZKIcon from '../zk-icon';
 
@@ -20,9 +21,9 @@ const FInitNavItem = ({ path, children, selected }) => {
 
 	let className = "";
 	if (selected) {
-		className = `${styles.nav_item_div} ${styles.nav_item_selected}`;
+		className = `${styles.zk_nav_item_div} ${styles.zk_nav_item_selected}`;
 	} else {
-		className = `${styles.nav_item_div}`;
+		className = `${styles.zk_nav_item_div}`;
 	}
 
 	return (
@@ -48,7 +49,7 @@ const FInitNavigation = withRouter(({ prefixPath, navItems, location }) => {
 	})
 
 	return (
-		<div className={styles.nav}>
+		<div className={styles.zk_nav}>
 			{navItems.map(item => {
 				// 不显示时，不生成导航节点
 				if(zkToolsNavAndMenu.navIsShow(item)){
@@ -56,7 +57,7 @@ const FInitNavigation = withRouter(({ prefixPath, navItems, location }) => {
 					return (
 						<FInitNavItem key={item.pkId} path={path} selected={path === selectNavItemPath} >
 							<span>
-								{zkJsUtils.isEmpty(item.icon) ? '' : (<ZKIcon.Antd4Icon icon = {item.icon} />)}&nbsp;
+								{zkJsUtils.isEmpty(item.icon) ? '' : (<ZKIcon.AntdIcon icon = {item.icon} />)}&nbsp;
 								{zkToolsMsg.getInternationInfo(item.name)}
 							</span>
 						</FInitNavItem>

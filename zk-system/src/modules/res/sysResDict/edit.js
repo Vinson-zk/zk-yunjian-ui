@@ -48,7 +48,7 @@ class CInitSysResDictEdit extends Component {
             payload: values, 
             callback: (errors) => {
                 if(!errors){
-                    this.setState({loading: true});
+                    this.setState({loading: false});
                 }
                 callbackFunc(errors);
             }
@@ -118,6 +118,7 @@ class CInitSysResDictEdit extends Component {
                             <ZKEditForm.Item name = "dictCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDict.dictCode')} 
                                 rules = {[
                                     zkToolsValidates.string(intl, 1, 64, true), 
+                                    zkToolsValidates.code(intl)
                                 ]} 
                             >
                                 <ZKInput disabled = {optEntity.pkId?true:false} />

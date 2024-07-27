@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-18 01:13:42
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-07-03 23:26:22
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-04 16:28:29
 * 
 * 向第三方平台授权
 * 
@@ -23,7 +23,7 @@ const { ZKSpin, ZKModal, ZKInput, ZKRadio, ZKSelect } = ZKOriginalComponents;
 
 const { zkToolsMsg, zkToolsValidates } = zkTools;
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 const formItemLayout = {
   labelCol: {
@@ -120,7 +120,7 @@ class CInitThridPartyAuth extends Component {
 
 		let spinning = loading.effects['mOfficialAccounts/accountAuth'];
 		return (
-			<ZKModal title={zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.auth')} visible={isShow}
+			<ZKModal title={zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.auth')} open={isShow}
 			  onOk={this.handleOk}
 			  onCancel={this.handleCancel}
 			  okButtonProps = {{loading: spinning}}
@@ -129,7 +129,7 @@ class CInitThridPartyAuth extends Component {
 			>
 			  {this.state.statusFalg == 0?
 	          <ZKSpin spinning={spinning === true} >
-	          		<Form {...formItemLayout} className={`${zkStyles.zk_modal_padding}`} ref = {this.formRef} >
+	          		<Form {...formItemLayout} className={`${zkStyles.zk_f_modal_padding}`} ref = {this.formRef} >
 						<Form.Item  name="byeType" label={zkToolsMsg.msgFormatByIntl(intl, 'zk.wechat.officialAccounts.accounts.auth.byeType')}
 							initialValue={0} rules = {[ zkToolsValidates.integer(intl, 0, 1)]} 
 						>
@@ -165,7 +165,7 @@ class CInitThridPartyAuth extends Component {
 					</Form>
 			  </ZKSpin>
 			  :
-			  <div className={`${zkStyles.zk_modal_padding} ${zkStyles.zk_unselect}`} onClick={()=>{this.f_copy(this.state.authUrl)}} >
+			  <div className={`${zkStyles.zk_f_modal_padding} ${zkStyles.zk_f_unselect}`} onClick={()=>{this.f_copy(this.state.authUrl)}} >
 			  	<Paragraph>
 			  		<Text strong style={{fontSize: 14}}>{this.state.authUrl}</Text>
 			    </Paragraph>

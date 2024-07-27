@@ -2,11 +2,11 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 19:08:06
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 11:01:05
  */
 
-import { editSysOrgRole, delSysOrgRole, getSysOrgRole, findSysOrgRoles, setAuthRelation } from './service';
+import { editSysOrgRole, delSysOrgRole, getSysOrgRole, findSysOrgRoles, grantAuths } from './service';
 
 import { zkTools } from 'zkFramework';
 const { zkToolsUtils, zkToolsMsg } = zkTools;
@@ -45,34 +45,33 @@ const model = {
         *editSysOrgRole({ payload, callback }, { call }) {
             let res = yield call(editSysOrgRole, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         // 删除
         *delSysOrgRole({ payload, callback }, { call }) {
             let res = yield call(delSysOrgRole, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },
         // 查询 详情
         *getSysOrgRole({ payload }, { call, put }) {
             let res = yield call(getSysOrgRole, payload);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { optEntity: res.data } });
             }
         },
@@ -89,7 +88,7 @@ const model = {
             }
             let res = yield call(findSysOrgRoles, params);
             let restState = {}
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 restState = {
                     "filter": params,
                     "gridData": res.data.result,
@@ -102,16 +101,16 @@ const model = {
                     }
                 }
                 yield put({ type: 'setState', payload: restState });
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this);
                 }
             }
         },
         // 给角色分配权限
-        *grantAuth({ roleId, auths, callback }, { call, put, select }){
-            let res = yield call(setAuthRelation, roleId, auths);
-            if (res.code == 'zk.0') {
-                if (callback instanceof Function) {
+        *grantAuth({ roleId, allotAuths, callback }, { call, put, select }){
+            let res = yield call(grantAuths, roleId, allotAuths);
+            if (res.ok) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                   zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
                   callback.call(this, res);
                 }

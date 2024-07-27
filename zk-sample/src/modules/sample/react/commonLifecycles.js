@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-03-28 15:10:20
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-03-28 23:32:11
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-14 23:03:44
 * 
 * 
 * 
@@ -19,11 +19,10 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { zkTools, ZKOriginalComponents, ZKCustomComponents } from "zkFramework";
 import { docco } from '../helper';
 import styles from "../styles.less";
+import img from "../../../assets/picture/react-16.4.jpg";
 
-import img  from "../../../assets/picture/react-16.4.jpg";
-
+const { ZKLogo, ZKContentFormat } = ZKCustomComponents;
 const { ZKButton } = ZKOriginalComponents;
-const { ZKLogo } = ZKCustomComponents;
 const { zkToolsNavAndMenu, zkToolsMsg } = zkTools;
 
 class CInitReactCommonLifecycles extends React.Component {
@@ -66,107 +65,96 @@ class CInitReactCommonLifecycles extends React.Component {
         }
 
         return (
-            <div className={styles.sample_detail_panel}>
-                <h1> react 组件生命周期学习 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-                <div className={styles.sample_detail_section}>
-                    <SyntaxHighlighter language='jsx' style={docco}>
+            <ZKContentFormat className={styles.sample_detail_panel} >
+                <ZKContentFormat title = {`react 组件生命周期学习 ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
                         {[
                             "react 组件生命周期学习；官网组件生命周期说明图，此图说明的是 React 16.4 以上的版本的生命周期；",
                         ].join('\n')
                     }
                     </SyntaxHighlighter>
                     官网查看地址：<a href='https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram'>https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram</a>
-                	<img src = {img} style = {{width:'100%'}} />
-                </div>
-                <div className={styles.sample_detail_section}>
-                    <h2>组件状态-componentState</h2>
-                    <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "组件状态-componentState:",
-                                "组件状态发生了变化，请查看 console 日志中的生命周期打印结果：",
-                                this.state.componentState
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <ZKButton onClick={e => { changeCompoentState() }}>changeCompoentState</ZKButton>
-                    </div>
-                </div>
-                <div className={styles.sample_detail_section}>
-                    <h2>Mounting</h2>
-                    <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "constructor()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "static getDerivedStateFromProps()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "render()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "componentDidMount()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                    </div>
-                </div>
-                <div className={styles.sample_detail_section}>
-                    <h2>Updating</h2>
-                    <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "static getDerivedStateFromProps()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "shouldComponentUpdate()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "render()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "getSnapshotBeforeUpdate()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "componentDidUpdate()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                    </div>
-                </div>
-                <div className={styles.sample_detail_section}>
-                    <h2>Unmounting</h2>
-                    <div>
-                        <SyntaxHighlighter language='jsx' style={docco}>
-                            {[
-                                "componentWillUnmount()",
-                                "",
-                            ].join('\n')}
-                        </SyntaxHighlighter>
-                    </div>
-                </div>
-            </div>
+                    <img src = {img} style = {{width:'100%'}} />
+                </ZKContentFormat>
+                <ZKContentFormat title = {`组件状态-componentState ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "组件状态-componentState:",
+                            "组件状态发生了变化，请查看 console 日志中的生命周期打印结果：",
+                            this.state.componentState
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <ZKButton onClick={e => { changeCompoentState() }}>changeCompoentState</ZKButton>
+                </ZKContentFormat>
+                <ZKContentFormat title = {`Mounting ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "constructor()",
+                            "",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "static getDerivedStateFromProps()",
+                            "",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "render()",
+                            "",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "componentDidMount()",
+                            "创建时；安装组件（插入树中）后立即调用；此方法是设置任何订阅的好地方。如果您这样做，请不要忘记取消订阅componentWillUnmount()",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                </ZKContentFormat>
+                <ZKContentFormat title = {`Updating ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "static getDerivedStateFromProps()",
+                            "",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "shouldComponentUpdate()",
+                            "",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "render()",
+                            "",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "getSnapshotBeforeUpdate()",
+                            "",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "componentDidUpdate()",
+                            "",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                </ZKContentFormat>
+                <ZKContentFormat title = {`Updating ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`}>
+                    <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+                        {[
+                            "componentWillUnmount()",
+                            "在卸载和销毁组件之前立即被调用。在此方法中执行任何必要的清理，例如使计时器失效、取消网络请求或清除在componentDidMount()中创建的任何订阅。",
+                            "你不应该在此方法中调用setState()，因为组件永远不会被重新呈现。一旦组件实例被卸载，它将永远不会被再次安装。",
+                        ].join('\n')}
+                    </SyntaxHighlighter>
+                </ZKContentFormat>
+                <br />
+            </ZKContentFormat>
         )
     }
 

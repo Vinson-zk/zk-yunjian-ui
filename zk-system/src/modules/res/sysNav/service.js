@@ -2,15 +2,14 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-21 17:19:18
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 11:47:10
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-06-24 18:05:18
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
 
 // 编辑 
 export async function editSysNav(params) {
@@ -18,14 +17,8 @@ export async function editSysNav(params) {
     return zkToolsAjax.reqPretreatment(
         `/${api}/res/nav/sysNav`, 
         {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
-        );
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
+    );
 }
 
 // 删除

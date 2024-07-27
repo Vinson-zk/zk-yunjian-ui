@@ -2,29 +2,32 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-23 22:53:23
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-25 19:03:20
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 22:58:31
  */
 
 import { locales as zkFrameworkLocales, zkTools } from 'zkFramework'; 
 import { locales as sampleLocales} from 'zkSample';
 import sysLocales from './sys/index.js';
 
-import enLocaleData from "react-intl/locale-data/en";
-import enAntd from "antd/lib/locale-provider/en_US";
 import zhLocaleData from "react-intl/locale-data/zh";
-import zhAntd from "antd/lib/locale-provider/zh_CN";
+import enLocaleData from "react-intl/locale-data/en";
+
+import zhAntd from "antd/locale/zh_CN";
+import enAntd from "antd/locale/en_US";
+import zhDayjs from 'dayjs/locale/zh-cn';
+import enDayjs from 'dayjs/locale/en';
 
 // console.log("[^_^: 20200807-1505-001] zkFrameworkLocales: ", zkFrameworkLocales);
 
 let locals = {
     "zh-CN":{
         localeData: zhLocaleData,
-        antd: zhAntd,
+        antd: {...zhAntd, ...zhDayjs}, 
     },
     "en-US":{
         localeData: enLocaleData,
-        antd: enAntd,
+        antd: {...enAntd, ...enDayjs},
     }
 };
 

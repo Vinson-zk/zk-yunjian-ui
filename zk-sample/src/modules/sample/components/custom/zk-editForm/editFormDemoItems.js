@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-05 15:42:57
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-28 13:15:28
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-19 13:22:13
 * 
 * 
 * 
@@ -11,7 +11,6 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import { Input, Checkbox, Radio, Form } from 'antd';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import moment from 'moment';
 
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
@@ -25,12 +24,12 @@ const { Option } = ZKSelect;
 import * as f_itemDataDispose from './itemDataDispose.js';
 
 // <React.Fragment></React.Fragment>
-const f_getItems = (namePrefix, form)=>{
-	// console.log("[^_^:20220427-1615-001]", namePrefix, form);
+const f_getItems = (namePrefix, form = null)=>{
+	console.log("[^_^:20220427-1615-001]", namePrefix, form);
 	let pSelectValue = "";
 	if(form != null){
 		pSelectValue = Form.useWatch(`${namePrefix}-ZKSelect`, form);
-		console.log("[^_^:20220427-1615-002]", pSelectValue);
+		console.log("[^_^:20220427-1615-002] pSelectValue: ", pSelectValue);
 	}
 	
 
@@ -38,7 +37,6 @@ const f_getItems = (namePrefix, form)=>{
 		if(form != null){
 			let isOptParent = form.isFieldTouched(namePrefix + '-ZKSelect');
 			if(isOptParent){
-				
 				// 操作过上级节点，重置关联的子选择当前值
 				// let v = {};
 				// v[`${namePrefix}-ZKSelectChild-1`] = '';
@@ -53,9 +51,11 @@ const f_getItems = (namePrefix, form)=>{
 	return [
 		<ZKRow key="1">
 			<ZKCol key="2" span={24}>
-				<ZKEditForm.Item key = {`${namePrefix}-Input`} labelCol = {{ span: 5 }} name = {`${namePrefix}-Input-`} label="Input-more" >
+				<ZKEditForm.Item key = {`${namePrefix}-Input-more`} labelCol = {{ span: 5 }} name = {`${namePrefix}-Input-more`} label="Input-more" >
+					{/*
 					<ZKInputJson styleType="compact" style={{ width: '100px' }} primaryAttr="zh_CN" onChange={(e) => { console.log('ZKInputJson-smart ', e) }} attrs={f_itemDataDispose.d_attrs} />
 					<Input style={{ width: 100 }} />
+					*/}
 					<ZKSelect>
 						<ZKSelect.Option value="">请选择</ZKSelect.Option>
 						{f_itemDataDispose.d_areas.map((item, index) => {
@@ -79,20 +79,44 @@ const f_getItems = (namePrefix, form)=>{
 				})}
 			</ZKSelect>
 		</ZKEditForm.Item>,
-		<ZKEditForm.Item key = {`${namePrefix}-noStyle-Select-child-`} noStyle shouldUpdate={ (prevValues, curValues) => {return prevValues[`${namePrefix}-Select-parent`] !== curValues[`${namePrefix}-Select-parent`] }}>
+		//<ZKEditForm.Item noStyle key = {`${namePrefix}-noStyle-Select-child`} shouldUpdate={ (prevValues, curValues) => {return prevValues[`${namePrefix}//-Select-parent`] !== curValues[`${namePrefix}-Select-parent`] }}>
+		//	{({ getFieldValue, setFieldsValue, isFieldTouched, resetFields })=>{
+		//		let svParent = getFieldValue(namePrefix + '-Select-parent');
+		//		let isOptParent = isFieldTouched(namePrefix + '-Select-parent');
+		//		let selChilds = f_itemDataDispose.f_getAreaTwos(svParent);
+		//		console.log("[^_^:20210301-0011-001]: " + namePrefix + '-Select-parent', svParent, isOptParent, selChilds);
+		//		let selChildOpts = selChilds.map(item => {return <ZKSelect.Option key={`${namePrefix}-${item.key}`} value={item.key}>{item.name}</ZKSelect.Option>});
+		//		if(isOptParent){
+		//			// 操作过上级节点
+		//			let v = {};
+		//			v[namePrefix + '-Select-child'] = '';
+		//			setFieldsValue(v);
+		//			// resetFields([namePrefix + '-Select-child']);
+		//		}
+		//		return (
+		//			<ZKForm.Item key = {`${namePrefix}-Select-child`} name = {`${namePrefix}-Select-child`} label="联动 Select-child" >
+		//				<ZKSelect>
+		//					<ZKSelect.Option value="">请选择</ZKSelect.Option>
+		//					{selChildOpts}
+		//				</ZKSelect>		
+		//			</ZKForm.Item>	
+		//		);
+		//	}}
+		//</ZKEditForm.Item>,
+		<ZKEditForm.Item noStyle key = {`${namePrefix}-noStyle-Select-child`} dependencies = {[`${namePrefix}-Select-parent`]} >
 			{({ getFieldValue, setFieldsValue, isFieldTouched, resetFields })=>{
 				let svParent = getFieldValue(namePrefix + '-Select-parent');
 				let isOptParent = isFieldTouched(namePrefix + '-Select-parent');
 				let selChilds = f_itemDataDispose.f_getAreaTwos(svParent);
-				// console.log("[^_^:20210301-0011-001] : " + namePrefix + '-Select-parent', svParent, isOptParent, selChilds);
+				console.log("[^_^:20210301-0011-002]: " + namePrefix + '-Select-parent', svParent, isOptParent, selChilds);
 				let selChildOpts = selChilds.map(item => {return <ZKSelect.Option key={`${namePrefix}-${item.key}`} value={item.key}>{item.name}</ZKSelect.Option>});
 
 				if(isOptParent){
 					// 操作过上级节点
-					// let v = {};
-					// v[namePrefix + '-Select-child'] = '';
-					// setFieldsValue(v);
-					resetFields([namePrefix + '-Select-child']);
+					let v = {};
+					v[namePrefix + '-Select-child'] = '';
+					setFieldsValue(v);
+					// resetFields([namePrefix + '-Select-child-2']);
 				}
 				return (
 					<ZKForm.Item key = {`${namePrefix}-Select-child`} name = {`${namePrefix}-Select-child`} label="联动 Select-child" >
@@ -147,7 +171,7 @@ const f_getItems = (namePrefix, form)=>{
 			<ZKInputJson styleType="expanding" isShowExpBtn={false} primaryAttr="zh_CN" 
 				onChange={(e) => { console.log('ZKInputJson-expanding-noButn ', e) }} attrs={f_itemDataDispose.d_attrs} />
 		</ZKEditForm.Item>,
-		<ZKEditForm.Item key = {`${namePrefix}-ZKSelect`} name = {`${namePrefix}-ZKSelect`} label="ZKSelect" rules = {[{ required: true}]} >
+		<ZKEditForm.Item key = {`${namePrefix}-ZKSelect`} name = {`${namePrefix}-ZKSelect`} label="联动 ZKSelect" rules = {[{ required: true}]} >
 			<ZKSelect fillValue={"请选择..."} >
 				<Option value="c1">c1</Option>
 				<Option value="c2">c2</Option>
@@ -159,7 +183,7 @@ const f_getItems = (namePrefix, form)=>{
 				{f_selectChild1()}
 			</ZKSelect>		
 		</ZKEditForm.Item>,
-		<ZKEditForm.Item key = {`${namePrefix}-ZKSelectChild-noStyle`} noStyle 
+		<ZKEditForm.Item noStyle key = {`${namePrefix}-ZKSelectChild-noStyle`} 
 			shouldUpdate={ (prevValues, curValues) => {
 				console.log("[^_^:20220427-1631-001] ", prevValues[`${namePrefix}-ZKSelect`] != curValues[`${namePrefix}-ZKSelect`]);
 				console.log("[^_^:20220427-1631-001-0] ", prevValues[`${namePrefix}-ZKSelect`]);

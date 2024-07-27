@@ -1,11 +1,11 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-07 10:49:19 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-07-02 09:43:07
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-12-11 15:54:43
  */
 import { message, Modal } from 'antd';
-
+import ZKModal from '../components/original/zk-modal/index.js'
 import zkJsUtils from 'zkJsUtils';
 
 /** 
@@ -35,7 +35,7 @@ const f_setLocale = (lang) => {
  * @return {string} 对应该国际化信息 
  */
 const f_getInternationInfo = (obj, lang) => {
-    if (typeof (obj) == 'string') {
+    if (zkJsUtils.assertObjType(obj, String)) {
         obj = JSON.parse(obj);
     }
 
@@ -63,7 +63,7 @@ const f_msgFormatByLocales = (locales = null, id, opt) => {
     if (zkJsUtils.isEmpty(msg)) {
         // throw new Error("not find format msg id:" + id);
         if (console) {
-            console.error("[>_<:20200815-0020-001] not find format msg id:: ", id);
+            console.error("[>_<:20200815-0020-001] not find format msg id: ", id);
         }
         return id;
     }
@@ -132,27 +132,27 @@ const f_alertMsg = (intl = null, locales = null, opt) => {
     switch (opt.type) {
         case 'success':
             opt.msg = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.success', {}); // 如未传入消息，使用默认 global.app.msg.success 消息
-            message.success(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null)); // 成功提示
+            ZKModal.message.success(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null)); // 成功提示
             return null;
             break;
         case 'warning':
             opt.msg = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.warning', {}); // 如未传入消息，使用默认 global.app.msg.warning 消息
-            message.warning(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null)); // 警告提示
+            ZKModal.message.warning(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null)); // 警告提示
             return null;
             break;
         case 'error':
             opt.msg = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.error', {}); // 如未传入消息，使用默认 global.app.msg.info 消息
-            message.error(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null));    // 错误提示
+            ZKModal.message.error(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null));    // 错误提示
             return null;
             break;
         case 'loading':
             opt.msg = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.loading', {}); // 如未传入消息，使用默认 global.app.msg.loading 消息
-            message.loading(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null));    // 加载提示
+            ZKModal.message.loading(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null));    // 加载提示
             return null;
             break;
         default:
             opt.msg = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.info', {}); // 如未传入消息，使用默认 global.app.msg.info 消息
-            message.info(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null)); // 默认为 info提示
+            ZKModal.message.info(opt.msg, opt.duration, (opt.onClose ? opt.onClose : null)); // 默认为 info提示
             return null;
             break;
     }
@@ -173,32 +173,32 @@ const f_alertModalMsg = (intl = null, locales = null, opt) => {
     opt.okText = f_msgFormat(intl, locales, 'global.popconfirm.name.okText');
     // 取消按钮文字
     opt.cancelText = f_msgFormat(intl, locales, 'global.popconfirm.name.cancelText');
-
+    // console.log("[^_^:202309-2150-002] f_alertModalMsg ZKModal.staticFunc: ", ZKModal.staticFunc);
     switch (opt.type) {
         case 'success': // 成功提示
             opt.content = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.success', {}); // 如未传入消息，使用默认 global.app.msg.success 消息
             opt.title = f_msgFormat(intl, locales, 'global.popconfirm.title.success') // 提示标题
-            return Modal.success(opt)
+            return ZKModal.success(opt)
             break
         case 'warning':  // 警告提示
             opt.content = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.warning', {}); // 如未传入消息，使用默认 global.app.msg.warning 消息
             opt.title = f_msgFormat(intl, locales, 'global.popconfirm.title.warning') // 提示标题
-            return Modal.warning(opt)
+            return ZKModal.warning(opt)
             break
         case 'error': // 错误提示
             opt.content = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.error', {}); // 如未传入消息，使用默认 global.app.msg.error 消息
             opt.title = f_msgFormat(intl, locales, 'global.popconfirm.title.error') // 提示标题
-            return Modal.error(opt)
+            return ZKModal.error(opt)
             break
         case 'confirm':  // 确认提示 警告
             opt.content = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.warning', {}); // 如未传入消息，使用默认 global.app.msg.warning 消息
             opt.title = f_msgFormat(intl, locales, 'global.popconfirm.title.confirm') // 提示标题
-            return Modal.confirm(opt)
+            return ZKModal.confirm(opt)
             break
         default:
             opt.content = opt.msg || f_msgFormat(intl, locales, 'global.app.msg.info', {}); // 如未传入消息，使用默认 global.app.msg.info 消息
             opt.title = f_msgFormat(intl, locales, 'global.popconfirm.title.info') // 提示标题
-            return Modal.info(opt) // 默认为 info提示
+            return ZKModal.info(opt) // 默认为 info提示
             break
     }
 }
@@ -255,7 +255,7 @@ const f_alertMsgByType = (intl = null, locales = null, type, onOk, onCancel) => 
  */
 const f_mergeLocalMsgs = (localDatas) => {
 
-    if (localDatas instanceof Array) {
+    if (zkJsUtils.assertObjType(localDatas, Array)) {
         let locale = {};
         localDatas.forEach(item => {
             for (let index in item) {
@@ -306,7 +306,7 @@ const f_makeFormFieldsErrorsByMapaData = (mapData) => {
  */
 // const f_dyncImportLocalMsgs = (dependentModules) => {
 //     let localMsgArray = [];
-//     if (dependentModules instanceof Array) {
+//     if (zkJsUtils.assertObjType(dependentModules, Array)) {
 //         dependentModules.forEach(item => {
 //             let msgFile = item + "/locales";
 //             let locales = require(msgFile);

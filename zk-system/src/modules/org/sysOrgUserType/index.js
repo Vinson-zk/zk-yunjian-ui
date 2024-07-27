@@ -17,9 +17,7 @@ const { zkToolsUtils, zkToolsMsg } = zkTools;
 import SearchItem from "./search.js";
 import GridItem from "./grid.js";
 import CGrantAuth from "../grantAuth.js";
-
-import zkStyles from 'zkFramework/css/styles.less';
-
+import zkStyles from 'zkFramework/style/zk.styles.less';
 import locales from "../../../locales/index";
 
 class CInitSysOrgUserTypeIndex extends Component {
@@ -27,14 +25,14 @@ class CInitSysOrgUserTypeIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            optCompanyEntity:{},
+            optUserTypeEntity:{},
             grantAuthModal:false,
         };
     }
 
     // 分配权限
     f_onShowGrantAuthModal = (flag, record)=>{
-        this.setState({grantAuthModal:flag, optCompanyEntity:record});
+        this.setState({grantAuthModal:flag, optUserTypeEntity:record});
     };
 
     render() {
@@ -42,23 +40,25 @@ class CInitSysOrgUserTypeIndex extends Component {
         let { intl, loading, mApp, dispatch } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
         return (
-            <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} >
+            <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} onShowGrantAuthModal={this.f_onShowGrantAuthModal} />
                 <CGrantAuth isShow = {this.state.grantAuthModal} 
-                    url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthUserType/sysAuthDefinedsPage`}
-                    urlOwnerIds = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthUserType/findAuthIdsByUserTypeId`}
-                    urlOwnerTargetParamName="userTypeId"
+                    url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthUserType/findAllotAuthPage`}
+                    formatParamsFunc = {(toTargetId, params={})=>{
+                        params['userTypeId'] = toTargetId;
+                        return params;
+                    }}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.userType')}
-                    descName={zkToolsMsg.getInternationInfo(this.state.optCompanyEntity.name?this.state.optCompanyEntity.name:{}, lang)}
-                    targetId={this.state.optCompanyEntity.pkId} 
+                    descName={zkToolsMsg.getInternationInfo(this.state.optUserTypeEntity.name?this.state.optUserTypeEntity.name:{}, lang)}
+                    toTargetId={this.state.optUserTypeEntity.pkId} 
                     onShowModal={this.f_onShowGrantAuthModal}
                     saveSpinning={loading.effects["mSysOrgUserType/grantAuth"]||false}
-                    saveFunc={(userTypeId, auths, callback)=>{
+                    saveFunc={(userTypeId, allotAuths, callback)=>{
                         dispatch({ 
                             type: 'mSysOrgUserType/grantAuth', 
                             userTypeId: userTypeId,
-                            auths: auths,
+                            allotAuths: allotAuths,
                             callback: callback
                         });
                     }}

@@ -2,15 +2,15 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 17:27:41
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 18:17:37
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
+
 /*
 JSON.stringify(params)
 contentType:'application/json; charset=utf-8'}
@@ -20,14 +20,8 @@ export async function editSysOrgCompany(params) {
     return zkToolsAjax.reqPretreatment(
         `/${api}/org/sysOrgCompany/sysOrgCompany`, 
         {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
-        );
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
+    );
 }
 
 // 删除
@@ -51,8 +45,8 @@ export async function auditCompany(companyId, status) {
 }
 
 // 给公司分配权限
-export async function setAuthRelation(companyId, auths) {
-    return zkToolsAjax.reqPretreatment(`/${api}/auth/sysAuthCompany/setRelationByCompany/${companyId}`, 
+export async function grantAuths(companyId, auths) {
+    return zkToolsAjax.reqPretreatment(`/${api}/auth/sysAuthCompany/grantAuths/${companyId}`, 
         {method:'POST', data:JSON.stringify(auths), contentType:'application/json; charset=utf-8'});
 }
 

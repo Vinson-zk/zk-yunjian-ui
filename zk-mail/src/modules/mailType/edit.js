@@ -74,7 +74,8 @@ class CInitMailTypeEdit extends Component {
                 >
                 	<ZKEditForm.Item name = "typeCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeCode')} 
                 		rules = {[
-							zkToolsValidates.string(intl, 1, 64, true), 
+							zkToolsValidates.string(intl, 1, 64, true),
+                            zkToolsValidates.code(intl) 
                         ]} 
 					>
                         <ZKInput placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeCode.placeholder')}

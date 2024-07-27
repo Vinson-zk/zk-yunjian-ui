@@ -2,15 +2,16 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 18:21:19
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-10 19:47:01
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 17:52:59
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Breadcrumb, Button } from 'antd';
 import { DoubleLeftOutlined } from '@ant-design/icons';
-import { Link, withRouter } from 'dva/router';
+import { router } from 'dva';
+const { Link, withRouter } = router;
 
 import zkJsUtils from 'zkJsUtils';
 import { zkToolsNavAndMenu } from '../../../tools';
@@ -23,13 +24,13 @@ const CInitBreadcrumb = withRouter(({ match, history, location, routerMappingObj
     paths = paths.split("?").filter(i => i)[0];
     paths = paths.split("/").filter(i => i);
 
-    let breads = f_getBreadcrumsByMapping(paths, routerMappingObj, isShowFunc)
+    let breadItems = f_getBreadcrumsByMapping(paths, routerMappingObj, isShowFunc)
 
     // console.log("[^_^:20190129-1416-001] CInitBreadcrumb: ", paths, location, breads, routerMappingObj)
     // size={"small"} 
     return (
-        <div className={styles.breadcrumb_div}>
-            <Button className={styles.breadcrumb_goBackButton} size={"small"} icon={<DoubleLeftOutlined />}
+        <div className={styles.zk_breadcrumb_div}>
+            <Button className={styles.zk_breadcrumb_goBackButton} size={"small"} icon={<DoubleLeftOutlined />}
                 onClick={e => {
                     // console.log(length, history)
                     // history.go(-1);
@@ -38,16 +39,25 @@ const CInitBreadcrumb = withRouter(({ match, history, location, routerMappingObj
                     // length = length - 1;
                 }
                 } />
-            <Breadcrumb className={styles.breadcrumb} separator={'>'}>{breads}</Breadcrumb>
+            <Breadcrumb className={styles.zk_breadcrumb} separator={'>'} itemRender={f_itemRender} items={breadItems} />
         </div>
     )
 
 })
 
+function f_itemRender(item, params, items, paths) {
+  const last = items.indexOf(item) === items.length - 1;
+  if(last){ // 最后一个面包屑节点
+    return <span>{item.title}</span>;
+  }else{
+    return <Link to={item.path}>{item.title}</Link>
+  }
+}
+
 // 根据 路由路径与菜单映射数据生成面包屑对应对象
 const f_getBreadcrumsByMapping = (paths, routerMappingObj, isShowFunc) => {
-    let breads = [];
-    if (routerMappingObj.getMappingTarget instanceof Function) {
+    let breadItems = [];
+    if (zkJsUtils.assertObjType(routerMappingObj.getMappingTarget, Function)) {
         let path = "";
         let breadName = undefined;
         let targetObj = undefined;
@@ -61,20 +71,26 @@ const f_getBreadcrumsByMapping = (paths, routerMappingObj, isShowFunc) => {
             if (targetObj != null && isShowFunc(targetObj)) {
                 breadName = zkToolsNavAndMenu.getMenuName(targetObj);
                 breadName = zkJsUtils.isEmpty(breadName) ? item : breadName;
-                if (index === arr.length - 1) {
-                    // 最后一级路由 .key 
-                    breads.push(<Breadcrumb.Item key={index}>{breadName}</Breadcrumb.Item>)
-                } else {
-                    breads.push(
-                        <Breadcrumb.Item key={index}>
-                            <Link to={path}>{breadName}</Link>
-                        </Breadcrumb.Item>
-                    )
-                }
+                breadItems.push({'path': path, 'title': breadName});
             }
+
+            // if (targetObj != null && isShowFunc(targetObj)) {
+            //     breadName = zkToolsNavAndMenu.getMenuName(targetObj);
+            //     breadName = zkJsUtils.isEmpty(breadName) ? item : breadName;
+            //     if (index === arr.length - 1) {
+            //         // 最后一级路由 .key 
+            //         breads.push(<Breadcrumb.Item key={index}>{breadName}</Breadcrumb.Item>)
+            //     } else {
+            //         breads.push(
+            //             <Breadcrumb.Item key={index}>
+            //                 <Link to={path}>{breadName}</Link>
+            //             </Breadcrumb.Item>
+            //         )
+            //     }
+            // }
         });
     }
-    return breads;
+    return breadItems;
 }
 
 // 根据路径对应菜单与树形数据生成面包屑数据

@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-03-05 10:31:51
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-04 17:45:52
+* @Last Modified by: runoob
+* @Last Modified time: 2024-07-04 16:28:29
 * 
 * 
 * 
@@ -82,7 +82,7 @@ class CInitChannelEdit extends Component {
   convertData = (datas)=>{
   	let { intl, mApp } = this.props;
   	let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-    if(datas && (datas instanceof Array)){
+    if(zkJsUtils.assertObjType(datas, Array)){
       return datas.map(item=>{
         return {
           key: item.pkId,
@@ -111,7 +111,7 @@ class CInitChannelEdit extends Component {
       callback: dataObj=>{
         // console.log("[^_^:20220318-1941-002] 可分配的请求渠道：", dataObj);
         let { resultList } = dataObj;
-        if(resultList && resultList instanceof Array){
+        if(zkJsUtils.assertObjType(resultList, Array)){
         	let selectKeys = resultList.map(item=>{
         		return item.channelId;
         	});
@@ -169,7 +169,7 @@ class CInitChannelEdit extends Component {
     	|| loading.effects['mSysResFuncApi/findRelationByFuncApi']
     	|| loading.effects['mSysResFuncApi/setRelationByFuncApi'] ;
     return (
-		<ZKModal title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.opt.channel.set')} visible={isShow}
+		<ZKModal title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.opt.channel.set')} open={isShow}
 		  onOk={this.handleOk}
 		  onCancel={this.handleCancel}
 		  okButtonProps = {{loading: spinning}}

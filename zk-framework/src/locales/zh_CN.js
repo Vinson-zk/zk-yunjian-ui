@@ -1,11 +1,12 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-07 10:52:32 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-01-03 15:14:41
+ * @Last Modified by: vinson
+ * @Last Modified time: 2023-09-06 10:39:23
  */
 import zhLocaleData from "react-intl/locale-data/zh"
-import antd from "antd/lib/locale-provider/zh_CN"
+
+import zhAntd from "antd/locale/zh_CN";
 
 import zh_CN_msg from "./msgs/zh_CN";
 import icon_zh_CN_msg from "./msgs/icon/zh_CN";
@@ -16,6 +17,6 @@ export default {
 	name: "简体中文",
 	locale: "zh-CN",
 	localeData: zhLocaleData,
-	antd: antd,
+	antd: zhAntd,
 	messages: { ...zh_CN_msg, ...icon_zh_CN_msg, ...editJsonArray_zh_CN_msg }
 }

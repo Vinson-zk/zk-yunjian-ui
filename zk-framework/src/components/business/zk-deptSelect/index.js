@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-02 16:19:50
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-07 17:43:02
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:15:52
 * 
 * 部门选择器；使用详见使用的属性说明
 * 
@@ -20,7 +20,7 @@ import { ZKTreeSelect, ZKSpin } from '../../original';
 import { zkToolsUtils, zkToolsMsg, zkToolsAjax } from '../../../tools';
 const { TreeNode } = ZKTreeSelect;
 
-import zkStyles from '../../../../css/styles.less';
+import zkStyles from '../../../../style/zk.styles.less';
 
 // const f_genUUID = ()=>{
 // 	return `zk-dept-sel-node-${uuid.v4()}`;
@@ -113,7 +113,7 @@ class CInitDeptTreeSelect extends Component {
 	        // params = zkToolsUtils.convertSortParam(params, {}); 
 	        params = { ...params, ...zkToolsUtils.convertPageParam({'current':1, 'pageSize':999}) };
 	        return f_findSysOrgDeptsSelf(url, params).then(res=>{
-                if (res.code == 'zk.0') {
+                if (res.ok) {
                     // let expandedKeys = [];
                     let cTreeData = res.data.result;
                     if(loadData == null){
@@ -298,7 +298,7 @@ export default CInitDeptTreeSelect;
 // const { zkToolsUtils, zkToolsMsg } = zkTools;
 
 
-// import zkStyles from 'zkFramework/css/styles.less';
+// import zkStyles from 'zkFramework/style/styles.less';
 
 // import locales from "../../locales/index";
 
@@ -339,7 +339,7 @@ export default CInitDeptTreeSelect;
 // 	        let promise = findSysOrgDeptsSelf(params);
 // 	        let _this = this;
 // 	        promise.then(res=>{
-// 	        	if (res.code == 'zk.0') {
+// 	        	if (res.ok) {
 // 	            	// let expandedKeys = [];
 // 	            	let cTreeData = res.data.result.map(item=>{
 // 	            		return {

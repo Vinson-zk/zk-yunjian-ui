@@ -2,12 +2,12 @@
  * 导航栏，菜单处理 函数方法
  * @Author: Vinson
  * @Date: 2020-08-11 09:04:45
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-17 16:59:52
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 20:41:57
  */
 
 import React from 'react';
-import dynamic from 'dva/dynamic';
+import { dynamic } from 'dva';
 
 import zkJsUtils from 'zkJsUtils';
 import zkToolsMsg from './zkToolsMsg.js';
@@ -78,7 +78,7 @@ const f_unRegisterModel = (dvaApp, models = []) => {
  */
 const f_makeDynamicComponent = (dvaApp, models, component) => {
 	// console.log("[^_^:20200813-1917-001] ", dvaApp, models, component);
-	if (models && (models instanceof Array) && models.length > 0) {
+	if ((zkJsUtils.assertObjType(models, Array)) && models.length > 0) {
 		// console.log("[^_^:20200813-2009-001 ] f_makeDynamicComponent ", dvaApp, models, component);
 		// dvaApp = dvaApp||globalDvaApp;
 		// 注意这里属性名称的对应，是 app
@@ -120,7 +120,8 @@ const f_getRoutesByNavs = (dvaApp, prefixPath, navDatas, dynamicImportHelper) =>
 				return;
 			}
 			navDynamicComponent = f_makeDynamicComponent(dvaApp, navComponentObj.models, navComponentObj.component);
-			// console.log("[^_^:20200813-1951-001] f_getRoutesByNavs: ", item, navComponentObj, navDynamicComponent);
+			// console.log("[^_^:20200813-1951-001] f_getRoutesByNavs: ", item, dynamicImportHelper);
+			// console.log("[^_^:20200813-1951-002] f_getRoutesByNavs: ", navComponentObj, navDynamicComponent);
 			return (
 				<ZKPrivateRoute
 					key={item.pkId + "-nav"}
@@ -257,7 +258,7 @@ const f_getIndexMenu = (menus, prefixPath) => {
 		if (menu.isIndex == 1) {
 			prefixPath = prefixPath + "/" + menu.path;
 			let indexObj = null;
-			if (menu.children instanceof Array) {
+			if (zkJsUtils.assertObjType(menu.children, Array)) {
 				indexObj = f_getIndexMenu(menu.children, prefixPath);
 			}
 			if (indexObj == null) {
@@ -311,7 +312,7 @@ const f_menuIsShow = (menu) => {
  * @return: true-是叶子节点；false-不是叶子节点； 
  */
 const f_menuIsLeaf = (menu) => {
-	if (menu.children instanceof Array) {
+	if (zkJsUtils.assertObjType(menu.children, Array)) {
 		for (let cm of menu.children) {
 			if (f_menuIsShow(cm)) {
 				return false

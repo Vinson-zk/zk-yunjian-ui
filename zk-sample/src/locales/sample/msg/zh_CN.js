@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-13 20:47:21
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 15:22:23
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-25 22:30:12
  */
 
 
@@ -17,10 +17,15 @@ const msg = {
     "sample.table.col1":"列1",
     "sample.table.col2":"列2",
 	"sample.table.col3":"列3",
+    "sample.table.col4":"列4",
+	"sample.table.col5":"列5",
+    "sample.table.col6":"列6",
+	"sample.table.col7":"列7",
 	
 	"sample.components.original.anchor":"ZKAnchor 锚点",
 	"sample.components.original.button":"ZKButton 按钮",
 	"sample.components.original.col":"ZKCol 列",
+	"sample.components.original.configProvider":"全局化配置",
 	"sample.components.original.datePicker":"ZKDatePicker 日期选择",
 	"sample.components.original.form":"ZKForm 表单",
 	"sample.components.original.input":"ZKInput 输入框",
@@ -40,6 +45,7 @@ const msg = {
 	"sample.components.custom.autoMenu":"ZKAutoMenu 菜单",
 	"sample.components.custom.autoTable":"ZKAutoTable 自动表格",
 	"sample.components.custom.breadcrumb":"ZKBreadcrumb 面包屑",
+	"sample.components.custom.contentFormat":"ZKContentFormat 内容版式",
 	"sample.components.custom.dateFormatPicker":"ZKDateFormatPicker 日期格式",
 	"sample.components.custom.detailGrid":"ZKDetailGrid 明细页面行例",
 	"sample.components.custom.editForm":"ZKEditForm 编辑",
@@ -55,7 +61,10 @@ const msg = {
 	"sample.components.custom.scrollTable":"ZKScrollTable 滚动条表格",
 	"sample.components.custom.searchRow":"ZKSearchRow 查询行",
 	"sample.components.custom.sider":"ZKSider 滑块",
+	"sample.components.custom.popoverPanel":"弹窗菜单",
 	"sample.components.custom.textEditor":"ZKTextEditor 富文本框",
+	"sample.components.custom.theme":"主题",
+	"sample.components.custom.touchControl":"触控点",
 	"sample.components.custom.upload":"ZKUpload 上传",
 	"sample.components.custom.userDropDown":"ZKUserDropDown 用户下拉框",
 	"sample.components.custom.versionInfo":"ZKVersionInfo 版本信息",

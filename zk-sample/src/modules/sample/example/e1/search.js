@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-17 14:21:36
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-15 19:33:21
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 20:53:48
  */
 
 
@@ -27,7 +27,7 @@ class CInitE1_Search extends React.Component {
 	// 第一级地区改变
 	f_areaOneChange = (e, form)=>{
 		let fsv = form.getFieldsValue();
-		if (this.props.onSetFilter instanceof Function) {
+		if (zkJsUtils.assertObjType(this.props.onSetFilter, Function)) {
 			this.props.onSetFilter.call(this, { ...fsv, areaOne: e, areaTwo: '' });
 		}
 		form.resetFields(["areaTwo"])
@@ -53,16 +53,16 @@ class CInitE1_Search extends React.Component {
 		return (
 			<ZKSearchRow ref={ this.formRef } initialValues = {filter}
 				resetFunc={values => {
-					if (onSetFilter instanceof Function) {
+					if (zkJsUtils.assertObjType(onSetFilter, Function)) {
 						onSetFilter.call(this, null);
 					}
-					// if(onSearch instanceof Function){
+					// if(onSearch, Function)){
 					// 	onSearch.call(this, null)
 					// }
 				}}
 				searchFunc={values => {
 					this.setState({ filter: values });
-					if (onSearch instanceof Function) {
+					if (zkJsUtils.assertObjType(onSearch, Function)) {
 						onSearch.call(this, values)
 					}
 				}}

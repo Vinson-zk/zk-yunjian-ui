@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-13 13:44:59
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-02-28 13:02:53
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-10-08 17:38:53
  */
 
 
@@ -15,7 +15,8 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from '../helper';
 import styles from "../styles.less";
 import zkJsUtils from 'zkJsUtils';
-import { zkTools, ZKOriginalComponents } from "zkFramework";
+import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { ZKAnchor } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
 
@@ -45,30 +46,116 @@ class CInitJsUtilsDemo extends React.Component {
 				return (dom&&dom.parentNode)?dom.parentNode:dom;
 			}
 		*/
-		return (
+		// Number-数字; Date-日期; String-字符串; Boolean-布尔; Function-函数; RegExp-正则表达式; Array-数组; Object-对象; Symbol-",
+		let key = 0;
+		let f_assertObjTypeContentDiv = (lable, obj)=>{
+			++key;
+			return (<div key={key}>
+				<span> ----- {lable} 对象测试 {zkJsUtils.isEmpty(obj, false)?'null':obj.toString()}: </span><br />
+				Number: {zkJsUtils.assertObjType(obj, Number)?'true':'false'}<br />
+				Date: {zkJsUtils.assertObjType(obj, Date)?'true':'false'}<br />
+				String: {zkJsUtils.assertObjType(obj, String)?'true':'false'}<br />
+				Boolean: {zkJsUtils.assertObjType(obj, Boolean)?'true':'false'}<br />
+				Function: {zkJsUtils.assertObjType(obj, Function)?'true':'false'}<br />
+				RegExp: {zkJsUtils.assertObjType(obj, RegExp)?'true':'false'}<br />
+				Array: {zkJsUtils.assertObjType(obj, Array)?'true':'false'}<br />
+				Object: {zkJsUtils.assertObjType(obj, Object)?'true':'false'}<br />
+				Symbol: {zkJsUtils.assertObjType(obj, Symbol)?'true':'false'}<br />
+			</div>)
+		}
 
-			<div id="sample-zkJs-zkJsUtils" className={styles.sample_detail_panel}  >
+		let f_assertObjTypeContent = ()=>{
+			let es = [];
+			es.push(f_assertObjTypeContentDiv('Number', 0));
+			es.push(f_assertObjTypeContentDiv('Date', new Date()));
+			es.push(f_assertObjTypeContentDiv('String', ''));
+			es.push(f_assertObjTypeContentDiv('Boolean', true));
+			es.push(f_assertObjTypeContentDiv('Function', ()=>{}));
+			es.push(f_assertObjTypeContentDiv('RegExp', /0/));
+			es.push(f_assertObjTypeContentDiv('Array', []));
+			es.push(f_assertObjTypeContentDiv('Object', {}));
+			// es.push(f_assertObjTypeContentDiv('Symbol', 0));
+			return es;
+		}
+
+		return (
+			<ZKContentFormat id="sample-zkJs-zkJsUtils" className={styles.sample_detail_panel} >
 				<div className={styles.sample_detail_top_affix} >
-					<ZKAnchor>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#queryURL`} title="queryURL" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#base64Decode`} title="base64Decode" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#removeObjUnAttr`} title="removeObjUnAttr" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#isEmpty`} title="isEmpty" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#strToObj`} title="strToObj" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#objToStr`} title="objToStr" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#redirectUrl`} title="redirectUrl" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#makeTree`} title="makeTree" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#findTreeParent`} title="findTreeParent" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#getLang`} title="getLang" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#strReplace`} title="strReplace" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#getJsonAttr`} title="getJsonAttr" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#sort`} title="sort" ></ZKAnchor.Link>
-						<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}/#arrayPrototype`} title="Array.prototype" ></ZKAnchor.Link>
-					</ZKAnchor>
+					<ZKAnchor items = {[
+						{
+							'key': `${globalAppConfig.basename}${match.path}/#queryURL`,
+				            'href': `${globalAppConfig.basename}${match.path}/#queryURL`,
+				            'title': 'queryURL'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#base64Decode`,
+				            'href': `${globalAppConfig.basename}${match.path}/#base64Decode`,
+				            'title': 'base64Decode'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#removeObjUnAttr`,
+				            'href': `${globalAppConfig.basename}${match.path}/#removeObjUnAttr`,
+				            'title': 'removeObjUnAttr'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#isEmpty`,
+				            'href': `${globalAppConfig.basename}${match.path}/#isEmpty`,
+				            'title': 'isEmpty'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#strToObj`,
+				            'href': `${globalAppConfig.basename}${match.path}/#strToObj`,
+				            'title': 'strToObj'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#objToStr`,
+				            'href': `${globalAppConfig.basename}${match.path}/#objToStr`,
+				            'title': 'objToStr'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#redirectUrl`,
+				            'href': `${globalAppConfig.basename}${match.path}/#redirectUrl`,
+				            'title': 'redirectUrl'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#makeTree`,
+				            'href': `${globalAppConfig.basename}${match.path}/#makeTree`,
+				            'title': 'makeTree'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#findTreeParent`,
+				            'href': `${globalAppConfig.basename}${match.path}/#findTreeParent`,
+				            'title': 'findTreeParent'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#getLang`,
+				            'href': `${globalAppConfig.basename}${match.path}/#getLang`,
+				            'title': 'getLang'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#strReplace`,
+				            'href': `${globalAppConfig.basename}${match.path}/#strReplace`,
+				            'title': 'strReplace'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#getJsonAttr`,
+				            'href': `${globalAppConfig.basename}${match.path}/#getJsonAttr`,
+				            'title': 'getJsonAttr'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#sort`,
+				            'href': `${globalAppConfig.basename}${match.path}/#sort`,
+				            'title': 'sort'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#clone`,
+				            'href': `${globalAppConfig.basename}${match.path}/#clone`,
+				            'title': 'clone'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#changeStyleCssVal`,
+				            'href': `${globalAppConfig.basename}${match.path}/#changeStyleCssVal`,
+				            'title': 'changeStyleCssVal'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#assertObjType`,
+				            'href': `${globalAppConfig.basename}${match.path}/#assertObjType`,
+				            'title': 'assertObjType'
+						},{
+							'key': `${globalAppConfig.basename}${match.path}/#arrayPrototype`,
+				            'href': `${globalAppConfig.basename}${match.path}/#arrayPrototype`,
+				            'title': 'arrayPrototype'
+						}
+					]} />
 				</div>
-				<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkJsUtils {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-				<div className={styles.sample_detail_section}>
-					<SyntaxHighlighter id="all-func" language='jsx' style={docco}>
+
+				<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkJsUtils ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+					<SyntaxHighlighter id="all-func" language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"queryURL         // 查询获取 url 中的参数，",
 							"base64Decode     // 64 编码解密",
@@ -83,13 +170,13 @@ class CInitJsUtilsDemo extends React.Component {
 							"strReplace       // 字符串 按参数名 {argName} 替换成对象的值",
 							"getJsonAttr      // 取 JSON 字符中的某个属性",
 							"sort             // 排序",
+							"clone            // 深度拷贝一个对象或数组",
 						].join('\n')}
 					</SyntaxHighlighter>
-				</div>
-				<div className={styles.sample_detail_section}>
-					<h2>1、方法 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
+				</ZKContentFormat>
+				<ZKContentFormat title = {`方法 ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
 					<div id="queryURL">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 获取 url 中的参数；",
 								" * @href: 为url;",
@@ -101,7 +188,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="base64Decode">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 64 解码",
 								" * @str: 待解码的字符串；",
@@ -112,7 +199,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="removeObjUnAttr">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 删除对象 undefined 属性",
 								" * @obj: 待处理对象;",
@@ -123,18 +210,19 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="isEmpty">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
-								"/** 判断一个对象是否为空; 'null', 'undefined', '' 都为空 ",
-								" * @obj: 待判断的对象;",
-								" * @return: true-空；false-不为空;",
-								" */",
-								"isEmpty:f_isEmpty(obj)"
+								"/** 判断一个对象是否为空",
+							    " * @obj: 待判断的对象;",
+							    " * @isExtend: 默认为 true; 扩展判断，true-时，'' 返回 true;",
+							    " * @return: 返回：null-true、undefined-true",
+							    " */",
+								"isEmpty:f_isEmpty(obj, isExtend=true)",
 							].join('\n')}
 						</SyntaxHighlighter>
 					</div>
 					<div id="strToObj">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** json 字符串转为 json 对象 ",
 								" * @str: 需要转的字符串或字符串数组;",
@@ -145,7 +233,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="objToStr">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** json 对象 转为 json 字符串",
 								" * @obj: 需要转的 json 对象; ",
@@ -156,7 +244,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="redirectUrl">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** url 重定向 ",
 								" * @location: 请求 location; location.pathname 为请求地址字符串；",
@@ -172,7 +260,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="makeTree">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 做成树状结构",
 								" * @objList: 数据对象数组，对象包含：id, parentId 两个属性；处理完后对象会增加一个 children 属性，无子节点是此属性为空；",
@@ -184,7 +272,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="findTreeParent">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 递归查找 父节点;",
 								" * @pObjs: 数据对象数组; 对象包含 id, parentId，children 三个属性；",
@@ -196,7 +284,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="getLang">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 国际化转换，将国际化标识转在本项目中对应的格式 ",
 								" * @lang: 待转换的标识; ",
@@ -207,7 +295,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="strReplace">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 字符串 按参数名 {argName} 替换成对象的值 ",
 								" * @msg: 源字符串; ",
@@ -223,7 +311,7 @@ class CInitJsUtilsDemo extends React.Component {
 						<br /><br />
 					</div>
 					<div id="getJsonAttr">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 不推荐使用，将会移除此方法；取 json 字符串 或 json 对象中的某个属性 ",
 								" * @objStr: 源 json 对象或json 字符串；",
@@ -235,7 +323,7 @@ class CInitJsUtilsDemo extends React.Component {
 						</SyntaxHighlighter>
 					</div>
 					<div id="sort">
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"/** 排序函数 ",
 								" * @items：源数据对象数组；",
@@ -248,11 +336,45 @@ class CInitJsUtilsDemo extends React.Component {
 							].join('\n')}
 						</SyntaxHighlighter>
 					</div>
-				</div>
-				<div className={styles.sample_detail_section}>
-					<h2>2、数组对象属性扩展 {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
+					<div id="clone">
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+							{[
+								"/** 深度拷贝一个对象或数组 ",
+								" * @obj: 源数组或对象；",
+								" * @return: 深度拷贝的结果数组或对象；",
+								" */",
+								"clone:f_clone(obj)"
+							].join('\n')}
+						</SyntaxHighlighter>
+					</div>
+					<div id="changeStyleCssVal">
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+							{[
+								"/** 修改页面中的样式变量值",
+							    " * @obj: 变量值映射",
+							    " * @keys: 修改的 css 变量名， 不带 '--'",
+								" */",
+								"changeStyleCssVal: f_changeStyleCssVal(valMap, keys=[])"
+							].join('\n')}
+						</SyntaxHighlighter>
+					</div>
+					<div id="assertObjType">
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+							{[
+								"/** 判断变量的数据类型是否是指定类型 ",
+								" * @obj: 变量, 非 Null、Undefined，obj 为 Null、Undefined 是，返回 false;",
+								" * @type: js 的数据类型: Number-数字; Date-日期; String-字符串; Boolean-布尔; Function-函数; RegExp-正则表达式; Array-数组; Object-对象; Symbol-",
+								" * @return: 结果, true-是; false-不是；",
+								" */",
+								"assertObjType:f_assertObjType(obj, type)"
+							].join('\n')}
+						</SyntaxHighlighter>
+						{f_assertObjTypeContent()}
+					</div>
+				</ZKContentFormat>
+				<ZKContentFormat title = {`数组对象属性扩展 ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
 					<div id="arrayPrototype" >
-						<SyntaxHighlighter language='jsx' style={docco}>
+						<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 							{[
 								"// 查询元素，不存在返回 -1; 存在 返回其位置",
 								"Array.prototype.indexOf = function(val) ",
@@ -267,9 +389,9 @@ class CInitJsUtilsDemo extends React.Component {
 							].join('\n')}
 						</SyntaxHighlighter>
 					</div>
-				</div>
+				</ZKContentFormat>
 				<br />
-			</div>
+			</ZKContentFormat>
 		)
 	}
 }

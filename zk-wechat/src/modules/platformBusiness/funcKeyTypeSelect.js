@@ -3,8 +3,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-03 15:13:29
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-07 17:43:17
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:15:55
 * 
 * 
 * 
@@ -54,7 +54,7 @@ class CInitFuncKeyConfigTypeSelect extends Component {
         	this.setState({spinning: true});
 	        params = { ...params, ...zkToolsUtils.convertPageParam({'current':1, 'pageSize':999}) };
 	        findFuncKeyTypes(params).then(res=>{
-	        	if (res.code == 'zk.0') {
+	        	if (res.ok) {
                     this.setState({listDatas: res.data.result, spinning: false});
                 }else{
                 	this.setState({spinning: false});

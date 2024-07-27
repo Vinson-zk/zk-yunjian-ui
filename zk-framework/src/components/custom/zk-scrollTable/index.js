@@ -1,9 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-11 18:13:59
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-15 19:25:53
-* 
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-27 23:57:36
 * 
 * 
 */
@@ -18,6 +17,7 @@ import $ from 'zkJquery';
 
 import { zkToolsMsg, zkToolsUtils } from '../../../tools';
 import { ZKTable } from '../../original';
+import zkStyles from '../../../../style/zk.styles.less';
 import styles from './styles.less';
 
 /*** 滚动条 滚动条添加样式 */
@@ -118,7 +118,7 @@ class CInitScrollTable extends React.Component {
 	render(){
 		if(this.props.scroll){
 			let _this = this;
-			let { autoHeight, scroll, className, components, ...itemProps } = _this.props;
+			let { autoHeight, scroll, className='', components, ...itemProps } = _this.props;
 			
 			let scrollY = 0;
 			if(autoHeight){
@@ -138,7 +138,7 @@ class CInitScrollTable extends React.Component {
 				if(!isNaN(scrollY)){
 					scrollBarsStyle['height'] = scrollY;
 				}
-				tableHiddenScroolClassName += ' ' + styles.s_scrollbars_table_y_hidden;
+				tableHiddenScroolClassName += ' ' + styles.zk_scroll_table_y_hidden;
 			}else{
 				scrollBarsProps['autoHeight'] = true;
 				scrollBarsProps['autoHeightMax'] = 900;
@@ -148,7 +148,7 @@ class CInitScrollTable extends React.Component {
 				// if(!isNaN(this.state.scroll.x)){
 				// 	scrollBarsStyle['width'] = this.state.scroll.x;
 				// }
-				tableHiddenScroolClassName += ' ' + styles.s_scrollbars_table_x_hidden;
+				tableHiddenScroolClassName += ' ' + styles.zk_scroll_table_x_hidden;
 			}
 			// console.log("[^_^:20210312-1705-001] scrollBarsProps:", scrollBarsProps, scrollBarsStyle);
 
@@ -157,7 +157,7 @@ class CInitScrollTable extends React.Component {
 	            // console.log("[^_^:20210312-0942-001] renderTableComponents: ", tableProps);
 	            const { style, children } = tableProps;
 	            return (
-	                <Scrollbars ref = { _this.scrollbarsRef } className = {styles.s_body_scrollbars} { ...scrollBarsProps } style = {scrollBarsStyle}
+	                <Scrollbars ref = { _this.scrollbarsRef } className = {styles.zk_scroll_table_body_scrollbars} { ...scrollBarsProps } style = {scrollBarsStyle}
 	                	onScroll = { _this.onScrollbars } onScrollStop = { _this.handleScrollStop } >
 	                    <table style = { style }>{ children }</table>
 	                </Scrollbars>
@@ -174,15 +174,16 @@ class CInitScrollTable extends React.Component {
 	        	// body: renderVirtualList,
 	        	table: renderTableComponents,
 	        }
-
+	        
 			return (autoHeight ?
-				(<div id = {this.tableId} className = {`${styles.s_scrollbars_table_div}`} >
-					<ZKTable { ...itemProps } scroll = {scroll} className = {`${styles.s_scrollbars_table} ${styles.s_flex} ${tableHiddenScroolClassName} ${className}`} components = { tableComponent } sticky = {true} />
+				(<div id = {this.tableId} className = {`${styles.zk_scroll_table_div}`} >
+					<ZKTable { ...itemProps } scroll = {scroll} className = {`${styles.zk_scroll_table} ${zkStyles.zk_f_flex_auto_1} ${tableHiddenScroolClassName} ${className}`} components = { tableComponent } sticky = {true} />
 				</div>)
-				: (<ZKTable { ...itemProps } scroll = {scroll} className = {`${styles.s_scrollbars_table} ${tableHiddenScroolClassName} ${className}`} components = { tableComponent } sticky = {true} />)
+				: (<ZKTable { ...itemProps } scroll = {scroll} className = {`${styles.zk_scroll_table} ${tableHiddenScroolClassName} ${className}`} components = { tableComponent } sticky = {true} />)
 			)
 		}else{
-			return <ZKTable { ...this.props } />
+			let {autoHeight, ...resProps} = this.props;
+			return <ZKTable { ...resProps } />
 		}
 	}
 
@@ -198,15 +199,15 @@ class CInitScrollTable extends React.Component {
 		// console.log("[^_^: 20220415-1918-003] ZKTable.calcTableHeight:", ZKTable.calcTableHeight(tableDom[0]));
 
 		if(tableDom[0]){
+			let paginationCount = 0;
 			if(this.props.pagination){
-				if(this.props.pagination.position && (this.props.pagination.position instanceof Array)){
-					scrollY = ZKTable.calcTableHeight(tableDom[0], this.props.pagination.position.length);
+				if(zkJsUtils.assertObjType(this.props.pagination.position, Array)){
+					paginationCount = this.props.pagination.position.length;
 				}else{
-					scrollY = ZKTable.calcTableHeight(tableDom[0], 1);
+					paginationCount = 1;
 				}
-			}else{
-				scrollY = ZKTable.calcTableHeight(tableDom[0], 0);
 			}
+			scrollY = ZKTable.calcTableHeight(tableDom[0], 36*paginationCount);
 		}
 		// console.log("[^_^: 20220415-1918-004] scrollY:", scrollY);
 		this.setState({ scrollY: scrollY });

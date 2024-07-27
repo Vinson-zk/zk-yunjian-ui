@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-31 10:56:52
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-11-17 10:19:41
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:32:45
 * 
 * 
 * 
@@ -27,10 +27,10 @@ const model = {
          // 查询 模块下所有表
         *getTables({ moduleId, callback }, { call, put }) {
             let res = yield call(getTables, moduleId);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 yield put({ type: 'setState', payload: { tableInfos: res.data } });
             }
-            if(callback instanceof Function){
+            if(zkJsUtils.assertObjType(callback, Function)){
                 callback.call(this);
             }
         },
@@ -38,48 +38,45 @@ const model = {
         *editTableInfo({ payload, callback }, { call }) {
             let res = yield call(editTableInfo, payload);
             let f = errors=>{
-                if (callback instanceof Function) {
+                if (zkJsUtils.assertObjType(callback, Function)) {
                     callback.call(this, errors);
                 }
             }
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    f();
-                    break;
-                case "zk.000002": 
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                f();
+            }else{
+                if(res.type == globalAppConfig.resCodeType.dataValidator){
                     f(zkToolsMsg.makeFormFieldsErrorsByMapaData(res.data));
-                    break;
+                }
             }
         },
         *updateTableInfo({ tableId, callback }, { call }) {
             let res = yield call(updateTableInfo, tableId);
-            switch(res.code){
-                case "zk.0": 
-                    zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
-                    if (callback instanceof Function) {
-                        callback.call(this);
-                    }
-                    break;
+            if(res.ok){
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                if (zkJsUtils.assertObjType(callback, Function)) {
+                    callback.call(this);
+                }
             }
         },
 
         *updateTableList({ moduleId, callback }, { call }) {
             let res = yield call(updateTableList, moduleId);
-            if (res.code == 'zk.0') {
+            if (res.ok) {
                 // yield put({ type: 'setState', payload: { tableInfos: res.data } });
             }
-            if(callback instanceof Function){
+            if(zkJsUtils.assertObjType(callback, Function)){
                 callback.call(this);
             }
         },
 
         *delTableInfo({ payload, callback }, { call }) {
             let res = yield call(delTableInfo, payload);
-            if(res.code == "zk.0"){
+            if(res.ok){
                 zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
             }
-            if (callback instanceof Function) {
+            if (zkJsUtils.assertObjType(callback, Function)) {
                 callback.call(this, res);
             }
         },

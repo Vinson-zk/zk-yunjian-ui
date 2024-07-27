@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:37:20
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-15 16:50:55
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 14:50:22
  */
 
 import cComponentsIndex from "./index.js";
@@ -23,13 +23,15 @@ const e403 = { component:cException403, models:[]};
 
 // /** 样例 custom 自定义 组件封装 */
 import funcCustoms from './custom/func.js';
-
 // /** 样例 original 原生 组件封装 */
 import funcOriginals from './original/func.js';
+// /** 样例 business 原生 组件封装 */
+import funcBusiness from './business/func.js';
 
 export default {
     componentsIndex,
     exception, e500, e404, e403,
     ...funcOriginals,
     ...funcCustoms,
+    ...funcBusiness,
 }

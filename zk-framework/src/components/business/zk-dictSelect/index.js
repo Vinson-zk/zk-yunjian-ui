@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-02 18:48:27
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-05-07 17:43:10
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 17:15:52
 * 
 * 非树形的字典项下拉选择
 * 
@@ -59,7 +59,7 @@ class CInitDictSelect extends Component {
 	        params['typeCode'] = this.props.typeCode;
 	        params = { ...params, ...zkToolsUtils.convertPageParam({'current':1, 'pageSize':999}) };
 	        f_doingSearch(url, params).done(res=>{
-                if (res.code == 'zk.0') {
+                if (res.ok) {
                     this.setState({resDicts: res.data.result, spinning: false});
                 }else{
                     this.setState({spinning: false});

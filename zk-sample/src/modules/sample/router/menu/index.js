@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 11:17:13
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 12:11:02
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 23:09:54
  */
 
 import React from 'react';
@@ -14,8 +14,7 @@ import stylesSample from "../../styles.less";
 import styles from "./styles.less";
 
 import { zkTools, ZKCustomComponents } from "zkFramework";
-
-const { ZKRouter } = ZKCustomComponents;
+const { ZKContentFormat, ZKRouter } = ZKCustomComponents;
 const { zkToolsMsg, zkToolsNavAndMenu } = zkTools;
 const { Switch, Link } = ZKRouter;
 
@@ -43,9 +42,8 @@ function FInitMenuRouterDemo({ intl, dvaApp, match, menus, dynamicImportHelper, 
 	}
 
 	return (
-		<div className={stylesSample.sample_detail_panel}>
-			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.router.menu')} {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-			<div className={stylesSample.sample_detail_section} >
+		<ZKContentFormat className={styles.sample_detail_panel} >
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.router.menu')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
 				{zkToolsMsg.msgFormatByIntl(intl, 'sample.router.level2', {})}: {match.path}
 				<div style={{ height: '100%', flex: '1 1 auto' }} className={styles.menu_router}>
 
@@ -85,8 +83,9 @@ function FInitMenuRouterDemo({ intl, dvaApp, match, menus, dynamicImportHelper, 
 						</Switch>
 					</div>
 				</div>
-			</div>
-		</div>
+			</ZKContentFormat>
+			<br />
+		</ZKContentFormat>
 	)
 }
 

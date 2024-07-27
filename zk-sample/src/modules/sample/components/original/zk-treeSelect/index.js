@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-04-28 17:25:58
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-04-28 17:30:01
+* @Last Modified by: runoob
+* @Last Modified time: 2023-09-24 14:01:36
 * 
 * 
 * 
@@ -14,9 +14,10 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { docco } from '../../../helper';
 import styles from "../../../styles.less";
-import { zkTools, ZKOriginalComponents } from "zkFramework";
-const { zkToolsMsg } = zkTools;
+import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { ZKTreeSelect } = ZKOriginalComponents;
+const { zkToolsMsg } = zkTools;
 
 class CInitZKTreeSelectferDemo extends Component {
 
@@ -31,88 +32,80 @@ class CInitZKTreeSelectferDemo extends Component {
     let { intl } = this.props;
 
     const treeData = [{
+      key: '0-0',
+      value: '0-0',
 	    title: 'parent 1',
-	    key: '0-0',
+      checkable: true,
 	    children: [
 	      {
+          key: '0-0-0',
+          value: '0-0-0',
 	        title: 'parent 1-0',
-	        key: '0-0-0',
+          selectable: true,
+          checkable: true,
 	        disabled: true,
 	        children: [
 	          {
+              key: '0-0-0-0',
+              value: '0-0-0-0',
 	            title: 'leaf',
-	            key: '0-0-0-0',
 	            disableCheckbox: true,
 	          },
 	          {
+              key: '0-0-0-1',
+              value: '0-0-0-1',
 	            title: 'leaf',
-	            key: '0-0-0-1',
 	          },
 	        ],
 	      },
 	      {
+          key: '0-0-1',
+          value: '0-0-1',
 	        title: 'parent 1-1',
-	        key: '0-0-1',
-	        children: [{ title: <span style={{ color: '#1890ff' }}>sss</span>, key: '0-0-1-0' }],
+          selectable: true,
+          checkable: true,
+	        children: [{ key: '0-0-1-0', value: '0-0-1-0', title: <span style={{ color: '#1890ff' }}>sss</span> }],
 	      },
 	    ],
-	},];
+	  },];
 
     const onSelect = (selectedKeys, info) => {
-	    console.log('[^_^:20220417-1621-001] selected', selectedKeys, info);
-	};
-
-	const onCheck = (checkedKeys, info) => {
-	    console.log('[^_^:20220417-1621-001] onCheck', checkedKeys, info);
-	};
+      console.log('[^_^:20220417-1621-001] selected', selectedKeys, info);
+    };
 
     return (
-      <div className={styles.sample_detail_panel}>
-        <div className={styles.sample_detail_section}>
-          <h2>1、{zkToolsMsg.msgFormatByIntl(intl, 'sample.components.original.treeSelect')}&nbsp;{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}</h2>
-          <div>
-            <ZKTreeSelect
-              checkable
-		      defaultExpandedKeys={['0-0-0', '0-0-1']}
-		      defaultSelectedKeys={['0-0-0', '0-0-1']}
-		      defaultCheckedKeys={['0-0-0', '0-0-1']}
-		      onSelect={onSelect}
-		      onCheck={onCheck}
-		      treeData={treeData}
-
-              listStyle={{
-                width: 400,
-                height: 450,
-                textAlign: "left"
-              }}
-            />
-          </div>
-            <br /><br />
-        </div>
-        <div className={styles.sample_detail_section}>
-          <h2>2、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')} </h2>
-          <div>
-            <SyntaxHighlighter language='jsx' style={docco}>
-              {[
-                "ZKTreeSelect 原生态封装组件：暂不做处理；",
-                "接受原生属性。",
-              ].join('\n')}
-            </SyntaxHighlighter>
-          </div>
-        </div>
-        <div className={styles.sample_detail_section}>
-          <h2>3、{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}</h2>
-          <div>
-            <SyntaxHighlighter language='jsx' style={docco}>
-              {[
-                "参考框架样例代码",
-              ].join('\n')}
-            </SyntaxHighlighter>
-          </div>
-        </div>
-
+      <ZKContentFormat className={styles.sample_detail_panel} >
+        <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.original.treeSelect')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+          <ZKTreeSelect
+            treeCheckable={true}
+            treeDefaultExpandedKeys={['0-0-0', '0-0-1']}
+            onSelect={onSelect}
+            treeData={treeData}
+            dropdownStyle={{
+              width: 400,
+              height: 450,
+              textAlign: "left"
+            }}
+          />
+          <br /><br />
+        </ZKContentFormat>
+        <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
+          <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+            {[
+              "ZKTreeSelect 原生态封装组件：暂不做处理；",
+              "接受原生属性。",
+            ].join('\n')}
+          </SyntaxHighlighter>
+        </ZKContentFormat>
+        <ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.code')}`}>
+          <SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
+            {[
+              "参考框架样例代码",
+            ].join('\n')}
+          </SyntaxHighlighter>
+        </ZKContentFormat>
         <br />
-      </div>
+      </ZKContentFormat>
     );
   }
 

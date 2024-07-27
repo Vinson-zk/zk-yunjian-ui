@@ -1,15 +1,15 @@
 /*
 * @Author: Vinson
 * @Date:   2021-12-08 00:01:39
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-01-25 14:57:29
+* @Last Modified by: runoob
+* @Last Modified time: 2023-10-08 17:55:47
 * 
 * 
 * 
 */
 
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Table, Input, Button, Popconfirm, Form } from 'antd';
+import { Input, Button, Popconfirm, Form } from 'antd';
 import PropTypes from 'prop-types';
 // const EditableContext = React.createContext(null);
 import { injectIntl } from 'react-intl';
@@ -38,7 +38,7 @@ const FInitEditCell = ({col={}, record, haveEdit=false, children, onChange, onPr
 
 
 	if(!col.title){
-		return <td className={`${styles.edit_table_cell} ${className}`} {...restProps} >{children}</td>
+		return <td className={`${styles.zk_edit_json_array_cell} ${className}`} {...restProps} >{children}</td>
 	}
 
 	const [value, setValue] = useState('');
@@ -59,14 +59,14 @@ const FInitEditCell = ({col={}, record, haveEdit=false, children, onChange, onPr
 	/** 值变化处理函数 */
 	const f_onChange = e=>{
 	    // console.log('[^_^:20211211-1611-002] e.target.value:', e.target.value);
-		if(onChange instanceof Function){
+		if(zkJsUtils.assertObjType(onChange, Function)){
 			onChange.call(inputRef, e);
 		}
 	}
 	/** 回车事件处理函数 */
 	const f_onPressEnter = e=>{
 	    // console.log('[^_^:20211211-1611-003] e.target.value:', e.target.value);
-		if(onPressEnter instanceof Function){
+		if(zkJsUtils.assertObjType(onPressEnter, Function)){
 			if(onPressEnter.call(inputRef, e)){
 				f_onToggleEdit();
 			}
@@ -77,7 +77,7 @@ const FInitEditCell = ({col={}, record, haveEdit=false, children, onChange, onPr
 	/** 失去焦点处理函数 */
 	const f_onBlur = e=>{
 	    // console.log('[^_^:20211211-1611-004]e.target.value:', e.target.value);
-		if(onBlur instanceof Function){
+		if(zkJsUtils.assertObjType(onBlur, Function)){
 			if(onBlur.call(inputRef, e)){
 				f_onToggleEdit();
 			}
@@ -94,10 +94,10 @@ const FInitEditCell = ({col={}, record, haveEdit=false, children, onChange, onPr
 		// console.log("[^_^:20220103-1435-001] FInitEditCell.children: ", children);
 		let cc = [children];
 		if(haveEdit){
-			cc.push(<div key="_dfdfd" className={styles.edit_table_cell_label}>&nbsp;</div>);
+			cc.push(<div key="_dfdfd" className={styles.zk_edit_json_array_cell_label}>&nbsp;</div>);
 		}
 		// console.log("---- haveEdit: ", haveEdit)
-		return <td className={`${styles.edit_table_cell} ${className}`} {...restProps} onClick={f_onToggleEdit} >{cc}</td>;
+		return <td className={`${styles.zk_edit_json_array_cell} ${className}`} {...restProps} onClick={f_onToggleEdit} >{cc}</td>;
 	}
 }
 
@@ -301,7 +301,7 @@ class CInitEditJsonArray extends React.Component {
 		return (
 			<ZKScrollTable id = "_CInitEditJsonArray_table"
 				// rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 30}}
-				className = {`${className} ${styles.edit_json_table}`}
+				className = {`${className} ${styles.zk_edit_json_array}`}
 				rowKey = { rowKey }
 				rowSelection = {{
 					onChange: this.f_onSelRow,
@@ -344,7 +344,7 @@ CInitEditJsonArray.defaultProps = {
 	value: [], // 数据据行 数组
 	maxRow: 999, // 最大可编辑的数据行
 	scroll: { x:60, y: 90 },
-	className: styles.edit_json_table_default_size,
+	className: styles.zk_edit_json_array_default_size,
 	pagination: false,
 	// columns=[], className, rowKey
 }

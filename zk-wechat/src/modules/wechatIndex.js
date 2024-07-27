@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2021-02-13 23:15:22
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-04-18 08:59:37
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-24 15:35:05
  */
 
 import React, { Component } from 'react';
@@ -14,7 +14,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import { ZKCustomComponents, ZKOriginalComponents, zkTools } from 'zkFramework';
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 
 // import zkJsUtils from "zkJsUtils";
 
@@ -34,9 +34,9 @@ class CInitHome extends Component {
             routerMappingObj: {},
         };
 
-        // console.log("[^_^:20200813-1941-001] CInitHome.constructor.props", props);
+        // console.log("[^_^:20200813-1941-006] CInitHome.constructor.props", props);
 
-        props.dispatch({ type: 'mWechat/getMenus', navCode:'wechat', payload: {} });
+        props.dispatch({ type: 'mWechat/getMenus', navCode: props.navCode, payload: {} });
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -58,14 +58,14 @@ class CInitHome extends Component {
     render() {
         let { match } = this.props;
         return (
-            <Layout className={zkStyles.zk_content}>
-                <ZKSider className={`${zkStyles.zk_left_sider} ${zkStyles.flex_1_auto}`}>
+            <Layout className={zkStyles.zk_f_content}>
+                <ZKSider className={`${zkStyles.zk_f_left_sider} ${zkStyles.zk_f_flex_auto_1}`}>
                     <ZKAutoMenu menus={ this.props.mWechat.menus } path={`${match.path}`} routerMappingObj={this.state.routerMappingObj} />
                 </ZKSider>
                 <Layout>
                     <Scrollbars style={{ height: '100%', background: '#fff' }} >
-                        <Content id="right-content" className={zkStyles.zk_wrapper}>
-                            <div className={ `${zkStyles.zk_main_panel} ${zkStyles.display_flex_col}` }>
+                        <Content id="right-content" className={zkStyles.zk_f_wrapper}>
+                            <div className={ `${zkStyles.zk_f_main_panel} ${zkStyles.zk_f_display_flex_col}` }>
                                 <ZKBreadcrumb routerMappingObj={this.state.routerMappingObj} />
                                 <Switch>
                                     {this.state.indexMenuRouter?

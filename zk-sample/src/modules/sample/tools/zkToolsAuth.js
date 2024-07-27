@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 12:29:44
- * @Last Modified by:   Vinson
- * @Last Modified time: 2020-08-14 23:39:43
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 23:33:38
  */
 
 
@@ -13,29 +13,54 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 
 import { docco } from '../helper';
 import styles from "../styles.less";
-import { zkTools, ZKOriginalComponents } from "zkFramework";
+import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 const { ZKAnchor } = ZKOriginalComponents;
 const { zkToolsMsg } = zkTools;
 
 const FInitZKToolsAuthDemo = ({ intl, match }) => {
 
 	return (
-		<div id = "top" className={styles.sample_detail_panel}>
+		<ZKContentFormat id = "top" className={styles.sample_detail_panel} >
 			<div className={styles.sample_detail_top_affix} >
-				<ZKAnchor>
-					<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}#top`} title="top" ></ZKAnchor.Link>
-					<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}#getTicket`} title="getTicket" ></ZKAnchor.Link>
-					<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}#setTicket`} title="setTicket" ></ZKAnchor.Link>
-					<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}#removeTicket`} title="removeTicket" ></ZKAnchor.Link>
-					<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}#isLogin`} title="isLogin" ></ZKAnchor.Link>
-					<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}#cleanLoginInfo`} title="cleanLoginInfo" ></ZKAnchor.Link>
-					<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}#logout`} title="logout" ></ZKAnchor.Link>
-					<ZKAnchor.Link href={`${globalAppConfig.basename}${match.path}#isPublicItem`} title="isPublicItem" ></ZKAnchor.Link>
-				</ZKAnchor>
+				<ZKAnchor items = {[
+					{
+						'key': `${globalAppConfig.basename}${match.path}/#top`,
+			            'href': `${globalAppConfig.basename}${match.path}/#top`,
+			            'title': 'top'
+					},{
+						'key': `${globalAppConfig.basename}${match.path}/#getTicket`,
+			            'href': `${globalAppConfig.basename}${match.path}/#getTicket`,
+			            'title': 'getTicket'
+					},{
+						'key': `${globalAppConfig.basename}${match.path}/#setTicket`,
+			            'href': `${globalAppConfig.basename}${match.path}/#setTicket`,
+			            'title': 'setTicket'
+					},{
+						'key': `${globalAppConfig.basename}${match.path}/#removeTicket`,
+			            'href': `${globalAppConfig.basename}${match.path}/#removeTicket`,
+			            'title': 'removeTicket'
+					},{
+						'key': `${globalAppConfig.basename}${match.path}/#isLogin`,
+			            'href': `${globalAppConfig.basename}${match.path}/#isLogin`,
+			            'title': 'isLogin'
+					},{
+						'key': `${globalAppConfig.basename}${match.path}/#cleanLoginInfo`,
+			            'href': `${globalAppConfig.basename}${match.path}/#cleanLoginInfo`,
+			            'title': 'cleanLoginInfo'
+					},{
+						'key': `${globalAppConfig.basename}${match.path}/#logout`,
+			            'href': `${globalAppConfig.basename}${match.path}/#logout`,
+			            'title': 'logout'
+					},{
+						'key': `${globalAppConfig.basename}${match.path}/#isPublicItem`,
+			            'href': `${globalAppConfig.basename}${match.path}/#isPublicItem`,
+			            'title': 'isPublicItem'
+					}
+				]} />
 			</div>
-			<h1>{zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsAuth {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h1>
-			<div className={styles.sample_detail_section} >
-				<SyntaxHighlighter language='jsx' style={docco}>
+			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.general.function')} zkToolsAuth ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
+				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 					{[
 						"一些用户权限处理函数",
 						"getTicket         // 取当前用户令牌",
@@ -47,11 +72,10 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 						"isPublicItem      // 判断当前打开的路由地址是否为开放的路由 item",
 					].join('\n')}
 				</SyntaxHighlighter>
-			</div>
-			<div className={styles.sample_detail_section} >
-				<h2>{zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}</h2>
+			</ZKContentFormat>
+			<ZKContentFormat title = {`方法  ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.declare')}`} >
 				<div id="getTicket">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 取当前用户令牌",
@@ -62,7 +86,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="f_setTicket">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 设置当前用户令牌",
@@ -74,7 +98,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="removeTicket">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 移除当前用户令牌",
@@ -85,7 +109,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="isLogin">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 判断是否已登录；",
@@ -96,7 +120,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="cleanLoginInfo">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 清理用户登录信息，可删除用户信息，cookie 等信息",
@@ -107,7 +131,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="logout">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/** 登出；",
 							" * @param {object} match ",
@@ -120,7 +144,7 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 					</SyntaxHighlighter>
 				</div>
 				<div id="isPublicItem">
-					<SyntaxHighlighter language='jsx' style={docco}>
+					<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 						{[
 							"/**",
 							" * 判断当前打开的路由地址是否为开放的路由 item；",
@@ -132,9 +156,9 @@ const FInitZKToolsAuthDemo = ({ intl, match }) => {
 						].join('\n')}
 					</SyntaxHighlighter>
 				</div>
-			</div>
+			</ZKContentFormat>
 			<br />
-		</div>
+		</ZKContentFormat>
 	)
 };
 

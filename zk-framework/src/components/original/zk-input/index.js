@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 09:41:45
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-26 18:58:38
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-19 13:46:25
  */
 
 import React from 'react';
@@ -20,13 +20,13 @@ FWrapInput.propTypes = {
 }
 FWrapInput.defaultProps = {
 	...Input.defaultProps,
-	className: styles.default_class,
+	className: styles.zk_input_default_class,
 }
 
 FWrapInput.Search = Input.Search;
 FWrapInput.Search.defaultProps = {
 	...FWrapInput.Search.defaultProps,
-	className: styles.default_class
+	className: styles.zk_input_default_class
 }
 
 FWrapInput.Password = Input.Password;

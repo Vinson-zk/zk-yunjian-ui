@@ -2,15 +2,15 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by:   Vinson
- * @Last Modified time: 2022-05-09 19:02:51
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-07 10:52:37
  */
 
 import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixSys;
-// const api = "apiMock";
+
 /*
 JSON.stringify(params)
 contentType:'application/json; charset=utf-8'}
@@ -20,14 +20,8 @@ export async function editSysOrgRank(params) {
     return zkToolsAjax.reqPretreatment(
         `/${api}/org/sysOrgRank/sysOrgRank`, 
         {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
-        );
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
+    );
 }
 
 // 删除
@@ -46,8 +40,8 @@ export async function findSysOrgRanks(params) {
 }
 
 // 给职级分配权限
-export async function setAuthRelation(rankId, auths) {
-    return zkToolsAjax.reqPretreatment(`/${api}/auth/sysAuthRank/setRelationByRank/${rankId}`, 
+export async function grantAuths(rankId, auths) {
+    return zkToolsAjax.reqPretreatment(`/${api}/auth/sysAuthRank/grantAuths/${rankId}`, 
         {method:'POST', data:JSON.stringify(auths), contentType:'application/json; charset=utf-8'});
 }
 

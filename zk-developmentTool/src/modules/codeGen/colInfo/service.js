@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-04-01 09:30:42
-* @Last Modified by:   Vinson
-* @Last Modified time: 2022-06-24 17:01:56
+* @Last Modified by: runoob
+* @Last Modified time: 2024-06-24 18:02:31
 * 
 * 
 * 
@@ -12,7 +12,6 @@ import { zkTools } from "zkFramework";
 const { zkToolsAjax } = zkTools;
 
 const api = globalAppConfig.apiPrefixDevTool;
-// const api = "apiMock";
 
 // 增量更新表字段信息
 export async function updateAddCols(tableId) {
@@ -32,13 +31,7 @@ export async function findColInfos(tableId) {
 // 编辑 
 export async function editColInfo(params) {
     return zkToolsAjax.reqPretreatment(`/${api}/cg/c/colInfo`, {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'},
-        res=>{
-            let filterCodes = ["zk.000002"];
-            if(filterCodes.includes(res.code)){
-                return true;
-            } 
-            return false
-        }
+        res=>res.type === globalAppConfig.resCodeType.dataValidator
     );
 }
 

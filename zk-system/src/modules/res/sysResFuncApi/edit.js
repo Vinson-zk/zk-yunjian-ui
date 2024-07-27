@@ -193,6 +193,7 @@ class CInitSysResFuncApiEdit extends Component {
                     <ZKEditForm.Item name = "systemCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.systemCode')} 
                         rules = {[
                             zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.code(intl)
                         ]} 
                     >
                         <ZKApplicationSystemSelect disabled = {optEntity.pkId?true:false} valueKey="code" />

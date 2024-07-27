@@ -2,12 +2,14 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-13 11:24:13
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-03-12 11:33:43
+ * @Last Modified by: runoob
+ * @Last Modified time: 2023-09-23 23:05:33
  */
 
 import React from 'react';
 
+import { ZKCustomComponents } from "zkFramework";
+const { ZKContentFormat } = ZKCustomComponents;
 import styles from "../styles.less";
 
 const f_tPromise1 = () => {
@@ -34,12 +36,12 @@ class CInitEs6 extends React.Component {
 		f_tPromise1();
 
 		return (
-			<div className={styles.sample_detail_panel}>
-				<h1>ES6 语法笔记</h1>
-				<div className={styles.sample_detail_section} >
+			<ZKContentFormat className={styles.sample_detail_panel} >
+				<ZKContentFormat title = {`ES6 语法笔记`}>
 					<font style={{ "color": "red" }}>待续 ... ... </font>
-				</div>
-			</div>
+				</ZKContentFormat>
+				<br />
+			</ZKContentFormat>
 		)
 	}
 }

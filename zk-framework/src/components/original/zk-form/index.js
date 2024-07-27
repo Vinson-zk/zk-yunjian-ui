@@ -3,14 +3,14 @@
  * @Author: Vinson
  * @Date: 2020-08-12 09:34:49
  * @Last Modified by:   Vinson
- * @Last Modified time: 2022-07-03 17:14:26
+ * @Last Modified time: 2023-05-29 16:52:14
  */
 import React from 'react';
 import { Form } from 'antd';
 import PropTypes from 'prop-types';
 
 const FWrapFormItem = (props)=>{
-	// console.log("[^_^:20210301-0750-001] FWrapFormItem: ", this.props);
+	// console.log("[^_^:20210301-0750-001] FWrapFormItem: ", props);
 	return <Form.Item {...props} />
 }
 // 定义属性

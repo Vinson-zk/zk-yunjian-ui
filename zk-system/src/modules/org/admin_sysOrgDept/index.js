@@ -25,7 +25,7 @@ import SearchItem from "./search.js";
 import GridItem from "./grid.js";
 import CGrantAuth from "../grantAuth.js";
 
-import zkStyles from 'zkFramework/css/styles.less';
+import zkStyles from 'zkFramework/style/zk.styles.less';
 import zkOrgStyles from '../org.styles.less';
 
 import locales from "../../../locales/index";
@@ -35,59 +35,64 @@ class CInitSysOrgDeptIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            optCompanyEntity:{},
+            optDeptEntity:{},
             grantAuthModal:false,
         }
     }
 
     f_onSelect = (company) => {
         let { dispatch, mSysOrgDeptAdmin } = this.props;
-        dispatch({ 
-            type: "mSysOrgDeptAdmin/findSysOrgDeptsTree", 
-            companyId: company.pkId, 
-            filter: mSysOrgDeptAdmin.filter, 
-            pagination: mSysOrgDeptAdmin.pagination, 
-            callback: e => { } 
-        });
-        dispatch({ 
-            type: 'mSysOrgDeptAdmin/setState', 
-            payload: {
-                targetCompany: company
-            }
-        });
+        if(company && company.pkId){
+            dispatch({ 
+                type: "mSysOrgDeptAdmin/findSysOrgDeptsTree", 
+                companyId: company.pkId, 
+                filter: mSysOrgDeptAdmin.filter, 
+                pagination: mSysOrgDeptAdmin.pagination, 
+                callback: e => { } 
+            });
+            dispatch({ 
+                type: 'mSysOrgDeptAdmin/setState', 
+                payload: {
+                    targetCompany: company
+                }
+            });
+        }
     };
 
     // 分配权限
     f_onShowGrantAuthModal = (flag, record)=>{
-        this.setState({grantAuthModal:flag, optCompanyEntity:record});
+        this.setState({grantAuthModal:flag, optDeptEntity:record});
     };
 
     render() {
         let { intl, loading, mApp, mSysOrgDeptAdmin, dispatch } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+        //  ${zkOrgStyles.companry_tree}
         return (
-            <div className={ `${zkStyles.zk_main_panel} ${zkStyles.display_flex_row}` } style={{height:'100%'}} >
-                <div className={`${zkStyles.zk_left_sider} ${zkOrgStyles.zk_left_sider_border} ${zkOrgStyles.companry_tree}`} style = {{'width':'200px'}}>
+            <div className={ `${zkStyles.zk_f_main_panel} ${zkStyles.zk_f_display_flex_row}` } style={{height:'100%'}} >
+                <div className={`${zkStyles.zk_f_left_sider} ${zkOrgStyles.zk_left_sider_border}`} style = {{'width':'200px'}}>
                     <ZKCompanyTree onSelect = {this.f_onSelect} optCompany = {mSysOrgDeptAdmin.targetCompany} />
                 </div>
                 {mSysOrgDeptAdmin.targetCompany.pkId?
-                    <div className={`${zkStyles.display_flex_col} ${zkStyles.flex_1_auto}`} style = {{'width':'100px'}} >
+                    <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} style = {{'width':'100px'}} >
                         <SearchItem {...this.props} locales={locales} />
                         <GridItem {...this.props} onShowGrantAuthModal={this.f_onShowGrantAuthModal} />
                         <CGrantAuth isShow = {this.state.grantAuthModal} 
-                            url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthDept/sysAuthDefinedsPage`}
-                            urlOwnerIds = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthDept/findAuthIdsByDeptId`}
-                            urlOwnerTargetParamName="deptId"
+                            url = {`/${globalAppConfig.apiPrefixSys}/auth/sysAuthDept/findAllotAuthPage`}
+                            formatParamsFunc = {(toTargetId, params={})=>{
+                                params['deptId'] = toTargetId;
+                                return params;
+                            }}
                             title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.dept')}
-                            descName={zkToolsMsg.getInternationInfo(this.state.optCompanyEntity.name?this.state.optCompanyEntity.name:{}, lang)}
-                            targetId={this.state.optCompanyEntity.pkId} 
+                            descName={zkToolsMsg.getInternationInfo(this.state.optDeptEntity.name?this.state.optDeptEntity.name:{}, lang)}
+                            toTargetId={this.state.optDeptEntity.pkId} 
                             onShowModal={this.f_onShowGrantAuthModal}
                             saveSpinning={loading.effects["mSysOrgDeptAdmin/grantAuth"]||false}
-                            saveFunc={(deptId, auths, callback)=>{
+                            saveFunc={(deptId, allotAuths, callback)=>{
                                 dispatch({ 
                                     type: 'mSysOrgDeptAdmin/grantAuth', 
                                     deptId: deptId,
-                                    auths: auths,
+                                    allotAuths: allotAuths,
                                     callback: callback
                                 });
                             }}
@@ -106,6 +111,10 @@ class CInitSysOrgDeptIndex extends Component {
             // this.f_getCompany(null);
 			// dispatch({ type: "mSysOrgDeptAdmin/findSysOrgDepts", filter: mSysOrgDeptAdmin.filter, pagination: mSysOrgDeptAdmin.pagination, callback: e => { } })
 		}
+    }
+
+    componentWillUnmount() {
+        this.setState = ()=>false;
     }
 }
 
