@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 13:59:32 
- * @Last Modified by: runoob
- * @Last Modified time: 2023-11-29 17:24:46
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-08-15 23:46:44
  */
 
 (function (global) {
@@ -165,6 +165,16 @@
   const f_Base64Decode = str => {
       return Base64.decode(str)
   }
+
+  /** 删除对象 指定 属性
+   * @obj: 待处理对象;
+   * @obj: 指定对象的属性;
+   * @return: 处理后的对象
+   */
+  const f_delObjAttr = (obj, key) => {
+      delete obj[key];
+      return obj
+  }
   
   /** 删除对象 undefined 属性
    * @obj: 待处理对象;
@@ -173,7 +183,7 @@
   const f_removeObjUnAttr = obj => {
       for (let ix in obj) {
           if (!obj[ix]) {
-              delete obj[ix]
+              f_delObjAttr(obj, ix);
           }
       }
       return obj
@@ -201,11 +211,15 @@
         if (obj === '') {
           // console.log("2-f_isEmpty ", obj)
           return true
+        }else if (f_assertObjType(obj, Object) 
+          && Object.keys(obj).length === 0) {
+          // console.log("2-f_isEmpty ", obj)
+          return true
         }
       }
       return false
   }
-  
+
   /*** json 字符串转为 json 对象 
    * @str: 需要转的字符串或字符串数组;
    * @return: 转成后的json 对象 或对象数组；
@@ -595,8 +609,7 @@
                   }
               }
           }
-      }
-  
+      }  
       // 如果果降序排序，反转按升序排序的数组
       return flag > 0 ? sortItems : sortItems.reverse()
   }
@@ -641,6 +654,7 @@
   const _zkJsUtils = {
     queryURL: f_queryURL,					 // 查询获取 url 中的参数，
     base64Decode: f_Base64Decode,			 // 64 编码解密
+    delObjAttr: f_delObjAttr,      // 删除对象指定属性
     removeObjUnAttr: f_removeObjUnAttr,	     // 删除对象一个属性
     isEmpty: f_isEmpty,						 // 对象是否是空
     strToObj: f_strToObj,					 // json 字符串或json 字符串数组 转 json对象，

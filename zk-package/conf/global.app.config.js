@@ -5,8 +5,8 @@
  * 可在应用中通过 直接使用；示例：详见 webpack.public.config.js 中的 webpack.DefinePlugin 定义处；
  * @Author: Vinson 
  * @Date: 2020-08-10 15:37:45 
- * @Last Modified by: runoob
- * @Last Modified time: 2024-06-27 23:46:14
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-20 20:09:09
  */
 
 /*** 应用的全局常量配置 ***/
@@ -19,9 +19,10 @@ module.exports = {
         lang: "_key_lang",         // 国际化标识
         ticket: "_key_ticket_",    // 本地存放令牌名
         pageSize:"_key_page.size", // 分页数量，本地记录标识；用于记录用户操作习惯；
+        islogin: "_key_login_flag",// 是否已登录
     },
     transferKey:{ // 与服务器传输 参数名
-        ticket: "_tkid",               // 令牌上遂参数名
+        ticket: "__tk",               // 令牌上遂参数名; // _tkid
         page:{                         // 请求后台时的分页参数
             pageNo: "page.no",
             pageSize: "page.size"
