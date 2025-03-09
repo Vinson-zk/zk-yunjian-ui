@@ -52,9 +52,6 @@ class CInitMailTypeEdit extends Component {
 
         let { location, mApp, dispatch, mMailType, intl, loading } = this.props;
         let { optEntity } = mMailType;
-        
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
 
         // ZKJson 自定义校验规则对象
         let f_makeObjRuls = required=>{
@@ -98,7 +95,7 @@ class CInitMailTypeEdit extends Component {
                             ]} 
                         >
                             <ZKInputJson placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeName.placeholder')}
-                                styleType="compact" primaryAttr={lang} attrs={locales} />
+                                styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                         </ZKEditForm.Item>
                     </ZKCol></ZKRow>
                     <ZKRow><ZKCol span = {24} >
@@ -108,7 +105,7 @@ class CInitMailTypeEdit extends Component {
                             ]} 
     					>
                             <ZKInputJson placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeDesc.placeholder')}
-                            	styleType="compact" primaryAttr={lang} attrs={locales} />
+                            	styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>
             	</ZKEditForm>

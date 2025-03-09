@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-13 20:47:33
- * @Last Modified by: runoob
- * @Last Modified time: 2023-09-25 22:30:25
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-11-01 10:00:50
  */
 
 
@@ -41,6 +41,7 @@ const msg = {
 	"sample.components.original.transfer":"ZKTransfer",
 	"sample.components.original.tree":"ZKTree",
 	"sample.components.original.treeSelect":"ZKTreeSelect",
+	"sample.components.original.upload":"ZKUpload",
 
 	"sample.components.custom.autoMenu":"ZKAutoMenu",
 	"sample.components.custom.autoTable":"ZKAutoTable",
@@ -61,6 +62,7 @@ const msg = {
 	"sample.components.custom.scrollTable":"ZKScrollTable",
 	"sample.components.custom.searchRow":"ZKSearchRow",
 	"sample.components.custom.sider":"ZKSider",
+	"sample.components.custom.smartUpload":"ZKSmartUpload",
 	"sample.components.custom.popoverPanel":"ZKPopoverPanel",
 	"sample.components.custom.textEditor":"ZKTextEditor",
 	"sample.components.custom.theme":"ZKTheme",

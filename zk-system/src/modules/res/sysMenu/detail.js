@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:40
  * @Last Modified by: runoob
- * @Last Modified time: 2023-09-21 00:06:50
+ * @Last Modified time: 2024-07-31 15:54:37
  */
 
 import React, { Component } from 'react';
@@ -61,7 +61,6 @@ class CInitSysMenuDetail extends Component {
 
 		let { location, mApp, mSysMenu, intl, loading } = this.props;
 		let { optEntity } = mSysMenu;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = !optEntity || loading.effects['mSysMenu/getSysMenu'];
 
@@ -77,7 +76,7 @@ class CInitSysMenuDetail extends Component {
 					<ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.name')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
 							{/* {optEntity.name?zkToolsMsg.getInternationInfo(optEntity.name):""} */}
 						</ZKDetailGrid.ColValue>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.code')}:</ZKDetailGrid.ColLabel>

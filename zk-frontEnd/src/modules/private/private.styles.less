@@ -1,0 +1,217 @@
+/*
+* @Author: Vinson
+* @Email: binary_space@126.com
+* @QQ: 1035862795
+* @Wechat: 1035862795
+* @Date: 2025-02-06 08:53:20
+* @Last Modified by: vinson
+* @Last Modified time: 2025-02-07 10:30:17
+*/
+
+@import "zkFramework/style/theme/zk.theme.variables.less";
+
+.panel_div {
+	min-width: 896px;
+	display: flex;
+	flex-direction: row;
+	margin: 19px auto;
+	// background-color: @colorBgBase;
+	box-shadow: 0 1px 3px 0 @colorPrimaryBorder;
+	// border-bottom: 0px solid @colorPrimaryBorder;
+	flex: auto 1 0;
+}
+
+.panel_div_left {
+	width: 180px;
+	padding: 29px 6px 29px 9px;
+	flex: auto 0 0;
+}
+
+.panel_div_left > ul{
+	text-align: right;
+	border-right: 1px solid @colorPrimaryBorder !important;
+}
+
+.panel_div_right {
+	flex: auto 1 0;
+	margin: 9px 9px;
+	position: relative;
+	overflow: hidden;
+}
+.panel_div_right_div {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+
+// 从上方滑入
+.content_animation_top_in {
+    animation: content-animation-top-in 0.5s forwards;
+    -webkit-animation: content-animation-top-in 0.5s forwards;
+}
+// 从上方滑出
+.content_animation_top_out {
+    animation: content-animation-top-out 0.5s forwards;
+    -webkit-animation: content-animation-top-out 0.5s forwards;
+}
+// 从下方滑入
+.content_animation_bottom_in {
+    animation: content-animation-bottom-in 0.5s forwards;
+    -webkit-animation: content-animation-bottom-in 0.5s forwards;
+}
+// 从下方滑出
+.content_animation_bottom_out {
+    animation: content-animation-bottom-out 0.5s forwards;
+    -webkit-animation: content-animation-bottom-out 0.5s forwards;
+}
+
+@keyframes content-animation-top-in {
+    0% { transform: translateY(-100%); opacity: 0; } 
+    100% { transform: translateY(0); opacity: 1; } 
+}
+@keyframes content-animation-top-out {
+    0% { transform: translateY(0); opacity: 1; } 
+    100% { transform: translateY(-100%); opacity: 0; } 
+}
+@keyframes content-animation-bottom-in {
+    0% { transform: translateY(100%); opacity: 0; } 
+    100% { transform: translateY(0); opacity: 1; } 
+}
+@keyframes content-animation-bottom-out {
+    0% { transform: translateY(0); opacity: 1; } 
+    100% { transform: translateY(100%); opacity: 0; } 
+}
+
+@-webkit-keyframes content-animation-top-in {
+    0% { transform: translateY(-100%); opacity: 0; } 
+    100% { transform: translateY(0); opacity: 1; } 
+}
+@-webkit-keyframes content-animation-top-out {
+    0% { transform: translateY(0); opacity: 1; } 
+    100% { transform: translateY(-100%); opacity: 0; } 
+}
+@-webkit-keyframes content-animation-bottom-in {
+    0% { transform: translateY(100%); opacity: 0; } 
+    100% { transform: translateY(0); opacity: 1; } 
+}
+@-webkit-keyframes content-animation-bottom-out {
+    0% { transform: translateY(0); opacity: 1; } 
+    100% { transform: translateY(100%); opacity: 0; } 
+}
+
+// -----------------------------
+.personal_center_head {
+	display: flex;
+	flex-direction: row;
+	width: 95%;
+	height: 164px;
+	padding: 22px;
+}
+
+.personal_center_head_left {
+	width: 120px;
+	display: grid;
+	place-content: center;
+	border-radius: 60px;
+	overflow: hidden;
+	position: relative;
+}
+
+.personal_center_head_left img{
+	height: 120px;
+	width: auto;
+}
+
+.personal_center_head_left_upload {
+	display: none;
+	width: 120px;
+	height: 120px;
+	border: 0px !important;
+	font-size: 22px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: #fff;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 16, 0.56);
+}
+
+.personal_center_head_left:hover{
+	.personal_center_head_left_upload{
+		display: flex;
+	}
+}
+
+.personal_center_head_right {
+	flex: auto 1 0;	
+	padding: 90px 6px 6px 12px;
+	font-size: 16px;
+}
+
+.personal_center_account_setting_label{
+	text-align: left;
+	padding: 0px 0px 0px 22px;
+	letter-spacing: 1px;
+	// text-align: justify;
+	// text-align-last: justify;
+}
+.personal_center_account_setting_tips {
+	text-align: right;
+	padding: 0px 6px 0px 0px;
+	// letter-spacing: 1px;
+}
+.personal_center_account_setting_opt{
+	text-align: right;
+	padding: 0px 22px 0px 0px;
+	// letter-spacing: 1px;
+}
+.personal_center_account_setting_opt > span {
+	color: @colorPrimaryText;
+	cursor: pointer;
+}
+
+.personal_center_divider {
+	margin: 9px 0px 24px 0px;
+}
+
+.personal_center_send_input {
+	.ant-input-group-addon{
+		padding: 0px;
+		margin: 0px;
+		// height: 32px;
+		// height: 100%;
+		overflow: hidden;
+		border: 0px;
+	}
+}
+
+.personal_center_send_input span {
+	height: 100%;
+}
+
+.personal_center_send_btn {
+	// padding: 0px 12px;
+	margin: 0px;
+	// max-width: 150px;
+	height: 100%;
+	border-radius: 0px 6px 6px 0px;
+	// border: 0px;
+	border-left: 0px;
+}
+
+.personal_center_login_record_div {
+	display: flex;
+	flex-direction: row;
+	padding: 0px 32px 6px 6px;
+}
+
+.personal_center_login_record_time {
+	flex: auto 1 1;
+	text-align: right;
+}
+
+
+

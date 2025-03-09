@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 11:06:27
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 19:48:42
+* @Last Modified time: 2024-07-31 16:00:33
 */
 
 
@@ -45,7 +45,6 @@ class CInitSysOrgCompanySearch extends React.Component {
     
     render(){
         let { intl, mApp, mSysOrgCompany, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 /*
 <ZKSearchItem name = "foundDate" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.foundDate')} >
@@ -66,7 +65,7 @@ class CInitSysOrgCompanySearch extends React.Component {
                     <ZKInput style = {{width:"180px"}}  />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.name')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>       
                 {/*<ZKSearchItem name = "legalPerson" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.legalPerson')} >
                     <ZKInput style = {{width:"180px"}}  />

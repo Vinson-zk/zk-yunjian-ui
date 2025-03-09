@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 11:05:59
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 16:55:14
+* @Last Modified time: 2024-07-31 15:59:32
 */
 
 
@@ -50,7 +50,6 @@ class CInitSysOrgDeptIndex extends Component {
 
     render() {
         let { intl, loading, mApp, mSysOrgDept, dispatch } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
         //  ${zkOrgStyles.companry_tree}
         return (
             <div className={ `${zkStyles.zk_f_main_panel} ${zkStyles.zk_f_display_flex_row}` } style={{height:'100%'}} >
@@ -64,7 +63,7 @@ class CInitSysOrgDeptIndex extends Component {
                             return params;
                         }}
                         title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.dept')}
-                        descName={zkToolsMsg.getInternationInfo(this.state.optDeptEntity.name?this.state.optDeptEntity.name:{}, lang)}
+                        descName={zkToolsMsg.getInternationInfo(this.state.optDeptEntity.name?this.state.optDeptEntity.name:{}, intl.locale)}
                         toTargetId={this.state.optDeptEntity.pkId} 
                         onShowModal={this.f_onShowGrantAuthModal}
                         saveSpinning={loading.effects["mSysOrgDept/grantAuth"]||false}

@@ -41,7 +41,6 @@ class CInitSysResDictTypeDetail extends Component {
 
 		let { location, mApp, mSysResDictType, intl, loading } = this.props;
 		let { optEntity  } = mSysResDictType;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = loading.effects['mSysResDictType/getSysResDictType'];
 
@@ -57,11 +56,11 @@ class CInitSysResDictTypeDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDictType.typeName')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.typeName?optEntity.typeName:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.typeName?optEntity.typeName:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDictType.typeDesc')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.typeDesc?optEntity.typeDesc:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.typeDesc?optEntity.typeDesc:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>       
 				</ZKDetailGrid>

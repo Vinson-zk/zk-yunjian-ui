@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 11:06:50
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-10 10:13:41
+* @Last Modified time: 2024-07-31 16:00:08
 */
 
 
@@ -54,9 +54,6 @@ class CInitSysOrgDeptEdit extends Component {
 
         let { location, mApp, dispatch, mSysOrgDept, intl, loading } = this.props;
         let { optEntity } = mSysOrgDept;
-        
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
 
         // ZKJson 自定义校验规则对象
         let f_makeObjRuls = required=>{
@@ -106,7 +103,7 @@ class CInitSysOrgDeptEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>  
                 	<ZKEditForm.Item name = "faxNum" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.faxNum')} 
@@ -153,7 +150,7 @@ class CInitSysOrgDeptEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
 
                     </ZKCol></ZKRow>
@@ -163,7 +160,7 @@ class CInitSysOrgDeptEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>
                 	<ZKEditForm.Item name = "sourceCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.sourceCode')} 

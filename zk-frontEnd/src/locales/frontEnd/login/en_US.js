@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2021-06-29 17:20:57
 * @Last Modified by: runoob
-* @Last Modified time: 2023-09-25 22:21:33
+* @Last Modified time: 2024-07-29 23:18:16
 * 
 * 
 * 
@@ -17,13 +17,14 @@ module.exports = {
 	"zk.front.end.login.lable.login.type.account":"Account",
 	"zk.front.end.login.lable.login.type.phone":"Mobile",
 	"zk.front.end.login.lable.username":"Username",
+	"zk.front.end.login.lable.mail":"Mail",
+	"zk.front.end.login.lable.phoneNumber":"Phone Number",
 	"zk.front.end.login.lable.companyCode":"Company Code",
 	"zk.front.end.login.lable.password":"Password",
 	"zk.front.end.login.lable.loginBtn":"Login",
 	"zk.front.end.login.lable.rememberAccount":"Remember me",
 	"zk.front.end.login.lable.rememberMe":"Remember password",
 	"zk.front.end.login.lable.forgotPassword":"Forgot password",
-	"zk.front.end.login.lable.phoneNumber":"Phone Number",
 	"zk.front.end.login.lable.validCode":"Get vaild code",
 	"zk.front.end.login.lable.register":"Register",
 	"zk.front.end.login.lable.register.guide":"No account？",

@@ -2,8 +2,8 @@
  * 用户权限判断与处理的一些方法函数
  * @Author: Vinson
  * @Date: 2020-08-11 11:23:00
- * @Last Modified by: runoob
- * @Last Modified time: 2024-06-27 23:46:10
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-21 10:04:34
  */
 
 import locales from '../locales';
@@ -40,9 +40,6 @@ const f_setTicket = (tkId) => {
     let msgOpt = { type: "error", msg: zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error') }
     zkToolsMsg.alertMsg(null, null, msgOpt);
   }
-  
-  // sessionStorage.setItem(globalAppConfig.localKey.ticket, tkId);
-  // localStorage.setItem("tkDate", new Date());
 }
 
 /**
@@ -54,12 +51,33 @@ const f_removeTicket = () => {
   // sessionStorage.removeItem(globalAppConfig.localKey.ticket);
 }
 
+// 设置是否已登录
+const f_setLoginFlag = ()=>{
+  localStorage.setItem(globalAppConfig.localKey.islogin, "true");
+}
+const f_getLoginFlag = ()=>{
+  let loginFlag = localStorage.getItem(globalAppConfig.localKey.islogin);
+  if(loginFlag){
+    // console.log("[^_^:20240627-2339-001] loginFlag: ", loginFlag);
+    // console.log("[^_^:20240627-2339-001] loginFlag === 'true': ", loginFlag === 'true');
+    return loginFlag === 'true';
+  }else{
+    f_removeLoginFlag();
+  }
+  return false;
+}
+const f_removeLoginFlag = () => {
+  localStorage.removeItem(globalAppConfig.localKey.islogin);
+  // sessionStorage.removeItem(globalAppConfig.localKey.ticket);
+}
+
 /**
  * 判断是否已登录;
  * @return {string} 返回 false 未登录；true 已登录；
  */
 const f_isLogin = () => {
-  if (zkJsUtils.isEmpty(f_getTicket())) {
+  if (zkJsUtils.isEmpty(f_getTicket()) || f_getLoginFlag() != true) {
+    // f_cleanLoginInfo();
     return false;
   }
   return true;
@@ -71,6 +89,7 @@ const f_isLogin = () => {
  */
 const f_cleanLoginInfo = () => {
   f_removeTicket();
+  f_removeLoginFlag();
 }
 
 /**
@@ -134,6 +153,9 @@ const f_isPublicItem = (basename, publicItems, currentPath) => {
 export default {
   getTicket: f_getTicket,             // 取当前用户令牌
   setTicket: f_setTicket,             // 设置当前用户令牌
+  setLoginFlag: f_setLoginFlag,
+  getLoginFlag: f_getLoginFlag,
+  removeLoginFlag: f_removeLoginFlag,
   removeTicket: f_removeTicket,       // 移除当前用户令牌
   isLogin: f_isLogin,                 // 判断是否已登录；返回 false 未登录；true 已登录；
   cleanLoginInfo: f_cleanLoginInfo,   // 清理用户登录信息，可删除用户信息，cookie 等信息

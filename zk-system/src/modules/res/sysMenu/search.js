@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:53
  * @Last Modified by: runoob
- * @Last Modified time: 2024-06-28 00:12:29
+ * @Last Modified time: 2024-07-31 15:53:50
  */
 
 import React, { Component } from 'react';
@@ -43,7 +43,6 @@ class CInitSysMenuSearch extends React.Component {
 
     render(){
         let { intl, mApp, mSysMenu, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         let selLoading = loading.effects['mSysMenu/findNavCodes'];
         return (
@@ -56,7 +55,7 @@ class CInitSysMenuSearch extends React.Component {
                 }}
             >
                 <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.name')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>
                 <ZKSearchItem name = "navCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.navCode')} >
                     <ZKSelect fillValue = {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.all')} 

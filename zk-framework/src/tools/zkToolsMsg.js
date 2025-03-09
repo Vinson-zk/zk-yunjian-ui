@@ -2,7 +2,7 @@
  * @Author: Vinson 
  * @Date: 2020-08-07 10:49:19 
  * @Last Modified by: runoob
- * @Last Modified time: 2023-12-11 15:54:43
+ * @Last Modified time: 2024-07-31 14:46:46
  */
 import { message, Modal } from 'antd';
 import ZKModal from '../components/original/zk-modal/index.js'
@@ -44,7 +44,7 @@ const f_getInternationInfo = (obj, lang) => {
 }
 
 /**
- * 消息国际化；
+ * 消息国际化；不建议使用；尽量取 intl 对象来国际化；
  * @param {object} locales 项目国际化语言对象；
  * @param {string} id 消息ID
  * @param {object} opt 消息其他替换参数对象; 示例：opt = {key1:value}, msg = 'msg-{key1}'; 会替换掉为：msg-value

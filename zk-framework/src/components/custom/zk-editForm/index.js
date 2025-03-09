@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 11:15:36
- * @Last Modified by: runoob
- * @Last Modified time: 2024-06-27 23:57:03
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-20 14:17:05
  */
 
 import React from 'react';
@@ -35,7 +35,7 @@ FInitEditItem.typeName = "FInitEditItem";
 
 const f_getViewDefaultFormItem = (children) => {
 
-	let span = 8;
+	let span = 9;
 	let offset = 2;
 	if (zkJsUtils.assertObjType(children, Array)) {
 		let cs = [];
@@ -172,7 +172,7 @@ class CInitEditForm extends React.Component {
 			// data = zkJsUtils.removeObjUnAttr(data)
 			// console.log("[^_^:20210308-1031-001] onFinish.saveData: ", saveData);
 			this.props.saveFunc.call(this, saveData, this.formRef.current, (errs, goBack=true) => {
-				// errs: [{'name': 'fName', 'errors': 'error msg'}]
+				// errs: [{'name': 'fName', 'errors': ['error msg']}]
 				// console.log("[^_^:20210308-1031-001] onFinish.errs: ", errs);
 				if(errs){
 					// 如果有传入错误信息，不返回，提示错误

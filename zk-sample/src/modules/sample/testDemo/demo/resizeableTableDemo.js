@@ -5,13 +5,13 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-26 23:32:49
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-27 09:17:09
+* @Last Modified time: 2024-07-30 17:33:11
 */
 
 import React from 'react';
 import { Table } from 'antd';
 import { Resizable } from 'react-resizable';
-import './resizeableTableDemo.less';
+import resizeableTableStyles from './resizeableTableDemo.less';
 
 const ResizeableTitle = props => {
   const { onResize, width, ...restProps } = props;
@@ -38,26 +38,31 @@ class Demo extends React.Component {
       {
         title: 'Date',
         dataIndex: 'date',
+        ellipsis: true,
         width: 200,
       },
       {
         title: 'Amount',
         dataIndex: 'amount',
+        ellipsis: true,
         width: 100,
       },
       {
         title: 'Type',
         dataIndex: 'type',
+        ellipsis: true,
         width: 100,
       },
       {
         title: 'Note',
         dataIndex: 'note',
+        ellipsis: true,
         width: 100,
       },
       {
         title: 'Action',
         key: 'action',
+        ellipsis: true,
         render: () => <a>Delete</a>,
       },
     ],
@@ -94,6 +99,8 @@ class Demo extends React.Component {
   };
 
   handleResize = index => (e, { size }) => {
+    console.log("------ size: ", this.state.columns[index]);
+    console.log("------ size: ", size);
     this.setState(({ columns }) => {
       const nextColumns = [...columns];
       nextColumns[index] = {
@@ -113,7 +120,12 @@ class Demo extends React.Component {
       }),
     }));
 
-    return <Table style={{width: '800px'}} bordered components={this.components} columns={columns} dataSource={this.data} />;
+    return <Table bordered 
+      tableLayout={'fixed'}
+      components={this.components} 
+      columns={columns} 
+      dataSource={this.data} 
+    />;
   }
 }
 

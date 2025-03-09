@@ -42,7 +42,6 @@ class CInitSysSetItemDetail extends Component {
 
 		let { location, mApp, mSysSetItem, intl, loading } = this.props;
 		let { optEntity } = mSysSetItem;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = loading.effects['mSysSetItem/getSysSetItem'];
 
@@ -72,7 +71,7 @@ class CInitSysSetItemDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.name')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.code')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
@@ -82,7 +81,7 @@ class CInitSysSetItemDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.setDesc')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.setDesc?optEntity.setDesc:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.setDesc?optEntity.setDesc:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>

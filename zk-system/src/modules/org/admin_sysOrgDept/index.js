@@ -66,7 +66,7 @@ class CInitSysOrgDeptIndex extends Component {
 
     render() {
         let { intl, loading, mApp, mSysOrgDeptAdmin, dispatch } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+
         //  ${zkOrgStyles.companry_tree}
         return (
             <div className={ `${zkStyles.zk_f_main_panel} ${zkStyles.zk_f_display_flex_row}` } style={{height:'100%'}} >
@@ -84,7 +84,7 @@ class CInitSysOrgDeptIndex extends Component {
                                 return params;
                             }}
                             title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.dept')}
-                            descName={zkToolsMsg.getInternationInfo(this.state.optDeptEntity.name?this.state.optDeptEntity.name:{}, lang)}
+                            descName={zkToolsMsg.getInternationInfo(this.state.optDeptEntity.name?this.state.optDeptEntity.name:{}, intl.locale)}
                             toTargetId={this.state.optDeptEntity.pkId} 
                             onShowModal={this.f_onShowGrantAuthModal}
                             saveSpinning={loading.effects["mSysOrgDeptAdmin/grantAuth"]||false}

@@ -38,7 +38,6 @@ class CInitSysAuthDefinedSearch extends React.Component {
     
     render(){
         let { intl, mApp, mSysAuthDefined, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
             <ZKSearchRow 

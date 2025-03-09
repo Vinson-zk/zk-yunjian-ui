@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-23 22:57:05
- * @Last Modified by: runoob
- * @Last Modified time: 2024-07-11 15:51:24
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-20 15:27:21
  */
 
 import React from 'react';
@@ -32,9 +32,12 @@ import zkTheme, { changeStyleCssVal } from "zkFramework/style/theme";
 import { theme } from 'antd/lib';
 const { compactAlgorithm, darkAlgorithm, defaultAlgorithm, defaultConfig, defaultSeed, getDesignToken, useToken } = theme;
 
-const FInitIndex = ({ mApp, ...props }) => {
+const FInitIndex = ({ mApp, match, location, history, ...props }) => {
 
-    const { match } = props;
+    // console.log("[^_^:20240627-2315-001] history: ", history);
+    // console.log("[^_^:20240627-2315-001] match: ", match);
+    // console.log("[^_^:20240627-2315-001] location: ", location);
+
     const { lang, themeFlag } = mApp;
     changeStyleCssVal(zkTheme[themeFlag]);
 
@@ -52,15 +55,18 @@ const FInitIndex = ({ mApp, ...props }) => {
         myTheme['algorithm'] = theme.darkAlgorithm 
     }
 
+    let defaultLoginType = localStorage.getItem(globalAppConfig.localKey.defaultLoginType);
+    defaultLoginType = defaultLoginType?defaultLoginType:'personal';
+
     return (
         <ConfigProvider locale={locales[lang].antd} theme = {myTheme} >
             <IntlProvider locale={locales[lang].locale} messages={locales[lang].messages}>
                 <App className={zkStyles.zk_f_full} >
                     <ZKModal.ModalStaticFunc />
                     {isOpenPage ?
-                        <CLayoutPublic {...props} locales={locales} lang={lang} mApp={mApp} />
+                        <CLayoutPublic {...props} match={match} location={location} history={history} locales={locales} lang={lang} mApp={mApp} />
                         : 
-                        <CLayoutPrivate { ...props } redirectPath={`${match.path=="/"?"":match.path}/_login`} locales={locales} lang={lang} mApp={mApp} user = {mApp.user} />
+                        <CLayoutPrivate { ...props } match={match} location={location} history={history} redirectPath={`${match.path=="/"?"":match.path}/_login/${defaultLoginType}`} locales={locales} lang={lang} mApp={mApp} user = {mApp.user} />
                     }
                 </App>
             </IntlProvider>

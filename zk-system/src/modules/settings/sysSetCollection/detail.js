@@ -42,7 +42,6 @@ class CInitSysSetCollectionDetail extends Component {
 
     let { location, mApp, mSysSetCollection, intl, loading } = this.props;
     let { optEntity } = mSysSetCollection;
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
     let spinning = loading.effects['mSysSetCollection/getSysSetCollection'];
 

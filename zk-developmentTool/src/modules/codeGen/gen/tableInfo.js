@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-31 08:29:59
-* @Last Modified by: runoob
-* @Last Modified time: 2024-07-04 16:27:25
+* @Last Modified by: vinson
+* @Last Modified time: 2024-12-27 11:21:36
 * 
 * 
 * 
@@ -297,11 +297,12 @@ class CInitTableInfo extends Component {
     let executeDelete = (keys) => {
       // 执行删除
       this.props.dispatch({
-                type: "mTableInfo/delTableInfo", payload: { pkId: keys },
-                callback: () => {
+        type: "mTableInfo/delTableInfo", 
+        payload: { pkId: keys },
+        callback: () => {
           this.props.dispatch({ type: 'mTableInfo/getTables', moduleId: this.props.mFuncModule.optEntity.pkId });                
         }
-            })
+      })
     };
     
     if (keys === null || keys === undefined || keys.length < 1) {

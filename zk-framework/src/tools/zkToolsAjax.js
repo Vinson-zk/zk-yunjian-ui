@@ -2,8 +2,8 @@
  * ajax 请求处理
  * @Author: Vinson
  * @Date: 2020-08-11 09:05:30
- * @Last Modified by: runoob
- * @Last Modified time: 2024-06-24 16:51:03
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-21 10:15:35
  */
 
 // jquery ajax 暂未使用 
@@ -28,7 +28,7 @@ import locales from '../locales';
  * @param {boolean} async 是否异常；true-异步；false-同步；
  * @return {object} ajax 请求体
  */
-const f_makeRequstBody = (url, options, async) => {
+const f_makeRequstBody = (url, options={}, async) => {
 
     // if(options.async === undefined){
     //     // 默认为异步请求
@@ -171,29 +171,36 @@ const f_makeRequstBody = (url, options, async) => {
  * 可同步异步；
  * @param {string} url 请求地址
  * @param {object} options 同 ajax 请求属性
- * @param {function} fCallback 返回前回调处理函数，可进行消息预处理与身份验证判断；
+ * @param {function} fCallback 返回前回调处理函数，可进行消息预处理、身份验证判断、请求头处理；
+ * @param {function} fCallbackErr 错误的回调处理函数；
+ * @param {function} fDisposeResHeader 请求头处理函数；
  * @return {object} ajax 对象; 
  */
-const f_req = (url, options, fCallback) => {
+const f_req = (url, options, fCallback, fCallbackErr) => {
 
     let requstBody = f_makeRequstBody(url, options);
 
     // console.log("[^_^:20190123-1452-001] requstBody:", requstBody);
-    // console.log("[^_^:20190123-1452-001] Ajax.ajax:", Ajax.ajax);
+    // console.log("[^_^:20190123-1452-002] Ajax.ajax:", Ajax.ajax);
 
     return Ajax.ajax(requstBody).done(function(data, status, xhr){
-        if(!f_auth(data)){
+        // console.log("[^_^:20190123-1452-003] Ajax.done.xhr:", xhr);
+        if(!f_auth.call(this, data)){
             return;
         }
+        
         let rData = data;
         
         // 如果有返回前回调处理函数，先回调，再返回
         if (fCallback) {
-            fCallback.call(this, data, status, xhr);
+            return fCallback.call(this, data, status, xhr);
         }
         return rData;
     }).fail((xhr, status, error) => {
-        return f_responseError.call(this, xhr, status, error);
+        if(fCallbackErr){
+            return fCallbackErr.call(this, xhr, status, error);
+        }
+        return { "code": "-4", "msg": error };
     })
 };
 
@@ -238,67 +245,46 @@ const f_req = (url, options, fCallback) => {
  * 请求方式 3: 请求会调用默认预处理；建议使用
  * @param {string} url 请求地址
  * @param {object} options 同 ajax 请求属性
- * @param {function} fFilter 过滤哪些情况不用预处理; 不存在时，默认都进行预处理; 返回: true-不进行预处理；
- * @param {function} fCallback 返回前回调处理函数；会在预算前调用；
+ * @param {function} fPretreatment 响应预处理，不存在时，使用默认预处理方法[f_pretreatment]进行预处理; 
+ * @param {function} fDisposeResHeader 处理响应头，不存在时，使用默认预处理方法[f_disposeResHeader]对响应头进行处理; 
  * @return {object} ajax 对象; 
  */
-const f_reqPretreatment = (url, options, fFilter, fCallback) => {
-
-    let requstBody = f_makeRequstBody(url, options);
-
-    // console.log("[^_^:20190123-1452-001] requstBody:", requstBody);
-
-    const f_disposeResult = (data)=>{
-        // 如果有返回前回调处理函数，先回调，再返回
-        if (fCallback) {
-            fCallback.call(this, data);
-        }
-        if(fFilter){
-            if(!fFilter.call(this, data)){
-                data = f_pretreatment(data);
-            }
+const f_reqPretreatment = (url, options, fPretreatment, fDisposeResHeader) => {
+    const f_callback = (data, status, xhr)=>{
+        // 处理请求头
+        if(fDisposeResHeader){
+            fDisposeResHeader.call(this, status, xhr);
         }else{
-            data = f_pretreatment(data);
+            f_disposeResHeader.call(this, status, xhr);
+        }
+        // 对响应预处理
+        if(fPretreatment){
+            data = fPretreatment.call(this, data);
+        }else{
+            data = f_pretreatment.call(this, data);
         }
         return data;
     }
-
-    return Ajax.ajax(requstBody).done((data) => {
-        if(!f_auth(data)){
-            return;
-        }
-        return f_disposeResult(data);
-    }).fail((err) => {
-        let rData = f_responseError(err);
-        return f_disposeResult(rData);
-    })
+    return f_req(url, options, f_callback, f_responseError);
 };
 
 // 请求结果处理相关函数 --------------------------------------------------------------
+
 /**
- * 请求消息返回预处理；也是默认处理函数；
- * @param {object} res 请求响应的数据对象；
- * @return {object} 请求响应的数据对象
+ * 响应头处理函数； 
+ * @param {int} status 响应状态；
+ * @param {object} xhr 响应体；
  */
-const f_pretreatment = (res) => {
-    if (res && !zkJsUtils.isEmpty(res.code)) {
-        if (res.ok) {
-            return res;
-        } else {
-            let msgOpt = { type: "error", msg: res.msg }
-            if (!msgOpt.msg) {
-                // 在这里无 intl 无法用 zkToolsMsg 取国际化消息；使用本地国际化消息对象，国际化消息
-                // let lang = zkToolsMsg.getLocale();
-                // 默认提示信息
-                msgOpt.msg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
-            }
-            zkToolsMsg.alertMsg(null, null, msgOpt);
-        }
-        // 以后这里返回 null，请求遇到 null 时，就不用再处理了。
-        return res;
+const f_disposeResHeader = (status, xhr) => {
+    let tkId = xhr.getResponseHeader(globalAppConfig.transferKey.ticket);
+    // console.log("[^_^:20240731-0112-001] disposeResHeader xhr: ", xhr);
+    // console.log("[^_^:20240731-0112-002] disposeResHeader tkId: ", tkId);
+    if(tkId){
+        // 只取第一个值保存
+        tkId = tkId.split(",")[0];
+        zkToolsAuth.setTicket(tkId);        
     }
-    return res;
-};
+}
 
 /**
  * 请求身份认证处理；也是默认处理函数；
@@ -323,6 +309,33 @@ const f_auth = (res) => {
         }
     }
     return true;
+};
+
+/**
+ * 请求消息返回预处理；也是默认处理函数；
+ * @param {object} res 请求响应的数据对象；
+ * @return {object} 请求响应的数据对象
+ */
+const f_pretreatment = (res) => {
+    if (res && !zkJsUtils.isEmpty(res.code)) {
+        if (res.ok) {
+            return res;
+        } else {
+            // console.error('[>_<:20241227-1051-001] res: ', res);
+            let msgOpt = { type: "error", msg: res.msg }
+            if (!msgOpt.msg) {
+                // 在这里无 intl 无法用 zkToolsMsg 取国际化消息；使用本地国际化消息对象，国际化消息
+                // let lang = zkToolsMsg.getLocale();
+                // 默认提示信息
+                msgOpt.msg = zkToolsMsg.msgFormatByLocales(locales, 'global.app.msg.error');
+            }
+            // console.error('[>_<:20241227-1051-002] msgOpt: ', msgOpt);
+            zkToolsMsg.alertMsg(null, null, msgOpt);
+        }
+        // 以后这里返回 null，请求遇到 null 时，就不用再处理了。
+        return res;
+    }
+    return res;
 };
 
 /**
@@ -450,8 +463,10 @@ const defaultModule = {
     req: f_req,                          // 请求方式 1：定制 ajax 请求，返回 Promise 对象；建议使用；
     // reqData: f_reqData,               // 请求方式 2: 定制 ajax 请求，返回数据对象；不建议使用；
     reqPretreatment: f_reqPretreatment,  // 请求方式 3: 请求会调用默认预处理；建议使用
-    pretreatment: f_pretreatment,  // 请求消息返回预处理；
+    disposeResHeader: f_disposeResHeader,
     auth: f_auth,                  // 请求身份认证处理
+    pretreatment: f_pretreatment,  // 请求消息返回预处理；
+    responseError: f_responseError,
     downloadByAjax: f_downloadByAjax,
     downloadFileByLocation: f_downloadFileByLocation
 };

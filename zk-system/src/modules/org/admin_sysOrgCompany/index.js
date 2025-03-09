@@ -44,8 +44,7 @@ class CInitSysOrgCompanyIndex extends Component {
     };
 
     render() {
-        let { mApp, dispatch } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+        let { intl, mApp, dispatch } = this.props;
 
         return (
             <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
@@ -57,7 +56,7 @@ class CInitSysOrgCompanyIndex extends Component {
                     optEntity = {this.state.optCompanyEntity} 
                     onShowAuditModal={this.onShowAuditModal} />
                 <CGrantAuthToCompany isShow = {this.state.grantAuthModal} 
-                    descName={zkToolsMsg.getInternationInfo(this.state.optCompanyEntity.name?this.state.optCompanyEntity.name:{}, lang)}
+                    descName={zkToolsMsg.getInternationInfo(this.state.optCompanyEntity.name?this.state.optCompanyEntity.name:{}, intl.locale)}
                     toTargetId={this.state.optCompanyEntity.pkId} 
                     onShowModal={this.f_onShowGrantModalModal} 
                     saveFunc={(companyId, allotAuths, callback)=>{

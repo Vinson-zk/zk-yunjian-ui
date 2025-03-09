@@ -45,7 +45,6 @@ class CInitMailTypeDetail extends Component {
 
     let { location, mApp, mMailType, intl, loading } = this.props;
     let { optEntity } = mMailType;
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
     let spinning = loading.effects['mMailType/getMailType'];
 
@@ -55,21 +54,21 @@ class CInitMailTypeDetail extends Component {
           <ZKDetailGrid.Row>
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeCode')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
-              <ZKInputJson disabled styleType="compact" value={optEntity.typeCode?optEntity.typeCode:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.typeCode?optEntity.typeCode:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue> 
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeName')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
-              <ZKInputJson disabled styleType="compact" value={optEntity.typeName?optEntity.typeName:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.typeName?optEntity.typeName:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue>
           </ZKDetailGrid.Row>
           <ZKDetailGrid.Row>
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.status')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
-              <ZKInputJson disabled styleType="compact" value={optEntity.status?optEntity.status:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.status?optEntity.status:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue> 
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeDesc')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
-              <ZKInputJson disabled styleType="compact" value={optEntity.typeDesc?optEntity.typeDesc:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.typeDesc?optEntity.typeDesc:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue>
           </ZKDetailGrid.Row>
         </ZKDetailGrid>

@@ -42,7 +42,6 @@ class CInitSysOrgCompanyDetail extends Component {
 
 		let { location, mApp, mSysOrgCompanyAdmin, intl, loading } = this.props;
 		let { optEntity } = mSysOrgCompanyAdmin;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = !optEntity || loading.effects['mSysOrgCompanyAdmin/getSysOrgCompany'];
 
@@ -71,7 +70,7 @@ class CInitSysOrgCompanyDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.name')}:</ZKDetailGrid.ColLeft>
 						<ZKDetailGrid.ColRight>
-							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColRight>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>
@@ -79,13 +78,7 @@ class CInitSysOrgCompanyDetail extends Component {
 						<ZKDetailGrid.ColRight>
 							{optEntity.logo}
 						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>       
-		            <ZKDetailGrid.Row>
-						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.logoOriginal')}:</ZKDetailGrid.ColLeft>
-						<ZKDetailGrid.ColRight>
-							{optEntity.logoOriginal}
-						</ZKDetailGrid.ColRight>
-					</ZKDetailGrid.Row>       
+					</ZKDetailGrid.Row>            
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.faxNum')}:</ZKDetailGrid.ColLeft>
 						<ZKDetailGrid.ColRight>
@@ -137,7 +130,7 @@ class CInitSysOrgCompanyDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.address')}:</ZKDetailGrid.ColLeft>
 						<ZKDetailGrid.ColRight>
-							<ZKInputJson disabled styleType="compact" value={optEntity.address?optEntity.address:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.address?optEntity.address:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColRight>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>
@@ -155,7 +148,7 @@ class CInitSysOrgCompanyDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.registerAddress')}:</ZKDetailGrid.ColLeft>
 						<ZKDetailGrid.ColRight>
-							<ZKInputJson disabled styleType="compact" value={optEntity.registerAddress?optEntity.registerAddress:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.registerAddress?optEntity.registerAddress:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColRight>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>
@@ -173,7 +166,7 @@ class CInitSysOrgCompanyDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLeft>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.shortDesc')}:</ZKDetailGrid.ColLeft>
 						<ZKDetailGrid.ColRight>
-							<ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColRight>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>

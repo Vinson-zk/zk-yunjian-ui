@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 22:42:51
- * @Last Modified by: runoob
- * @Last Modified time: 2023-10-08 18:01:23
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-05 16:47:52
  */
 
 
@@ -30,7 +30,7 @@ user
 userDropObj props
 {
     user:{},
-    optKeys:[],
+    optMenuItems:[],
     callBack: , 回调函数；key, item
     onNewMsg:, 新消息回调；key='newMsg'
     onLogin:, 登录回调； key='login'
@@ -56,8 +56,8 @@ const f_getUserOpt = (intl, user, callBack) => {
                     callBack('user')
                 }
             }}>
-                {user.img ? <img className={styles.avatar} src={user.img} /> : <UserOutlined className={styles.avatar} />}
-                {user.nickname ? user.nickname : zkToolsMsg.msgFormatByIntl(intl, 'global.app.user.nickname', null)}
+                {user.img ? <img className={styles.zk_avatar} src={user.img} /> : <UserOutlined className={styles.zk_avatar} />}
+                {user.username}
             </div>
         )
     }
@@ -78,8 +78,8 @@ const f_getUserMsg = (intl, user, callBack) => {
         return ""
     }
 }
-const f_getOptMenu = (intl, keys, callBack) => {
-    if (zkJsUtils.assertObjType(keys, Array) && keys.length > 0) {
+const f_getOptMenu = (intl, optMenuItems, callBack) => {
+    if (zkJsUtils.assertObjType(optMenuItems, Array) && optMenuItems.length > 0) {
         /*** 生成菜单1, <4.20.0 可用，>=4.20.0 时不推荐 ***/
         // let menuItem = []
         // for (let key of keys) {
@@ -91,20 +91,20 @@ const f_getOptMenu = (intl, keys, callBack) => {
         //     }
         // }}>{menuItem}</Menu>)
         /*** 生成菜单2, >=4.20.0 可用，推荐的写法 ***/
-        let menuItem = []
-        for (let key of keys) {
-            menuItem.push({
-                'key': key,
-                'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)}</span>,
-                'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)
-            })
-        }
+        // let menuItem = []
+        // for (let key of keys) {
+        //     menuItem.push({
+        //         'key': key,
+        //         'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)}</span>,
+        //         'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name." + key, null)
+        //     })
+        // }
 
         return (
             <div>
                 <Dropdown trigger={['click']} 
                     menu={{
-                        'items': menuItem,
+                        'items': optMenuItems,
                         'onClick': ({ item, key, keyPath, domEvent }) => {
                             if (zkJsUtils.assertObjType(callBack, Function)) {
                                 callBack(key, keyPath, item);
@@ -112,8 +112,9 @@ const f_getOptMenu = (intl, keys, callBack) => {
                         }
                     }}
                 >
-                    <span>
-                        <SettingOutlined />{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_settings", null)}
+                    <span >
+                        <SettingOutlined className={styles.zk_avatar} />
+                        {zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_settings", null)}
                     </span>
                 </Dropdown>
             </div>
@@ -123,10 +124,9 @@ const f_getOptMenu = (intl, keys, callBack) => {
     }
 }
 
-const FInitUserDropDown = ({ intl, user, optKeys, callBack, onNewMsg, onLogin, onUser }) => {
+const FInitUserDropDown = ({ intl, user, optMenuItems=[], callBack, onNewMsg, onLogin, onUser }) => {
 
     user = user || {}
-    optKeys = optKeys || {}
     callBack = callBack || null
     onNewMsg = onNewMsg || null
     onLogin = onLogin || null
@@ -155,7 +155,7 @@ const FInitUserDropDown = ({ intl, user, optKeys, callBack, onNewMsg, onLogin, o
 
     const userBtn = f_getUserOpt(intl, user, userCallClick)
     const newMsgBtn = f_getUserMsg(intl, user, userCallClick)
-    const optMenu = f_getOptMenu(intl, optKeys, optCallBack)
+    const optMenu = f_getOptMenu(intl, optMenuItems, optCallBack)
 
     return (
         <div className={styles.zk_dropdown} >

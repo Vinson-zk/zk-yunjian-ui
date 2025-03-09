@@ -42,7 +42,6 @@ class CInitSysResApplicationSystemDetail extends Component {
 
 		let { mApp, mSysResApplicationSystem, intl, loading } = this.props;
 		let { optEntity = {} } = mSysResApplicationSystem;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = loading.effects['mSysResApplicationSystem/getSysResApplicationSystem'];
 
@@ -58,11 +57,11 @@ class CInitSysResApplicationSystemDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResApplicationSystem.name')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResApplicationSystem.shortName')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.shortName?optEntity.shortName:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.shortName?optEntity.shortName:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>       
 				</ZKDetailGrid>

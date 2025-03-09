@@ -55,9 +55,6 @@ class CInitMailTemplateEdit extends Component {
         let { location, mApp, dispatch, mMailTemplate, intl, loading } = this.props;
         let { optEntity } = mMailTemplate;
         
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
-
         // ZKJson 自定义校验规则对象
         let f_makeObjRuls = required=>{
             let objRule = {};

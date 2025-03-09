@@ -2,11 +2,11 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-28 15:22:52
- * @Last Modified by: runoob
- * @Last Modified time: 2024-06-28 00:14:00
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-05 17:04:14
  */
 
- zkJsEvent.eventBinding(window, "storage", function(event){
+zkJsEvent.eventBinding(window, "storage", function(event){
 	// console.log("[^_^:20220511-1946-001] eventBinding.window.storage.event:", event);
 	// console.log("[^_^:20220511-1946-002] eventBinding.window.storage: ", localStorage, sessionStorage);
 	if(event.key == globalAppConfig.localKey.ticket){
@@ -16,36 +16,38 @@
 	}
 });
 
-// 错误：ResizeObserver loop completed with undelivered notifications.
-const debounce = (fn, delay) => {
-  let timer = null;
-  return function () {
-    let context = this;
-    let args = arguments;
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      fn.apply(context, args);
-    }, delay);
-  }
-}
+// // 错误：ResizeObserver loop completed with undelivered notifications.
+// const debounce = (fn, delay) => {
+//   let timer = null;
+//   return function () {
+//     let context = this;
+//     let args = arguments;
+//     clearTimeout(timer);
+//     timer = setTimeout(function () {
+//       fn.apply(context, args);
+//     }, delay);
+//   }
+// }
 
-const _ResizeObserver = window.ResizeObserver;
-window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
-  constructor(callback) {
-    callback = debounce(callback, 200);
-    super(callback);
-  }
-}
+// const _ResizeObserver = window.ResizeObserver;
+// window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
+//   constructor(callback) {
+//     callback = debounce(callback, 200);
+//     super(callback);
+//   }
+// }
 
-window.ResizeObserver = class _NewResizeObserver extends ResizeObserver {
-	constructor(callback) {
-		super(() => window.requestAnimationFrame(() => callback.apply(this, arguments)));
-	}
-}
+// window.ResizeObserver = class _NewResizeObserver extends ResizeObserver {
+// 	constructor(callback) {
+// 		super(() => window.requestAnimationFrame(() => callback.apply(this, arguments)));
+// 	}
+// }
 
-window.addEventListener("error", function (e) {
-  console.error(e.message);
-});
+// window.addEventListener("error", function (e) {
+// 	// zkJsEvent.eventCancelPropagation(e);
+// 	// zkJsEvent.eventCancelDefault(e);
+// 	console.error('[>_<:20241227-1109-001] dvaApp.error: ', e.message);
+// });
 
 
 // ////////////////////////////////////////////////////////////////////////////////////

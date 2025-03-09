@@ -39,7 +39,6 @@ class CInitSysOrgRoleSearch extends React.Component {
     
     render(){
         let { intl, mApp, mSysOrgRole, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
             <ZKSearchRow 
@@ -51,7 +50,7 @@ class CInitSysOrgRoleSearch extends React.Component {
                 }}
             >     
                 <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgRole.name')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "type" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgRole.type')} >
                     <ZKSelect fillValue = {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.all')} >

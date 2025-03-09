@@ -3,28 +3,15 @@
  * @Author: Vinson
  * @Date: 2020-08-28 15:22:47
  * @Last Modified by: runoob
- * @Last Modified time: 2024-06-27 23:51:16
+ * @Last Modified time: 2024-07-31 23:41:54
  */
 
 // import zkJsUtils from 'zkJsUtils';
 import { zkTools } from 'zkFramework';
 
-import { getNavItems, loginUserInfo, accountLogin, phoneNumberLogin } from './service.js';
+import { getNavItems, loginUserInfo } from './service.js';
 
 let { zkToolsMsg, zkToolsAuth, zkToolsUtils } = zkTools;
-
-const loginResDispose = (res)=>{
-    // console.log("[^_^:20210702-0004-001] loginResDispose.res: ", res);
-    // console.log("[^_^:20210702-0004-001] loginResDispose.res: ", res.data[globalAppConfig.transferKey.ticket]);
-    if(res.ok){
-        // 登录成功
-        zkToolsAuth.setTicket(res.data[globalAppConfig.transferKey.ticket]);
-        return true;
-    }else{
-        // zkToolsMsg.alertMsg(null, null, {type:"error", msg:res.msg});
-        return false;
-    }
-}
 
 const model = {
     namespace: 'mApp',
@@ -84,24 +71,9 @@ const model = {
             let res = yield call(loginUserInfo);
             if(res.ok){
                 // console.log("[^_^:20220426-1726-001] 当前登录用户信息: ", res.data);
-                yield put({ type: 'setState', payload: res.data });
+                yield put({ type: 'setState', payload: {user: res.data.user} });
             }else{
                 zkToolsAuth.logout();
-            }
-        },
-        // loginFlag 1-个人用户登录；2-企业用户登录
-        *accountLogin({ loginFlag, params }, { call, put }){
-            let res = yield call(accountLogin, params);
-            if(loginResDispose(res)){
-                 yield put({ type: 'loginUserInfo' });
-                // yield put({ type: 'setState', payload: loginInfo });
-            }
-        },
-        *phoneNumberLogin({ params }, { call, put }){
-            let res = yield call(phoneNumberLogin, params);
-            if(loginResDispose(res)){
-                 yield put({ type: 'loginUserInfo' });
-                // yield put({ type: 'setState', payload: loginInfo });
             }
         },
     },

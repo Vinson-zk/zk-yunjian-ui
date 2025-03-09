@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-07-01 16:31:37
-* @Last Modified by: runoob
-* @Last Modified time: 2024-07-09 11:43:22
+* @Last Modified by: vinson
+* @Last Modified time: 2025-01-25 14:34:56
 * 
 * 
 * 
@@ -22,7 +22,7 @@
 	/* width: 360px; */
     display: table;
     // background: #fff;
-    box-shadow: 0 2px 6px #999;
+    box-shadow: 0 2px 4px @colorPrimary;
     border-radius: 5px;
 
     padding: 32px;
@@ -42,11 +42,6 @@
 
 .login_item {
 
-}
-
-.login_item_icon {
-	// color: rgba(0, 0, 0, 0.45);
-	color: @colorPrimary;
 }
 
 .login_item_checkbox {
@@ -103,49 +98,6 @@
 .login_span_btn_userType {
 	font-size: 13px;
 	color : @colorPrimaryText;
-}
-
-/* tabs 页样式 */
-.login_tabs {
-	/* 选 tab 页时，tab title 的字段颜色*/
-	:global {
-		.ant-tabs-nav::before {
-			border-bottom: 1px solid @colorPrimaryBorder;
-		}
-		.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active {
-			border-top: 1px solid @colorPrimaryBorderHover;
-			border-left: 1px solid @colorPrimaryBorderHover;
-			border-right: 1px solid @colorPrimaryBorderHover;
-			border-bottom: 1px solid @colorPrimaryBorder;
-			// background: @colorPrimaryActive;
-		}
-		/* 没选中的 tab 页的 tab title 的样式 */
-		.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-			/*color: inherit;*/
-			// color: @colorPrimaryActive;
-		}
-		.ant-tabs-nav-list .ant-tabs-tab {
-			border-top: 1px solid @colorPrimaryBorder;
-			border-left: 1px solid @colorPrimaryBorder;
-			border-right: 1px solid @colorPrimaryBorder;
-			border-bottom: 1px solid @colorPrimaryBorder;
-		    background: inherit;
-			// color  : @colorPrimary;
-			user-select: none;
-		}
-		.ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active:hover {
-			background: @colorPrimaryHover;
-			// border-bottom: 1px solid @colorPrimaryBorder;
-			cursor: default;
-			// color: @colorPrimaryBg;
-		}
-		.ant-tabs-nav-list .ant-tabs-tab:hover {
-			background: @colorPrimaryHover;
-	    	border: 1px solid @colorPrimaryBorderHover;
-			cursor: pointer;
-			color: @colorPrimaryBg;
-		}
-	}
 }
 
 .login_panel_block {

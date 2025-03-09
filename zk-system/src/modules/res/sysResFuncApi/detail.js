@@ -42,7 +42,6 @@ class CInitSysResFuncApiDetail extends Component {
 
 		let { location, mApp, mSysResFuncApi, intl, loading } = this.props;
 		let { optEntity } = mSysResFuncApi;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let columns = [
             {title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.param.name'), dataIndex:'pName', key:'pName'},
@@ -64,17 +63,17 @@ class CInitSysResFuncApiDetail extends Component {
 						</ZKDetailGrid.ColValue>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.name')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row> 
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.reqDesc')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.reqDesc?optEntity.reqDesc:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.reqDesc?optEntity.reqDesc:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.useContext')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.useContext?optEntity.useContext:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.useContext?optEntity.useContext:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row> 
 					<ZKDetailGrid.Row>

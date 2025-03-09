@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-04-15 14:32:51
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-04 16:28:30
+* @Last Modified time: 2024-07-31 16:03:59
 * 
 * 审核公司
 * 
@@ -57,7 +57,6 @@ class CInitSysOrgCompanyAudit extends Component {
 	render() {
 
 		let { location, mApp, mSysOrgCompanyAdmin, isShow, optEntity, intl, loading } = this.props;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = !optEntity || loading.effects['mSysOrgCompanyAdmin/auditCompany'];
 

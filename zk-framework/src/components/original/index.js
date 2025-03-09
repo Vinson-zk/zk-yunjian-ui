@@ -2,13 +2,14 @@
  * 原生组件的封装；封装是为了：统一默认情况下的风格与功能；这些默认处理，除个别强制要求的外，都可覆盖，且不影响原生功能与属性；
  * @Author: Vinson
  * @Date: 2020-08-12 09:13:47
- * @Last Modified by: runoob
- * @Last Modified time: 2024-07-08 14:16:09
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-24 13:44:06
  */
-
+export { default as ZKAlert } from './zk-alert';
 export { default as ZKAnchor } from './zk-anchor';
 export { default as ZKAvatar } from './zk-avatar';
 export { default as ZKButton } from './zk-button';
+export { default as ZKCard } from './zk-card';
 export { default as ZKCheckbox } from './zk-checkbox';
 export { default as ZKCol } from './zk-col';
 export { default as ZKConfigProvider } from './zk-configProvider';

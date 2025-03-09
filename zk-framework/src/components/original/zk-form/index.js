@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 09:34:49
- * @Last Modified by:   Vinson
- * @Last Modified time: 2023-05-29 16:52:14
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-08-20 11:15:22
  */
 import React from 'react';
 import { Form } from 'antd';
@@ -17,16 +17,22 @@ const FWrapFormItem = (props)=>{
 FWrapFormItem.propTypes = {
     ...Form.Item.propTypes
 }
+// xs	屏幕 < 576px 响应式栅格，可为栅格数或一个包含其他属性的对象	number | object	-	
+// sm	屏幕 ≥ 576px 响应式栅格，可为栅格数或一个包含其他属性的对象	number | object	-	
+// md	屏幕 ≥ 768px 响应式栅格，可为栅格数或一个包含其他属性的对象	number | object	-	
+// lg	屏幕 ≥ 992px 响应式栅格，可为栅格数或一个包含其他属性的对象	number | object	-	
+// xl	屏幕 ≥ 1200px 响应式栅格，可为栅格数或一个包含其他属性的对象	number | object	-	
+// xxl 屏幕 ≥ 1600px 响应式栅格，可为栅格数或一个包含其他属性的对象	number | object	-
 // 定义属性默认值
 FWrapFormItem.defaultProps = {
 	...Form.Item.defaultProps,
-	labelCol: { // 使用 9:15 为配合 editForm 下栅格分布，正好是 label 占 3 格
-		xs: { span: 24 },
-		sm: { span: 9 },    
+	labelCol: { // 使用 9:15 为配合 editForm 下栅格分布，正好是 label 占 3 格；
+		xs: 8,
+		sm: 8,    
 	},
 	wrapperCol: {
-		xs: { span: 24 },
-		sm: { span: 15 },
+		xs: 16,
+		sm: 16,
 	},
 	// labelCol: { span: 9 },
 	// wrapperCol: { span: 15 },

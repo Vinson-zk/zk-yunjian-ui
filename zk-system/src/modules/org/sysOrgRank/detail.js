@@ -42,7 +42,6 @@ class CInitSysOrgRankDetail extends Component {
 
     let { location, mApp, mSysOrgRank, intl, loading } = this.props;
     let { optEntity } = mSysOrgRank;
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
     let spinning = loading.effects['mSysOrgRank/getSysOrgRank'];
 
@@ -72,13 +71,13 @@ class CInitSysOrgRankDetail extends Component {
           <ZKDetailGrid.Row>
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgRank.name')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue span={12} >
-              <ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue>
           </ZKDetailGrid.Row>
           <ZKDetailGrid.Row>
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgRank.shortDesc')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue span={12} >
-              <ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue>
           </ZKDetailGrid.Row>
         </ZKDetailGrid>

@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:45
  * @Last Modified by: runoob
- * @Last Modified time: 2023-09-24 15:42:30
+ * @Last Modified time: 2024-07-31 15:54:09
  */
 
 
@@ -24,9 +24,8 @@ import zkStyles from 'zkFramework/style/zk.styles.less';
  * @param {Function} editFunc 编辑函数
  * @param {Function} detailFunc 明细函数
  * @param {Function} deleteFunc 删除函数
- * @param {object} intl 国际化语言对象
  */
-const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang) => {
+const f_getTableColumns = (onEdit, onDetail, onDelete, intl) => {
 
 	return [
    //      {
@@ -37,7 +36,7 @@ const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang) => {
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.name'),
 			dataIndex: 'name', key: 'name', width: 100, textAlign: 'left', 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 			}
         },
         {
@@ -187,11 +186,10 @@ class CInitSysMenuGrid extends React.Component {
 	render() {
 
 		let { intl, mApp, mSysMenu, dispatch, history, match, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let gridLoading = loading.effects['mSysMenu/findSysMenusTree'];
 
-		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang);
+		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl);
 
 		// scroll = {{x:1440, y: 'calc(100vh - 217px)' }}
 		return (

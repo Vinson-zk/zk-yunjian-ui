@@ -2,8 +2,8 @@
  *
  * @Author: 
  * @Date: 
- * @Last Modified by: runoob
- * @Last Modified time: 2024-07-07 10:59:35
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-08 14:39:07
  */
 
 import { zkTools } from "zkFramework";
@@ -41,7 +41,7 @@ export async function findSysOrgUsers(params) {
 
 // 管理员重置密码
 export async function resetPwd(params){
-    return zkToolsAjax.reqPretreatment(`/${api}/org/sysOrgUser/resetPwd`, {method:'POST', data:params});
+    return zkToolsAjax.reqPretreatment(`/${api}/org/upwd/resetPwd`, {method:'POST', data:params});
 }
 
 // 给用户分配角色

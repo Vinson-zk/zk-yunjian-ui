@@ -1,8 +1,8 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-06 17:23:52 
- * @Last Modified by: vinson
- * @Last Modified time: 2023-08-28 10:41:46
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-31 23:49:49
  */
 
 const path = require('path');
@@ -347,7 +347,7 @@ module.exports = {// 入口，在各个项目的 webpack 配置中支配置
                     pageSize:"_key_page.size",     // 分页数量，本地记录标识；用于记录用户操作习惯；
                 },
                 transferKey:{ // 与服务器传输 参数名
-                    ticket: "_tkId",               // 令牌上遂参数名
+                    ticket: "_tkid",               // 令牌上遂参数名
                     page:{                         // 请求后台时的分页参数
                         pageNo: "page.no",
                         pageSize: "page.size"

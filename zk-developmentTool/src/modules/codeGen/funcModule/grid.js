@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 11:54:38
-* @Last Modified by: runoob
-* @Last Modified time: 2024-06-24 18:55:19
+* @Last Modified by: vinson
+* @Last Modified time: 2024-12-30 14:51:47
 * 
 * 
 * 
@@ -10,7 +10,6 @@
 
 
 import React from 'react';
-import { injectIntl } from 'react-intl';
 import { Table } from 'antd';
 
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
@@ -105,7 +104,7 @@ const f_getTableColumns = (editFunc, detailFunc, deleteFunc, genCodeFunc, intl, 
   ]
 };
 
-class CInitSysNavGrid extends React.Component {
+class CInitFuncModuleGrid extends React.Component {
 
   constructor(props) {
     super(props);
@@ -143,77 +142,85 @@ class CInitSysNavGrid extends React.Component {
 
   render() {
 
-  let { pagination = {}, gridData = [], gridSelKeys = [], onChange, onChangeSelKeys, onDetail, onEdit, onGenCode, lang, intl, loading } = this.props
+    let { pagination = {}, gridData = [], gridSelKeys = [], 
+      onChange, onChangeSelKeys, onDetail, onEdit, onGenCode, 
+      lang, intl, loading } = this.props
 
-  // 改变选择行
-  const changeSelKeysFunc = (selRowKeys, selRows) => {
-    if (zkJsUtils.assertObjType(onChangeSelKeys, Function)) {
-      onChangeSelKeys.call(this, selRowKeys);
-    }
-  };
+    // 改变选择行
+    const changeSelKeysFunc = (selRowKeys, selRows) => {
+      if (zkJsUtils.assertObjType(onChangeSelKeys, Function)) {
+        onChangeSelKeys.call(this, selRowKeys);
+      }
+    };
 
-  // 明细
-  const detailFunc = (entity) => {
-    if (zkJsUtils.assertObjType(onDetail, Function)) {
-      onDetail.call(this, entity);
-    }
-  };
+    // 明细
+    const detailFunc = (entity) => {
+      if (zkJsUtils.assertObjType(onDetail, Function)) {
+        onDetail.call(this, entity);
+      }
+    };
 
-  // 删除
-  const deleteFunc = ids => {
-    this.f_delete(ids, false);
-  };
+    // 删除
+    const deleteFunc = ids => {
+      this.f_delete(ids, false);
+    };
 
-  // 新增/编辑
-  const editFunc = entity => {
-    if (zkJsUtils.assertObjType(onEdit, Function)) {
-      onEdit.call(this, entity)
-    }
-  };
+    // 新增/编辑
+    const editFunc = entity => {
+      if (zkJsUtils.assertObjType(onEdit, Function)) {
+        onEdit.call(this, entity);
+      }
+    };
 
-  // 新增/编辑
-  const genCodeFunc = entity => {
-    if (zkJsUtils.assertObjType(onGenCode, Function)) {
-      onGenCode.call(this, entity)
-    }
-  };
+    // 新增/编辑
+    const genCodeFunc = entity => {
+      if (zkJsUtils.assertObjType(onGenCode, Function)) {
+        onGenCode.call(this, entity);
+      }
+    };
 
-  let tableColumns = f_getTableColumns(editFunc, detailFunc, deleteFunc, genCodeFunc, intl, lang);
+    let tableColumns = f_getTableColumns(editFunc, detailFunc, deleteFunc, genCodeFunc, intl, lang);
 
-  return (
-    <ZKScrollTable loading = { loading }
-      autoHeight = {true}
-      rowSelection = {{
-        onChange: (selRowKeys, selRows) => { changeSelKeysFunc(selRowKeys, selRows) },
-        selectedRowKeys: gridSelKeys, columnWidth: '32px'
-      }}
-      rowKey = "pkId"
-      rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
-      columns = {tableColumns}
-      scroll = {{ x:1440, y: this.state.sh }}
-      pagination = {pagination}
-      // pagination = {{position: ['topRight'], ...pagination}}
-      dataSource = {gridData}
-      // (pagination, filters, sorter, extra: { currentDataSource: [] })
-      onChange = {onChange}
-      className = {zkStyles.zk_f_flex_auto_1}
-    >
-    <ZKOptRow>
-      <ZKOptRow.OptGroup>
-      <ZKOptRow.OptGroup.OptItem onClick={(e) => {
-        editFunc({});
-      }} >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_add')}</ZKOptRow.OptGroup.OptItem>
-      <ZKOptRow.OptGroup.OptItem onClick={(e) => {
-        // 删除
-        this.f_delete(gridSelKeys, true);
-      }} >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_del')}</ZKOptRow.OptGroup.OptItem>
-      </ZKOptRow.OptGroup>
-    </ZKOptRow>
-    </ZKScrollTable>
-  )
+    return (
+      <ZKScrollTable loading = { loading }
+        autoHeight = {true}
+        rowSelection = {{
+          onChange: (selRowKeys, selRows) => { changeSelKeysFunc(selRowKeys, selRows) },
+          selectedRowKeys: gridSelKeys, columnWidth: '32px'
+        }}
+        rowKey = "pkId"
+        rowNum = {{'textAlign': 'center', 'fixed': 'left', width: 40}}
+        columns = {tableColumns}
+        scroll = {{ x:1440, y: this.state.sh }}
+        pagination = {pagination}
+        // pagination = {{position: ['topRight'], ...pagination}}
+        dataSource = {gridData}
+        // (pagination, filters, sorter, extra: { currentDataSource: [] })
+        onChange = {onChange}
+        className = {zkStyles.zk_f_flex_auto_1}
+      >
+      <ZKOptRow>
+        <ZKOptRow.OptGroup>
+        <ZKOptRow.OptGroup.OptItem onClick={(e) => {
+          editFunc({});
+        }} >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_add')}</ZKOptRow.OptGroup.OptItem>
+        <ZKOptRow.OptGroup.OptItem onClick={(e) => {
+          // 删除
+          this.f_delete(gridSelKeys, true);
+        }} >{zkToolsMsg.msgFormatByIntl(intl, 'global.opt.name._key_del')}</ZKOptRow.OptGroup.OptItem>
+        </ZKOptRow.OptGroup>
+      </ZKOptRow>
+      </ZKScrollTable>
+    )
   }
+
+  // 6、卸载时；在卸载和销毁组件之前立即调用。在此方法中执行任何必要的清理，例如使计时器无效，取消网络请求或清除在其中创建的任何订阅
+  componentWillUnmount() {
+    this.setState = ()=>false;
+  }
+
 }
 
-export default injectIntl(CInitSysNavGrid);
+export default CInitFuncModuleGrid;
 
 

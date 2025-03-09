@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 11:33:59
- * @Last Modified by: runoob
- * @Last Modified time: 2023-09-21 21:33:29
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-12-16 21:06:04
  */
 
 import React from 'react';
@@ -25,10 +25,10 @@ class CInitInputJson extends React.Component {
 		this.state = {
 			// value: props.value || {},
 			value: {},
-			// attrs: props.attrs            // attributers 需要编辑的属性说明对象 {attrName:{name:显示名}}
+			// attrs: props.attrs             // attributers 需要编辑的属性说明对象 {attrName:{name:显示名}}
 			primaryAttr: props.primaryAttr,   // 首要属性; 也是当前维护的属性；
 			styleType: props.styleType,       // Input Json UI 类型 
-			isInput: false,                    // 是否是输入来修改值；
+			isInput: false,                   // 是否是输入来修改值；
 		}
 		// 初始化所有属性值为空字符串
 		if (props.initAttrrEmpty) {
@@ -47,21 +47,29 @@ class CInitInputJson extends React.Component {
 			} else {
 				state.value = {};
 			}
-			// console.log("----- getDerivedStateFromProps -- 1: ", state.primaryAttr)
-			state.primaryAttr = state.primaryAttr ? state.primaryAttr : props.primaryAttr;
-			if (zkJsUtils.isEmpty(state.primaryAttr)) {
-				for (let index in props.attrs) {
-					state.primaryAttr = index;
-					break;
-				}
-			}
 		} else {
 			// console.log("----- getDerivedStateFromProps -- 2: ", state)
 		}
 
+		// console.log("[^_^:20240731-0012-002] state.primaryAttr: ", state.primaryAttr)
+
 		state.isInput = false;
 		return true;
 	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		// console.log("[^_^:20240731-0012-001] shouldComponentUpdate: ", this.props.primaryAttr, nextProps.primaryAttr);
+		if(this.props.primaryAttr && nextProps.primaryAttr && this.props.primaryAttr != nextProps.primaryAttr){
+			nextState.primaryAttr = nextProps.primaryAttr;
+		}
+		if (zkJsUtils.isEmpty(nextState.primaryAttr)) {
+			for (let index in nextProps.attrs) {
+				nextState.primaryAttr = index;
+				break;
+			}
+		}
+        return true;
+    }
 
 	/*** 配合 Form.Item 事件函数 ***/
 	triggerChange = (changedValue)=>{

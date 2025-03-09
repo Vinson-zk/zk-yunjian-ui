@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-05-06 17:14:32
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-04 16:28:29
+* @Last Modified time: 2024-07-31 16:05:42
 * 
 * 
 * 
@@ -133,13 +133,12 @@ class CInitGrantFuncApi extends Component {
     
 	render(){
 		let { intl, loading, mApp, isShow, descName } = this.props;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 		let tableColumns = [
 			{
 				title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.name'),
 				textAlign: 'center', dataIndex: 'name', key: 'name', width: 100, 
 				render: (text, record, index) => {
-					return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+					return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 				}
 			},
 			{
@@ -158,7 +157,7 @@ class CInitGrantFuncApi extends Component {
 				title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.reqDesc'),
 				textAlign: 'center', dataIndex: 'reqDesc', key: 'reqDesc', width: 100, 
 				render: (text, record, index) => {
-					return zkToolsMsg.getInternationInfo(record.reqDesc?record.reqDesc:{}, lang);
+					return zkToolsMsg.getInternationInfo(record.reqDesc?record.reqDesc:{}, intl.locale);
 				}
 			}
 		]

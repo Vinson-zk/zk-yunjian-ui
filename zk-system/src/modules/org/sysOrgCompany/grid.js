@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 11:07:13
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 19:44:01
+* @Last Modified time: 2024-07-31 16:01:03
 */
 
 
@@ -24,9 +24,8 @@ import zkStyles from 'zkFramework/style/zk.styles.less';
  * @param {object} currentCompany 当前登录公司
  * @param {Function} detailFunc 明细函数
  * @param {object} intl 国际化语言对象
- * @param {string} lang 当前语言标识
  */
-const f_getTableColumns = (currentCompany, onDetail, intl, lang, onShowAuditModal, onShowGrantModalModal) => {
+const f_getTableColumns = (currentCompany, onDetail, intl, onShowAuditModal, onShowGrantModalModal) => {
 
 	return [
 		{
@@ -41,7 +40,7 @@ const f_getTableColumns = (currentCompany, onDetail, intl, lang, onShowAuditModa
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.name'),
 			textAlign: 'center', dataIndex: 'name', key: 'name', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 			}
 		},
 		{
@@ -209,9 +208,8 @@ class CInitSysOrgCompanyGrid extends React.Component {
     /** 返回 JSX 元素 */
 	render() {
 		let { intl, mApp, mSysOrgCompany, loading, onShowAuditModal, onShowGrantModalModal } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let tableColumns = f_getTableColumns(mApp.user.company, this.f_detail, intl, lang, onShowAuditModal, onShowGrantModalModal);
+		let tableColumns = f_getTableColumns(mApp.user.company, this.f_detail, intl, onShowAuditModal, onShowGrantModalModal);
 
 		let gridLoading = loading.effects['mSysOrgCompany/findSysOrgChildCompanysTree'];
 		return (

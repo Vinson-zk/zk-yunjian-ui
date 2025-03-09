@@ -51,9 +51,6 @@ class CInitSysResApplicationSystemEdit extends Component {
 
         let { mApp, dispatch, mSysResApplicationSystem, intl, loading, location } = this.props;
         let { optEntity } = mSysResApplicationSystem;
-        
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
 
         // ZKJson 自定义校验规则对象
         let f_makeObjRuls = required=>{
@@ -76,7 +73,7 @@ class CInitSysResApplicationSystemEdit extends Component {
 							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
                         ]} 
 					>
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                        <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 	</ZKEditForm.Item>
                 	<ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResApplicationSystem.code')} 
                 		rules = {[
@@ -91,7 +88,7 @@ class CInitSysResApplicationSystemEdit extends Component {
 							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                         ]} 
 					>
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                        <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 	</ZKEditForm.Item>
             	</ZKEditForm>
             </ZKSpin>

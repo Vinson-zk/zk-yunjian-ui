@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 11:06:15
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 17:26:29
+* @Last Modified time: 2024-07-31 16:02:38
 */
 
 
@@ -46,7 +46,6 @@ class CInitSysOrgDeptDetail extends Component {
 
 		let { location, mApp, mSysOrgDeptAdmin, intl, loading } = this.props;
 		let { optEntity, targetCompany } = mSysOrgDeptAdmin;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = !optEntity || loading.effects['mSysOrgDeptAdmin/getSysOrgDept'];
 
@@ -74,7 +73,7 @@ class CInitSysOrgDeptDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.name')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue span = {12}>
-							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>  
 		            <ZKDetailGrid.Row>
@@ -110,13 +109,13 @@ class CInitSysOrgDeptDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.address')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue span = {12}>
-							<ZKInputJson disabled styleType="compact" value={optEntity.address?optEntity.address:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.address?optEntity.address:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.shortDesc')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue span = {12}>
-							<ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>

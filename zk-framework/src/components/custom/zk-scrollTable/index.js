@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-11 18:13:59
-* @Last Modified by: runoob
-* @Last Modified time: 2024-06-27 23:57:36
+* @Last Modified by: vinson
+* @Last Modified time: 2024-12-30 14:52:38
 * 
 * 
 */
@@ -213,12 +213,8 @@ class CInitScrollTable extends React.Component {
 		this.setState({ scrollY: scrollY });
 	}
 
-	componentWillUnmount(){
-		if(this.props.scroll && this.props.autoHeight){
-        	window.removeEventListener('resize', this.calcTableHeight);
-        }
-    }
-	componentDidMount() {
+	// 6、创建时；安装组件（插入树中）后立即调用；此方法是设置任何订阅的好地方。如果您这样做，请不要忘记取消订阅componentWillUnmount()。
+    componentDidMount() {
         //  覆盖 ant design 自带滚动条样式
         // document.querySelector('.ant-table-scroll > .ant-table-body').styles.overflow='hidden';
         // 滚动条组件ref，重新设置滚动位置
@@ -247,6 +243,8 @@ class CInitScrollTable extends React.Component {
    //      }
 
     }
+
+    // 6、修改时；更新发生后立即调用。初始渲染不会调用此方法。
     // 组件重新渲染，重新设置滚动条的位置
 	componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.scrollbarsRef.current){
@@ -270,6 +268,14 @@ class CInitScrollTable extends React.Component {
 			// }
    //      }
     }
+
+    // 6、卸载时；在卸载和销毁组件之前立即调用。在此方法中执行任何必要的清理，例如使计时器无效，取消网络请求或清除在其中创建的任何订阅
+    componentWillUnmount() {
+        // this.setState = ()=>false;
+		if(this.props.scroll && this.props.autoHeight){
+        	window.removeEventListener('resize', this.calcTableHeight);
+        }
+    }
 }
 
 // 定义属性
@@ -287,5 +293,6 @@ CInitScrollTable.defaultProps = {
 CInitScrollTable.calcTableHeight = ZKTable.calcTableHeight;
 
 export default CInitScrollTable;
+
 
 

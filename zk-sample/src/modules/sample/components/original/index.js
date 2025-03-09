@@ -2,8 +2,8 @@
  * 原生组件的封装；封装是为了：统一默认情况下的风格与功能；这些默认处理，除个别强制要求的外，都可覆盖，且不影响原生功能与属性；
  * @Author: Vinson
  * @Date: 2020-08-12 09:13:47
- * @Last Modified by: runoob
- * @Last Modified time: 2024-07-08 14:17:03
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-24 13:44:39
  */
 
 import React from 'react';
@@ -35,34 +35,37 @@ function FInitOriginalIndexDemo({intl}){
 				<SyntaxHighlighter language='jsx' style={docco} className={`${styles.zk_SyntaxHighlighter}`}>
 		        	{[
 					"封装原生组件；",
+					"    ZKAlert 原生封装，无样例",
 					"    ZKBAnchor",
 	        		"    ZKAvatar 原生封装，无样例",
 	        		"    ZKButton",
+	        		"    ZKCard 原生封装，无样例",
 	        		"    ZKCheckbox 原生封装，无样例",
 					"    ZKCol",
 					"    ZKDatePicker",
-					"    ZKDivider  原生封装，无样例",
-					"    ZKDrawer  原生封装，无样例",
-					"    ZKDropdown  原生封装，无样例",
+					"    ZKDivider 原生封装，无样例",
+					"    ZKDrawer 原生封装，无样例",
+					"    ZKDropdown 原生封装，无样例",
 					"    ZKEmpty ",
 					"    ZKForm",
 					"    ZKInput",
 					"    ZKInputNumber",
-					"    ZKList  原生封装，无样例",
-					"    ZKMenu  原生封装，无样例",
+					"    ZKList 原生封装，无样例",
+					"    ZKMenu 原生封装，无样例",
 					"    ZKModal",
-					"    ZKPopconfirm  原生封装，无样例",
+					"    ZKPopconfirm 原生封装，无样例",
 					"    ZKRadio",
 					"    ZKRow",
 					"    ZKSelect",
 					"    ZKSpin",
-					"    ZKSteps  原生封装，无样例",
+					"    ZKSteps 原生封装，无样例",
 					"    ZKSwitch",
 					"    ZKTable",
-					"    ZKTabs  原生封装，无样例",
+					"    ZKTabs 原生封装，无样例",
 					"    ZKTransfer",
 					"    ZKTee",
 					"    ZKTreeSelect",
+					"    ZKUpload",
 					].join('\n')}
 		        </SyntaxHighlighter>
 			</ZKContentFormat>

@@ -1,9 +1,11 @@
 /*
 * @Author: Vinson
-* @Date:   2021-03-29 16:26:49
+* @Email: binary_space@126.com
+* @QQ: 1035862795
+* @Wechat: 1035862795
+* @Date: 2024-07-31 18:32:43
 * @Last Modified by: runoob
-* @Last Modified time: 2024-06-27 23:31:23
-* 
+* @Last Modified time: 2024-07-31 18:37:13
 */
 
 
@@ -26,17 +28,4 @@ export async function loginUserInfo(){
 	// }
  //    return resJsonData;
 }
-
-export async function accountLogin(params){
-    return zkToolsAjax.reqPretreatment(`/${apiSys}/sec/login`, {method:'POST', data: params}); // , dataType:'text'
-}
-
-export async function phoneNumberLogin(params){
-    return zkToolsAjax.reqPretreatment(`/${apiSys}/sec/phoneNumberLogin`, {method:'POST', data:JSON.stringify(params), contentType:'application/json; charset=utf-8'});
-}
-
-
-
-
-
 

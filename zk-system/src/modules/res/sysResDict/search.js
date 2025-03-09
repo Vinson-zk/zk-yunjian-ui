@@ -51,7 +51,6 @@ class CInitSysResDictSearch extends React.Component {
     
     render(){
         let { intl, mApp, mSysResDict, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         let selLoading = loading.effects['mSysResDict/findSysResDictsTree'];
         return (
@@ -78,7 +77,7 @@ class CInitSysResDictSearch extends React.Component {
                     <ZKInput style = {{width:"180px"}}  />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "dictName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDict.dictName')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>       
             </ZKSearchRow>
         );

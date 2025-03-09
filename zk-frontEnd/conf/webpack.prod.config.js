@@ -2,7 +2,7 @@
  * @Author: Vinson 
  * @Date: 2020-08-07 09:32:40 
  * @Last Modified by: vinson
- * @Last Modified time: 2023-08-28 22:31:10
+ * @Last Modified time: 2025-01-08 15:54:45
  */
 
 
@@ -36,6 +36,7 @@ module.exports = (env, args, isDev=false) => {
     webpackConfig.resolve.alias['zkWechat'] = packagePath.resolve(__dirname, '../../zk-wechat');
     webpackConfig.resolve.alias['zkFile'] = packagePath.resolve(__dirname, '../../zk-file');
     webpackConfig.resolve.alias['zkMail'] = packagePath.resolve(__dirname, '../../zk-mail');
+    webpackConfig.resolve.alias['zkIot'] = packagePath.resolve(__dirname, '../../zk-iot');
 
     /*** rules ***/
     // 添加需要编译的目录
@@ -47,6 +48,8 @@ module.exports = (env, args, isDev=false) => {
     packageWebpackConfig.packageDefaultRules.babel_loader.include.push(packagePath.resolve(__dirname, "../../zk-wechat"));
     packageWebpackConfig.packageDefaultRules.babel_loader.include.push(packagePath.resolve(__dirname, "../../zk-file"));
     packageWebpackConfig.packageDefaultRules.babel_loader.include.push(packagePath.resolve(__dirname, "../../zk-mail"));
+    packageWebpackConfig.packageDefaultRules.babel_loader.include.push(packagePath.resolve(__dirname, "../../zk-iot"));
+    // 添加编译的规则
     webpackConfig.module.rules.push(packageWebpackConfig.packageDefaultRules.babel_loader);
     webpackConfig.module.rules.push(packageWebpackConfig.packageDefaultRules.url_loader);
     webpackConfig.module.rules.push(packageWebpackConfig.packageDefaultRules.css_less_loader);
@@ -66,7 +69,12 @@ module.exports = (env, args, isDev=false) => {
     webpackConfig.plugins.push(tempPluginObj);
     // plugin 插件 html 模版
     tempPluginObj = packageWebpackConfig.packageDefaultPlugins.HtmlWebpackPlugin;
-    tempPluginObj.userOptions.template = packagePath.resolve(__dirname, '../public/index.html');
+    if(isDev){
+        tempPluginObj.userOptions.template = packagePath.resolve(__dirname, '../public/index.html');
+    }else{
+        tempPluginObj.userOptions.template = packagePath.resolve(__dirname, '../public/prod/index.html');
+    }
+    
     webpackConfig.plugins.push(tempPluginObj);
     // plugin 插件 清理
     tempPluginObj = packageWebpackConfig.packageDefaultPlugins.CleanWebpackPlugin;

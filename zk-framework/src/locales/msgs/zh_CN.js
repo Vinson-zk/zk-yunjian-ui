@@ -64,6 +64,8 @@ const messages = {
 	"global.opt.name._key_cancel": "取消",
 	"global.opt.name._key_save": "保存",
 	"global.opt.name._key_submit": "提交",
+	"global.opt.name._key_pre_step": "上一步",
+	"global.opt.name._key_next_step": "下一步",
 	"global.opt.name._key_next": "下一个",
 	"global.opt.name._key_view": "查看",
 	"global.opt.name._key_detail": "详情",
@@ -76,6 +78,9 @@ const messages = {
 	"global.opt.name._key_icon.select.opt": "单击图标选择",
 	"global.opt.name._key_upload": "上传",
 	"global.opt.name._key_download": "下载",
+	"global.opt.name._key_sendVerifyCode": "发送验证码",
+	"global.opt.name._key_sendVerifyCode.again": "重新发送",
+
 
 	// 全局提示名称
 	"global.alert.name._key_newMsg": "未读({num})",
@@ -116,10 +121,10 @@ const messages = {
 	"global.data.validate.integer.rang":"请输入 {min} 到 {max} 之间的整数",
 	"global.data.validate.object":"非法输入",
 	"global.data.validate.enum":"请输入以下：{value} 选项之一",
-	"global.data.validate.email":"请输入有效的邮箱地址",
+	"global.data.validate.email":"请输入有效的邮箱地址: xxx@xxx.xx",
 	"global.data.validate.pattern":"非法输入",
 	"global.data.validate.username":"请输入有效用户名[用户名只能是字母、下划线、数字；且必须以字母或下划开头]",
-	"global.data.validate.phone":"请输入有效电话号码",
+	"global.data.validate.phone":"请输入有效电话号码：[11位国内数据手号]或[+国际区号-7到11位手机号]",
 	"global.data.validate.code":"输入字符只能是大小写字母、数字、中杠、下划线和点",
 
 }

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:29:25
- * @Last Modified by: runoob
- * @Last Modified time: 2023-09-23 21:49:33
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-05 16:43:51
  */
 
 import React from 'react';
@@ -18,6 +18,24 @@ const { zkToolsMsg } = zkTools;
 
 function FInitZKUserDropDownDemo({ intl }) {
 
+	let optMenuItems = [
+    	{
+            'key': '_key_add',
+            'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_add", null)}</span>,
+            'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_add", null)
+        },
+        {
+            'key': '_key_edit',
+            'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_edit", null)}</span>,
+            'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_edit", null)
+        },
+        {
+            'key': '_key_logout',
+            'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_logout", null)}</span>,
+            'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_logout", null)
+        }
+    ];
+
 	return (
 		<ZKContentFormat className={styles.sample_detail_panel} >
 			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.userDropDown')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
@@ -31,7 +49,7 @@ function FInitZKUserDropDownDemo({ intl }) {
 				<div className={styles.sample_detail_section_row_right}>
 					<ZKUserDropDown
 						user={{ username: "huaan", nickname: '华安', newMsg: 9 }}
-						optKeys={["_key_add", "_key_edit", "_key_logout"]}
+						optMenuItems={optMenuItems}
 						onLogin={() => { console.log('--- onLogin call back - ', key) }}
 						onNewMsg={(user) => { console.log('--- onNewMsg call back -', user) }}
 						onUser={(user) => { console.log('--- onUser call back -', user) }}
@@ -59,8 +77,8 @@ function FInitZKUserDropDownDemo({ intl }) {
 						<tr><td>onLogin</td><td>false</td><td>登录按钮回调</td><td>Function</td><td></td></tr>
 						<tr><td>onNewMsg</td><td>false</td><td>新消息点击回调</td><td>Function(user)</td><td></td></tr>
 						<tr><td>onUser</td><td>false</td><td>点击用户回调</td><td>Function(user)</td><td></td></tr>
-						<tr><td>optKeys</td><td>false</td><td>显示操作 key，显示的内容为以 "global.opt.name." + key 的国际化信息</td><td>Array</td><td></td></tr>
-						<tr><td>callBack</td><td>false</td><td>操作回调</td><td>Function(optkey, item)</td><td></td></tr>
+						<tr><td>optMenuItems</td><td>false</td><td>下拉操作的子菜单项，同：Dropdown 的 items </td><td>Array</td><td></td></tr>
+						<tr><td>callBack</td><td>false</td><td>操作回调</td><td>Function(optkey, item)；optkey: 下拉操作的子菜单项的key</td><td></td></tr>
 					</tbody>
 				</table>
 				<div style={{ color: 'red' }}>
@@ -77,7 +95,7 @@ function FInitZKUserDropDownDemo({ intl }) {
 						"/>",
 						"<ZKUserDropDown ",
 						"	user={{username:\"huaan\", nickname:'华安', newMsg:9}} ",
-						"	optKeys = {[\"_key_add\", \"_key_edit\", \"_key_logout\"]}",
+						"	optMenuItems={optMenuItems}",
 						"	onLogin={()=>{console.log('--- onLogin call back - ', key)}} ",
 						"	onNewMsg={(user)=>{console.log('--- onNewMsg call back -', user)}} ",
 						"	onUser={(user)=>{console.log('--- onUser call back -', user)}}",

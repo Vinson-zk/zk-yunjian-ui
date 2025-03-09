@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:25:42
- * @Last Modified by: runoob
- * @Last Modified time: 2024-07-26 19:21:28
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-05 17:40:12
  */
 
 import React from 'react';
@@ -21,7 +21,8 @@ import zkSampleConstant from "../../../zk.sample.constant.js";
 function FInitZKAutoMenuDemo({ history, match, intl }) {
 
   let basePath = match.path.split("/").filter((currentValue, index, arr) => { return index < arr.length - 3 }).join("/");
-  let routerSamplePath =  zkSampleConstant.routePath.routerSample;
+  // let routerSamplePath =  zkSampleConstant.routePath.routerSample;
+    let routerSamplePath =  basePath + "/" + zkSampleConstant.routePath.routerSample;
 
   return (
     <ZKContentFormat className={styles.sample_detail_panel} >

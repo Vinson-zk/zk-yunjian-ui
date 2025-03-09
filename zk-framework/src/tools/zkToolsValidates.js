@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-25 15:36:02
  * @Last Modified by: runoob
- * @Last Modified time: 2024-07-10 09:51:28
+ * @Last Modified time: 2024-08-01 23:42:04
  */
 
 import AsyncValidator from 'async-validator';
@@ -330,8 +330,10 @@ const f_phone = (intl, required=false, transform, msg)=>{
     document.write(patt1.test(t) + " - false -> " + t + " <br />");
     t = "1234-12341234";
     document.write(patt1.test(t) + " - false -> " + t + " <br />");
+    (^\+[1-9]\d{1,3}-\d{7,11}$)|(^1[3-9]\d{9}$)
+    ^([\+]\d{2,3}-)(\d{6,11})$
     */
-    return f_pattern(intl, /^([\+]\d{2,3}-)(\d{6,11})$/, required, transform, msg?msg:zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.phone"));
+    return f_pattern(intl, /(^\+[1-9]\d{1,3}-\d{7,11}$)|(^1[3-9]\d{9}$)/, required, transform, msg?msg:zkToolsMsg.msgFormatByIntl(intl, "global.data.validate.phone"));
 }
 
 const f_code = (intl, required=false, transform, msg)=>{

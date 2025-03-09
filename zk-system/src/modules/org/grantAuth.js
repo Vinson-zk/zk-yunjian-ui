@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-05-09 16:50:26
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 10:51:19
+* @Last Modified time: 2024-07-31 16:01:48
 * 
 * 
 * 
@@ -162,13 +162,13 @@ class CInitGrantAuth extends Component {
     
 	render(){
 		let { intl, loading, mApp, isShow, descName, saveSpinning, title } = this.props;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+
 		let tableColumns = [
 			{
 				title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.name'),
 				textAlign: 'center', dataIndex: 'name', key: 'name', width: 100, 
 				render: (text, record, index) => {
-					return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+					return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 				}
 			},
 			{

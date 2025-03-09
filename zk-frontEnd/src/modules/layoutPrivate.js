@@ -1,18 +1,18 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-29 16:21:08
-* @Last Modified by: runoob
-* @Last Modified time: 2024-07-11 16:06:31
+* @Last Modified by: vinson
+* @Last Modified time: 2025-02-06 19:56:32
 * 
 * 
 * 
 */
 
-window.ResizeObserver = class _NewResizeObserver extends ResizeObserver {
-	constructor(callback) {
-		super(() => window.requestAnimationFrame(() => callback.apply(this, arguments)));
-	}
-}
+// window.ResizeObserver = class _NewResizeObserver extends ResizeObserver {
+// 	constructor(callback) {
+// 		super(() => window.requestAnimationFrame(() => callback.apply(this, arguments)));
+// 	}
+// }
 
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
@@ -41,11 +41,15 @@ import zkDevelopmentToolPackageInfo from 'zkDevelopmentTool/package.json';
 import zkWechatPackageInfo from 'zkWechat/package.json';
 import zkFilePackageInfo from 'zkFile/package.json';
 import zkMailPackageInfo from 'zkMail/package.json';
+import zkIotPackageInfo from 'zkIot/package.json';
 
 const dependenceInfos = [
 	// zkSamplePackageInfo, 
-	zkPackagePackageInfo, zkFrameworkPackageInfo, zkSystemPackageInfo, zkDevelopmentToolPackageInfo, zkWechatPackageInfo, zkFilePackageInfo, zkMailPackageInfo];
+	zkPackagePackageInfo, zkFrameworkPackageInfo, zkSystemPackageInfo, zkDevelopmentToolPackageInfo, zkWechatPackageInfo, zkFilePackageInfo, zkMailPackageInfo, zkIotPackageInfo];
 import versionInfo from '../../package.json';
+
+import { privateRouteCode, privateRouteItems } from '../static.router.item.js';
+import privateFuncObj from './private/func.js';
 
 /*** 引入依赖功能模块 ***/
 // import {funcModule as sampleFuncModule} from 'zkSample';
@@ -55,6 +59,7 @@ import {funcModule as wechatFuncModule} from 'zkWechat';
 import {funcModule as fileFuncModule} from 'zkFile';
 import {funcModule as mailFuncModule} from 'zkMail';
 import generalApplicationFuncModule from './generalApplication/func.js';
+import {funcModule as iotFuncModule} from 'zkIot';
 
 const funcModuleMppingObj = { 
     // "sample": sampleFuncModule,
@@ -64,7 +69,11 @@ const funcModuleMppingObj = {
     "generalApplication": generalApplicationFuncModule,
     "file": fileFuncModule,
     "mail": mailFuncModule,
+    "iot": iotFuncModule,
 }
+funcModuleMppingObj[privateRouteCode] = privateFuncObj;
+
+// console.log("[^_^:20250108-1601-001] funcModuleMppingObj: ", funcModuleMppingObj);
 
 /*** 动态加载组件助手 ***/
 const dynamicImportHelper = zkToolsNavAndMenu.getDynamicImportHelper(funcModuleMppingObj);
@@ -80,15 +89,6 @@ class CInitLayoutPrivate extends React.PureComponent {
         props.dispatch({type: 'mApp/getNavItems', payload:{}});
     }
 
-    componentDidMount() {
-        const { intl, dispatch, mApp } = this.props;
-        // 请求菜单
-        if(mApp.menuFlag === 0){
-            // 尚未向后请求过菜单，请求菜单
-            dispatch({ type: "mApp/getMenus" });
-        }
-    }
-
     static getDerivedStateFromProps(props, state){
 
         // console.log("[^_^:20210329-1720-001] getDerivedStateFromProps ", props, state);
@@ -97,18 +97,26 @@ class CInitLayoutPrivate extends React.PureComponent {
             let { mApp, dvaApp, dispatch, match } = props;
             // console.log("[^_^:20200811-1044-001] getDerivedStateFromProps ", mApp, state);
             // 生成导航栏目路由
-            state.navRoutes = zkToolsNavAndMenu.getRoutesByNavs(dvaApp, match.path, mApp.navItems, dynamicImportHelper);
+            let navRoutes = zkToolsNavAndMenu.getRoutesByNavs(dvaApp, match.path, mApp.navItems, dynamicImportHelper);
+            let privateNavRoutes = zkToolsNavAndMenu.getRoutesByMenus(dvaApp, match.path, privateRouteItems, dynamicImportHelper);
+            state.navRoutes = navRoutes.concat(privateNavRoutes);
             // 查找默认导航栏目
-            state.indexNavRoute = zkToolsNavAndMenu.getIndexNav(mApp.navItems);
+            let items = privateRouteItems.concat(mApp.navItems);
+            state.indexNavRoute = zkToolsNavAndMenu.getIndexNav(items);
+            // console.log("[^_^:20200811-1726-001] getDerivedStateFromProps.items ", items);
+            // console.log("[^_^:20200811-1726-001] getDerivedStateFromProps.privateRouteItems ", privateRouteItems);
+            // console.log("[^_^:20200811-1726-001] getDerivedStateFromProps.navItems ", mApp.navItems);
+            // console.log("[^_^:20200811-1044-002] getDerivedStateFromProps.state.navRoutes ", state.navRoutes);
+            // console.log("[^_^:20200811-1044-002] getDerivedStateFromProps.state.indexNavRoute ", state.indexNavRoute);
         }
         return true;
     }
 
     render(){
-    	const {dvaApp, match, mApp, dispatch, locales, lang, intl} = this.props;
+    	const {dvaApp, match, mApp, dispatch, history, locales, intl} = this.props;
     	let languageSwitchProps = { 
     		locales, 
-    		lang,
+    		lang: intl.locale,
 	        changeFunc(lang) {
 	            dispatch({ type: 'mApp/changeLanguage', payload: { lang: lang } });
 	        }
@@ -122,6 +130,9 @@ class CInitLayoutPrivate extends React.PureComponent {
 
 	    let f_onUserDropDownCallBack = key => {
 	        switch (key) {
+	        	case '_key_personal_center':  // 个人中心
+	            	history.push(`${(match.path == '/' ? "" : match.path)}/_personalCenter`);
+	                break;
 	            case '_key_logout':  // 退出
 	            	zkToolsAuth.logout();
 	                dispatch({ type: 'mApp/setState', payload: { user: undefined } });
@@ -138,19 +149,37 @@ class CInitLayoutPrivate extends React.PureComponent {
 	        }
 	    }
 
-	    let optKeys = [];
-	    if (mApp.user) {
-	        optKeys = ["_key_logout", "_key_version_info"];
-	    } else {
-	        optKeys = [];
+	    let optMenuItems = [];
+        if (mApp.user) {
+	        optMenuItems = [
+	        	// {
+	            //     'key': '_key_personal_center',
+	            //     'icon': <ZKIcon icon = 'UserOutlined' />,
+	            //     'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "zk.front.end.label.personal.center", null)}</span>,
+	            //     'title': zkToolsMsg.msgFormatByIntl(intl, "zk.front.end.label.personal.center", null)
+	            // },
+		    	{
+	                'key': '_key_logout',
+	                'icon': <ZKIcon icon = 'LogoutOutlined' />,
+	                'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_logout", null)}</span>,
+	                'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_logout", null)
+	            },
+	            {
+	                'key': '_key_version_info',
+	                'icon': <ZKIcon icon = 'InfoCircleOutlined' />,
+	                'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_version_info", null)}</span>,
+	                'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_version_info", null)
+	            }
+		    ];
 	    }
 
 	    return (
 	        <Layout className={zkStyles.zk_f_layout}>
 	            <Header className={zkStyles.zk_f_header}>
-	                <ZKLogo logoImgUrl="assets/img/logo-zk.png" />
+	                {/*<ZKLogo logoImgUrl="assets/img/logo-zk.png" />*/}
+	                <ZKLogo logoImgUrl="assets/img/logo-zk.jpg" onClick = {e=>history.push("/")} />
 	                <ZKNavigation prefixPath={`${match.path}`} navItems={mApp.navItems?mApp.navItems:[]} />
-	                <ZKUserDropDown user={{username:mApp.user.account, ...mApp.user}} optKeys={optKeys} callBack={f_onUserDropDownCallBack} />
+	                <ZKUserDropDown user={{username: mApp.user.nickname?mApp.user.nickname:mApp.user.account, ...mApp.user}} optMenuItems={optMenuItems} callBack={f_onUserDropDownCallBack} />
 	                <ZKTheme themeFlag={mApp.themeFlag} setThemeFunc={key=>{
 	                	zkToolsUtils.setTheme(key);
 	                	dispatch({ type: 'mApp/setState', payload: { themeFlag: key }});
@@ -167,7 +196,12 @@ class CInitLayoutPrivate extends React.PureComponent {
 	                    {this.state.navRoutes}
 	                </Switch>
 	            </Content>
-                <div className = {zkStyles.zk_f_footer} ><span>opyright © Vinson zk-frontEnd</span></div>
+                {/*<div className = {zkStyles.zk_f_footer} ><span>Copyright © Vinson zk-frontEnd</span></div>*/}
+                {/*<div className = {zkStyles.zk_f_footer} ><span>Copyright © Comnect All Rights Reserved.</span></div>*/}
+                <div className = {zkStyles.zk_f_footer} >
+                	<span>Copyright © Shenzhen COMNECT Technology Co., Ltd. All rights reserved. </span>
+                </div>
+                
 	        </Layout>
 	    )
     }

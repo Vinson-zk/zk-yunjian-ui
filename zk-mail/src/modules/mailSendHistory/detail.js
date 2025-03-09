@@ -45,7 +45,6 @@ class CInitMailSendHistoryDetail extends Component {
 
     let { location, mApp, mMailSendHistory, intl, loading } = this.props;
     let { optEntity } = mMailSendHistory;
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
     let spinning = loading.effects['mMailSendHistory/getMailSendHistory'];
 

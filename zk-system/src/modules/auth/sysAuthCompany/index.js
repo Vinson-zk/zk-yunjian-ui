@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 19:50:16
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 20:20:27
+* @Last Modified time: 2024-07-31 16:06:15
 */
 
 
@@ -31,7 +31,6 @@ class CInitSysAuthCompanyIndex extends Component {
 
     render() {
         let { intl, mApp } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
         return (
             <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />

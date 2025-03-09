@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 22:49:46
- * @Last Modified by: runoob
- * @Last Modified time: 2024-07-26 14:28:52
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-05 16:44:42
  */
 
 import React, { Component } from 'react';
@@ -75,11 +75,11 @@ class CInitHome extends Component {
     }
 
     render() {
-        const { match, dispatch, locales, lang, mApp, intl } = this.props;
+        const { match, dispatch, locales, mApp, intl } = this.props;
 
         let languageSwitchProps = {
             locales,
-            lang,
+            lang: intl.locale,
             changeFunc(lang) {
                 dispatch({ type: 'mApp/changeLanguage', payload: { lang: lang } });
             }
@@ -108,11 +108,20 @@ class CInitHome extends Component {
             }
         }
 
-        let optKeys = [];
+        let optMenuItems = [];
         if (mApp.user) {
-            optKeys = ["_key_logout", "_key_version_info"];
-        } else {
-            optKeys = [];
+            optMenuItems = [
+                {
+                    'key': '_key_logout',
+                    'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_logout", null)}</span>,
+                    'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_logout", null)
+                },
+                {
+                    'key': '_key_version_info',
+                    'label': <span>{zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_version_info", null)}</span>,
+                    'title': zkToolsMsg.msgFormatByIntl(intl, "global.opt.name._key_version_info", null)
+                }
+            ];
         }
 
         // <div className = {zkStyles.zk_f_footer} >opyright © Vinson 2</div>
@@ -121,7 +130,7 @@ class CInitHome extends Component {
                 <Header className={zkStyles.zk_f_header}>
                     <ZKLogo logoImgUrl = {logImg} />
                     <ZKNavigation prefixPath={`${match.path}`} navItems={mApp.navItems?mApp.navItems:[]} />
-                    <ZKUserDropDown user={mApp.user} onLogin={f_onLogin} optKeys={optKeys} callBack={f_onUserDropDownCallBack} />
+                    <ZKUserDropDown user={mApp.user} onLogin={f_onLogin} optMenuItems={optMenuItems} callBack={f_onUserDropDownCallBack} />
                     <ZKTheme themeFlag={mApp.themeFlag} setThemeFunc={key=>{
                         // zkToolsUtils.setTheme(key);
                         dispatch({ type: 'mApp/changeTheme', themeFlag: key });

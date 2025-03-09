@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-06-24 18:48:40
-* @Last Modified by: runoob
-* @Last Modified time: 2024-06-27 23:25:09
+* @Last Modified by: vinson
+* @Last Modified time: 2025-02-05 16:14:35
 * 
 * 公共的视图，登录，注册等未进入框架布局前的视图
 * 
@@ -15,12 +15,12 @@ import { injectIntl } from "react-intl";
 
 import { ZKCustomComponents, ZKOriginalComponents, ZKException, zkTools } from 'zkFramework';
 import zkStyles from 'zkFramework/style/zk.styles.less';
-import publicStyles from './layoutPublic.styles.less';
+import frontEndStyles from './frontEnd.styles.less';
 
 // import zkJsUtils from "zkJsUtils";
 
 const { Header, Content } = Layout;
-const { ZKRouter, ZKLogo, ZKLanguageSelect } = ZKCustomComponents;
+const { ZKRouter, ZKLogo } = ZKCustomComponents;
 const { Switch, Redirect, Route } = ZKRouter;
 const { zkToolsNavAndMenu, zkToolsAuth } = zkTools;
 
@@ -40,9 +40,8 @@ let publicIndexRouter = null;
 /**
  * 登录、注册等开放的 路径的布局
  */
-const FInitLayoutPublic = ({ dvaApp, match, dispatch, locales, mApp, lang }) => {
-
-    // console.log("[^_^:20240627-2315-001] match: ", match);
+const FInitLayoutPublic = ({ dvaApp, match, dispatch, locales, mApp }) => {
+    
     // console.log("[^_^:20240627-2315-001] globalAppConfig.basename: ", globalAppConfig);
     if (publicRouters == null) {
         // 生成路由 
@@ -54,28 +53,8 @@ const FInitLayoutPublic = ({ dvaApp, match, dispatch, locales, mApp, lang }) => 
     }
     // console.log("[^_^:20240627-2315-002] publicRouters: ", publicRouters);
 
-    // let languageSwitchProps = { 
-    // 	locales, 
-    // 	lang,
-    //     changeFunc(lang) {
-    //         dispatch({ type: 'mApp/changeLanguage', payload: { lang: lang } });
-    //     }
-    // };
-
-    // let f_onLogin = () => {
-    //     if (!mApp.user) {
-    //     	zkToolsAuth.setTicket("test_假装登录");
-    //         dispatch({ type: 'mApp/setState', payload: { user: { "pkId": "pkId", "loginName": "test", "nickname": "游客", "newMsg": 6 } } });
-    //     }
-    // }
-
     return (
         <Layout className={zkStyles.zk_f_layout}>
-	        {/*<div className={publicStyles.public_head} >
-	        	<div>
-                	<ZKLanguageSelect {...languageSwitchProps} />
-                </div>
-            </div>*/}
 	        <Switch>
 	            { publicRouters }
 	        </Switch>

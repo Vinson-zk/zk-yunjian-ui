@@ -21,9 +21,8 @@ import zkStyles from 'zkFramework/style/zk.styles.less';
  * @param {Function} detailFunc 明细函数
  * @param {Function} deleteFunc 删除函数
  * @param {object} intl 国际化语言对象
- * @param {string} lang 当前语言标识
  */
-const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang) => {
+const f_getTableColumns = (onEdit, onDetail, onDelete, intl) => {
 
 	return [
 		// {
@@ -45,14 +44,14 @@ const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang) => {
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDict.dictName'),
 			textAlign: 'center', dataIndex: 'dictName', key: 'dictName', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.dictName?record.dictName:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.dictName?record.dictName:{}, intl.locale);
 			}
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResDict.dictDesc'),
 			textAlign: 'center', dataIndex: 'dictDesc', key: 'dictDesc', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.dictDesc?record.dictDesc:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.dictDesc?record.dictDesc:{}, intl.locale);
 			}
 		},
 		{
@@ -163,9 +162,8 @@ class CInitSysResDictGrid extends React.Component {
 	/** 返回 JSX 元素 */
 	render() {
 		let { intl, mApp, mSysResDict, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang);
+		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl);
 
 		let gridLoading = loading.effects['mSysResDict/findSysResDictsTree'];
 		return (

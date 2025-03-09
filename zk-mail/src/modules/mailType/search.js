@@ -42,7 +42,6 @@ class CInitMailTypeSearch extends React.Component {
     
     render(){
         let { intl, mApp, mMailType, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
             <ZKSearchRow 
@@ -54,10 +53,10 @@ class CInitMailTypeSearch extends React.Component {
                 }}
             >
                 <ZKSearchItem name = "typeCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeCode')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "typeName" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.typeName')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "status" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.mail.MailType.status')} >
                     <ZKSelect fillValue = {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.all')} >

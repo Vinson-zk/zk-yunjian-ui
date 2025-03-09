@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-11 17:46:03
- * @Last Modified by: runoob
- * @Last Modified time: 2023-09-25 22:35:15
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-11-18 17:00:27
  */
 
 export { default as ZKAutoMenu } from './zk-autoMenu';
@@ -28,10 +28,10 @@ export { default as ZKRouter } from './zk-router';
 export { default as ZKScrollTable } from './zk-scrollTable';
 export { default as ZKSearchRow } from './zk-searchRow';
 export { default as ZKSider } from './zk-sider';
+export { default as ZKSmartUpload } from './zk-smartUpload';
 export { default as ZKTextEditor } from './zk-textEditor';
 export { default as ZKTheme } from './zk-theme';
 export { default as ZKTouchControl } from './zk-touchControl';
-export { default as ZKUpload } from './zk-upload';
 export { default as ZKUserDropDown } from './zk-userDropDown';
 export { default as ZKVersionInfo } from './zk-versionInfo';
 

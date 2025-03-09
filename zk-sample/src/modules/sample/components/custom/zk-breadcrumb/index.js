@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:22:16
- * @Last Modified by: runoob
- * @Last Modified time: 2023-12-11 12:42:50
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-05 17:39:56
  */
 
 
@@ -22,7 +22,8 @@ import zkSampleConstant from "../../../zk.sample.constant.js";
 function FInitZKBredcrumbDemo({ history, match, intl }) {
 
 	let basePath = match.path.split("/").filter((currentValue, index, arr) => { return index < arr.length - 3 }).join("/");
-	let routerSamplePath =  zkSampleConstant.routePath.routerSample;
+	// let routerSamplePath =  zkSampleConstant.routePath.routerSample;
+    let routerSamplePath =  basePath + "/" + zkSampleConstant.routePath.routerSample;
 
 	return (
 		<ZKContentFormat className={styles.sample_detail_panel} >

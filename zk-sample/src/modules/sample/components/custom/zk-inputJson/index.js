@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:24:23
- * @Last Modified by: runoob
- * @Last Modified time: 2023-09-23 22:12:50
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-06 15:39:52
  */
 
 import React, {useState} from 'react';
@@ -290,7 +290,7 @@ const TestZKFormNode = injectIntl(connect()(CInitZKFormNode));
 function FInitZKInputJsonDemo({ dispatch, intl }) {
 
 	return (
-		<ZKContentFormat className={styles.sample_detail_panel} >
+		<ZKContentFormat className={stylesSample.sample_detail_panel} >
 			<ZKContentFormat title = {`${zkToolsMsg.msgFormatByIntl(intl, 'sample.components.custom.inputJson')} ${zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.demo')}`}>
 				<br />--- 展开、收起、smart <br />
 				<ZKInputJson styleType="expanding" style={{ width: 450 }}

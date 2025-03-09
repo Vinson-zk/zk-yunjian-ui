@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 10:20:49
- * @Last Modified by: Vinson
- * @Last Modified time: 2020-08-14 10:36:01
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-20 16:01:03
  */
 
 
@@ -30,6 +30,7 @@ class CInitChildRouterL2C1 extends React.Component {
 			console.log(" 函数控制路径跳转 routerRedux :", routerRedux);
 			routerRedux.push(match.path + "/functionToPath?p6=456")
 		}
+		
 		return (
 			<Switch>
 				<Route exact path={match.path} component={() => {

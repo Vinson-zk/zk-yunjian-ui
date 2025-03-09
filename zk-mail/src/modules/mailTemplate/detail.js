@@ -45,7 +45,6 @@ class CInitMailTemplateDetail extends Component {
 
     let { location, mApp, mMailTemplate, intl, loading } = this.props;
     let { optEntity } = mMailTemplate;
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
     let spinning = loading.effects['mMailTemplate/getMailTemplate'];
 

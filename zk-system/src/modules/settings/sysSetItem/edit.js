@@ -51,9 +51,6 @@ class CInitSysSetItemEdit extends Component {
 
     let { mApp, dispatch, mSysSetItem, intl, loading, location } = this.props;
     let { optEntity } = mSysSetItem;
-    
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
 
     // ZKJson 自定义校验规则对象
     let f_makeObjRuls = required=>{
@@ -163,7 +160,7 @@ class CInitSysSetItemEdit extends Component {
                 zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
               ]} 
             >
-              <ZKInputJson style={{ width: '100%' }} styleType="compact" primaryAttr={lang} attrs={locales} />
+              <ZKInputJson style={{ width: '100%' }} styleType="compact" primaryAttr={intl.locale} attrs={locales} />
             </ZKEditForm.Item>
           </ZKCol></ZKRow>
           <ZKRow><ZKCol span = {24} >
@@ -172,7 +169,7 @@ class CInitSysSetItemEdit extends Component {
                 zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
               ]} 
             >
-              <ZKInputJson style={{ width: '100%' }} styleType="compact" primaryAttr={lang} attrs={locales} />
+              <ZKInputJson style={{ width: '100%' }} styleType="compact" primaryAttr={intl.locale} attrs={locales} />
             </ZKEditForm.Item>
           </ZKCol></ZKRow>
           <ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.code')} 

@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-31 10:56:52
-* @Last Modified by: runoob
-* @Last Modified time: 2024-06-24 17:32:45
+* @Last Modified by: vinson
+* @Last Modified time: 2024-12-27 11:37:42
 * 
 * 
 * 
@@ -61,14 +61,16 @@ const model = {
             }
         },
 
-        *updateTableList({ moduleId, callback }, { call }) {
+        *updateTableList({ moduleId, callback }, { put, call }) {
             let res = yield call(updateTableList, moduleId);
             if (res.ok) {
-                // yield put({ type: 'setState', payload: { tableInfos: res.data } });
+                zkToolsMsg.alertMsg(null, null, {type:"success", msg:res.msg});
+                yield put({ type: 'setState', payload: { tableInfos: res.data } });
+                if(zkJsUtils.assertObjType(callback, Function)){
+                    callback.call(this);
+                }
             }
-            if(zkJsUtils.assertObjType(callback, Function)){
-                callback.call(this);
-            }
+            
         },
 
         *delTableInfo({ payload, callback }, { call }) {

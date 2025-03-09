@@ -42,7 +42,6 @@ class CInitSysOrgDeptDetail extends Component {
 
 		let { location, mApp, mSysOrgDept, intl, loading } = this.props;
 		let { optEntity } = mSysOrgDept;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = !optEntity || loading.effects['mSysOrgDept/getSysOrgDept'];
 
@@ -70,7 +69,7 @@ class CInitSysOrgDeptDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.name')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue span = {12}>
-							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>  
 		            <ZKDetailGrid.Row>
@@ -106,13 +105,13 @@ class CInitSysOrgDeptDetail extends Component {
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.address')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue span = {12}>
-							<ZKInputJson disabled styleType="compact" value={optEntity.address?optEntity.address:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.address?optEntity.address:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.shortDesc')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue span = {12}>
-							<ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={intl.locale} attrs={locales} />
 						</ZKDetailGrid.ColValue>
 					</ZKDetailGrid.Row>       
 		            <ZKDetailGrid.Row>

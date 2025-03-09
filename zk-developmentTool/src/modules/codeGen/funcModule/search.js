@@ -1,16 +1,14 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 11:55:16
-* @Last Modified by: runoob
-* @Last Modified time: 2023-10-08 17:44:54
+* @Last Modified by: vinson
+* @Last Modified time: 2024-12-30 14:52:06
 * 
 * 
 * 
 */
 
 import React, { Component } from 'react';
-//  import { connect } from 'dva';
-import { injectIntl } from 'react-intl';
 
 import { zkTools, ZKCustomComponents, ZKOriginalComponents } from "zkFramework";
 const { ZKSelect, ZKInput } = ZKOriginalComponents;
@@ -39,4 +37,4 @@ const FInitFuncModuleSearch = ({ intl, filter = {}, onSearch, lang, onSetFilter 
     );
 }
 
-export default injectIntl(FInitFuncModuleSearch);
+export default FInitFuncModuleSearch;

@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 11:07:13
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 18:01:09
+* @Last Modified time: 2024-07-31 15:59:47
 */
 
 
@@ -24,9 +24,8 @@ import zkStyles from 'zkFramework/style/zk.styles.less';
  * @param {Function} detailFunc 明细函数
  * @param {Function} deleteFunc 删除函数
  * @param {object} intl 国际化语言对象
- * @param {string} lang 当前语言标识
  */
-const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang, onShowGrantAuthModal) => {
+const f_getTableColumns = (onEdit, onDetail, onDelete, intl, onShowGrantAuthModal) => {
 
 	return [
 		{
@@ -45,7 +44,7 @@ const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang, onShowGrantAu
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.name'),
 			textAlign: 'center', dataIndex: 'name', key: 'name', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 			}
 		},
 		{
@@ -196,9 +195,8 @@ class CInitSysOrgDeptGrid extends React.Component {
     /** 返回 JSX 元素 */
 	render() {
 		let { intl, mApp, mSysOrgDept, loading, onShowGrantAuthModal } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang, onShowGrantAuthModal);
+		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, onShowGrantAuthModal);
 
 		let gridLoading = loading.effects['mSysOrgDept/findSysOrgDeptsTree'] || loading.effects['mSysOrgDept/findSysOrgCompanysTree'];
 		return (

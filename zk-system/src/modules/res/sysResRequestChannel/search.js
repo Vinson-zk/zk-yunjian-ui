@@ -42,7 +42,6 @@ class CInitSysResRequestChannelSearch extends React.Component {
     
     render(){
         let { intl, mApp, mSysResRequestChannel, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
             <ZKSearchRow 
@@ -54,7 +53,7 @@ class CInitSysResRequestChannelSearch extends React.Component {
                 }}
             >
                 <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResRequestChannel.name')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResRequestChannel.code')} >
                     <ZKInput style = {{width:"180px"}}  />

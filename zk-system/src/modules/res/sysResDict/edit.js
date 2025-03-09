@@ -60,8 +60,6 @@ class CInitSysResDictEdit extends Component {
 
         let { mApp, dispatch, mSysResDict, intl, loading, location } = this.props;
         let { optEntity } = mSysResDict;
-        
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         // ZKJson 自定义校验规则对象
         let f_makeObjRuls = required=>{
@@ -131,7 +129,7 @@ class CInitSysResDictEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>
                     <ZKRow><ZKCol span = {24} >
@@ -140,7 +138,7 @@ class CInitSysResDictEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>
             	</ZKEditForm>

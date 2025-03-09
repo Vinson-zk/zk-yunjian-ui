@@ -21,9 +21,8 @@ import zkStyles from 'zkFramework/style/zk.styles.less';
  * @param {Function} detailFunc 明细函数
  * @param {Function} deleteFunc 删除函数
  * @param {object} intl 国际化语言对象
- * @param {string} lang 当前语言标识
  */
-const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang, onShowAuditModal, onShowGrantModalModal) => {
+const f_getTableColumns = (onEdit, onDetail, onDelete, intl, onShowAuditModal, onShowGrantModalModal) => {
 
 	return [
 		{
@@ -38,7 +37,7 @@ const f_getTableColumns = (onEdit, onDetail, onDelete, intl, lang, onShowAuditMo
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.name'),
 			textAlign: 'center', dataIndex: 'name', key: 'name', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 			}
 		},
 		{
@@ -211,9 +210,8 @@ class CInitSysOrgCompanyGrid extends React.Component {
     /** 返回 JSX 元素 */
 	render() {
 		let { intl, mApp, mSysOrgCompanyAdmin, loading, onShowAuditModal, onShowGrantModalModal } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang, onShowAuditModal, onShowGrantModalModal);
+		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, onShowAuditModal, onShowGrantModalModal);
 
 		let gridLoading = loading.effects['mSysOrgCompanyAdmin/findSysOrgCompanysTree'];
 		return (

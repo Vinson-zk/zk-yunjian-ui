@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 12:29:58
- * @Last Modified by: runoob
- * @Last Modified time: 2023-12-11 12:49:54
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-05 17:37:23
  */
 
 
@@ -25,7 +25,8 @@ import zkSampleConstant from "../zk.sample.constant.js";
 const FInitZKToolsNavAndMenuDemo = ({ match, intl }) => {
 
     let basePath = match.path.split("/").filter((currentValue, index, arr) => { return index < arr.length - 2 }).join("/");
-    let routerSamplePath = zkSampleConstant.routePath.routerSample;
+    // let routerSamplePath = zkSampleConstant.routePath.routerSample;
+    let routerSamplePath =  basePath + "/" + zkSampleConstant.routePath.routerSample;
 
     // let targetDom = scrollDom ? scrollDom.parentElement : undefined;
     return (

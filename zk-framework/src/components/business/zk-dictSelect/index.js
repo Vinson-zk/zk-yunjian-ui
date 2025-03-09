@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-05-02 18:48:27
-* @Last Modified by: runoob
-* @Last Modified time: 2024-06-24 17:15:52
+* @Last Modified by: vinson
+* @Last Modified time: 2024-09-11 16:03:36
 * 
 * 非树形的字典项下拉选择
 * 
@@ -26,6 +26,10 @@ function f_doingSearch(url, params) {
     // return zkToolsAjax.reqData(url, {method:'GET', async:false, data:params});
     // return zkToolsAjax.reqPretreatment(url, {method:'GET', async:false, data:params});
 	return zkToolsAjax.req(url, {method:'GET', async:true, data:params});
+}
+
+let defaultStyle = {
+    'width': '180px'
 }
 
 class CInitDictSelect extends Component {
@@ -92,15 +96,19 @@ class CInitDictSelect extends Component {
         }
     };
 	render(){
-		let { typeCode, url, onSearch, valueKey, onDropdownVisibleChange, ...otherProps } = this.props;
+		let { typeCode, url, onSearch, valueKey, onDropdownVisibleChange, className, ...otherProps } = this.props;
+        let style = className?{}:defaultStyle;
+        className = className?className:"";
 		return (
-			<ZKSelect {...otherProps } loading = { this.state.spinning } 
+			<ZKSelect {...otherProps } className = {className} style = {style}
+                loading = { this.state.spinning } 
 				onSearch = { this.f_onSearch }
                 onSelect = { this.f_onSelect }
                 // onChange = { this.f_onChange }
 	            onDropdownVisibleChange = { this.f_onDropdownVisibleChange } >
 	            {this.state.resDicts.map((item, index)=>{
-	                return <ZKSelect.Option key={index} value={item[valueKey]}>{zkToolsMsg.getInternationInfo(item.dictName)}[{item.dictCode}]</ZKSelect.Option>
+                    {/*{zkToolsMsg.getInternationInfo(item.dictName)}[{item.dictCode}]*/}
+	                return <ZKSelect.Option key={index} value={item[valueKey]}>{zkToolsMsg.getInternationInfo(item.dictName)}</ZKSelect.Option>
 	            })}
 	        </ZKSelect>
 	    )
@@ -126,11 +134,12 @@ CInitDictSelect.propTypes = {
 // 定义属性默认值
 CInitDictSelect.defaultProps = {
     ...ZKSelect.defaultProps,
+    className: undefined,
     placeholder: "",
     allowClear: true,
     showSearch: true,
     filterOption: false,
-	url: `/${globalAppConfig.apiPrefixSys}/res/sysResDict/sysResDicts`,
+	url: `/${globalAppConfig.apiPrefixSys}/res/sysResDict/n/sysResDicts`,
 	valueKey: 'pkId'
 }
 

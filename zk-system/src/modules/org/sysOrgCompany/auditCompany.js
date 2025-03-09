@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 19:04:44
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 19:05:31
+* @Last Modified time: 2024-07-31 16:01:35
 
 * 审核公司
 * 
@@ -60,7 +60,6 @@ class CInitSysOrgCompanyAudit extends Component {
 	render() {
 
 		let { location, mApp, mSysOrgCompany, isShow, optEntity, intl, loading } = this.props;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = !optEntity || loading.effects['mSysOrgCompany/auditCompany'];
 

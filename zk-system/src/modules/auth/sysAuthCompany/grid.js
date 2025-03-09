@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 19:50:41
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-08 17:41:37
+* @Last Modified time: 2024-07-31 16:06:31
 */
 
 
@@ -22,16 +22,15 @@ import zkStyles from 'zkFramework/style/zk.styles.less';
  * 取 table 列表
  * @param {Function} onSetAuthsDefaultTransfer 设置权限是否默认传递给子公司
  * @param {object} intl 国际化语言对象
- * @param {string} lang 当前语言标识
  */
-const f_getTableColumns = (intl, lang, onSetAuthsDefaultTransfer) => {
+const f_getTableColumns = (intl, onSetAuthsDefaultTransfer) => {
 
 	return [
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.name'),
 			textAlign: 'center', dataIndex: 'name', key: 'name', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 			}
 		},
 		{
@@ -116,9 +115,8 @@ class CInitSysAuthCompanyGrid extends React.Component {
 	render() {
 
 		let { intl, mApp, mSysAuthCompany, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let tableColumns = f_getTableColumns(intl, lang, this.f_setAuthsDefaultTransfer);
+		let tableColumns = f_getTableColumns(intl, this.f_setAuthsDefaultTransfer);
 
 		let gridLoading = loading.effects['mSysAuthCompany/findAuthPage']||loading.effects['mSysAuthCompany/setAuthsDefaultTransfer'];
 

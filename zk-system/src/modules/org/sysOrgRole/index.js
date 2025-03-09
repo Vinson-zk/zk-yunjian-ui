@@ -40,7 +40,7 @@ class CInitSysOrgRoleIndex extends Component {
     render() {
         
         let { intl, loading, mApp, dispatch } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+
         return (
             <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
@@ -52,7 +52,7 @@ class CInitSysOrgRoleIndex extends Component {
                         return params;
                     }}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.role')}
-                    descName={zkToolsMsg.getInternationInfo(this.state.optRoleEntity.name?this.state.optRoleEntity.name:{}, lang)}
+                    descName={zkToolsMsg.getInternationInfo(this.state.optRoleEntity.name?this.state.optRoleEntity.name:{}, intl.locale)}
                     toTargetId={this.state.optRoleEntity.pkId} 
                     onShowModal={this.f_onShowGrantAuthModal}
                     saveSpinning={loading.effects["mSysOrgRole/grantAuth"]||false}

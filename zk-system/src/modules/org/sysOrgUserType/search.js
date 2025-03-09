@@ -42,7 +42,6 @@ class CInitSysOrgUserTypeSearch extends React.Component {
     
     render(){
         let { intl, mApp, mSysOrgUserType, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
             <ZKSearchRow 
@@ -57,7 +56,7 @@ class CInitSysOrgUserTypeSearch extends React.Component {
                     <ZKInput style = {{width:"180px"}}  />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUserType.name')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "status" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUserType.status')} >
                     <ZKSelect fillValue = {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.all')} >

@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-13 20:47:21
- * @Last Modified by: runoob
- * @Last Modified time: 2023-09-25 22:30:12
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-11-01 10:00:53
  */
 
 
@@ -41,6 +41,7 @@ const msg = {
 	"sample.components.original.transfer":"穿梭框",
 	"sample.components.original.tree":"树形控件",
 	"sample.components.original.treeSelect":"树形选择",
+	"sample.components.original.upload":"文件上传",
 
 	"sample.components.custom.autoMenu":"ZKAutoMenu 菜单",
 	"sample.components.custom.autoTable":"ZKAutoTable 自动表格",
@@ -61,6 +62,7 @@ const msg = {
 	"sample.components.custom.scrollTable":"ZKScrollTable 滚动条表格",
 	"sample.components.custom.searchRow":"ZKSearchRow 查询行",
 	"sample.components.custom.sider":"ZKSider 滑块",
+	"sample.components.custom.smartUpload":"ZKSmartUpload 文件上传",
 	"sample.components.custom.popoverPanel":"弹窗菜单",
 	"sample.components.custom.textEditor":"ZKTextEditor 富文本框",
 	"sample.components.custom.theme":"主题",

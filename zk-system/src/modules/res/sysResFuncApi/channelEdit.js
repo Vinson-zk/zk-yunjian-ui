@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-03-05 10:31:51
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-04 16:28:29
+* @Last Modified time: 2024-07-31 15:49:35
 * 
 * 
 * 
@@ -81,13 +81,12 @@ class CInitChannelEdit extends Component {
   // 数据源格式转换
   convertData = (datas)=>{
   	let { intl, mApp } = this.props;
-  	let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
     if(zkJsUtils.assertObjType(datas, Array)){
       return datas.map(item=>{
         return {
           key: item.pkId,
           data: item,
-          // description: zkToolsMsg.getInternationInfo(item.name?item.name:{}, lang),
+          // description: zkToolsMsg.getInternationInfo(item.name?item.name:{}, intl.locale),
           // disabled: i % 3 < 1, // 禁止数据行选择
         }
       });
@@ -144,7 +143,6 @@ class CInitChannelEdit extends Component {
   render() {
    	// console.log("[^_^:20220407-1724-001] CReactDva:React-Lifecycle render ", this.state);
     let { intl, mApp, isShow, loading } = this.props;
-  	let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
     let transferProps = {
    	  listStyle: {
         // width: 400,
@@ -159,7 +157,7 @@ class CInitChannelEdit extends Component {
       targetKeys:this.state.selectedKeys,
       titles:[zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.opt.channel.source'), zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetItem.opt.channel.selected')],
       render:item => {
-      	return <span title = {zkToolsMsg.getInternationInfo(item.name?item.name:{}, lang)} >{zkToolsMsg.getInternationInfo(item.data.name?item.data.name:{}, lang)}({item.data.code})</span>
+      	return <span title = {zkToolsMsg.getInternationInfo(item.name?item.name:{}, intl.locale)} >{zkToolsMsg.getInternationInfo(item.data.name?item.data.name:{}, intl.locale)}({item.data.code})</span>
       },
       onChange: this.onChange
     }

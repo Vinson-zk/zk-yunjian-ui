@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2022-04-21 14:34:54
-* @Last Modified by: runoob
-* @Last Modified time: 2023-09-25 21:42:20
+* @Last Modified by: vinson
+* @Last Modified time: 2025-02-05 16:14:34
 * 
 * 
 * 
@@ -10,12 +10,12 @@
 
 
 import React from "react";
-import { injectIntl } from 'react-intl';
 import { connect } from 'dva';
 import { UserOutlined, LockOutlined, AccountBookOutlined } from '@ant-design/icons';
 
 // import { Form, Input, Button } from "antd";
 
+import frontEndStyles from "../../../frontEnd.styles.less";
 import loginStyles from "../styles.less";
 
 import { ZKOriginalComponents, zkTools } from "zkFramework";
@@ -39,10 +39,11 @@ class CInitAccountLogin extends React.PureComponent {
     };
 
     onAccountLogin = (values) => {
-    	let { dispatch } = this.props;
+    	let { dispatch, history } = this.props;
+    	// console.log("[^_^:20210629-1717-001] this.props: ", this.props);
 	    // console.log("[^_^:20210629-1717-001] FInitAccountLogin.values: ", values);
 	    // dispatch({type:'mApp/login',history,payload:values}).then(()=>{dispatch({type:'mApp/getUaidLicenseInfo'})})
-	    dispatch({type:'mApp/accountLogin', loginFlag:2, params:values});
+	    dispatch({type:'mPublicApp/accountLogin', params:values, history: history});
 	};
 
 	render(){
@@ -58,7 +59,7 @@ class CInitAccountLogin extends React.PureComponent {
 						<ZKForm.Item labelCol = "" wrapperCol = "" name = "companyCode"  
 							rules = {[ { required: true, message: zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.vMsg.companyCode') } ]} >
 							<ZKInput className="" 
-								prefix = { <AccountBookOutlined className = { loginStyles.login_item_icon } /> } 
+								prefix = { <AccountBookOutlined className = { frontEndStyles.zk_public_icon_color } /> } 
 								placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.companyCode')}
 							/>
 						</ZKForm.Item>
@@ -69,7 +70,7 @@ class CInitAccountLogin extends React.PureComponent {
 						<ZKForm.Item labelCol = "" wrapperCol = "" name = "username"  
 							rules = {[ { required: true, message: zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.vMsg.username') } ]} >
 							<ZKInput className="" 
-								prefix = { <UserOutlined className = { loginStyles.login_item_icon } /> } 
+								prefix = { <UserOutlined className = { frontEndStyles.zk_public_icon_color } /> } 
 								placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.username')}
 							/>
 						</ZKForm.Item>
@@ -80,7 +81,7 @@ class CInitAccountLogin extends React.PureComponent {
 						<ZKForm.Item labelCol = "" wrapperCol = "" name ="pwd"  
 							rules = {[ { required: true, message: zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.vMsg.password') } ]} >
 							<ZKInput.Password style={{ width: '100%' }} 
-								prefix = { <LockOutlined className = { loginStyles.login_item_icon } /> } 
+								prefix = { <LockOutlined className = { frontEndStyles.zk_public_icon_color } /> } 
 								placeholder = { zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.password') } 
 							/>
 						</ZKForm.Item>
@@ -114,7 +115,7 @@ class CInitAccountLogin extends React.PureComponent {
 	}
 }
 
-export default injectIntl(CInitAccountLogin);
+export default CInitAccountLogin;
 
 
 

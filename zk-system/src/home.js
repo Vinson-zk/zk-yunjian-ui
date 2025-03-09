@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-29 21:52:35
  * @Last Modified by: runoob
- * @Last Modified time: 2023-09-24 15:49:02
+ * @Last Modified time: 2024-07-31 16:06:54
  */
 
 
@@ -51,7 +51,7 @@ const navItems = mockDataSysNavs.navItems;
 let navRoutes = null;
 let indexNavRoute = null;
 
-const FInitNavHome = ({dvaApp, match, mApp, dispatch, locales, lang, intl}) => {
+const FInitNavHome = ({dvaApp, match, mApp, dispatch, locales, intl}) => {
     // console.log("[^_^:20210213-1108-001] ", navItems, dynamicImportHelper);
     if(navRoutes == null){
         navRoutes = zkToolsNavAndMenu.getRoutesByNavs(dvaApp, match.path, navItems, dynamicImportHelper);
@@ -61,7 +61,9 @@ const FInitNavHome = ({dvaApp, match, mApp, dispatch, locales, lang, intl}) => {
         indexNavRoute = zkToolsNavAndMenu.getIndexNav(navItems);
     }
 
-    let languageSwitchProps = { locales, lang,
+    let languageSwitchProps = { 
+        locales, 
+        lang: intl.locale,
         changeFunc(lang) {
             dispatch({ type: 'mApp/changeLanguage', payload: { lang: lang } });
         }

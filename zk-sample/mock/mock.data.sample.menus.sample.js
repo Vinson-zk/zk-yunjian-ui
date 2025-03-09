@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2023-05-29 00:18:35
-* @Last Modified by: runoob
-* @Last Modified time: 2023-09-25 22:36:27
+* @Last Modified by: vinson
+* @Last Modified time: 2024-11-18 17:00:22
 */
 
 const mockDataNavs = require('./mock.data.sample.navs.js');
@@ -497,9 +497,17 @@ tMenu = {
 sampleMenus.push(tMenu);
 // 原生组件封装的子菜单： ZKTreeSelect
 tMenu = {
-	pkId:"sample_zkOriginalComponents_ZKTreeSelect", key:"sample_zkOriginalComponents_ZKTreeSelect", name:{"zh-CN":"ZK树形选择","en-US":"ZKTreeSelect"}, 
+	pkId:"sample_zkOriginalComponents_treeSelect", key:"sample_zkOriginalComponents_treeSelect", name:{"zh-CN":"ZK树形选择","en-US":"ZKTreeSelect"}, 
 	path:"treeSelect", navCode: navCodeSample, funcModuleCode: navCodeSample, funcName: "originalTreeSelect",
 	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:160, 
+	permission:null, parentId:"sample_zkOriginalComponents", children:null
+}
+sampleMenus.push(tMenu);
+// 原生组件封装的子菜单： ZKUpload
+tMenu = {
+	pkId:"sample_zkOriginalComponents_upload", key:"sample_zkOriginalComponents_upload", name:{"zh-CN":"ZK上传","en-US":"ZKUpload"}, 
+	path:"upload", navCode: navCodeSample, funcModuleCode: navCodeSample, funcName: "originalUpload",
+	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:170, 
 	permission:null, parentId:"sample_zkOriginalComponents", children:null
 }
 sampleMenus.push(tMenu);
@@ -680,6 +688,14 @@ tMenu = {
 	permission:null, parentId:"sample_zkCustomComponents", children:null
 }
 sampleMenus.push(tMenu);
+// 自定组件的子菜单：ZKSmartUpload
+tMenu = {
+	pkId:"sample_zkCustomComponents_smartUpload", key:"sample_zkCustomComponents_smartUpload", name:{"zh-CN":"ZKSmartUpload 文件上传","en-US":"ZKSmartUpload"}, 
+	path:"smartUpload", navCode: navCodeSample, funcModuleCode: navCodeSample, funcName: "customSmartUpload",
+	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:145, 
+	permission:null, parentId:"sample_zkCustomComponents", children:null
+}
+sampleMenus.push(tMenu);
 // 自定组件的子菜单：ZKTextEditor
 tMenu = {
 	pkId:"sample_zkCustomComponents_textEditor", key:"sample_zkCustomComponents_textEditor", name:{"zh-CN":"ZK富文本编辑","en-US":"ZKTextEditor"}, 
@@ -701,14 +717,6 @@ tMenu = {
 	pkId:"sample_zkCustomComponents_ZKTouchControl", key:"sample_zkCustomComponents_ZKTouchControl", name:{"zh-CN":"ZK触控点","en-US":"ZKTouchControl"}, 
 	path:"touchControl", navCode: navCodeSample, funcModuleCode: navCodeSample, funcName: "customTouchControl",
 	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:155, 
-	permission:null, parentId:"sample_zkCustomComponents", children:null
-}
-sampleMenus.push(tMenu);
-// 自定组件的子菜单：ZKUpload
-tMenu = {
-	pkId:"sample_zkCustomComponents_upload", key:"sample_zkCustomComponents_upload", name:{"zh-CN":"ZK上传","en-US":"ZKUpload"}, 
-	path:"upload", navCode: navCodeSample, funcModuleCode: navCodeSample, funcName: "customUpload",
-	isIndex:0, exact:true, isFrame:0, isShow:1, icon:"AntDesignOutlined", sort:160, 
 	permission:null, parentId:"sample_zkCustomComponents", children:null
 }
 sampleMenus.push(tMenu);

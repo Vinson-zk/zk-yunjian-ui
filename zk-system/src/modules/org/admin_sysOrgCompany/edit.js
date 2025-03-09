@@ -58,8 +58,6 @@ class CInitSysOrgCompanyEdit extends Component {
 
         let { location, mApp, dispatch, mSysOrgCompanyAdmin, intl, loading } = this.props;
         let { optEntity } = mSysOrgCompanyAdmin;
-        
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         // ZKJson 自定义校验规则对象
         let f_makeObjRuls = required=>{
@@ -101,7 +99,7 @@ class CInitSysOrgCompanyEdit extends Component {
                                 zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
                             ]} 
                         >
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                         </ZKEditForm.Item>
                     </ZKCol></ZKRow>
                 	<ZKEditForm.Item name = "groupCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.groupCode')} 
@@ -121,13 +119,6 @@ class CInitSysOrgCompanyEdit extends Component {
                         <ZKInput disabled = {optEntity.pkId?true:false} />
                 	</ZKEditForm.Item>
                 	<ZKEditForm.Item name = "logo" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.logo')} 
-                		rules = {[
-							zkToolsValidates.string(intl, 0, 64), 
-                        ]} 
-					>
-                        <ZKInput />
-                	</ZKEditForm.Item>
-                	<ZKEditForm.Item name = "logoOriginal" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.logoOriginal')} 
                 		rules = {[
 							zkToolsValidates.string(intl, 0, 64), 
                         ]} 
@@ -197,7 +188,7 @@ class CInitSysOrgCompanyEdit extends Component {
                                 zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                             ]} 
                         >
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                         </ZKEditForm.Item>
                     </ZKCol></ZKRow>
                 	<ZKEditForm.Item name = "foundDate" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.foundDate')} 
@@ -218,7 +209,7 @@ class CInitSysOrgCompanyEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>
                 	<ZKEditForm.Item name = "registerAuthority" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.registerAuthority')} 
@@ -241,7 +232,7 @@ class CInitSysOrgCompanyEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>
                 	<ZKEditForm.Item name = "sourceCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgCompany.sourceCode')} 

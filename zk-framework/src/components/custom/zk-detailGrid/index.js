@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 11:08:52
- * @Last Modified by: runoob
- * @Last Modified time: 2023-09-21 00:06:51
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-06 15:56:06
  */
 
 import React from 'react';
@@ -48,7 +48,7 @@ const FInitDetailLabel = props => {
 FInitDetailLabel.defaultProps = {
 	span: 3,
 	offset: 2,
-	className: styles.zk_detail_grid_col_lable
+	className: styles.zk_detail_grid_col_label
 }
 
 const FInitDetailValue = props => {

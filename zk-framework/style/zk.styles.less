@@ -1,3 +1,6 @@
+
+
+
 @import "./theme/zk.theme.variables.less";
 
 /* --------------------------------------------------------------- */
@@ -254,5 +257,19 @@ body {
    display: flex;
    align-items: center;
 }
+
+/*
+ * antd组件内 ResizeObserver loop limit exceeded报错隐藏。
+ * 在报错组件里面，或者全局，添加隐藏这个浮层的样式。
+ * 这只是临时解决方案，并不解决根本的 ResizeObserver 问题。错误还是在继续报，只是不显示了
+ 
+#webpack-dev-server-client-overlay {
+  display: none !important;
+}
+
+*/
+
+
+
 
 

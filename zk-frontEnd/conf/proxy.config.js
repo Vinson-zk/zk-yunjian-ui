@@ -1,24 +1,25 @@
 /*
  * @Author: Vinson 
  * @Date: 2020-08-07 09:33:05 
- * @Last Modified by: runoob
- * @Last Modified time: 2024-06-27 23:46:25
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-01-15 14:26:32
  */
 
 /* 直接使用网关路由 */
 let proxy = [
 {
-    target: "http://127.0.0.1:8088",  // 后台接口域名
-	// "changeOrigin": true,          // 是否跨域
-    // ws: true,                      // 如果要代理 websockets，配置这个参数
-    // secure: false,                 // 如果是https接口，需要配置这个参数
     context: [
         "/apiSys", 
         "/apiDevTool", 
         "/apiWechat", 
         "/apiFile", 
         "/apiMail",
+        "/apiIot",
     ],
+    target: "http://127.0.0.1:8088",  // 后台接口域名
+	// "changeOrigin": true,          // 是否跨域
+    // ws: true,                      // 如果要代理 websockets，配置这个参数
+    // secure: false,                 // 如果是https接口，需要配置这个参数
     // target: "http://192.168.1.105:8088",  
     "pathRewrite": { 
         "^/apiDevTool/" : "/apiDevTool/zk/dt/v1.0/",
@@ -26,17 +27,18 @@ let proxy = [
         "^/apiWechat/" : "/apiWechat/zk/wechat/v1.0/",
         "^/apiFile/" : "/apiFile/zk/f/v1.0/",
         "^/apiMail/" : "/apiMail/zk/mail/v1.0/",
+        "^/apiIot/" : "/apiIot/zk/iot/v1.0/",
     }
 },
 {
-    target: "http://127.0.0.1:11111",  // 后台接口域名
     context: [
         // "/apiSys",
         // "/apiFile",
     ],
+    target: "http://127.0.0.1:11111",  // 后台接口域名
     "pathRewrite": { 
-        "^/apiSys/" : "/apiMock/",
-        "^/apiFile/" : "/apiMock/",
+        // "^/apiSys/" : "/apiMock/",
+        // "^/apiFile/" : "/apiMock/",
     }
 },
 // {

@@ -5,7 +5,7 @@
 * @Wechat: 1035862795
 * @Date: 2024-07-07 11:06:27
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-07 12:27:54
+* @Last Modified time: 2024-07-31 15:59:24
 */
 
 
@@ -45,7 +45,6 @@ class CInitSysOrgDeptSearch extends React.Component {
     
     render(){
         let { intl, mApp, mSysOrgDept, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
             <ZKSearchRow 
@@ -60,7 +59,7 @@ class CInitSysOrgDeptSearch extends React.Component {
                     <ZKInput style = {{width:"180px"}}  />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.name')} >
-                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                    <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                 </ZKSearchItem>       
                 <ZKSearchItem name = "status" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgDept.status')} >
                     <ZKSelect fillValue = {zkToolsMsg.msgFormatByIntl(intl, 'global.app.info.all')} >

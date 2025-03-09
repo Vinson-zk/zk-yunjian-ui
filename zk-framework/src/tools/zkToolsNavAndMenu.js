@@ -2,8 +2,8 @@
  * 导航栏，菜单处理 函数方法
  * @Author: Vinson
  * @Date: 2020-08-11 09:04:45
- * @Last Modified by: runoob
- * @Last Modified time: 2023-10-08 20:41:57
+ * @Last Modified by: vinson
+ * @Last Modified time: 2025-02-05 17:48:21
  */
 
 import React from 'react';
@@ -108,13 +108,15 @@ const f_makeDynamicComponent = (dvaApp, models, component) => {
  */
 const f_getRoutesByNavs = (dvaApp, prefixPath, navDatas, dynamicImportHelper) => {
 	prefixPath = prefixPath == "/" ? "" : prefixPath;
-
+	// console.log("[^_^:20220205-1746-001] ------ prefixPath: ", prefixPath);
+	// console.log("[^_^:20220205-1746-001] ------ navDatas: ", navDatas);
 	let navComponentObj = null;
 	let navDynamicComponent = undefined;
 	return navDatas.map(item => {
 		// 导航栏目，不显示时，不生成路由，这一点与菜单不同
 		if(f_navIsShow(item)){
 			navComponentObj = dynamicImportHelper.dynamicImport(item);
+			// console.log("[^_^:20220205-1746-001] ------ navComponentObj: ", item, navComponentObj);
 			if(!navComponentObj){
 				console.error("[>_<:20210214-0844-001] item 未找对应定义的功能组件：", item, dynamicImportHelper);
 				return;

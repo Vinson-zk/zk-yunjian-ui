@@ -38,7 +38,7 @@ class CInitSysOrgUserTypeIndex extends Component {
     render() {
         
         let { intl, loading, mApp, dispatch } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+
         return (
             <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
@@ -50,7 +50,7 @@ class CInitSysOrgUserTypeIndex extends Component {
                         return params;
                     }}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.userType')}
-                    descName={zkToolsMsg.getInternationInfo(this.state.optUserTypeEntity.name?this.state.optUserTypeEntity.name:{}, lang)}
+                    descName={zkToolsMsg.getInternationInfo(this.state.optUserTypeEntity.name?this.state.optUserTypeEntity.name:{}, intl.locale)}
                     toTargetId={this.state.optUserTypeEntity.pkId} 
                     onShowModal={this.f_onShowGrantAuthModal}
                     saveSpinning={loading.effects["mSysOrgUserType/grantAuth"]||false}

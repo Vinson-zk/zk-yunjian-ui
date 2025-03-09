@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:48
  * @Last Modified by: runoob
- * @Last Modified time: 2024-07-10 10:13:41
+ * @Last Modified time: 2024-07-31 15:53:24
  */
 
 
@@ -57,8 +57,6 @@ class CInitSysNavEdit extends Component {
 
         let { mApp, dispatch, mSysNav, intl, loading, location } = this.props;
         let { optEntity } = mSysNav;
-        
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         const f_selectIcon = (value)=>{
             let selIconAttrName = this.state.selIconAttrName;
@@ -112,7 +110,7 @@ class CInitSysNavEdit extends Component {
                                 // zkToolsValidates.notNull(intl), 
                                 zkToolsValidates.object(intl, locales.localLanguage, undefined, f_makeObjRuls(true), true),
                             ]} >
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                        <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.code')} 
                         rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64), zkToolsValidates.code(intl)]} >

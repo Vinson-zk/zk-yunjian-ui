@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:55
- * @Last Modified by:   Vinson
- * @Last Modified time: 2021-11-03 09:20:03
+ * @Last Modified by: runoob
+ * @Last Modified time: 2024-07-31 15:52:50
  */
 
 import React, { Component } from 'react';
@@ -22,8 +22,6 @@ const ZKSearchItem = ZKSearchRow.Item;
 
 const FInitSysNavSearch = ({ intl, mApp, mSysNav, dispatch }) => {
 
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
     let f_onSearch = filter=>{
         if(!filter){
             filter = {};
@@ -41,7 +39,7 @@ const FInitSysNavSearch = ({ intl, mApp, mSysNav, dispatch }) => {
             }}
         >
             <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.name')} >
-                <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+                <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
             </ZKSearchItem>
             <ZKSearchItem name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.code')} >
                 <ZKInput style = {{width:"180px"}}  />
@@ -77,10 +75,7 @@ export default FInitSysNavSearch;
 //     render() {
 //         // console.log("[^_^:202111021635-001]", this.props.mSysNav.filter)
 
-
 //         let { intl, mApp, mSysNav, dispatch } = this.props;
-
-//         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 //         let f_onSearch = filter=>{
 //             if(!filter){
@@ -108,7 +103,7 @@ export default FInitSysNavSearch;
 //                 }}
 //             >
 //                 <ZKSearchItem name = "name" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.name')} >
-//                     <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={lang} attrs={locales} />
+//                     <ZKInputJson style = {{width:"280px"}}  styleType="compact" primaryAttr={intl.locale} attrs={locales} />
 //                 </ZKSearchItem>
 //                 <ZKSearchItem name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.code')} >
 //                     <ZKInput style = {{width:"180px"}}  />

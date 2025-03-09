@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-14 17:35:22
- * @Last Modified by: runoob
- * @Last Modified time: 2023-09-24 14:49:21
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-08-15 22:24:58
  */
 
 import cIndex from './index.js';
@@ -26,6 +26,7 @@ import cTable from './zk-table/index.js';
 import cTransfer from "./zk-transfer/index.js";
 import cTree from "./zk-tree/index.js";
 import cTreeSelect from "./zk-treeSelect/index.js";
+import cUpload from "./zk-upload/index.js";
 
 const originalIndex = { component:cIndex, models:[]}
 const originalAnchor = { component:cAnchor, models:[]}
@@ -47,6 +48,7 @@ const originalTable = {component:cTable, models:[]};
 const originalTransfer = {component:cTransfer, models:[]};
 const originalTree = {component:cTree, models:[]};
 const originalTreeSelect = {component:cTreeSelect, models:[]};
+const originalUpload = {component:cUpload, models:[]};
 
 export default {
 	originalIndex,
@@ -68,7 +70,8 @@ export default {
 	originalTable,
 	originalTransfer,
 	originalTree,
-	originalTreeSelect
+	originalTreeSelect,
+	originalUpload,
 }
 
 

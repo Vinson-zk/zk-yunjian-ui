@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-10-26 17:59:42
  * @Last Modified by: runoob
- * @Last Modified time: 2024-07-10 10:10:58
+ * @Last Modified time: 2024-07-31 16:17:43
  */
 
 import React, { Component } from 'react';
@@ -86,8 +86,6 @@ class CInitSysMenuEdit extends Component {
 
         let { location, mApp, dispatch, mSysMenu, intl, loading } = this.props;
         let { optEntity } = mSysMenu;
-        
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         const f_selectIcon = (value)=>{
             this.formRef.current.setFieldsValue({"icon": value});
@@ -156,14 +154,16 @@ class CInitSysMenuEdit extends Component {
                                 // zkToolsValidates.notNull(intl), 
                                 zkToolsValidates.object(intl, locales.localLanguage, undefined, f_makeObjRuls(true), true),
                             ]} >
-                        <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                        <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "code" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.code')} 
                         rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64), zkToolsValidates.code(intl)]} >
                         <ZKInput />
                     </ZKEditForm.Item>
                     <ZKEditForm.Item name = "navCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.system.menu.navCode')} 
-                        rules = {[zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64)], zkToolsValidates.code(intl)} >
+                        rules = {[
+                            zkToolsValidates.notNull(intl), zkToolsValidates.string(intl, 0, 64), zkToolsValidates.code(intl)
+                            ]} >
                         <ZKSelect showSearch = {true} loading = { navCodeSelLoading }
                             onDropdownVisibleChange = { open=>{if(open){this.f_searchNavCodes('');}}}
                             onSearch = { this.f_searchNavCodes }

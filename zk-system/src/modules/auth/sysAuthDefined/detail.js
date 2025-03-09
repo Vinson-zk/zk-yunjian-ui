@@ -42,7 +42,6 @@ class CInitSysAuthDefinedDetail extends Component {
 
     let { location, mApp, mSysAuthDefined, intl, loading } = this.props;
     let { optEntity } = mSysAuthDefined;
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
     let spinning = loading.effects['mSysAuthDefined/getSysAuthDefined'];
 
@@ -62,11 +61,11 @@ class CInitSysAuthDefinedDetail extends Component {
           <ZKDetailGrid.Row>
             {/*<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.systemCode')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
-              <ZKInputJson disabled styleType="compact" value={optEntity.systemCode?optEntity.systemCode:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.systemCode?optEntity.systemCode:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue> */}
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.SysAuthDefined.shortDesc')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
-              <ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.shortDesc?optEntity.shortDesc:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue>
           </ZKDetailGrid.Row>
         </ZKDetailGrid>

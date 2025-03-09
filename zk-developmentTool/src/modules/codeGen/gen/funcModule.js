@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-30 16:58:09
-* @Last Modified by: runoob
-* @Last Modified time: 2023-09-21 00:06:50
+* @Last Modified by: vinson
+* @Last Modified time: 2024-12-27 10:35:42
 * 
 * 
 * 
@@ -159,10 +159,16 @@ class CInitFuncModule extends Component {
             if (optEntity && optEntity.pkId && optEntity.pkId == params.funcModuleId) {
                 dispatch({ type: 'mGen/setState', payload: { pathname: location.pathname } });
                 dispatch({ type: 'mFuncModule/setState', payload: { optEntity: optEntity } });
+
+                dispatch({ type: 'mTableInfo/setState', payload: { tableInfos: undefined } });
+                dispatch({ type: 'mColInfo/setState', payload: { tableInfo: undefined, colInfos: undefined } });
             } else {
                 dispatch({ type: 'mGen/setState', payload: { pathname: location.pathname } });
                 dispatch({ type: 'mFuncModule/setState', payload: { optEntity:optEntity } });
                 dispatch({ type: 'mFuncModule/getFuncModule', payload: { pkId: params.funcModuleId } });
+
+                dispatch({ type: 'mTableInfo/setState', payload: { tableInfos: undefined } });
+                dispatch({ type: 'mColInfo/setState', payload: { tableInfo: undefined, colInfos: undefined } });
             }
         }
     }

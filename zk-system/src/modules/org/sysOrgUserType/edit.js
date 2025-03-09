@@ -51,9 +51,6 @@ class CInitSysOrgUserTypeEdit extends Component {
         let { location, mApp, dispatch, mSysOrgUserType, intl, loading } = this.props;
         let { optEntity } = mSysOrgUserType;
         let { user } = mApp;
-        
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
 
         // ZKJson 自定义校验规则对象
         let f_makeObjRuls = required=>{
@@ -102,7 +99,7 @@ class CInitSysOrgUserTypeEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(true), true), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>
                     <ZKRow><ZKCol span = {24} >
@@ -111,7 +108,7 @@ class CInitSysOrgUserTypeEdit extends Component {
     							zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                             ]} 
     					>
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                     	</ZKEditForm.Item>
                     </ZKCol></ZKRow>
             	</ZKEditForm>

@@ -42,7 +42,6 @@ class CInitSysOrgUserDetail extends Component {
 
     let { location, mApp, mSysOrgUser, intl, loading } = this.props;
     let { optEntity } = mSysOrgUser;
-    let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
     let spinning = loading.effects['mSysOrgUser/getSysOrgUser'];
 
@@ -142,11 +141,11 @@ class CInitSysOrgUserDetail extends Component {
           <ZKDetailGrid.Row>
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.sex')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
-              <ZKInputJson disabled styleType="compact" value={optEntity.sex?optEntity.sex:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.sex?optEntity.sex:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue> 
             <ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.address')}:</ZKDetailGrid.ColLabel>
             <ZKDetailGrid.ColValue>
-              <ZKInputJson disabled styleType="compact" value={optEntity.address?optEntity.address:{}} primaryAttr={lang} attrs={locales} />
+              <ZKInputJson disabled styleType="compact" value={optEntity.address?optEntity.address:{}} primaryAttr={intl.locale} attrs={locales} />
             </ZKDetailGrid.ColValue>
           </ZKDetailGrid.Row>
           <ZKDetailGrid.Row>

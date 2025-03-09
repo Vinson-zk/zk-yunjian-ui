@@ -4,8 +4,8 @@
 * @QQ: 1035862795
 * @Wechat: 1035862795
 * @Date: 2023-09-11 00:02:33
-* @Last Modified by: runoob
-* @Last Modified time: 2023-10-08 10:39:10
+* @Last Modified by: vinson
+* @Last Modified time: 2025-02-06 19:56:52
 */
 const { theme } = require('antd/lib');
 const { compactAlgorithm, darkAlgorithm, defaultAlgorithm, defaultConfig, defaultSeed, getDesignToken, useToken } = theme;
@@ -13,6 +13,7 @@ const { compactAlgorithm, darkAlgorithm, defaultAlgorithm, defaultConfig, defaul
 // theme antd
 const themeAntd = require('./antd/index.js');
 themeAntd.map = {...themeAntd.map, ...defaultAlgorithm({...defaultSeed, ...themeAntd.base})};
+// console.log("[^_^:20230926-0021-001] themeAntd:", themeAntd);
 
 // theme default
 const themeDefault = require('./default/index.js');

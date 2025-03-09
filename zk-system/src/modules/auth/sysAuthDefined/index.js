@@ -47,21 +47,21 @@ class CInitSysAuthDefinedIndex extends Component {
 
     render() {
         let { intl, mApp } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
+
         return (
             <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
                 <SearchItem {...this.props} locales={locales} />
                 <GridItem {...this.props} onShowGrantModal = {this.f_onShowModal} />
                 <CGrantFuncApi isShow={this.state.grantFuncApiModal} 
-                    descName={zkToolsMsg.getInternationInfo(this.state.optAuth.name?this.state.optAuth.name:{}, lang)}
+                    descName={zkToolsMsg.getInternationInfo(this.state.optAuth.name?this.state.optAuth.name:{}, intl.locale)}
                     targetId={this.state.optAuth.pkId} 
                     onShowModal={this.f_onShowModal} />
                 <CGrantMenu isShow={this.state.grantMenuModal} 
-                    descName={zkToolsMsg.getInternationInfo(this.state.optAuth.name?this.state.optAuth.name:{}, lang)}
+                    descName={zkToolsMsg.getInternationInfo(this.state.optAuth.name?this.state.optAuth.name:{}, intl.locale)}
                     targetId={this.state.optAuth.pkId} 
                     onShowModal={this.f_onShowModal} />
                 <CGrantNav isShow={this.state.grantNavModal} 
-                    descName={zkToolsMsg.getInternationInfo(this.state.optAuth.name?this.state.optAuth.name:{}, lang)}
+                    descName={zkToolsMsg.getInternationInfo(this.state.optAuth.name?this.state.optAuth.name:{}, intl.locale)}
                     targetId={this.state.optAuth.pkId} 
                     onShowModal={this.f_onShowModal} />
             </div>

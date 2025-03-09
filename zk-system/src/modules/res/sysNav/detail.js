@@ -3,7 +3,7 @@
  * @Author: Vinson
  * @Date: 2020-08-21 17:54:44
  * @Last Modified by: runoob
- * @Last Modified time: 2023-09-21 00:06:50
+ * @Last Modified time: 2024-07-31 15:53:35
  */
 
 import React, { Component } from 'react';
@@ -42,7 +42,6 @@ class CInitSysNavDetail extends Component {
 
 		let { location, mApp, mSysNav, intl, loading } = this.props;
 		let { optEntity } = mSysNav;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
 		let spinning = loading.effects['mSysNav/getSysNav'];
 
@@ -52,7 +51,7 @@ class CInitSysNavDetail extends Component {
 					<ZKDetailGrid.Row>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.name')}:</ZKDetailGrid.ColLabel>
 						<ZKDetailGrid.ColValue>
-							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={lang} attrs={locales} />
+							<ZKInputJson disabled styleType="compact" value={optEntity.name?optEntity.name:{}} primaryAttr={intl.locale} attrs={locales} />
 							{/* {optEntity.name?zkToolsMsg.getInternationInfo(optEntity.name):""} */}
 						</ZKDetailGrid.ColValue>
 						<ZKDetailGrid.ColLabel>{zkToolsMsg.msgFormatByIntl(intl, 'zk.system.nav.code')}:</ZKDetailGrid.ColLabel>

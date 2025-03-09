@@ -2,8 +2,8 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-10 17:24:17
- * @Last Modified by: runoob
- * @Last Modified time: 2024-06-27 23:31:24
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-11-18 14:45:23
  */
 
 const mockDataNavs = require('../mock.data.sample.navs.js');
@@ -26,5 +26,9 @@ module.exports = {
             console.log(`[^_^:20190130-2158-001] sample.mock GET /apiMock/getNavItems 休息 ${sleepTime / 1000} 秒 完成!`); // navItems
             res.json(resJsonData)
         }, sleepTime);       
+    },
+    ['POST /apiMock/file/upload'](req, res) {
+        console.log("[^_^:20241118-1724-001] sample.mock GET /apiMock/file/upload ing!");
+        res.json("mock GET /apiMock/file/upload ok!");
     }
 }

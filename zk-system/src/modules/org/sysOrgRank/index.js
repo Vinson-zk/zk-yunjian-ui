@@ -39,7 +39,6 @@ class CInitSysOrgRankIndex extends Component {
 
     render() {
         let { intl, loading, mApp, dispatch } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
             <div className={`${zkStyles.zk_f_display_flex_col} ${zkStyles.zk_f_flex_auto_1}`} >
@@ -52,7 +51,7 @@ class CInitSysOrgRankIndex extends Component {
                         return params;
                     }}
                     title={zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.auth.grant.modal.title.rank')}
-                    descName={zkToolsMsg.getInternationInfo(this.state.optRankEntity.name?this.state.optRankEntity.name:{}, lang)}
+                    descName={zkToolsMsg.getInternationInfo(this.state.optRankEntity.name?this.state.optRankEntity.name:{}, intl.locale)}
                     toTargetId={this.state.optRankEntity.pkId} 
                     onShowModal={this.f_onShowGrantAuthModal}
                     saveSpinning={loading.effects["mSysOrgRank/grantAuth"]||false}

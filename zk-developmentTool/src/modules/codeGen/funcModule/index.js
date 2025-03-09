@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-03-29 18:33:25
-* @Last Modified by: runoob
-* @Last Modified time: 2024-06-24 18:55:21
+* @Last Modified by: vinson
+* @Last Modified time: 2024-12-30 14:52:29
 * 
 * 
 * 
@@ -32,10 +32,11 @@ class CInitCodeGenFuncModuleIndex extends Component {
     // }
 
     render() {
-        let { mApp, mFuncModule, dispatch, history, match, loading } = this.props;
+        let { mApp, mFuncModule, dispatch, history, match, loading, intl } = this.props;
         let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         let searchItemProps = {
+            intl: intl,
             filter: mFuncModule.filter,
             lang: lang,
             onSearch: filter=>{
@@ -47,6 +48,7 @@ class CInitCodeGenFuncModuleIndex extends Component {
         }
 
         let gridProps = {
+            intl: intl,
             loading: loading.effects['mFuncModule/findFuncModules'],
             pagination: mFuncModule.pagination || {},
             lang: lang,
@@ -128,7 +130,7 @@ class CInitCodeGenFuncModuleIndex extends Component {
 
     // 6、卸载时；在卸载和销毁组件之前立即调用。在此方法中执行任何必要的清理，例如使计时器无效，取消网络请求或清除在其中创建的任何订阅
     componentWillUnmount() {
-
+        this.setState = ()=>false;
     }
 }
 

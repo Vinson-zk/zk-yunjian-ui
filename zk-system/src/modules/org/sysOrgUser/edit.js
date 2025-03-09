@@ -62,8 +62,6 @@ class CInitSysOrgUserEdit extends Component {
         let { location, mApp, dispatch, mSysOrgUser, intl, loading } = this.props;
         let { optEntity } = mSysOrgUser;
         let { user } = mApp;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
-
 
         // ZKJson 自定义校验规则对象
         let f_makeObjRuls = required=>{
@@ -91,6 +89,7 @@ class CInitSysOrgUserEdit extends Component {
                     <ZKEditForm.Item name = "account" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.account')} 
                         rules = {[
                             zkToolsValidates.string(intl, 1, 64, true), 
+                            zkToolsValidates.username(intl)
                         ]} 
                     >
                         <ZKInput disabled = {optEntity.pkId?true:false} />
@@ -228,7 +227,7 @@ class CInitSysOrgUserEdit extends Component {
                                 zkToolsValidates.object(intl, locales, undefined, f_makeObjRuls(false)), 
                             ]} 
                         >
-                            <ZKInputJson styleType="compact" primaryAttr={lang} attrs={locales} />
+                            <ZKInputJson styleType="compact" primaryAttr={intl.locale} attrs={locales} />
                         </ZKEditForm.Item>
                     </ZKCol></ZKRow>
                 	<ZKEditForm.Item name = "sourceCode" label = {zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.org.SysOrgUser.sourceCode')} 

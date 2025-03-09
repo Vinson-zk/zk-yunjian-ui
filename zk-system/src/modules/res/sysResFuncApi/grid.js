@@ -21,17 +21,16 @@ import zkStyles from 'zkFramework/style/zk.styles.less';
  * @param {Function} onDetail 明细函数
  * @param {Function} onDelete 删除函数
  * @param {object} intl 国际化语言对象
- * @param {string} lang 当前语言标识
  * @param {Function} showChannelEdit 接口请求渠道编辑页面控制函数
  */
-const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang, onShowChannelEdit) => {
+const f_getTableColumns = (onEedit, onDetail, onDelete, intl, onShowChannelEdit) => {
 
 	return [
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.name'),
 			textAlign: 'center', dataIndex: 'name', key: 'name', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 			}
 		},
 		{
@@ -98,7 +97,7 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang, onShowChanne
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.reqParamsDesc'),
 			textAlign: 'center', dataIndex: 'reqParamsDesc', key: 'reqParamsDesc', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.reqParamsDesc?record.reqParamsDesc:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.reqParamsDesc?record.reqParamsDesc:{}, intl.locale);
 			}
 		},
 		{
@@ -109,21 +108,21 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang, onShowChanne
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.resDataDesc'),
 			textAlign: 'center', dataIndex: 'resDesc', key: 'resDesc', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.resDesc?record.resDesc:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.resDesc?record.resDesc:{}, intl.locale);
 			}
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.useContext'),
 			textAlign: 'center', dataIndex: 'useContext', key: 'useContext', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.useContext?record.useContext:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.useContext?record.useContext:{}, intl.locale);
 			}
 		},
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.res.SysResFuncApi.reqDesc'),
 			textAlign: 'center', dataIndex: 'reqDesc', key: 'reqDesc', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.reqDesc?record.reqDesc:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.reqDesc?record.reqDesc:{}, intl.locale);
 			}
 		},
 		{
@@ -238,9 +237,8 @@ class CInitSysResFuncApiGrid extends React.Component {
 	render() {
 
 		let { intl, mApp, mSysResFuncApi, loading, onShowChannelEdit } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang, onShowChannelEdit);
+		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, onShowChannelEdit);
 
 		let gridLoading = loading.effects['mSysResFuncApi/findSysResFuncApis'];
 

@@ -21,16 +21,15 @@ import zkStyles from 'zkFramework/style/zk.styles.less';
  * @param {Function} onDetail 明细函数
  * @param {Function} onDelete 删除函数
  * @param {object} intl 国际化语言对象
- * @param {string} lang 当前语言标识
  */
-const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang) => {
+const f_getTableColumns = (onEedit, onDetail, onDelete, intl) => {
 
 	return [
 		{
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetCollection.name'),
 			textAlign: 'center', dataIndex: 'name', key: 'name', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.name?record.name:{}, intl.locale);
 			}
 		},
 		{
@@ -41,7 +40,7 @@ const f_getTableColumns = (onEedit, onDetail, onDelete, intl, lang) => {
 			title: zkToolsMsg.msgFormatByIntl(intl, 'zk.sys.settings.SysSetCollection.setDesc'),
 			textAlign: 'center', dataIndex: 'setDesc', key: 'setDesc', width: 100, 
 			render: (text, record, index) => {
-				return zkToolsMsg.getInternationInfo(record.setDesc?record.setDesc:{}, lang);
+				return zkToolsMsg.getInternationInfo(record.setDesc?record.setDesc:{}, intl.locale);
 			}
 		},
 		{
@@ -159,9 +158,8 @@ class CInitSysSetCollectionGrid extends React.Component {
 	render() {
 
 		let { intl, mApp, mSysSetCollection, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
-		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl, lang);
+		let tableColumns = f_getTableColumns(this.f_edit, this.f_detail, this.f_delete, intl);
 
 		let gridLoading = loading.effects['mSysSetCollection/findSysSetCollections'];
 

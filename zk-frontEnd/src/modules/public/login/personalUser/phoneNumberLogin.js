@@ -1,8 +1,8 @@
 /*
 * @Author: Vinson
 * @Date:   2021-07-01 09:19:07
-* @Last Modified by:   Vinson
-* @Last Modified time: 2021-07-02 00:01:23
+* @Last Modified by: vinson
+* @Last Modified time: 2025-02-05 16:14:35
 * 
 * 
 * 
@@ -10,12 +10,12 @@
 
 
 import React from "react";
-import { injectIntl } from 'react-intl';
 import { connect } from 'dva';
 import { MobileOutlined, LockOutlined } from '@ant-design/icons';
 
 // import { Form, Input, Button } from "antd";
 
+import frontEndStyles from "../../../frontEnd.styles.less";
 import loginStyles from "../styles.less";
 
 import { ZKOriginalComponents, zkTools } from "zkFramework";
@@ -33,9 +33,9 @@ class CInitPhoneNumberLoginLogin extends React.PureComponent {
     }
 
 	onPhoneNumberLogin = (values) => {
-		let { dispatch } = this.props;
+		let { dispatch, history } = this.props;
 	    // console.log("[^_^:20210629-1717-001] onPhoneNumberLogin.values: ", values);
-	    dispatch({type:'mApp/phoneNumberLogin', params:values});
+	    dispatch({type:'mPublicApp/phoneNumberLogin', params:values, history:history });
 	};
 
 	onGetValidCode = ()=>{
@@ -54,7 +54,7 @@ class CInitPhoneNumberLoginLogin extends React.PureComponent {
 						<ZKForm.Item labelCol = "" wrapperCol = "" name = "phoneNumber"  
 							rules = {[ { required: true, message: zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.vMsg.phoneNumber') } ]} >
 							<ZKInput className="" 
-								prefix = { <MobileOutlined className = { loginStyles.login_item_icon } /> } 
+								prefix = { <MobileOutlined className = { frontEndStyles.zk_public_icon_color } /> } 
 								placeholder={zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.phoneNumber')} 
 							/>
 						</ZKForm.Item>
@@ -65,19 +65,19 @@ class CInitPhoneNumberLoginLogin extends React.PureComponent {
 						<ZKForm.Item labelCol = "" wrapperCol = "" name ="validCode"  
 							rules = {[ { required: true, message: zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.vMsg.validCode') } ]} >
 							<ZKInput style={{ width: '100%' }} 
-								prefix = { <LockOutlined className = { loginStyles.login_item_icon } /> } 
+								prefix = { <LockOutlined className = { frontEndStyles.zk_public_icon_color } /> } 
 								addonAfter = {<span onClick={this.onGetValidCode} className = {loginStyles.login_span_btn} >{zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.validCode')}</span>}
 								placeholder = { zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.validCode') } />
 						</ZKForm.Item>
 					</ZKCol>
 				</ZKRow>
-				<ZKRow gutter={24} >
+				{/*<ZKRow gutter={24} >
 					<ZKCol >
 						<ZKForm.Item labelCol = "" wrapperCol = "" name ="rememberAccount" valuePropName="checked" >
 							<ZKCheckbox className = { loginStyles.login_item_checkbox } >{ zkToolsMsg.msgFormatByIntl(intl, 'zk.front.end.login.lable.rememberAccount') }</ZKCheckbox>
 						</ZKForm.Item>
 					</ZKCol>
-				</ZKRow>
+				</ZKRow>*/}
 				<ZKRow gutter={24} >
 					<ZKCol span = {24}>
 						<ZKForm.Item labelCol = "" wrapperCol = "" className = {loginStyles.login_item_btn} >
@@ -93,7 +93,7 @@ class CInitPhoneNumberLoginLogin extends React.PureComponent {
 }
 
 
-export default injectIntl(CInitPhoneNumberLoginLogin);
+export default CInitPhoneNumberLoginLogin;
 
 
 

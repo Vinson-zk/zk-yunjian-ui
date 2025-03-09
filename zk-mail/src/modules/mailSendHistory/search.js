@@ -42,7 +42,6 @@ class CInitMailSendHistorySearch extends React.Component {
     
     render(){
         let { intl, mApp, mMailSendHistory, locales, loading } = this.props;
-        let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 
         return (
             <ZKSearchRow 

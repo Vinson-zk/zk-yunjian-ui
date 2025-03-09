@@ -64,6 +64,8 @@ const messages = {
 	"global.opt.name._key_cancel": "Canel",
 	"global.opt.name._key_save": "Save",
 	"global.opt.name._key_submit": "Submit",
+	"global.opt.name._key_pre_step": "Previous",
+	"global.opt.name._key_next_step": "Next",
 	"global.opt.name._key_next": "Next",
 	"global.opt.name._key_view": "View",
 	"global.opt.name._key_detail": "Detail",
@@ -76,6 +78,8 @@ const messages = {
 	"global.opt.name._key_icon.select.opt": "Click Icon select",
 	"global.opt.name._key_upload": "Upload",
 	"global.opt.name._key_download": "Download",
+	"global.opt.name._key_sendVerifyCode": "Send Code",
+	"global.opt.name._key_sendVerifyCode.again": "Send Code Again",
 
 	// 全局提示名称
 	"global.alert.name._key_newMsg": "New({num})",

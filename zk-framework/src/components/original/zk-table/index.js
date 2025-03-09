@@ -2,12 +2,12 @@
  *
  * @Author: Vinson
  * @Date: 2020-08-12 10:13:11
- * @Last Modified by: runoob
- * @Last Modified time: 2024-07-27 00:31:22
+ * @Last Modified by: vinson
+ * @Last Modified time: 2024-12-30 14:53:12
  */
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
@@ -16,7 +16,7 @@ import { Resizable } from 'react-resizable';
 import { zkToolsMsg, zkToolsUtils } from '../../../tools';
 
 import styles from "./styles.less";
-import "./styles.resizableTable.less";
+// import "./styles.resizableTable.less";
 
 /** 计算表格填满时的高度 tDom 为 表格 document 节点 */
 const f_calcTableHeight = (tDom, defaultCut=0)=>{
@@ -120,15 +120,14 @@ const f_calcTableHeight = (tDom, defaultCut=0)=>{
 
 // 可伸缩的列
 const FInitResizeableTitle = props => {
-  const { onResize, width, ...restProps } = props;
+    const { onResize, width, ...restProps } = props;
+    console.log("[^_^:20240730-2321-001] FInitResizeableTitle.width: ", width, props)
+    if (!width) {
+        return <th {...restProps} />;
+    }
 
-	  if (!width) {
-	  	console.log("----- width: ", width, props)
-	    return <th {...restProps} />;
-	  }
-
-  return (
-    <Resizable
+    return (
+        <Resizable
       width={width}
       height={0}
       onResize={onResize}
@@ -136,22 +135,26 @@ const FInitResizeableTitle = props => {
     >
       <th {...restProps} />
     </Resizable>
-  );
-};
-
-const f_handleResize = (index, cols, setColumns) => (e, { size }) => {
-	const nextColumns = [...cols];
-	nextColumns[index] = {
-		...nextColumns[index],
-		width: size.width,
-	};
-	setColumns(nextColumns);
+    );
 };
 
 /* 组件主要是作用：
 	1：统一设置了默认样式，样式使用方面与 Table 使用一样，
 */
 const FInitTable = ({ isStretch=false, rowNum, pagination, dataSource, columns, children, intl, className, ...props }) => {
+
+	// useEffect(
+	// 	() => {
+	// 		console.log("--- 11 ", props);
+	// 		console.log("--- 22 ", this);
+
+	// 		// const subscription = props.source.subscribe();
+	// 		return () => {
+	// 		  // subscription.unsubscribe();
+	// 		};
+	// 	},
+	// 	[props.source],
+	// );
 
 	const defaultPagination = {
 		position: ['bottomRight'],
@@ -246,56 +249,67 @@ const FInitTable = ({ isStretch=false, rowNum, pagination, dataSource, columns, 
 		}
 	}
 
-	if(isStretch){
-		let { components, ...otherProps } = props;
-		if(!components){
-			components = {};
-		}
-		if(!components.header){
-			components.header = {}
-		}
-		if(!components.header.cell){
-			components.header.cell = FInitResizeableTitle;
-		}
+	// if(isStretch){
+	// 	let { components, ...otherProps } = props;
+	// 	if(!components){
+	// 		components = {};
+	// 	}
+	// 	if(!components.header){
+	// 		components.header = {}
+	// 	}
+	// 	if(!components.header.cell){
+	// 		components.header.cell = FInitResizeableTitle;
+	// 	}
+	// 	const [mCols, setColumns] = useState(columns);
+	// 	let cols = mCols;
+	// 	if (cols) {
+	// 	    cols = cols.map((col, index) => ({
+	// 	        ...col,
+	// 	        onHeaderCell: column => ({
+	// 	            width: column.width,
+	// 	            onResize: (index, cols, setColumns) => (e, { size }) => {
+	// 	                const nextColumns = [...cols];
+	// 	                nextColumns[index] = {
+	// 	                    ...nextColumns[index],
+	// 	                    width: size.width,
+	// 	                };
+	// 	                setColumns(nextColumns);
+	// 	            },
+	// 	        }),
+	// 	    }));
+	// 	}
 
-		const [mCols, setColumns] = useState(columns);
-		let cols = mCols;
-		console.log("----- cols: ", cols);
-		if (cols) {
-			cols = cols.map((col, index) => ({
-				...col,
-				onHeaderCell: column => ({
-					width: column.width,
-					onResize: f_handleResize(index, cols, setColumns),
-				}),
-			}));
+	// 	return (
+	// 		<Table className = {`${styles.zk_table} ${className}`} {...otherProps}
+	// 			components = {components}
+	// 			title = {title} 
+	// 			columns = {cols} 
+	// 			dataSource = {dataSource}
+	// 			pagination = {pagination}
+	// 		/>
+	// 	)
+	// }else{
+	// 	return (
+	// 		<Table className = {`${styles.zk_table} ${className}`} {...props}
+	// 			title = {title} 
+	// 			columns = {columns} 
+	// 			dataSource = {dataSource}
+	// 			pagination = {pagination}
+	// 		/>
+	// 	)
+	// }
 
-			console.log("===== ", cols);
-		}
-
-		return (
-			<Table className = {`${styles.zk_table} ${className}`} {...otherProps}
-				components = {components}
-				title = {title} 
-				columns = {cols} 
-				dataSource = {dataSource}
-				pagination = {pagination}
-			/>
-		)
-	}else{
-		return (
-			<Table className = {`${styles.zk_table} ${className}`} {...props}
-				title = {title} 
-				columns = {columns} 
-				dataSource = {dataSource}
-				pagination = {pagination}
-			/>
-		)
-	}
+	return (
+		<Table className = {`${styles.zk_table} ${className}`} {...props}
+			title = {title} 
+			columns = {columns} 
+			dataSource = {dataSource}
+			pagination = {pagination}
+		/>
+	)
 
 	// console.log("[^_^:20211202-1641-001] table.pagination: ", pagination);
 	// console.log("[^_^:20230919-2326-001] table.props: ", props);
-	
 }
 
 // 定义属性
@@ -336,7 +350,8 @@ FWrapTable.defaultProps = {
 }
 
 FWrapTable.calcTableHeight = f_calcTableHeight;
-
 export default injectIntl(FWrapTable);
 
+// Table.calcTableHeight = f_calcTableHeight;
+// export default Table;
 

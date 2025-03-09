@@ -2,7 +2,7 @@
 * @Author: Vinson
 * @Date:   2022-05-06 17:14:43
 * @Last Modified by: runoob
-* @Last Modified time: 2024-07-04 16:28:29
+* @Last Modified time: 2024-07-31 16:05:05
 * 
 * 
 * 
@@ -179,7 +179,6 @@ class CInitGrantMenu extends Component {
     
 	render(){
 		let { intl, loading, mApp, isShow, descName, ...otherProps } = this.props;
-		let lang = mApp.lang?mApp.lang:zkToolsMsg.getLocale();
 		
 		let spinning = loading.effects['mSysAuthDefined/grantMenus'] || this.state.spinningtreeData || this.state.spinningOwnerIds;
 
